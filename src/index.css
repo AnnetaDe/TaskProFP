@@ -24,9 +24,9 @@
 }
 [theme='light'] {
   --text-color: #000000;
-  --background-color: ##fdfdfd;
-  --button-background-color-hoover: ##bedbb0;
-  --button-background-color: ##9dc888;
+  --background-color: #fdfdfd;
+  --button-background-color-hoover: #bedbb0;
+  --button-background-color: #9dc888;
   --little-button-background-color: #bedbb0;
   --button-text-color: #161616;
 }
@@ -36,7 +36,7 @@
   --button-background-color: #7b7ede;
   --button-background-color-hoover: #5255bc;
   --button-text-color: #ffffff;
-  --little-button-background-color: ##ecedfd;
+  --little-button-background-color: #ecedfd;
 }
 
 body {
