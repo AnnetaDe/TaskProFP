@@ -4,10 +4,12 @@ import { Dashboard, Login, Registration, Start } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { Button } from './components/Button/Button';
+import { LittleButton } from './components/LittleButton/LittleButton';
 
 function App() {
   return (
     <>
+      <LittleButton />
       <h1>App</h1>
       <Routes>
         <Route

@@ -20,14 +20,12 @@
   --button-background-color-hoover: #bedbb0;
   --button-background-color: #9dc888;
   --button-text-color: #161616;
-  --little-button-background-color: #bedbb0;
 }
 [theme='light'] {
   --text-color: #000000;
   --background-color: #fdfdfd;
   --button-background-color-hoover: #bedbb0;
   --button-background-color: #9dc888;
-  --little-button-background-color: #bedbb0;
   --button-text-color: #161616;
 }
 [theme='violet'] {
@@ -36,7 +34,6 @@
   --button-background-color: #7b7ede;
   --button-background-color-hoover: #5255bc;
   --button-text-color: #ffffff;
-  --little-button-background-color: #ecedfd;
 }
 
 body {
@@ -60,18 +57,5 @@ button {
   font-weight: 500;
 }
 button:hover {
-  background-color: var(--button-background-color-hoover);
-}
-
-.little-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  background-color: var(--little-button-background-color);
-  cursor: pointer;
-  color: var(--button-text-color);
-  width: 40px;
-  height: 36px;
-}
-.little-button:hover {
   background-color: var(--button-background-color-hoover);
 }
