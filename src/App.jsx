@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Dashboard, Login, Registration, Start } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import { Button } from './components/Button/Button';
 
 function App() {
   return (

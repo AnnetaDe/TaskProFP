@@ -3,11 +3,10 @@
 
 :root {
   --font-family: Poppins, sans-serif;
-
   --text-color: #ffffff;
   --background-color: #232323;
-  --button-background-color-hoover: ##bedbb0;
-  --button-background-color: ##9dc888;
+  --button-background-color-hoover: #bedbb0;
+  --button-background-color: #9dc888;
   --button-text-color: #161616;
 
   font-synthesis: none;
@@ -18,8 +17,8 @@
 [theme='dark'] {
   --text-color: #ffffff;
   --background-color: #232323;
-  --button-background-color-hoover: ##bedbb0;
-  --button-background-color: ##9dc888;
+  --button-background-color-hoover: #bedbb0;
+  --button-background-color: #9dc888;
   --button-text-color: #161616;
   --little-button-background-color: #bedbb0;
 }
@@ -33,8 +32,8 @@
 }
 [theme='violet'] {
   --text-color: #ffffff;
-  --background-color: ##d6d8ff;
-  --button-background-color: ##7b7ede;
+  --background-color: #d6d8ff;
+  --button-background-color: #7b7ede;
   --button-background-color-hoover: #5255bc;
   --button-text-color: #ffffff;
   --little-button-background-color: ##ecedfd;
@@ -55,6 +54,10 @@ button {
   width: 302px;
   height: 49px;
   padding: 10px 0px 11px 0px;
+  width: 302px;
+  height: 49px;
+  font-size: 14px;
+  font-weight: 500;
 }
 button:hover {
   background-color: var(--button-background-color-hoover);
