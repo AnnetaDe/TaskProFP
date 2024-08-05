@@ -5,10 +5,16 @@ import css from './RegistrationForm.module.css';
 // import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { registerThunk } from '../../redux/user/userOperations';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from '../../redux/user/userSelectors';
 import icon from '../../images/icons.svg';
 
 const RegistrationForm = () => {
-  const isLoading = false; // from redux
+  const dispatch = useDispatch(); // from redux
+  const isLoading = useSelector(selectIsLoading);
+  console.log(isLoading);
   const {
     register,
     handleSubmit,
@@ -16,6 +22,7 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      username: '',
       email: '',
       password: '',
     },
@@ -31,6 +38,7 @@ const RegistrationForm = () => {
 
   const onSubmit = data => {
     console.log(data);
+    dispatch(registerThunk(data));
     reset();
   };
 
@@ -57,10 +65,10 @@ const RegistrationForm = () => {
           <label>
             <input
               className={css.inputStyles}
-              type="name"
-              name="name"
+              type="username"
+              name="username"
               placeholder="Enter your name"
-              {...register('name')}
+              {...register('username')}
             />
             <p className={css.errorStyles}>{errors.name?.message}</p>
           </label>
