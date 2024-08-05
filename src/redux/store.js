@@ -10,18 +10,17 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
+import { userReducer } from './user/userSlice';
 
-const persistCurrentColorScheme = {
+export const persistCurrentColorScheme = {
   key: 'currentColorScheme',
   version: 1,
   storage,
   whitelist: ['currentColorScheme'],
 };
 
-const store = configureStore({
-  reducer: persistReducer(persistCurrentColorScheme, {
-    currentColorScheme: 'light',
-  }),
+export const store = configureStore({
+  reducer: persistReducer(persistCurrentColorScheme, userReducer),
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
