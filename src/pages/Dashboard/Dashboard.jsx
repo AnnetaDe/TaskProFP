@@ -1,4 +1,4 @@
-const Dashboard = () => {
+const DashboardLayout = () => {
   return <div>Dashboard</div>;
 };
-export default Dashboard;
+export default DashboardLayout;
