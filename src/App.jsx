@@ -1,13 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { Dashboard, Login, Registration, Start } from './pages';
+import { Dashboard, Login, Registration, WelcomePage } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
     <>
-      <h1>App</h1>
       <Routes>
         <Route
           path="/dashboard"
@@ -18,10 +17,10 @@ function App() {
           }
         ></Route>
         <Route
-          path="/"
+          path="/welcome"
           element={
             <PublicRoute>
-              <Start />
+              <WelcomePage />
             </PublicRoute>
           }
         />
