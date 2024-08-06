@@ -6,9 +6,12 @@ import css from './LoginForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
 import icon from '../../images/icons.svg';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from '../../redux/user/userOperations';
 
 const LoginForm = () => {
   const isLoading = false; // from redux
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -31,6 +34,7 @@ const LoginForm = () => {
 
   const onSubmit = data => {
     console.log(data);
+    dispatch(loginThunk(data));
     reset();
   };
 
