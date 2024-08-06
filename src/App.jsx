@@ -3,13 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import { DashboardLayout, Login, Registration, WelcomePage } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import Header from './components/Header/Header';
 
 function App() {
   return (
     <>
-      <Header />
-      {/* <Routes>
+      <Routes>
         <Route
           path="/dashboard"
           element={
@@ -42,7 +40,7 @@ function App() {
             </PublicRoute>
           }
         />
-      </Routes> */}
+      </Routes>
     </>
   );
 }
