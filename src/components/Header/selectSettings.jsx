@@ -13,11 +13,20 @@ export const customStyles = {
     outline: 'none',
     '&:hover': {
       border: 'none',
+      outline: 'none',
     },
     '&:focus': {
       outline: 'none',
+      border: 'none',
     },
-    margin: '0px',
+    '&:active': {
+      outline: 'none',
+      border: 'none',
+    },
+    '&:checked': {
+      outline: 'none',
+      border: 'none',
+    },
   }),
   menu: provided => ({
     ...provided,
