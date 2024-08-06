@@ -43,16 +43,16 @@ const Welcome = () => {
         <h1>Task Pro</h1>
       </div>
 
-      <p>
+      <p className={css.info}>
         Supercharge your productivity and take control of your tasks with Task
         Pro - Don't wait, start achieving your goals now!
       </p>
 
       <div className={css.authNav}>
-        <NavLink className={css.authLink} to="/register">
+        <NavLink className={css.authLink} to="/auth/register">
           Registration
         </NavLink>
-        <NavLink className={css.authLink} to="/login">
+        <NavLink className={css.authLink} to="/auth/login">
           Log In
         </NavLink>
       </div>
