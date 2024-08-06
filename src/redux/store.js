@@ -13,10 +13,10 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import { userReducer } from './user/userSlice';
 
 export const persistCurrentColorScheme = {
-  key: 'currentColorScheme',
+  key: ['currentColorScheme'],
   version: 1,
   storage,
-  whitelist: ['currentColorScheme'],
+  whitelist: ['theme'],
 };
 
 export const store = configureStore({
