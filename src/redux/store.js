@@ -11,6 +11,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { userReducer } from './user/userSlice';
+import { modalReducer } from './modal/modalSlice';
 
 export const persistCurrentColorScheme = {
   key: ['currentColorScheme'],
@@ -20,7 +21,10 @@ export const persistCurrentColorScheme = {
 };
 
 export const store = configureStore({
-  reducer: persistReducer(persistCurrentColorScheme, userReducer),
+  reducer: {
+    user: persistReducer(persistCurrentColorScheme, userReducer),
+    modal: modalReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
