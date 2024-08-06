@@ -12,7 +12,6 @@ import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { userReducer } from './user/userSlice';
 import { modalReducer } from './modal/modalSlice';
-import { modalReducer } from './modal/modalSlice';
 
 const persistUser = {
   key: ['user'],
