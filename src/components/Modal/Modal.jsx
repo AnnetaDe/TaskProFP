@@ -31,18 +31,26 @@ const Modal = ({ children }) => {
       <div className={css.content}>
         <button className={css.closeBtn} onClick={() => dispatch(closeModal())}>
           <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M1.5 1.5L10.5 10.5"
-              stroke="#161616"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              d="M13.5 4.5L4.5 13.5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              className={clsx(css.icon)}
+            />
+            <path
+              d="M4.5 4.5L13.5 13.5"
+              stroke="white"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
               className={clsx(css.icon)}
             />
           </svg>
