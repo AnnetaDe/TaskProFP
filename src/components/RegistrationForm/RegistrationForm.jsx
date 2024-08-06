@@ -13,8 +13,7 @@ import icon from '../../images/icons.svg';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch(); // from redux
-  const isLoading = useSelector(selectIsLoading);
-  console.log(isLoading);
+  const isLoading = false;
   const {
     register,
     handleSubmit,

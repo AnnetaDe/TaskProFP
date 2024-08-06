@@ -2,24 +2,28 @@ import { createSlice } from '@reduxjs/toolkit';
 import { registerThunk, loginThunk, logoutThunk } from './userOperations';
 
 const initialState = {
-  user: { email: '', password: '', theme: 'light', avatar: '' },
-  token: null,
+  user: { email: '', password: '', theme: '', avatar: '' },
+  accessToken: null,
+  refreshToken: null,
+  userTheme: 'dark',
+  userAvatar: '',
   isVeryfied: false,
   isLoggined: false,
   isLoading: false,
+  isRefreshing: false,
   error: false,
 };
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    changeTheme(state, action) {
-      state.user.theme = action.payload;
-    },
-    changeAvatar(state, action) {
-      state.user.avatar = action.payload;
-    },
-  },
+  // reducers: {
+  //   changeTheme(state, action) {
+  //     state.user.theme = action.payload;
+  //   },
+  //   changeAvatar(state, action) {
+  //     state.user.avatar = action.payload;
+  //   },
+  // },
   extraReducers: builder => {
     builder
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
@@ -28,8 +32,11 @@ const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
-        state.token = payload.accessToken;
+        state.user = payload.data.user;
+        state.accessToken = payload.data.accessToken;
+        state.refreshToken = payload.data.refreshToken;
+        state.userTheme = payload.data.user.theme;
+        state.userAvatar = payload.data.user.avatar;
         state.isLoggined = true;
         state.isLoading = false;
       })
@@ -41,5 +48,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { changeTheme, changeAvatar } = userSlice.actions;
+// export const { changeTheme, changeAvatar } = userSlice.actions;
 export const userReducer = userSlice.reducer;

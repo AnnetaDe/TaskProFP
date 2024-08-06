@@ -27,7 +27,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const { data } = await taskProApi.post('api/auth/login', credentials);
       setToken(data.accessToken);
-      console.log(data);
+      console.log('data', data);
 
       return data;
     } catch (error) {
@@ -48,12 +48,6 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-// {
-//     "username":"ann",
-//     "email": "tipike6101@almaxen.com",
-//     "password": "12345678"
-// }
-
-// email: 'tyquon.f1@oabibleh.com';
-// name: 'Ann';
+// email: 'heidie@modulesdsh.com';
+// name: 'ann';
 // password: 'aaAA1111';
