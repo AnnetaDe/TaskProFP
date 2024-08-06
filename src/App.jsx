@@ -19,7 +19,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/"
+          path="/welcome"
           element={
             <PublicRoute>
               <WelcomePage />
@@ -27,7 +27,7 @@ function App() {
           }
         />
         <Route
-          path="/register"
+          path="/auth/register"
           element={
             <PublicRoute>
               <Registration />
@@ -35,7 +35,7 @@ function App() {
           }
         />
         <Route
-          path="/login"
+          path="/auth/login"
           element={
             <PublicRoute>
               <Login />

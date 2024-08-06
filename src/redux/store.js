@@ -11,16 +11,22 @@ import {
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { userReducer } from './user/userSlice';
+import { modalReducer } from './modal/modalSlice';
 
-export const persistCurrentColorScheme = {
-  key: ['currentColorScheme'],
+const persistUser = {
+  key: ['user'],
   version: 1,
   storage,
-  whitelist: ['theme'],
+  whitelist: ['refreshToken', 'accessToken', 'userTheme', 'userAvatar'],
 };
 
 export const store = configureStore({
-  reducer: persistReducer(persistCurrentColorScheme, userReducer),
+  reducer: {
+    user: {
+      user: persistReducer(persistUser, userReducer),
+      modal: modalReducer,
+    },
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -1,0 +1,33 @@
+.icon {
+  stroke: #fff;
+  fill: none;
+}
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: inherit;
+}
+.content {
+  position: relative;
+  background-color: rgb(10, 10, 10);
+  padding: 10px 40px;
+  overflow: hidden;
+  max-width: 541px;
+}
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: calc(100vh - 60px);
+  width: 100%;
+  z-index: 150;
+  box-shadow: 0px 4px 60px 0px #fff;
+  backdrop-filter: blur(80px);
+  overflow: auto;
+}
