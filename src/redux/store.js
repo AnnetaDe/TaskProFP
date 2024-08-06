@@ -22,11 +22,10 @@ const persistUser = {
 
 export const store = configureStore({
   reducer: {
-    user: {
-      user: persistReducer(persistUser, userReducer),
-      modal: modalReducer,
-    },
+    user: persistReducer(persistUser, userReducer),
+    modal: modalReducer,
   },
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
