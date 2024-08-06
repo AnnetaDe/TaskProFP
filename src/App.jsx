@@ -1,6 +1,14 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { DashboardLayout, Login, Registration, WelcomePage } from './pages';
+import {
+  DashboardLayout,
+  Login,
+  Registration,
+  WelcomePage,
+  HomePage,
+  ScreensPage,
+  NotFound,
+} from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
@@ -9,15 +17,19 @@ function App() {
     <>
       <Routes>
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <PrivateRoute>
               <DashboardLayout />
             </PrivateRoute>
           }
-        ></Route>
+        >
+          <Route index element={<HomePage />} />
+          <Route path="boardid" element={<ScreensPage />} />
+        </Route>
+
         <Route
-          path="/"
+          path="/welcome"
           element={
             <PublicRoute>
               <WelcomePage />
@@ -40,6 +52,7 @@ function App() {
             </PublicRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

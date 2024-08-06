@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard'
 import MyBoards from './MyBoards/MyBoards'
 import NeedHelp from './NeedHelp/NeedHelp'
@@ -8,8 +8,8 @@ import s from './Sidebar.module.css';
 
 
 export const Sidebar = () => {
-  const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  // const dispatch = useDispatch();
+  // const [isOpen, setIsOpen] = useState(false);
   
 
 
@@ -19,7 +19,7 @@ export const Sidebar = () => {
         <use href={sprite + '#icon-login'}></use>
         </svg>
          <div className={s.container}>
-         <div className={styles.navigation}>
+         <div className={s.navigation}>
             <div className={s.title}>
                 <div className={s.logo}>
                 <svg className={s.logoIcon}>
