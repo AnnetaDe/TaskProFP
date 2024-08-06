@@ -3,6 +3,7 @@ const emailSchame =
   /^([A-Za-z0-9_-]+.)*[A-Za-z0-9_-]+@[a-z0-9_-]+(.[a-z0-9_-]+)*.[a-z]{2,6}$/;
 const nameSchame = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
 const passwordSchame = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+// Regex for password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters
 
 export const LoginSchame = yup
   .object({
@@ -21,9 +22,9 @@ export const LoginSchame = yup
 
 export const RegistrationSchame = yup
   .object({
-    name: yup
+    username: yup
       .string()
-      .required('Name is required')
+      .required('Username is required')
       .matches(nameSchame, 'Invalid name format')
       .trim(),
     email: yup
