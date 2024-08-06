@@ -15,18 +15,6 @@ export const customStyles = {
       border: 'none',
       outline: 'none',
     },
-    '&:focus': {
-      outline: 'none',
-      border: 'none',
-    },
-    '&:active': {
-      outline: 'none',
-      border: 'none',
-    },
-    '&:checked': {
-      outline: 'none',
-      border: 'none',
-    },
   }),
   menu: provided => ({
     ...provided,
