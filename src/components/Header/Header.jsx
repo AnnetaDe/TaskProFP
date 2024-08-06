@@ -44,7 +44,7 @@ const Header = () => {
         </div>
       </section>
 
-      <Modal></Modal>
+      <Modal>Modal</Modal>
     </header>
   );
 };
