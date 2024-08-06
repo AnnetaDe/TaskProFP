@@ -37,7 +37,6 @@
   flex-direction: column;
   align-items: start;
   gap: 14px;
-
   margin: 0 auto;
   padding: 0;
 }
@@ -80,7 +79,6 @@
   position: absolute;
   top: -8px;
   right: 20px;
-  /* transform: translate(42%, -18%); */
   font-size: 2rem;
   color: #fff;
   opacity: 0.4;
@@ -97,7 +95,6 @@
   color: red;
   font-size: 12px;
   margin-left: 4px;
-
   position: absolute;
   bottom: -13px;
   left: 0;
@@ -110,19 +107,10 @@
 }
 .authLink {
   color: #ffffff;
-  cursor: none;
   display: inline-block;
   padding-right: 14px;
   font-size: 18px;
   font-weight: 500;
-
-  &:hover {
-    cursor: disabled;
-  }
-
-  &.active {
-    color: #ffffff;
-  }
 }
 .buttonStyles {
   margin-top: 10px;
@@ -157,4 +145,13 @@ label {
   &.active {
     color: #ffffff;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #151515 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  background-color: transparent !important;
 }

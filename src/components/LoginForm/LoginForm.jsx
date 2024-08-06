@@ -39,24 +39,23 @@ const LoginForm = () => {
       <div className={css.formWrapper}>
         <ul className={css.authNav}>
           <li>
-            <NavLink className={css.activeAuthLink} to={`/register`}>
+            <NavLink className={css.activeAuthLink} to={`/auth/register`}>
               Registration
             </NavLink>
           </li>
           <li>
-            <NavLink className={css.authLink} to={`/login`}>
-              Log in
-            </NavLink>
+            <p className={css.authLink}>Log in</p>
           </li>
         </ul>
 
         <form
           className={css.formStyle}
           onSubmit={handleSubmit(onSubmit)}
-          autoComplete="nope"
+          autoComplete="off"
         >
           <label>
             <input
+              autoComplete="off"
               className={css.inputStyles}
               type="email"
               placeholder="Enter your email"
@@ -67,6 +66,7 @@ const LoginForm = () => {
           <label>
             <div className={css.passwordContainer}>
               <input
+                autoComplete="off"
                 className={css.inputStyles}
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="Enter your password"
