@@ -81,12 +81,13 @@
   right: 20px;
   font-size: 2rem;
   color: #fff;
+  stroke: #fff;
+  fill: none;
   opacity: 0.4;
   background-color: transparent;
   cursor: pointer;
   &:hover {
     stroke: #fff;
-    fill: none;
     opacity: 1;
     background-color: transparent;
   }

@@ -80,9 +80,9 @@
   position: absolute;
   top: -8px;
   right: 20px;
-  /* transform: translate(42%, -18%); */
   font-size: 2rem;
   color: #fff;
+  stroke: #fff;
   opacity: 0.4;
   background-color: transparent;
   cursor: pointer;
