@@ -19,7 +19,7 @@ function App() {
           }
         ></Route>
         <Route
-          path="/welcome"
+          path="/"
           element={
             <PublicRoute>
               <WelcomePage />
