@@ -1,10 +1,10 @@
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from './modalSlice';
 import css from './Modal.module.css';
 import { selectModal } from '../../redux/modal/modalSelector';
 import { useEffect } from 'react';
 import clsx from 'clsx';
+import { closeModal } from '../../redux/modal/modalSlice';
 
 const Modal = ({ children }) => {
   const isOpen = useSelector(selectModal);
