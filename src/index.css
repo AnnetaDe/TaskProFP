@@ -28,6 +28,9 @@
   --small-btn-bgc: #bedbb0;
   --small-btn-bgc-hover: #9dc888;
   --small-btn-color: #121212;
+  --logo-icon-bgc: : #1f1f1f;
+  --logo-icon-fill: #fff;
+  --logo-text-color: #fff;
 }
 [theme='light'] {
   --text-color: #000000;
@@ -43,6 +46,10 @@
   --small-btn-bgc: #bedbb0;
   --small-btn-bgc-hover: #9dc888;
   --small-btn-color: #121212;
+  --logo-icon-bgc: #1f1f1f;
+  --logo-icon-fill: #fff;
+  --logo-text-color: #161616;
+
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -58,6 +65,9 @@
   --small-btn-bgc: #b8bcfd;
   --small-btn-bgc-hover: #979cea;
   --small-btn-color: #fff;
+  --logo-icon-bgc: #ecedfd;
+  --logo-icon-fill: #5255bc;
+  --logo-text-color: #fff;
 }
 
 body {
