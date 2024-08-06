@@ -39,12 +39,10 @@ const RegistrationForm = () => {
       <div className={css.formWrapper}>
         <ul className={css.authNav}>
           <li>
-            <NavLink className={css.authLink} to={`/register`}>
-              Registration
-            </NavLink>
+            <p className={css.authLink}>Registration</p>
           </li>
           <li>
-            <NavLink className={css.activeAuthLink} to={`/login`}>
+            <NavLink className={css.activeAuthLink} to={`/auth/login`}>
               Log in
             </NavLink>
           </li>
