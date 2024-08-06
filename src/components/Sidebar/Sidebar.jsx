@@ -4,6 +4,8 @@ import MyBoards from './MyBoards/MyBoards'
 import NeedHelp from './NeedHelp/NeedHelp'
 import LogOut from './LogOut/LogOut'
 import sprite from '../../../src/images/icons.svg';
+import s from './Sidebar.module.css';
+
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
