@@ -2,7 +2,7 @@
 @import url('./css/reset.css');
 
 :root {
-  --font-family: Poppins, sans-serif;
+  --font-family: 'Poppins', sans-serif;
   --text-color: #ffffff;
   --background-color: #232323;
   --button-background-color-hoover: #bedbb0;
@@ -17,23 +17,29 @@
 [theme='dark'] {
   --text-color: #ffffff;
   --background-color: #232323;
+  --background-header: #161616;
   --button-background-color-hoover: #bedbb0;
   --button-background-color: #9dc888;
   --button-text-color: #161616;
+  --header-arrow-color: rgb(255, 255, 255, 0.8);
 }
 [theme='light'] {
   --text-color: #000000;
   --background-color: #fdfdfd;
+  --background-header: #fcfcfc;
   --button-background-color-hoover: #bedbb0;
   --button-background-color: #9dc888;
   --button-text-color: #161616;
+  --header-arrow-color: #161616cc;
 }
 [theme='violet'] {
-  --text-color: #ffffff;
+  --text-color: #000000;
   --background-color: #d6d8ff;
+  --background-header: #fff;
   --button-background-color: #7b7ede;
   --button-background-color-hoover: #5255bc;
   --button-text-color: #ffffff;
+  --header-arrow-color: #161616cc;
 }
 
 body {
