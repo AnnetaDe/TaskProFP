@@ -1,8 +1,5 @@
-import { useSelector } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
-import { selectRefreshToken } from './userSelectors';
-import { set } from 'react-hook-form';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -50,19 +47,40 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-export const refreshUserThunk = createAsyncThunk(
+export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
+    const refreshToken = thunkAPI.getState().user.refreshToken;
+    if (!refreshToken) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      const { data } = await taskProApi.post('api/auth/refresh', {
+        refreshToken,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshUserThunk = createAsyncThunk(
+  'auth/currentUser',
+  async (_, thunkAPI) => {
+    try {
+      await thunkAPI.dispatch(refreshTokensThunk());
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+
     const accessToken = thunkAPI.getState().user.accessToken;
     setToken(accessToken);
-    console.log('acc', accessToken);
-
     if (!accessToken) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
       const { data } = await taskProApi.get('api/auth/current');
-      console.log('data', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
