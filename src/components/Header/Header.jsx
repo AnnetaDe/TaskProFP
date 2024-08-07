@@ -6,8 +6,8 @@ import {
   customStyles,
   selectOptions,
 } from './selectSettings.jsx';
-import { selectUserName } from '../../redux/user/userSelectors.js';
-import { useSelector } from 'react-redux';
+// import { selectUserName } from '../../redux/user/userSelectors.js';
+// import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice.js';
 import Modal from '../Modal/Modal.jsx';
@@ -23,7 +23,7 @@ const Header = () => {
   //   const avatar = useSelector(selectUserAvatar);
   const avatar = null;
 
-  const { isDesktop, isTablet } = useMedia();
+  const { isDesktop} = useMedia();
 
   const handleOpenModal = () => {
     dispatch(openModal());
