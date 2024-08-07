@@ -2,12 +2,11 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import {
   DashboardLayout,
-  Login,
-  Registration,
   WelcomePage,
   HomePage,
   ScreensPage,
   NotFound,
+  AuthPage,
 } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
@@ -27,7 +26,6 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="boardid" element={<ScreensPage />} />
         </Route>
-
         <Route
           path="/welcome"
           element={
@@ -37,18 +35,10 @@ function App() {
           }
         />
         <Route
-          path="/auth/register"
+          path="/auth/:type"
           element={
             <PublicRoute>
-              <Registration />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/auth/login"
-          element={
-            <PublicRoute>
-              <Login />
+              <AuthPage />
             </PublicRoute>
           }
         />
