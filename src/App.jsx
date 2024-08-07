@@ -23,7 +23,7 @@ function App() {
     // dispatch(refreshTokensThunk());
     dispatch(refreshUserThunk());
   }, [dispatch]);
-  return isRefreshing ? (
+  return !isRefreshing ? (
     <div>refreshing...</div>
   ) : (
     <>
