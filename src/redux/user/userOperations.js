@@ -65,24 +65,6 @@ export const refreshTokensThunk = createAsyncThunk(
   }
 );
 
-export const refreshTokensThunk = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const refreshToken = thunkAPI.getState().user.refreshToken;
-    if (!refreshToken) {
-      return thunkAPI.rejectWithValue('Unable to fetch user');
-    }
-    try {
-      const { data } = await taskProApi.post('api/auth/refresh', {
-        refreshToken,
-      });
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
   'auth/currentUser',
@@ -113,13 +95,12 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
-export const updateUserThunk = createAsyncThunk(
-  'update',
-  async (data, thunkAPI) => {
+export const changeThemeThunk = createAsyncThunk(
+  'auth/changeTheme',
+  async (theme, thunkAPI) => {
     try {
-      const response = await taskProApi.patch('api/auth/update', data);
-      console.log('update', response);
-      return response.data;
+      const { data } = await taskProApi.patch('api/auth/update', { theme });
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
