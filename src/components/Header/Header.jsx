@@ -6,23 +6,26 @@ import {
   customStyles,
   selectOptions,
 } from './selectSettings.jsx';
-
+import {
+  selectAvatar,
+  selectUserName,
+} from '../../redux/user/userSelectors.js';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice.js';
 import Modal from '../Modal/Modal.jsx';
 import { useMedia } from '../../hooks/useMedia.jsx';
 import icons from '../../images/icons.svg';
+import SvgIconAnonym from './SvgIconAnonym.jsx';
 
 const Header = () => {
   const dispatch = useDispatch();
   const [theme, setTheme] = useState(selectOptions[1]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  //   const userName = useSelector(selectUserName);
-  const userName = 'Name';
-  //   const avatar = useSelector(selectUserAvatar);
-  const avatar = null;
+  const userName = useSelector(selectUserName);
+  const avatar = useSelector(selectAvatar);
 
-  const { isDesktop, isTablet } = useMedia();
+  const { isDesktop } = useMedia();
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -62,10 +65,18 @@ const Header = () => {
           components={customComponents}
         />
         <div className={s.user_info} onClick={handleOpenModal}>
-          <p>{userName}</p>
-          <div className={s.img_wrap}>
-            <img src={avatar} alt="" />
-          </div>
+          <p>{userName ? userName : 'Anonym'}</p>
+          {avatar ? (
+            <div className={s.img_wrap}>
+              <img src={avatar} alt={`Avatar ${userName}`} />
+            </div>
+          ) : (
+            <div className={s.svg_wrap}>
+              <div>
+                <SvgIconAnonym fill="var(--user-icon-fill)" />
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
