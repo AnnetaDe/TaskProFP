@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
+import axios from 'axios';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
