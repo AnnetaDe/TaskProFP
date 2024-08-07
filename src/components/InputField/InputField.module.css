@@ -1,0 +1,73 @@
+.input_field {
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  margin: 0 auto;
+  min-width: 287px;
+  width: 100%;
+  padding: 14px 18px;
+  background-color: var(--input-bgc);
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  color: var(--input-text-color);
+  box-shadow: 0 4px 16px 0 var(--input-box-shadow);
+  transition: color var(--transition-pattern),
+    background-color var(--transition-pattern);
+  opacity: 0.5;
+  position: relative;
+  outline: none;
+  &:focus,
+  &:hover {
+    opacity: 1;
+  }
+  @media only screen and (min-width: 768px) {
+    max-width: 352px;
+  }
+}
+.textarea_container {
+  height: 154px;
+}
+.textarea_field {
+  color: var(--input-text-color);
+  width: 100%;
+  min-width: 287px;
+  height: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  scroll-behavior: smooth;
+  border-radius: 8px;
+  transition: color var(--transition-pattern),
+    background-color var(--transition-pattern);
+
+  @media only screen and (min-width: 768px) {
+    max-width: 352px;
+  }
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 10px;
+    background-color: var(--button-background-color);
+    border-radius: 8px;
+    transition: background-color var(--transition-pattern);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--button-background-color-hoover);
+  }
+}
+
+.input_field:-webkit-autofill,
+.input_field:-webkit-autofill:hover,
+.input_field:-webkit-autofill:focus,
+.input_field:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #151515 inset !important;
+  -webkit-text-fill-color: #fff !important;
+  background-color: transparent !important;
+}

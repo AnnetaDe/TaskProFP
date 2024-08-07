@@ -1,23 +1,49 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { DashboardLayout, Login, Registration, WelcomePage } from './pages';
+import {
+  DashboardLayout,
+  WelcomePage,
+  HomePage,
+  ScreensPage,
+  NotFound,
+  AuthPage,
+} from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import {
+  refreshTokensThunk,
+  refreshUserThunk,
+} from './redux/user/userOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsRefreshing } from './redux/user/userSelectors';
+import { useEffect } from 'react';
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    // dispatch(refreshTokensThunk());
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <div>refreshing...</div>
+  ) : (
     <>
       <Routes>
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <PrivateRoute>
               <DashboardLayout />
             </PrivateRoute>
           }
-        ></Route>
+        >
+          <Route index element={<HomePage />} />
+          <Route path="boardid" element={<ScreensPage />} />
+        </Route>
         <Route
-          path="/"
+          path="/welcome"
           element={
             <PublicRoute>
               <WelcomePage />
@@ -25,21 +51,14 @@ function App() {
           }
         />
         <Route
-          path="/auth/register"
+          path="/auth/:type"
           element={
             <PublicRoute>
-              <Registration />
+              <AuthPage />
             </PublicRoute>
           }
         />
-        <Route
-          path="/auth/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

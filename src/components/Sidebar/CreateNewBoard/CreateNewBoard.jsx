@@ -2,8 +2,7 @@
 import s from './CreateNewBoard.module.css';
 import sprite from "../../../images/icons.svg"
 
-
-const CreateNewBoard = () => {
+export const CreateNewBoard = () => {
   return (
     <>
   <div className={s.boards}>
