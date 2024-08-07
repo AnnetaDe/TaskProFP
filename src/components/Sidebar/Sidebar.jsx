@@ -1,13 +1,17 @@
-import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
-import MyBoards from './MyBoards/MyBoards';
-import NeedHelp from './NeedHelp/NeedHelp';
-import LogOut from './LogOut/LogOut';
+
+import CreateNewBoard from './CreateNewBoard/CreateNewBoard'
+import MyBoards from './MyBoards/MyBoards'
+import NeedHelp from './NeedHelp/NeedHelp'
+import LogOut from './LogOut/LogOut'
 import sprite from '../../../src/images/icons.svg';
 import s from './Sidebar.module.css';
 
-const Sidebar = () => {
+
+ const Sidebar = () => {
   // const dispatch = useDispatch();
   // const [isOpen, setIsOpen] = useState(false);
+  
+
 
   return (
     <>

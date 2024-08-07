@@ -45,13 +45,13 @@ const userSlice = createSlice({
       .addCase(loginThunk.rejected, state => {
         state.isLoading = false;
         state.error = true;
-      })
-      .addCase(refreshUserThunk.fulfilled, (state, { payload }) => {
-        state.login = payload.data.user;
-
-        state.isLoggined = true;
-        state.isRefreshing = false;
       });
+    // .addCase(refreshUserThunk.fulfilled, (state, { payload }) => {
+    //   state.login = payload.data.user;
+
+    //   state.isLoggined = true;
+    //   state.isRefreshing = false;
+    // });
   },
 });
 

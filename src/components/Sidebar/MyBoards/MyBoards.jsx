@@ -1,7 +1,7 @@
 import s from './MyBoards.module.css';
 import sprite from '../../../images/icons.svg';
 
-export const MyBoards = desk => {
+const MyBoards = desk => {
   // const deskRoute = desk.desk.title.split(' ').join('-');
   const boardIcon = `#${desk.desk.icon}`;
 
@@ -17,21 +17,30 @@ export const MyBoards = desk => {
             <p className={s.project}>{desk.desk.title}</p>
           </button>
           <div className={s.wrapperIcons}>
-            <svg width="16px" height="16px" className={s.iconEdit}>
-              <use href={sprite + `#icon-pencil`}></use>
-            </svg>
-          </div>
-          <div className={s.wrapperIcons}>
-            <svg width="16px" height="16px" className={s.iconDelete}>
-              <use href={sprite + '#icon-trash'}></use>
-            </svg>
-          </div>
-        </div>
-        {/* </NavLink>
+              <svg
+                width="16px"
+                height="16px"
+                className={s.iconEdit}
+              >
+                <use href={sprite + `#icon-pencil`}></use>
+              </svg>
+            </div>
+            <div className={s.wrapperIcons}>
+              <svg
+                width="16px"
+                height="16px"
+                className={s.iconDelete}
+              >
+                <use href={sprite + '#icon-trash'}></use>
+              </svg>
+            </div>
+            </div>
+      {/* </NavLink>
         </div> */}
       </div>
     </>
   );
 };
+
 
 export default MyBoards;

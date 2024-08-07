@@ -5,7 +5,7 @@ import { selectIsLoggined } from '../redux/user/userSelectors';
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = useSelector(selectIsLoggined);
   console.log('privat', isLoggedIn);
-  return isLoggedIn ? children : <Navigate to="/welcome" state={location} />;
+  return isLoggedIn ? children : <Navigate to="/welcome" />;
 };
 
 export default PrivateRoute;
