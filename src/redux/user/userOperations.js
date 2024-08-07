@@ -53,13 +53,14 @@ export const logoutThunk = createAsyncThunk(
 export const refreshUserThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
-    const refreshToken = useSelector(selectRefreshToken);
+    const refreshToken = thunkAPI.getState().user.refreshToken;
     if (!refreshToken) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
+    setToken(refreshToken);
+
     try {
-      setToken(refreshToken);
-      const { data } = await taskProApi.post('/auth/refresh');
+      const { data } = await taskProApi.post('auth/refresh', refreshToken);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

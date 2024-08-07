@@ -12,6 +12,7 @@ import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
 import { userReducer } from './user/userSlice';
 import { modalReducer } from './modal/modalSlice';
+import { registerReducer } from './user/registerSlice';
 
 const persistUser = {
   key: ['user'],
@@ -22,6 +23,7 @@ const persistUser = {
 
 export const store = configureStore({
   reducer: {
+    registration: registerReducer,
     user: persistReducer(persistUser, userReducer),
     modal: modalReducer,
   },
