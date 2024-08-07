@@ -7,7 +7,7 @@ import sprite from '../../../src/images/icons.svg';
 import s from './Sidebar.module.css';
 
 
-export const Sidebar = () => {
+ const Sidebar = () => {
   // const dispatch = useDispatch();
   // const [isOpen, setIsOpen] = useState(false);
   

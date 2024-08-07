@@ -1,7 +1,7 @@
 import s from './MyBoards.module.css';
 import sprite from '../../../images/icons.svg';
 
-export const MyBoards = desk => {
+const MyBoards = desk => {
   // const deskRoute = desk.desk.title.split(' ').join('-');
   const boardIcon = `#${desk.desk.icon}`;
 
@@ -43,3 +43,4 @@ export const MyBoards = desk => {
 };
 
 
+export default MyBoards;
