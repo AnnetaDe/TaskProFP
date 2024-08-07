@@ -88,6 +88,8 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
+export const updateUserThunk = createAsyncThunk();
+
 // email: 'heidie@modulesdsh.com';
 // name: 'ann';
 // password: 'aaAA1111';
