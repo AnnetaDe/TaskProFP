@@ -68,7 +68,7 @@ const Header = () => {
           <p>{userName ? userName : 'Anonym'}</p>
           {avatar ? (
             <div className={s.img_wrap}>
-              <img src={avatar} alt="" />{' '}
+              <img src={avatar} alt={`Avatar ${userName}`} />
             </div>
           ) : (
             <div className={s.svg_wrap}>
