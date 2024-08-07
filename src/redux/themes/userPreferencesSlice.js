@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const userPreferencesSlice = createSlice({
   name: 'userPreferences',
   initialState: {
-    userTheme: 'light',
+    userTheme: 'violet',
     userAvatar: '',
   },
   reducers: {

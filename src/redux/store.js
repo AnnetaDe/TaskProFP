@@ -21,17 +21,18 @@ const persistUser = {
   storage,
   whitelist: ['refreshToken', 'accessToken', 'userTheme', 'userAvatar'],
 };
-// const persistUserPreferences = {
-//   key: ['preferences'],
-//   version: 1,
-//   storage,
-//   whitelist: ['userTheme', 'userAvatar'],
-// };
+const persistUserPreferences = {
+  key: ['preferences'],
+  version: 1,
+  storage,
+  whitelist: ['userTheme', 'userAvatar'],
+};
 
 export const store = configureStore({
   reducer: {
     registration: registerReducer,
     user: persistReducer(persistUser, userReducer),
+    preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
 
     modal: modalReducer,
   },
