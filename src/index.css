@@ -31,6 +31,8 @@
   --logo-icon-bgc: : #1f1f1f;
   --logo-icon-fill: #fff;
   --logo-text-color: #fff;
+  --user-icon-fill: #151515;
+  --user-icon-bgc: #1f1f1f;
 }
 [theme='light'] {
   --text-color: #000000;
@@ -49,7 +51,8 @@
   --logo-icon-bgc: #1f1f1f;
   --logo-icon-fill: #fff;
   --logo-text-color: #161616;
-
+  --user-icon-fill: #fff;
+  --user-icon-bgc: #f6f6f7;
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -68,6 +71,9 @@
   --logo-icon-bgc: #ecedfd;
   --logo-icon-fill: #5255bc;
   --logo-text-color: #fff;
+  --user-icon-fill: #fff;
+  --user-icon-bgc:  #ecedfd;
+
 }
 
 body {
