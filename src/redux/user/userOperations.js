@@ -67,14 +67,7 @@ export const refreshTokensThunk = createAsyncThunk(
 
 export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
-  'auth/currentUser',
   async (_, thunkAPI) => {
-    try {
-      await thunkAPI.dispatch(refreshTokensThunk());
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-
     try {
       await thunkAPI.dispatch(refreshTokensThunk());
     } catch (error) {
