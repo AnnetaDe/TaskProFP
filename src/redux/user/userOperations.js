@@ -65,9 +65,34 @@ export const refreshTokensThunk = createAsyncThunk(
   }
 );
 
+export const refreshTokensThunk = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const refreshToken = thunkAPI.getState().user.refreshToken;
+    if (!refreshToken) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      const { data } = await taskProApi.post('api/auth/refresh', {
+        refreshToken,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
+  'auth/currentUser',
   async (_, thunkAPI) => {
+    try {
+      await thunkAPI.dispatch(refreshTokensThunk());
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+
     try {
       await thunkAPI.dispatch(refreshTokensThunk());
     } catch (error) {
