@@ -2,7 +2,7 @@
 const EditBoard = () => {
   return (
     <div>
-      EditBoard
+       EditBoard
     </div>
   )
 }

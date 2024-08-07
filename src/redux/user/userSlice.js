@@ -20,14 +20,19 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  // reducers: {
-  //   changeTheme(state, action) {
-  //     state.user.theme = action.payload;
-  //   },
+  reducers: {
+    changeTheme(state, action) {
+      state.user.theme = action.payload;
+    },
   //   changeAvatar(state, action) {
   //     state.user.avatar = action.payload;
   //   },
-  // },
+  changeCurrentBoard(state, action) {
+    state.user.currentBoard = action.payload;
+  },
+  },
+
+
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
@@ -66,11 +71,12 @@ const userSlice = createSlice({
       .addCase(refreshUserThunk.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUserThunk.rejected, (state, { payload }) => {
+      .addCase(refreshUserThunk.rejected, (state) => {
         state.error = true;
       });
   },
 });
 
-// export const { changeTheme, changeAvatar } = userSlice.actions;
+
+ export const { changeTheme, changeCurrentBoard } = userSlice.actions;
 export const userReducer = userSlice.reducer;

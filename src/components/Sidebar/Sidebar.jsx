@@ -57,8 +57,8 @@ const Sidebar = () => {
         <div className={s.navigation}>
           <div className={s.title}>
             <div className={s.logo}>
-              <svg className={s.logoIcon}>
-                <use href={`${icons}#icon-Logo-task-Pro`}  ></use>
+              <svg className={s.logoIcon}  width="12px" height="16px">
+                <use href={`${icons}#icon-Logo-task-Pro`}></use>
               </svg>
             </div>
             <h2 className={s.mainTitle}>Task Pro</h2>
