@@ -59,10 +59,11 @@ const RegistrationForm = () => {
         <form
           className={css.formStyle}
           onSubmit={handleSubmit(onSubmit)}
-          autoComplete="nope"
+          autoComplete="off"
         >
           <label>
             <input
+              autoComplete="off"
               className={css.inputStyles}
               type="username"
               name="username"
@@ -73,6 +74,7 @@ const RegistrationForm = () => {
           </label>
           <label>
             <input
+              autoComplete="off"
               className={css.inputStyles}
               type="email"
               placeholder="Enter your email"
@@ -83,6 +85,7 @@ const RegistrationForm = () => {
           <label>
             <div className={css.passwordContainer}>
               <input
+                autoComplete="off"
                 className={css.inputStyles}
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="Create a password"
