@@ -113,8 +113,26 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
-export const updateUserThunk = createAsyncThunk();
+export const updateUserThunk = createAsyncThunk(
+  'update',
+  async (data, thunkAPI) => {
+    try {
+      const response = await taskProApi.patch('api/auth/update', data);
+      console.log('update', response);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 // email: 'heidie@modulesdsh.com';
 // name: 'ann';
 // password: 'aaAA1111';
+
+// {
+//   "username": "John Johnson",
+//   "email": "example@exnpl.com",
+//   "password": "examplePasswrd",
+//   "theme": "dark"
+// }
