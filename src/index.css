@@ -8,6 +8,7 @@
   --button-background-color-hoover: #bedbb0;
   --button-background-color: #9dc888;
   --button-text-color: #161616;
+  --transition-pattern: 300ms ease-in;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
