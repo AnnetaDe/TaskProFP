@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
-import { selectRefreshToken } from './userSelectors';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -15,7 +13,6 @@ export const registerThunk = createAsyncThunk(
     try {
       const { data } = await taskProApi.post('api/auth/register', credentials);
       console.log(data);
-      setToken(data.accessToken);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -28,8 +25,8 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await taskProApi.post('api/auth/login', credentials);
-      setToken(data.accessToken);
-      console.log('data', data);
+      setToken(data.data.accessToken);
+      console.log('data', data.data.accessToken);
 
       return data;
     } catch (error) {
@@ -50,17 +47,40 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-export const refreshUserThunk = createAsyncThunk(
+export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const refreshToken = thunkAPI.getState().user.refreshToken;
     if (!refreshToken) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
-    setToken(refreshToken);
-
     try {
-      const { data } = await taskProApi.post('auth/refresh', refreshToken);
+      const { data } = await taskProApi.post('api/auth/refresh', {
+        refreshToken,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const refreshUserThunk = createAsyncThunk(
+  'auth/currentUser',
+  async (_, thunkAPI) => {
+    try {
+      await thunkAPI.dispatch(refreshTokensThunk());
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+
+    const accessToken = thunkAPI.getState().user.accessToken;
+    setToken(accessToken);
+    if (!accessToken) {
+      return thunkAPI.rejectWithValue('Unable to fetch user');
+    }
+    try {
+      const { data } = await taskProApi.get('api/auth/current');
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

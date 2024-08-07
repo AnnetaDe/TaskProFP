@@ -10,9 +10,25 @@ import {
 } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import {
+  refreshTokensThunk,
+  refreshUserThunk,
+} from './redux/user/userOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsRefreshing } from './redux/user/userSelectors';
+import { useEffect } from 'react';
 
 function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    // dispatch(refreshTokensThunk());
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <div>refreshing...</div>
+  ) : (
     <>
       <Routes>
         <Route
