@@ -89,6 +89,18 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
+export const changeThemeThunk = createAsyncThunk(
+  'auth/changeTheme',
+  async (theme, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.patch('api/auth/update', { theme });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // email: 'heidie@modulesdsh.com';
 // name: 'ann';
 // password: 'aaAA1111';

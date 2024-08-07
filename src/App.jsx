@@ -10,10 +10,7 @@ import {
 } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import {
-  refreshTokensThunk,
-  refreshUserThunk,
-} from './redux/user/userOperations';
+import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { useEffect } from 'react';
