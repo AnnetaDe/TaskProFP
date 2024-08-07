@@ -1,24 +1,34 @@
 import clsx from 'clsx';
 import s from './Button.module.css';
 
-const btnTypes = ['transparent', 'primary', 'secondary'];
-
-export const Button = ({ buttonText = '', type = 'primary', icon = '' }) => {
+export const Button = ({
+  buttonText = '',
+  onClick,
+  type = 'button',
+  typeStyle = 'primary',
+  icon = '',
+}) => {
   return (
     <>
       {type === 'small' ? (
-        <button className={clsx(s.btn_small)}>
+        <button
+          className={clsx(s.btn_small)}
+          type={type}
+          onClick={onClick ? onClick : null}
+        >
           <svg width="20" height="20">
             <use href={icon}></use>
           </svg>
         </button>
       ) : (
         <button
+          type={type}
+          onClick={onClick ? onClick : null}
           className={clsx(s.btn, {
-            [s.transparent]: type === 'transparent',
-            [s.primary]: type === 'primary',
-            [s.secondary]: type === 'secondary',
-            [s.small]: type === 'small',
+            [s.transparent]: typeStyle === 'transparent',
+            [s.primary]: typeStyle === 'primary',
+            [s.secondary]: typeStyle === 'secondary',
+            [s.small]: typeStyle === 'small',
           })}
         >
           {icon && (

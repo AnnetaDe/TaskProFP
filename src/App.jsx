@@ -10,11 +10,13 @@ import {
 } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import { Button } from './components/Button/Button';
 
 function App() {
   return (
     <>
-      <Routes>
+      <Button width="35px" />
+      {/* <Routes>
         <Route
           path="/"
           element={
@@ -43,7 +45,7 @@ function App() {
           }
         />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 }
