@@ -1,8 +1,14 @@
 
 import s from './CreateNewBoard.module.css';
-import sprite from "../../../images/icons.svg"
+import icons from "../../../images/icons.svg"
+import { useState } from 'react';
+import Modal from '../../Modal/Modal';
 
 export const CreateNewBoard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(isOpen => !isOpen);
+  };
   return (
     <>
   <div className={s.boards}>
@@ -11,22 +17,21 @@ export const CreateNewBoard = () => {
     </p>
     </div>
     <div className={s.create}>
-    <h2 className={s.title}>Create a new board</h2>
-    <button type="button" className={s.createButton}>
+    <p className={s.title}>Create a new board</p>
+    <button type="button" className={s.createButton} onClick={toggleModal}>
     <svg
             width="40px"
-            height="36px"
-            className={s.iconPlus}
-          >
-            <use href={sprite + "icon-plus-big"}></use>
+            height="20px"
+            className={s.iconPlus}>
+              <use href={`${icons}#icon-plus-small`}> </use>
             </svg>
     </button>
-    {/* {isOpen && (
+    {isOpen && (
           <Modal>
             onClose={toggleModal}
-            children={<ModalBoard onClose={toggleModal} />}
+            {/* children={<ModalBoard onClose={toggleModal} />} */}
             </Modal>
-        )} */}
+        )}
   </div>
     </>
   )

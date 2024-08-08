@@ -1,8 +1,9 @@
 .boards {
-    border-bottom: 1px solid #161616;
+    border-bottom: 1px solid rgba(22, 22, 22, 0.1);
     margin-bottom: 9px;
     margin-right: 24px;
     padding-bottom: 8px;
+    text-align: left; 
   }
   
   .text {
@@ -15,8 +16,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid  #161616;
+    border-bottom: 1px solid rgba(22, 22, 22, 0.1);;
     margin-bottom: 40px;
+    font-weight: 500px;
     margin-right: 24px;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -24,8 +26,10 @@
   
   .title {
     width: 76px;
+    height: 42px;
     font-weight: 500;
     letter-spacing: -0.28px;
+    text-align: left; 
   }
   
   .createButton {
@@ -54,5 +58,7 @@
     flex-shrink: 0;
     fill: #121212;
     color: #121212;
+    stroke: var(--button-text-color);
+    
   }
   
