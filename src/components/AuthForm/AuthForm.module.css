@@ -1,4 +1,4 @@
-.background {
+/* .background {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,20 +24,20 @@
     padding: 40px;
     width: 100%;
 
-    width: 424px;
+    max-width: 424px;
   }
-}
-.authNav {
+} */
+/* .authNav {
   display: flex;
   gap: 14px;
-  /* margin: 40px 0 0 40px; */
-}
+   margin: 40px 0 0 40px; 
+} */
 
 .formStyle {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: stretch;
   gap: 14px;
 
   margin: 0;
@@ -89,20 +89,20 @@
   align-items: center;
   position: relative;
 }
-.authLink {
+/* .authLink {
   height: 27px;
   font-family: var(--font-family);
   color: #ffffff;
   display: inline-block;
   font-size: 18px;
   font-weight: 500;
-}
+} */
 
 label {
   position: relative;
   color: #fff;
 }
-.activeAuthLink {
+/* .activeAuthLink {
   height: 27px;
   text-decoration: none;
   font-family: var(--font-family);
@@ -120,7 +120,7 @@ label {
   &.active {
     color: #ffffff;
   }
-}
+} */
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
