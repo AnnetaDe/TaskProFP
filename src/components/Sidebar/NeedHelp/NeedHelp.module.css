@@ -3,7 +3,7 @@
   padding: 14px 14px 14px 14px;
   margin-bottom: 24px;
   border-radius: 8px;
-  background-color: rgba(31, 31, 31, 1);
+  background-color: var(--need-help-bgc);
 }
 
 .image {
