@@ -4,7 +4,7 @@ import { updateUserPreferencesThunk } from '../user/userOperations';
 const userPreferencesSlice = createSlice({
   name: 'userPreferences',
   initialState: {
-    userTheme: 'violet',
+    userTheme: 'dark',
     userAvatar: '',
   },
 

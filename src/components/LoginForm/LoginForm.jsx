@@ -8,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 import icon from '../../images/icons.svg';
 import { useDispatch } from 'react-redux';
 import { loginThunk } from '../../redux/user/userOperations';
+import InputField from '../InputField/InputField';
+import { Button } from '../Button/Button';
 
 const LoginForm = () => {
   const isLoading = false; // from redux
@@ -59,23 +61,23 @@ const LoginForm = () => {
           autoComplete="off"
         >
           <label>
-            <input
+            <InputField
               autoComplete="off"
-              className={css.inputStyles}
               type="email"
               placeholder="Enter your email"
-              {...register('email')}
+              register={register}
+              name="email"
             />
             <p className={css.errorStyles}>{errors.email?.message}</p>
           </label>
           <label>
             <div className={css.passwordContainer}>
-              <input
+              <InputField
                 autoComplete="off"
-                className={css.inputStyles}
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="Enter your password"
-                {...register('password')}
+                register={register}
+                name="password"
               />
               <button
                 type="button"
@@ -89,9 +91,11 @@ const LoginForm = () => {
             </div>
             <p className={css.errorStyles}>{errors.password?.message}</p>
           </label>
-          <button className={css.buttonStyles} type="submit">
-            Log In Now
-          </button>
+          <Button
+            className={css.buttonStyles}
+            type="submit"
+            buttonText="Log In Now"
+          />
         </form>
       </div>
     </div>
