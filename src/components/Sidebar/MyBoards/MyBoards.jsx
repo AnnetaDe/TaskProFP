@@ -1,9 +1,9 @@
 import s from './MyBoards.module.css';
 import sprite from '../../../images/icons.svg';
 
-const MyBoards = desk => {
+const MyBoards = () => {
   // const deskRoute = desk.desk.title.split(' ').join('-');
-  const boardIcon = `#${desk.desk.icon}`;
+  // const boardIcon = `#${desk.desk.icon}`;
 
   return (
     <>
@@ -12,9 +12,9 @@ const MyBoards = desk => {
           {/* <NavLink to={deskRoute} className={s.navItem}> */}
           <button className={s.wrapperIcons}>
             <svg width="18px" height="16px">
-              <use href={sprite + boardIcon}></use>
+              {/* <use href={sprite + boardIcon}></use> */}
             </svg>
-            <p className={s.project}>{desk.desk.title}</p>
+            <p className={s.project}></p>
           </button>
           <div className={s.wrapperIcons}>
               <svg

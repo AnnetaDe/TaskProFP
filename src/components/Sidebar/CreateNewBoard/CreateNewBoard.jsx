@@ -2,7 +2,6 @@
 import s from './CreateNewBoard.module.css';
 import sprite from "../../../images/icons.svg"
 
-
 export const CreateNewBoard = () => {
   return (
     <>

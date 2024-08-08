@@ -20,14 +20,7 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  // reducers: {
-  //   changeTheme(state, action) {
-  //     state.user.theme = action.payload;
-  //   },
-  //   changeAvatar(state, action) {
-  //     state.user.avatar = action.payload;
-  //   },
-  // },
+
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
@@ -41,7 +34,9 @@ const userSlice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, state => {
         state.login = { email: '', password: '', theme: '', avatar: '' };
+
         state.accessToken = null;
+        state.refreshToken = null;
         state.isLoggined = false;
       })
       .addCase(loginThunk.pending, state => {
@@ -66,8 +61,10 @@ const userSlice = createSlice({
       .addCase(refreshUserThunk.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUserThunk.rejected, (state, { payload }) => {
+      .addCase(refreshUserThunk.rejected, state => {
         state.error = true;
+        state.isRefreshing = false;
+        state.isLoggined = false;
       });
   },
 });

@@ -33,6 +33,7 @@ export const customStyles = {
   }),
   option: (provided, state) => ({
     ...provided,
+
     border: 'none',
     backgroundColor: 'var(--background-header)',
     borderRadius: '8px',
