@@ -1,28 +1,57 @@
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import AuthForm from '../../components/AuthForm/AuthForm';
 import { LoginSchame, RegistrationSchame } from '../../schames/AuthSchames';
 import { loginThunk, registerThunk } from '../../redux/user/userOperations';
-
+import css from './AuthPage.module.css';
 export const AuthPage = () => {
   const { type } = useParams();
 
   return (
-    <div>
-      {type === 'login' ? (
-        <AuthForm
-          loginForm
-          key="login"
-          scheme={LoginSchame}
-          onSubmitThunk={loginThunk}
-        />
-      ) : (
-        <AuthForm
-          registerForm
-          key="register"
-          scheme={RegistrationSchame}
-          onSubmitThunk={registerThunk}
-        />
-      )}
+    <div className={css.background}>
+      {/* {isLoading && <Loader />} */}
+      <div className={css.formWrapper}>
+        <ul className={css.authNav}>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? css.authLink
+                  : `${css.activeAuthLink} ${css.authLink}`
+              }
+              to="/auth/register"
+            >
+              Registration
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? css.authLink
+                  : `${css.activeAuthLink} ${css.authLink}`
+              }
+              to="/auth/login"
+            >
+              Log in
+            </NavLink>
+          </li>
+        </ul>
+        {type === 'login' ? (
+          <AuthForm
+            loginForm
+            key="login"
+            scheme={LoginSchame}
+            onSubmitThunk={loginThunk}
+          />
+        ) : (
+          <AuthForm
+            registerForm
+            key="register"
+            scheme={RegistrationSchame}
+            onSubmitThunk={registerThunk}
+          />
+        )}
+      </div>
     </div>
   );
 };
