@@ -1,19 +1,15 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import {
-  DashboardLayout,
-  WelcomePage,
-  HomePage,
-  ScreensPage,
-  NotFound,
-  AuthPage,
-} from './pages';
+import { DashboardLayout, WelcomePage, NotFound, AuthPage } from './pages';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
+
+const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +33,7 @@ function App() {
           }
         >
           <Route index element={<HomePage />} />
-          <Route path="boardid" element={<ScreensPage />} />
+          <Route path="board/:id" element={<ScreensPage />} />
         </Route>
         <Route
           path="/welcome"

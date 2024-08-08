@@ -7,8 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerThunk } from '../../redux/user/userOperations';
-import { useSelector } from 'react-redux';
-import { selectIsLoading } from '../../redux/user/userSelectors';
+
 import icon from '../../images/icons.svg';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
