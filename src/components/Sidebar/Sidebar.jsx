@@ -9,31 +9,32 @@ import { useMediaQuery } from 'react-responsive';
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
+import Logo from '../Logo/Logo';
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1440 });
 
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch, selectBoards]);
 
-  const handleToggleSidebar = () => {
-    setIsOpen(prevState => !prevState);
-  };
+  // const handleToggleSidebar = () => {
+  //   setIsSidebarOpen(prevState => !prevState);
+  // };
 
   const handleOutsideClick = event => {
     if (!event.target.closest('.sidebar')) {
-      setIsOpen(false);
+      setIsSidebarOpen(false);
     }
   };
 
   useEffect(() => {
     let timeoutId;
 
-    if (isOpen && isMobile) {
+    if (isSidebarOpen && isMobile) {
       timeoutId = setTimeout(() => {
         document.addEventListener('click', handleOutsideClick);
       }, 100);
@@ -45,27 +46,32 @@ const Sidebar = () => {
       clearTimeout(timeoutId);
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isOpen, isMobile]);
+  }, [isSidebarOpen, isMobile]);
 
   return (
     <>
-      <svg className={s.iconMenu} onClick={handleToggleSidebar}>
+      {/* <svg className={s.iconMenu} onClick={handleToggleSidebar}>
         <use href={`${icons}#icon-burger`}></use>
-      </svg>
-      <div className={`${s.container} ${isMobile && isOpen ? s.mobile : ''}`}>
+      </svg> */}
+      <div
+        className={`${s.container} ${
+          isMobile && isSidebarOpen ? s.mobile : ''
+        }`}
+      >
         <div className={s.navigation}>
-          <div className={s.title}>
+          <Logo />
+          {/* <div className={s.title}>
             <div className={s.logo}>
-              <svg className={s.logoIcon}  width="12px" height="16px">
+              <svg className={s.logoIcon} width="12px" height="16px">
                 <use href={`${icons}#icon-Logo-task-Pro`}></use>
               </svg>
             </div>
             <h2 className={s.mainTitle}>Task Pro</h2>
-          </div>
+          </div> */}
           <CreateNewBoard />
         </div>
         <nav className={s.dashboards}>
-            <MyBoards />  
+          <MyBoards />
         </nav>
         <div className={s.needHelp}>
           <NeedHelp />
