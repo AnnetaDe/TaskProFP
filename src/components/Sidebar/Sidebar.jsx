@@ -5,16 +5,16 @@ import icons from '../../images/icons.svg';
 import s from './Sidebar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
+import { useMedia } from '../../hooks/useMedia';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
   const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: 1440 });
+  const { isMobile, isTablet } = useMedia();
 
   useEffect(() => {
     dispatch(fetchBoardsThunk());
@@ -45,14 +45,17 @@ const Sidebar = () => {
       clearTimeout(timeoutId);
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isOpen, isMobile]);
+  }, [isOpen, isMobile, isTablet]);
 
   return (
     <>
       <svg className={s.iconMenu} onClick={handleToggleSidebar}>
         <use href={`${icons}#icon-burger`}></use>
       </svg>
-      <div className={`${s.container} ${isMobile && isOpen ? s.mobile : ''}`}>
+      {(isMobile || isTablet) && isOpen  && (
+        <div className={s.backdrop} onClick={handleToggleSidebar}></div>
+      )}
+      <div className={`${s.container} ${  (isMobile || isTablet) && isOpen ? s.mobile : ''}`}>
         <div className={s.navigation}>
           <div className={s.title}>
             <div className={s.logo}>

@@ -19,7 +19,7 @@ const InputField = ({
     ...(width && { width }),
   };
   if (errors && errors[name]) {
-    return <p className={css.errorStyles}>{errors[name].message}</p>;
+    return <p className={s.errorStyles}>{errors[name].message}</p>;
   }
   if (isTextArea) {
     return (
