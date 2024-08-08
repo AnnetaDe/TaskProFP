@@ -23,7 +23,8 @@
   @media only screen and (min-width: 768px) {
     padding: 40px;
     width: 100%;
-    max-width: 424px;
+
+    width: 424px;
   }
 }
 .authNav {
@@ -36,52 +37,12 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: start;
   gap: 14px;
 
   margin: 0;
   padding: 0;
 }
-
-/* .inputStyles {
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: -0.02em;
-  margin: 0;
-  width: 100%;
-  height: 47px;
-  padding: 0px 0px 0px 18px;
-  background-color: #151515 !important;
-  border: 1px solid rgb(190, 219, 176);
-  border-radius: 8px;
-  color: rgb(255, 255, 255);
-
-  opacity: 0.5;
-  position: relative;
-
-  &:focus {
-    opacity: 1;
-    background-color: #151515 !important;
-  }
-
-  &:hover {
-    opacity: 1;
-    background-color: #151515 !important;
-  }
-  @media screen and (max-width: 374px) {
-    width: 248px;
-  }
-
-  @media screen and (min-width: 375px) {
-    width: 268px;
-  }
-  @media screen and (min-width: 768px) {
-    width: 324px;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 324px;
-  }
-} */
 
 .svgStyles {
   stroke: #fff;
@@ -133,34 +94,10 @@
   font-family: var(--font-family);
   color: #ffffff;
   display: inline-block;
-  /* padding-right: 14px; */
   font-size: 18px;
   font-weight: 500;
 }
-.buttonStyles {
-  width: 100%;
-  margin-top: 10px;
-  height: 49px;
-  padding: 14px 0;
-  font-weight: 500;
-  background: #bedbb0;
-  border-radius: 8px;
-  color: #161616;
 
-  &:hover {
-    background: #9dc888;
-  }
-
-  @media screen and (min-width: 375px) {
-    width: 287px;
-  }
-  @media screen and (min-width: 768px) {
-    width: 344px;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 344px;
-  }
-}
 label {
   position: relative;
   color: #fff;
