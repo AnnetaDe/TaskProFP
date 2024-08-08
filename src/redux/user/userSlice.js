@@ -46,7 +46,9 @@ const userSlice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, state => {
         state.login = { email: '', password: '', theme: '', avatar: '' };
+
         state.accessToken = null;
+        state.refreshToken = null;
         state.isLoggined = false;
       })
       .addCase(loginThunk.pending, state => {
@@ -73,6 +75,8 @@ const userSlice = createSlice({
       })
       .addCase(refreshUserThunk.rejected, (state) => {
         state.error = true;
+        state.isRefreshing = false;
+        state.isLoggined = false;
       });
   },
 });

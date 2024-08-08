@@ -26,9 +26,8 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await taskProApi.post('api/auth/login', credentials);
-      setToken(data.data.accessToken);
       console.log('data', data.data.accessToken);
-
+      setToken(data.data.accessToken);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -157,6 +156,32 @@ export const fetchColumns = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(`/api/columns/${id}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateUserPreferencesThunk = createAsyncThunk(
+  'auth/updateUserPreferences',
+  async (preferences, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.patch('api/auth/update', preferences);
+      console.log('data', data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const changeTheme = createAsyncThunk(
+  'auth/theme',
+  async (changeTheme, thunkAPI) => {
+    try {
+      const response = await axios.patch('/users/theme', changeTheme);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

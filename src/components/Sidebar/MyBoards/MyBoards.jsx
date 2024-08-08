@@ -42,7 +42,7 @@ const MyBoards = (desk) => {
             <svg width="18px" height="16px">
               <use href={projectIcons}></use>
             </svg>
-            <p className={s.project}>{desk.desk.title}</p>
+            <p className={s.project}></p>
           </button>
           <div className={s.btnContainer}>
           <div className={s.wrapperIcons}>
