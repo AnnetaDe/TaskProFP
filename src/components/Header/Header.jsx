@@ -28,10 +28,7 @@ const Header = () => {
   const [theme, setTheme] = useState(
     selectOptions.filter(el => el.value === userTheme)
   );
-
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const userName = useSelector(selectUserName);
-  const avatar = useSelector(selectAvatar);
 
   const { isDesktop } = useMedia();
 
@@ -39,7 +36,7 @@ const Header = () => {
     dispatch(openModal());
   };
   const handleChange = selectedOption => {
-    // setTheme(selectedOption);
+    setTheme(selectedOption);
     dispatch(updateUserPreferencesThunk({ theme: selectedOption.value }));
 
     document.documentElement.setAttribute('theme', selectedOption.value);
@@ -68,7 +65,7 @@ const Header = () => {
       )}
       <section className={s.right}>
         <Select
-          // value={theme} Люба, магия вот это надо было закоментировать и выбранная тема стала подсвечиваться
+          value={theme}
           onChange={handleChange}
           options={selectOptions}
           placeholder="Theme"
