@@ -1,6 +1,6 @@
 .container {
   width: 197px;
-  padding: 14px 0px 14px 14px;
+  padding: 14px 14px 14px 14px;
   margin-bottom: 24px;
   border-radius: 8px;
   background-color: rgba(31, 31, 31, 1);
@@ -14,6 +14,7 @@
 .text {
   font-family: var(--font-family);
   color: var(--logo-text-color);
+  font-weight: 400;
   font-size: 12px;
   line-height: 1.67;
   letter-spacing: -0.28px;
@@ -39,6 +40,7 @@
   display: inline-flex;
   align-items: center;
   background-color: transparent;
+  font-weight: 500;
 }
 
 .btn:hover {
@@ -59,6 +61,7 @@
 
 @media screen and (min-width: 768px) {
   .container {
+    width: 212px;
     padding: 20px 20px 20px 20px;
   }
   .text {
