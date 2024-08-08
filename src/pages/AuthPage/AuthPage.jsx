@@ -9,10 +9,16 @@ export const AuthPage = () => {
   return (
     <div>
       {type === 'login' ? (
-        <AuthForm loginForm scheme={LoginSchame} onSubmitThunk={loginThunk} />
+        <AuthForm
+          loginForm
+          key="login"
+          scheme={LoginSchame}
+          onSubmitThunk={loginThunk}
+        />
       ) : (
         <AuthForm
           registerForm
+          key="register"
           scheme={RegistrationSchame}
           onSubmitThunk={registerThunk}
         />

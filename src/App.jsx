@@ -23,10 +23,6 @@ function App() {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('theme', 'dark');
-  }, []);
-
   return isRefreshing ? (
     <div>refreshing...</div>
   ) : (
