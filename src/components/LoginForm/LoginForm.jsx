@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { LoginSchame } from '../../schames/AuthSchames';
 import css from './LoginForm.module.css';
-// import Loader from '../Loader/Loader';
+import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
 import icon from '../../images/icons.svg';
@@ -40,7 +40,7 @@ const LoginForm = () => {
 
   return (
     <div className={css.background}>
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
       <div className={css.formWrapper}>
         <ul className={css.authNav}>
           <li>
