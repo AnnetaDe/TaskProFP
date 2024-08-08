@@ -1,20 +1,21 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { RegistrationSchame } from '../../schames/AuthSchames';
-import css from './RegistrationForm.module.css';
+import css from './AuthForm.module.css';
 // import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { registerThunk } from '../../redux/user/userOperations';
-import { useSelector } from 'react-redux';
-import { selectIsLoading } from '../../redux/user/userSelectors';
 import icon from '../../images/icons.svg';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
 
-const RegistrationForm = () => {
-  const dispatch = useDispatch(); // from redux
+const AuthForm = ({
+  registerForm = false,
+  loginForm = false,
+  scheme,
+  onSubmitThunk,
+}) => {
+  const dispatch = useDispatch();
   const isLoading = false;
   const {
     register,
@@ -22,12 +23,10 @@ const RegistrationForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      username: '',
-      email: '',
-      password: '',
-    },
-    resolver: yupResolver(RegistrationSchame),
+    defaultValues: registerForm
+      ? { username: '', email: '', password: '' }
+      : { email: '', password: '' },
+    resolver: yupResolver(scheme),
     mode: 'onChange',
   });
 
@@ -39,7 +38,8 @@ const RegistrationForm = () => {
 
   const onSubmit = data => {
     console.log(data);
-    dispatch(registerThunk(data));
+    console.log('submit');
+    dispatch(onSubmitThunk(data));
     reset();
   };
 
@@ -49,10 +49,26 @@ const RegistrationForm = () => {
       <div className={css.formWrapper}>
         <ul className={css.authNav}>
           <li>
-            <p className={css.authLink}>Registration</p>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? css.authLink
+                  : `${css.activeAuthLink} ${css.authLink}`
+              }
+              to="/auth/register"
+            >
+              Registration
+            </NavLink>
           </li>
           <li>
-            <NavLink className={css.activeAuthLink} to={`/auth/login`}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? css.authLink
+                  : `${css.activeAuthLink} ${css.authLink}`
+              }
+              to="/auth/login"
+            >
               Log in
             </NavLink>
           </li>
@@ -63,15 +79,17 @@ const RegistrationForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           autoComplete="nope"
         >
-          <label>
-            <InputField
-              type="text"
-              name="username"
-              placeholder="Enter your name"
-              register={register}
-            />
-            <p className={css.errorStyles}>{errors.name?.message}</p>
-          </label>
+          {registerForm && (
+            <label>
+              <InputField
+                type="text"
+                name="username"
+                placeholder="Enter your name"
+                register={register}
+              />
+              <p className={css.errorStyles}>{errors.name?.message}</p>
+            </label>
+          )}
           <label>
             <InputField
               type="email"
@@ -104,7 +122,7 @@ const RegistrationForm = () => {
           <Button
             className={css.buttonStyles}
             type="submit"
-            buttonText="Register Now"
+            buttonText={registerForm ? 'Register Now' : 'Log In Now'}
           />
         </form>
       </div>
@@ -112,4 +130,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default AuthForm;
