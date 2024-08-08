@@ -151,17 +151,6 @@ export const deleteBoard = createAsyncThunk(
   }
 );
 
-export const fetchColumns = createAsyncThunk(
-  'tasks/fetchColumns',
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.get(`/api/columns/${id}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
 
 export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',

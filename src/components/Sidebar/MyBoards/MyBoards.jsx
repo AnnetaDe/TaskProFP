@@ -2,10 +2,10 @@ import s from './MyBoards.module.css';
 import icons from '../../../images/icons.svg';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchColumns } from '../../../redux/user/userOperations';
-import { changeCurrentBoard, changeTheme } from '../../../redux/user/userSlice';
 import { NavLink } from 'react-router-dom';
 import Modal from '../../Modal/Modal';
+import { fetchColumns } from '../../../redux/boards/boardsOperations';
+import { changeBg, changeCurrentBoard } from '../../../redux/boards/boardsSlice';
 // import DeleteBoard from '../BoardModal/DeleteBoard';
 // import EditBoard from '../BoardModal/EditBoard';
 
@@ -21,7 +21,7 @@ const MyBoards = (desk) => {
 
   const addColumns = id => {
     dispatch(fetchColumns(id));
-    dispatch(changeTheme(desk.desk.currentBg));
+    dispatch(changeBg(desk.desk.currentBg));
     dispatch(changeCurrentBoard(id));
   };
 

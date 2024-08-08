@@ -4,11 +4,11 @@ import LogOut from './LogOut/LogOut';
 import icons from '../../images/icons.svg';
 import s from './Sidebar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBoard } from '../../redux/user/userSelectors';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { fetchBoards } from '../../redux/user/userOperations';
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
+import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
+import { selectBoard } from '../../redux/boards/boardsSelectors';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Sidebar = () => {
   const isMobile = useMediaQuery({ maxWidth: 1440 });
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    dispatch(fetchBoardsThunk());
   }, [dispatch, selectBoards]);
 
   const handleToggleSidebar = () => {

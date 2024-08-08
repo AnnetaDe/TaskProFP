@@ -21,17 +21,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    changeTheme(state, action) {
-      state.user.theme = action.payload;
-    },
   //   changeAvatar(state, action) {
   //     state.user.avatar = action.payload;
-  //   },
-  changeCurrentBoard(state, action) {
-    state.user.currentBoard = action.payload;
   },
-  },
-
 
   extraReducers: builder => {
     builder
@@ -82,5 +74,5 @@ const userSlice = createSlice({
 });
 
 
- export const { changeTheme, changeCurrentBoard } = userSlice.actions;
+
 export const userReducer = userSlice.reducer;

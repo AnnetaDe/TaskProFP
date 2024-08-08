@@ -40,17 +40,17 @@ const Modal = ({ children }) => {
             <path
               d="M13.5 4.5L4.5 13.5"
               stroke="white"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className={clsx(css.icon)}
             />
             <path
               d="M4.5 4.5L13.5 13.5"
               stroke="white"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               className={clsx(css.icon)}
             />
           </svg>
