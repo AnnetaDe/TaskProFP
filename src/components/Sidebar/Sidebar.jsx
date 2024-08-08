@@ -10,20 +10,16 @@ import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 import Logo from '../Logo/Logo';
+import { useMedia } from '../../hooks/useMedia';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
-  // const [isOpen, setIsOpen] = useState(false);
-  const isMobile = useMediaQuery({ maxWidth: 1440 });
+  const { isDesktop } = useMedia();
 
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch, selectBoards]);
-
-  // const handleToggleSidebar = () => {
-  //   setIsSidebarOpen(prevState => !prevState);
-  // };
 
   const handleOutsideClick = event => {
     if (!event.target.closest('.sidebar')) {
@@ -34,7 +30,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   useEffect(() => {
     let timeoutId;
 
-    if (isSidebarOpen && isMobile) {
+    if (isSidebarOpen && !isDesktop) {
       timeoutId = setTimeout(() => {
         document.addEventListener('click', handleOutsideClick);
       }, 100);
@@ -46,28 +42,17 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       clearTimeout(timeoutId);
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [isSidebarOpen, isMobile]);
+  }, [isSidebarOpen, isDesktop]);
 
   return (
     <>
-      {/* <svg className={s.iconMenu} onClick={handleToggleSidebar}>
-        <use href={`${icons}#icon-burger`}></use>
-      </svg> */}
       <div
         className={`${s.container} ${
-          isMobile && isSidebarOpen ? s.mobile : ''
+          !isDesktop && isSidebarOpen ? s.mobile : ''
         }`}
       >
         <div className={s.navigation}>
-          <Logo />
-          {/* <div className={s.title}>
-            <div className={s.logo}>
-              <svg className={s.logoIcon} width="12px" height="16px">
-                <use href={`${icons}#icon-Logo-task-Pro`}></use>
-              </svg>
-            </div>
-            <h2 className={s.mainTitle}>Task Pro</h2>
-          </div> */}
+          <Logo className={s.logo} />
           <CreateNewBoard />
         </div>
         <nav className={s.dashboards}>
