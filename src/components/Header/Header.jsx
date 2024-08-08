@@ -19,8 +19,7 @@ import { useMedia } from '../../hooks/useMedia.jsx';
 import icons from '../../images/icons.svg';
 import SvgIconAnonym from './SvgIconAnonym.jsx';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
-
-const Header = () => {
+const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
@@ -28,25 +27,21 @@ const Header = () => {
   const [theme, setTheme] = useState(
     selectOptions.filter(el => el.value === userTheme)
   );
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
+  // const [isSidebarOpen, setSidebarOpen] = useState(false);
   const { isDesktop } = useMedia();
-
   const handleOpenModal = () => {
     dispatch(openModal());
   };
   const handleChange = selectedOption => {
     setTheme(selectedOption);
     dispatch(updateUserPreferencesThunk({ theme: selectedOption.value }));
-
     document.documentElement.setAttribute('theme', selectedOption.value);
   };
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme.value);
   }, []);
-
   const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
     console.log(isSidebarOpen);
   };
   return (
@@ -88,7 +83,6 @@ const Header = () => {
           )}
         </div>
       </section>
-
       <Modal>Edit User Modal</Modal>
     </header>
   );
