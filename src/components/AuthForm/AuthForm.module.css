@@ -24,7 +24,7 @@
     padding: 40px;
     width: 100%;
 
-    width: 424px;
+    max-width: 424px;
   }
 }
 .authNav {
@@ -37,7 +37,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: stretch;
   gap: 14px;
 
   margin: 0;
