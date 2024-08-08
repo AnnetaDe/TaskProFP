@@ -4,11 +4,11 @@ import LogOut from './LogOut/LogOut';
 import icons from '../../images/icons.svg';
 import s from './Sidebar.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBoard } from '../../redux/user/userSelectors';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
+import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
+import { selectBoard } from '../../redux/boards/boardsSelectors';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Sidebar = () => {
         <div className={s.navigation}>
           <div className={s.title}>
             <div className={s.logo}>
-              <svg className={s.logoIcon}>
+              <svg className={s.logoIcon}  width="12px" height="16px">
                 <use href={`${icons}#icon-Logo-task-Pro`}></use>
               </svg>
             </div>
@@ -65,7 +65,7 @@ const Sidebar = () => {
           <CreateNewBoard />
         </div>
         <nav className={s.dashboards}>
-          <MyBoards />
+            <MyBoards />  
         </nav>
         <div className={s.needHelp}>
           <NeedHelp />

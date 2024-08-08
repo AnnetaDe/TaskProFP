@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
+import axios from 'axios';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -87,17 +88,70 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
-export const changeThemeThunk = createAsyncThunk(
-  'auth/changeTheme',
-  async (theme, thunkAPI) => {
+// email: 'heidie@modulesdsh.com';
+// name: 'ann';
+// password: 'aaAA1111';
+
+export const fetchBoards = createAsyncThunk(
+  'user/boards',
+  async (_, thunkAPI) => {
     try {
-      const { data } = await taskProApi.patch('api/auth/update', { theme });
-      return data;
+      const response = await axios.get('/api/boards');
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+export const addBoard = createAsyncThunk(
+  'boards/addBoard',
+  async ({ title, currentBg, icon }, thunkAPI) => {
+    try {
+      const response = await axios.post('/api/boards', {
+        title,
+        currentBg,
+        icon,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editBoard = createAsyncThunk(
+  'boards/editBoard',
+  async ({ title, currentBg, icon, id }, thunkAPI) => {
+    try {
+      const response = await axios.put(`/api/boards/${id}`, {
+        title,
+        currentBg,
+        icon,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteBoard = createAsyncThunk(
+  'boards/deleteBoard',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/api/boards/${id}`);
+
+      if (response.status === 204) {
+        return id;
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
 export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
@@ -105,6 +159,19 @@ export const updateUserPreferencesThunk = createAsyncThunk(
       const { data } = await taskProApi.patch('api/auth/update', preferences);
       console.log('data', data);
       return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const changeTheme = createAsyncThunk(
+  'auth/theme',
+  async (changeTheme, thunkAPI) => {
+    try {
+      const response = await axios.patch('/users/theme', changeTheme);
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

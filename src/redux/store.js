@@ -14,6 +14,7 @@ import { userReducer } from './user/userSlice';
 import { modalReducer } from './modal/modalSlice';
 import { registerReducer } from './user/registerSlice';
 import { userPreferencesReducer } from './themes/userPreferencesSlice';
+import { taskReducer } from './boards/boardsSlice';
 
 const persistUser = {
   key: ['user'],
@@ -33,7 +34,7 @@ export const store = configureStore({
     registration: registerReducer,
     user: persistReducer(persistUser, userReducer),
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
-
+    task: taskReducer,
     modal: modalReducer,
   },
 
