@@ -12,6 +12,7 @@ const InputField = ({
   register = () => {},
   name,
   errors,
+  value,
   ...rest
 }) => {
   const style = {
@@ -19,7 +20,7 @@ const InputField = ({
     ...(width && { width }),
   };
   if (errors && errors[name]) {
-    return <p className={css.errorStyles}>{errors[name].message}</p>;
+    return <p className={s.errorStyles}>{errors[name].message}</p>;
   }
   if (isTextArea) {
     return (
@@ -35,6 +36,7 @@ const InputField = ({
   }
   return (
     <input
+      value={value}
       autoComplete={autoComplete}
       className={clsx(s.input_field, className)}
       type={type}

@@ -11,14 +11,11 @@ import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
+  console.log(selectBoards);
+
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1440 });
-
-  useEffect(() => {
-    dispatch(fetchBoardsThunk());
-  }, [dispatch, selectBoards]);
 
   const handleToggleSidebar = () => {
     setIsOpen(prevState => !prevState);
@@ -32,7 +29,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     let timeoutId;
-
     if (isOpen && isMobile) {
       timeoutId = setTimeout(() => {
         document.addEventListener('click', handleOutsideClick);
@@ -56,7 +52,7 @@ const Sidebar = () => {
         <div className={s.navigation}>
           <div className={s.title}>
             <div className={s.logo}>
-              <svg className={s.logoIcon}  width="12px" height="16px">
+              <svg className={s.logoIcon} width="12px" height="16px">
                 <use href={`${icons}#icon-Logo-task-Pro`}></use>
               </svg>
             </div>
@@ -65,7 +61,7 @@ const Sidebar = () => {
           <CreateNewBoard />
         </div>
         <nav className={s.dashboards}>
-            <MyBoards />  
+          <MyBoards />
         </nav>
         <div className={s.needHelp}>
           <NeedHelp />

@@ -9,6 +9,7 @@ export const createNewTaskThunk = createAsyncThunk(
         `api/boards/${board.id}/columns/${column.id}/tasks`,
         task
       );
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -4,7 +4,7 @@
   font-size: 14px;
   letter-spacing: -0.02em;
   margin: 0 auto;
-  min-width: 287px;
+  min-width: 272px;
   width: 100%;
   padding: 14px 18px;
   background-color: var(--input-bgc);
@@ -23,6 +23,7 @@
     opacity: 1;
   }
   @media only screen and (min-width: 768px) {
+    width: 100%;
     max-width: 352px;
   }
 }
