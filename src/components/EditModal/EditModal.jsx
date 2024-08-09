@@ -1,41 +1,112 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { updateUserPreferencesThunk } from '../../redux/user/userOperations';
+
 import InputField from '../InputField/InputField';
 import s from './EditModal.module.css';
 import { useState } from 'react';
 import { EditUserScheme } from '../../schames/AuthSchames';
 import { useSelector } from 'react-redux';
-import { selectAvatar, selectUserName } from '../../redux/user/userSelectors';
+import {
+  selectAvatar,
+  selectUserEmail,
+  selectUserName,
+} from '../../redux/user/userSelectors';
 import InputPassword from '../InputPassword/InputPassword';
+import { Button } from '../Button/Button';
+import icon from '../../images/icons.svg';
+import { updateUserPreferencesThunk } from '../../redux/user/userOperations';
+import { closeModal } from '../../redux/modal/modalSlice';
 const EditModal = () => {
   const dispatch = useDispatch();
 
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
-
-  console.log(userName, avatar);
+  console.log(avatar);
   
+  const email = useSelector(selectUserEmail);
+  const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {avatar: avatar, username: userName, email: '', password: '' },
-    resolver: yupResolver(EditUserScheme),
+    defaultValues: {
+      avatar: avatar,
+      username: userName,
+      // email: email,
+      // password: '',
+    },
+    // resolver: yupResolver(EditUserScheme),
     mode: 'onChange',
   });
 
   const onSubmit = data => {
     console.log(data);
     console.log('submit');
-    dispatch(updateUserPreferencesThunk(data));
+    const formData = new FormData();
+    formData.append('userAvatar', selectedAvatar);
+    // formData.append('userName', data.username);
+    // console.log(data.username);
+
+    dispatch(
+      updateUserPreferencesThunk({
+        // avatar: selectedAvatar,
+        username: data.username,
+      })
+    );
+    console.log(formData);
+    handleCloseModal()
     reset();
   };
+  const handleFileChange = event => {
+    console.log('File input change event triggered');
+    
+    const file = event.target.files[0];
+    console.log('Selected file:', file);
+  
+    if (file) {
+      setSelectedAvatar(file);
+      console.log('Avatar selected:', file);
+    } else {
+      console.log('No file selected');
+    }
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} autoComplete="nope" className={s.edit_profile_form}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      autoComplete="nope"
+      className={s.edit_profile_form}
+    >
+      <div className={s.avatar_wrap}>
+        <label>
+          <img
+            src={selectedAvatar ? URL.createObjectURL(selectedAvatar) : avatar}
+            alt={`Avatar ${userName}`}
+          />
+          <input
+            className={s.input_avatar}
+            type="file"
+            accept="image/*"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+            name="avatar"
+            {...register('avatar')}
+          />
+          <Button
+            small
+            width={24}
+            height={24}
+            icon={`${icon}#icon-plus-small`}
+            iconSize="10"
+            className={s.plus_btn}
+          />
+        </label>
+      </div>
       <label>
         <InputField
           type="text"
@@ -50,11 +121,14 @@ const EditModal = () => {
           type="email"
           name="email"
           placeholder="Enter your email"
-          register={register}
+          // register={register}
+          value={email}
+          disabled
         />
         <p className={s.errorStyles}>{errors.name?.message}</p>
       </label>
-      <InputPassword register={register} />
+      <InputPassword disabled defaultValue={userName} />
+      <Button buttonText="Send" type="submit" />
     </form>
   );
 };

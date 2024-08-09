@@ -7,3 +7,4 @@ export const selectIsLoading = state => state.user.isLoading;
 export const selectIsRefreshing = state => state.user.isRefreshing;
 export const selectAvatar = state => state.user.userAvatar;
 export const selectRefresh = state => state.user.isRefreshing;
+export const selectUserEmail = state=>state.user.login.email
