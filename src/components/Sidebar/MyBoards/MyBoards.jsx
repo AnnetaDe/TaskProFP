@@ -9,6 +9,8 @@ import {
   changeBg,
   changeCurrentBoard,
 } from '../../../redux/boards/boardsSlice';
+import { useSelector } from 'react-redux';
+import { selectBoard } from '../../../redux/boards/boardsSelectors';
 // import DeleteBoard from '../BoardModal/DeleteBoard';
 // import EditBoard from '../BoardModal/EditBoard';
 
@@ -16,6 +18,8 @@ const MyBoards = desk => {
   const [isOpen, setIsOpen] = useState(false);
   const [typeModal, setTypeModal] = useState('');
   const dispatch = useDispatch();
+  const myBoards = useSelector(selectBoard);
+  console.log(myBoards);
 
   if (desk.desk === undefined) {
     return null;
@@ -52,7 +56,7 @@ const MyBoards = desk => {
               <svg width="18px" height="16px">
                 <use href={projectIcons}></use>
               </svg>
-              <p className={s.project}></p>
+              <p className={s.project}>{}</p>
             </button>
             <div className={s.btnContainer}>
               <div className={s.wrapperIcons}>

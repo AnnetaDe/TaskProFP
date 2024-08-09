@@ -3,13 +3,15 @@ import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { useEffect } from 'react';
 import { Board } from '../Board/Board';
 import { useSelector } from 'react-redux';
-import { selectBoard } from '../../redux/boards/boardsSelectors';
-import { selectColumns } from '../../redux/columns/columnsSelectors';
-import { get } from 'react-hook-form';
+import {
+  selectBoard,
+  selectBoardsIds,
+} from '../../redux/boards/boardsSelectors';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 
 const Kanban = () => {
   const boards = useSelector(selectBoard);
+  const boardsIds = useSelector(selectBoardsIds);
 
   console.log(boards);
 

@@ -7,6 +7,7 @@ import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { lazy, useEffect } from 'react';
+import { fetchBoardsThunk } from './redux/boards/boardsOperations';
 
 const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));

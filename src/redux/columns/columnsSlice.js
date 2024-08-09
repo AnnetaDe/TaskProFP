@@ -7,6 +7,10 @@ import {
 } from './columnsOperations';
 
 const initialState = {
+  boardId: null,
+  boardTitle: null,
+  boardIcon: null,
+  boardBackground: [],
   columns: [],
   isLoading: false,
   error: null,
@@ -21,7 +25,11 @@ const columnSlice = createSlice({
         (state, { payload }) => {
           state.error = false;
           state.isLoading = false;
-          state.columns = payload.data;
+          state.boardId = payload._id;
+          state.boardTitle = payload.title;
+          state.columns = payload.columns;
+          state.boardIcon = payload.icon;
+          state.boardBackground = payload.background;
         }
       )
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
