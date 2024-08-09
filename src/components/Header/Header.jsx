@@ -19,6 +19,7 @@ import { useMedia } from '../../hooks/useMedia.jsx';
 import icons from '../../images/icons.svg';
 import SvgIconAnonym from './SvgIconAnonym.jsx';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
+import EditModal from '../EditModal/EditModal.jsx';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -89,7 +90,7 @@ const Header = () => {
         </div>
       </section>
 
-      <Modal>Edit User Modal</Modal>
+      <Modal title='Edit profile'><EditModal /></Modal>
     </header>
   );
 };
