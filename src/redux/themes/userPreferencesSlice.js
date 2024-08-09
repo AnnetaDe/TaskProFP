@@ -6,12 +6,14 @@ const userPreferencesSlice = createSlice({
   initialState: {
     userTheme: 'dark',
     userAvatar: '',
+    userName:''
   },
 
   extraReducers: builder => {
     builder.addCase(updateUserPreferencesThunk.fulfilled, (state, action) => {
       state.userTheme = action.payload.userTheme;
       state.userAvatar = action.payload.userAvatar;
+      state.userName = action.payload.userName
     });
   },
 });

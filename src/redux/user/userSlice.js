@@ -25,6 +25,7 @@ const userSlice = createSlice({
     builder
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.login = payload.data.user;
+        state.email = payload.data.email;
         state.accessToken = payload.data.accessToken;
         state.refreshToken = payload.data.refreshToken;
         state.userTheme = payload.data.user.theme;
@@ -65,7 +66,7 @@ const userSlice = createSlice({
         state.error = true;
         state.isRefreshing = false;
         state.isLoggined = false;
-      });
+      })
   },
 });
 

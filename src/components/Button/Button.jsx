@@ -7,16 +7,26 @@ export const Button = ({
   type = 'button',
   typeStyle = 'primary',
   icon = '',
+  width,
+  height,
+  iconSize = '20',
+  className,
+  small = false,
 }) => {
+  const buttonStyle = {
+    width: width || undefined,
+    height: height || undefined,
+  };
   return (
     <>
-      {type === 'small' ? (
+      {small ? (
         <button
-          className={clsx(s.btn_small)}
+          className={clsx(s.btn_small, className)}
           type={type}
+          style={buttonStyle}
           onClick={onClick ? onClick : null}
         >
-          <svg width="20" height="20">
+          <svg width={iconSize} height={iconSize}>
             <use href={icon}></use>
           </svg>
         </button>
@@ -30,6 +40,7 @@ export const Button = ({
             [s.secondary]: typeStyle === 'secondary',
             [s.small]: typeStyle === 'small',
           })}
+          style={buttonStyle}
         >
           {icon && (
             <div className={s.icon}>

@@ -13,6 +13,8 @@ const InputField = ({
   name,
   errors,
   value,
+  disabled,
+  defaultValue,
   ...rest
 }) => {
   const style = {
@@ -37,7 +39,9 @@ const InputField = ({
   return (
     <input
       value={value}
+      defaultValue={defaultValue}
       autoComplete={autoComplete}
+      disabled={disabled}
       className={clsx(s.input_field, className)}
       type={type}
       placeholder={placeholder}

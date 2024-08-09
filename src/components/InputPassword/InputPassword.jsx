@@ -3,7 +3,7 @@ import InputField from "../InputField/InputField";
 import css from './InputPassword.module.css'
 import icon from '../../images/icons.svg';
 
-const InputPassword = ({register, errors={}}) => {
+const InputPassword = ({register, errors={}, disabled, defaultValue}) => {
     const [passwordShown, setPasswordShown] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -16,7 +16,9 @@ const InputPassword = ({register, errors={}}) => {
         type={passwordShown ? 'text' : 'password'}
         placeholder="Create a password"
         name="password"
+        value={defaultValue}
         register={register}
+        disabled={disabled}
       />
       <button
         type="button"
