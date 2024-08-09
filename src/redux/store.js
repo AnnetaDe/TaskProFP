@@ -15,6 +15,7 @@ import { modalReducer } from './modal/modalSlice';
 import { registerReducer } from './user/registerSlice';
 import { userPreferencesReducer } from './themes/userPreferencesSlice';
 import { boardsReducer } from './boards/boardsSlice';
+import { supportReducer } from './support/supportSlice';
 import { columnsReducer } from './columns/columnsSlice';
 
 const persistUser = {
@@ -38,6 +39,7 @@ export const store = configureStore({
     boards: boardsReducer,
     columns: columnsReducer,
     modal: modalReducer,
+    support: supportReducer,
   },
 
   middleware: getDefaultMiddleware =>

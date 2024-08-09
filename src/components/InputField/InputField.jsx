@@ -13,6 +13,8 @@ const InputField = ({
   name,
   errors,
   value,
+  disabled,
+  defaultValue,
   ...rest
 }) => {
   const style = {
@@ -26,9 +28,11 @@ const InputField = ({
     return (
       <div className={clsx(s.input_field, s.textarea_container)}>
         <textarea
+          value={value}
           className={clsx(s.textarea_field)}
           placeholder={placeholder}
           style={style}
+          {...(register ? register(name) : {})}
           {...rest}
         />
       </div>
@@ -37,7 +41,9 @@ const InputField = ({
   return (
     <input
       value={value}
+      defaultValue={defaultValue}
       autoComplete={autoComplete}
+      disabled={disabled}
       className={clsx(s.input_field, className)}
       type={type}
       placeholder={placeholder}

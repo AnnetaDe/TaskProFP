@@ -20,6 +20,8 @@ import icons from '../../images/icons.svg';
 import SvgIconAnonym from './SvgIconAnonym.jsx';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
 import EditModal from '../EditModal/EditModal.jsx';
+import { createPortal } from 'react-dom';
+import { selectModal } from '../../redux/modal/modalSelector.js';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -29,9 +31,11 @@ const Header = () => {
   const [theme, setTheme] = useState(
     selectOptions.filter(el => el.value === userTheme)
   );
+
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const { isDesktop } = useMedia();
+  const openedModal = useSelector(selectModal);
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -39,12 +43,11 @@ const Header = () => {
   const handleChange = selectedOption => {
     setTheme(selectedOption);
     dispatch(updateUserPreferencesThunk({ theme: selectedOption.value }));
-
     document.documentElement.setAttribute('theme', selectedOption.value);
   };
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme.value);
-  }, []);
+  }, [theme.value]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -89,8 +92,15 @@ const Header = () => {
           )}
         </div>
       </section>
+      {openedModal &&
+        createPortal(
+          <Modal title="Edit profile">
+            <EditModal />
+          </Modal>,
+          document.body
+        )}
 
-      <Modal title='Edit profile'><EditModal /></Modal>
+      {/* <Modal title='Edit profile'><EditModal /></Modal> */}
     </header>
   );
 };
