@@ -11,7 +11,7 @@ import {
 import Modal from '../../Modal/Modal';
 import NeedHelpForm from './NeedHelpForm';
 import icon from '../../../images/icons.svg';
-
+import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { selectModal } from '../../../redux/modal/modalSelector';
 import { closeModal, openModal } from '../../../redux/modal/modalSlice';
@@ -66,12 +66,13 @@ const NeedHelp = () => {
         </button>
       </div>
 
-      {isOpen && (
-        <Modal
-          onClose={toggleModal}
-          children={<NeedHelpForm onClose={toggleModal} />}
-        />
-      )}
+      {isOpen &&
+        createPortal(
+          <Modal title="Need help">
+            <NeedHelpForm />
+          </Modal>,
+          document.body
+        )}
     </div>
   );
 };
