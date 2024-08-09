@@ -5,13 +5,11 @@ import {
   fetchBoardsThunk,
   updateBoardThunk,
 } from './boardsOperations';
-
 const initialState = {
   boards: [],
   isLoading: false,
   error: null,
 };
-
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
@@ -30,13 +28,11 @@ const boardSlice = createSlice({
         state.isLoading = false;
         state.boards = payload.data;
       })
-
       .addCase(createBoardThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
         state.boards.push(payload);
       })
-
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
         const board = state.boards.find(
           board => board._id === action.payload._id
@@ -45,7 +41,6 @@ const boardSlice = createSlice({
         board.icon = action.payload.icon;
         board.backgroundImg = action.payload.backgroundImg; //{ _id, title, icon,backgroundImg :{mobile: "link", ...} }
       })
-
       .addCase(deleteBoardThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
@@ -56,13 +51,11 @@ const boardSlice = createSlice({
         state.lists = [];
         state.cards = [];
       });
-
     // .addCase(backgroundUrl.fulfilled, (state, action) => {
     //   state.error = false;
     //   state.isLoading = false;
     //   state.backgroundUrl = action.payload;
     // })
-
     // .addCase(changeBackground.fulfilled, (state, action) => {
     //   state.error = false;
     //   state.isLoading = false;
@@ -79,6 +72,5 @@ const boardSlice = createSlice({
     // });
   },
 });
-
 export const boardsReducer = boardSlice.reducer;
 export const { changeBg, changeCurrentBoard } = boardSlice.actions;
