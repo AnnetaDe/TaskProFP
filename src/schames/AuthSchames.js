@@ -16,18 +16,7 @@ const fileSchema = yup
     const maxSize = 5 * 1024 * 1024;
     return value.size <= maxSize;
   });
-const fileSchema = yup
-  .mixed()
-  .test('fileType', 'Unsupported file format', value => {
-    if (!value) return true;
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-    return allowedTypes.includes(value.type);
-  })
-  .test('fileSize', 'File too large', value => {
-    if (!value) return true;
-    const maxSize = 5 * 1024 * 1024;
-    return value.size <= maxSize;
-  });
+
 export const LoginSchame = yup
   .object({
     email: yup
