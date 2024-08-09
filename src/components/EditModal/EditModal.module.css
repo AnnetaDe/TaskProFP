@@ -16,7 +16,11 @@
         height: 100%;
         object-fit: cover;
     }
-
+    .input_avatar{
+      z-index: 10;
+      position: relative;
+      display: none;
+    }
     .plus_btn{
         position: absolute;
         bottom: -18%;

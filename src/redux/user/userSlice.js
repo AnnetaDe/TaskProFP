@@ -4,6 +4,7 @@ import {
   logoutThunk,
   refreshUserThunk,
   refreshTokensThunk,
+  updateUserPreferencesThunk,
 } from './userOperations';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   refreshToken: null,
   userTheme: 'dark',
   userAvatar: '',
+  userName: '',
   isLoggined: false,
   isLoading: false,
   isRefreshing: false,
@@ -67,6 +69,14 @@ const userSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggined = false;
       })
+      .addCase(updateUserPreferencesThunk.fulfilled, (state, action) => {
+        state.userTheme = action.payload.theme;
+        state.userAvatar = action.payload.avatarUrl;
+        state.userName = action.payload.username;
+      })
+      .addCase(updateUserPreferencesThunk.rejected, (state, action) => {
+        console.error('Error updating user preferences:', action.payload);
+      });
   },
 });
 
