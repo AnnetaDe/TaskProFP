@@ -71,3 +71,87 @@ export const changeBackground = createAsyncThunk(
     }
   }
 );
+
+//додано по колонках і картках
+export const createColumnThunk = createAsyncThunk(
+  'lists/createColumn',
+  async (columnData, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.post(
+        `api/boards/${boardId}/columns`,
+        columnData
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const updateColumnThunk = createAsyncThunk(
+  'lists/updateColumn',
+  async (column, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.patch(
+        `api/boards/${boardId}/columns/${column.id}`,
+        column
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteColumnThunk = createAsyncThunk(
+  'lists/deleteColumn',
+  async (columnId, thunkAPI) => {
+    try {
+      await taskProApi.delete(`api/boards/${boardId}/columns/${columnId}`);
+      return columnId;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createCardThunk = createAsyncThunk(
+  'cards/createCard',
+  async (cardData, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.post(
+        `api/boards/${boardId}/columns/${columnId}/tasks`,
+        cardData
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const updateCardThunk = createAsyncThunk(
+  'cards/updateCard',
+  async (card, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.patch(
+        `api/boards/${boardId}/columns/${columnId}/tasks/${card.id}`,
+        card
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteCardThunk = createAsyncThunk(
+  'cards/deleteCard',
+  async (cardId, thunkAPI) => {
+    try {
+      await taskProApi.delete(
+        `api/boards/${boardId}/columns/${columnId}/tasks/${cardId}`
+      );
+      return cardId;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+//

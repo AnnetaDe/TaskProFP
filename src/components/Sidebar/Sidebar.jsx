@@ -56,7 +56,7 @@ const Sidebar = () => {
         <div className={s.navigation}>
           <div className={s.title}>
             <div className={s.logo}>
-              <svg className={s.logoIcon}  width="12px" height="16px">
+              <svg className={s.logoIcon} width="12px" height="16px">
                 <use href={`${icons}#icon-Logo-task-Pro`}></use>
               </svg>
             </div>
@@ -65,7 +65,7 @@ const Sidebar = () => {
           <CreateNewBoard />
         </div>
         <nav className={s.dashboards}>
-            <MyBoards />  
+          <MyBoards />
         </nav>
         <div className={s.needHelp}>
           <NeedHelp />
