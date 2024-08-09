@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import InputField from '../InputField/InputField';
 import Modal from '../Modal/Modal';
+import { createCardThunk } from '../../redux/boards/boardsOperations';
 
 export const AddCard = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ export const AddCard = () => {
   const handleSubmit = event => {
     event.preventDefault();
     console.log('Form card submitted');
-    dispatch(addNewCard(), closeModal());
+    dispatch(createCardThunk(), closeModal());
   };
   return (
     <div>

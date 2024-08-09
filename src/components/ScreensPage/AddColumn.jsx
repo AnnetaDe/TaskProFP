@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import InputField from '../InputField/InputField';
 import Modal from '../Modal/Modal';
+import { createColumnThunk } from '../../redux/boards/boardsOperations';
 
 export const AddColumn = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ export const AddColumn = () => {
   const handleSubmit = event => {
     event.preventDefault();
     console.log('Form column submitted');
-    dispatch(addNewColumn(), closeModal());
+    dispatch(createColumnThunk(), closeModal());
   };
   return (
     <div>
