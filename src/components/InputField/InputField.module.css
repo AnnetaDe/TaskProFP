@@ -4,11 +4,12 @@
   font-size: 14px;
   letter-spacing: -0.02em;
   margin: 0 auto;
-  min-width: 287px;
+  min-width: 272px;
   width: 100%;
   padding: 14px 18px;
   background-color: var(--input-bgc);
   border: 1px solid var(--input-border);
+  /* border: 1px solid red; */
   border-radius: 8px;
   color: var(--input-text-color);
   box-shadow: 0 4px 16px 0 var(--input-box-shadow);
@@ -22,6 +23,7 @@
     opacity: 1;
   }
   @media only screen and (min-width: 768px) {
+    width: 100%;
     max-width: 352px;
   }
 }

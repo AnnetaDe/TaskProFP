@@ -7,9 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registerThunk } from '../../redux/user/userOperations';
-import { useSelector } from 'react-redux';
-import { selectIsLoading } from '../../redux/user/userSelectors';
+
 import icon from '../../images/icons.svg';
+import InputField from '../InputField/InputField';
+import { Button } from '../Button/Button';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch(); // from redux
@@ -62,31 +63,30 @@ const RegistrationForm = () => {
           autoComplete="nope"
         >
           <label>
-            <input
-              className={css.inputStyles}
-              type="username"
+            <InputField
+              type="text"
               name="username"
               placeholder="Enter your name"
-              {...register('username')}
+              register={register}
             />
             <p className={css.errorStyles}>{errors.name?.message}</p>
           </label>
           <label>
-            <input
-              className={css.inputStyles}
+            <InputField
               type="email"
+              name="email"
               placeholder="Enter your email"
-              {...register('email')}
+              register={register}
             />
             <p className={css.errorStyles}>{errors.email?.message}</p>
           </label>
           <label>
             <div className={css.passwordContainer}>
-              <input
-                className={css.inputStyles}
+              <InputField
                 type={passwordShown ? 'text' : 'password'}
                 placeholder="Create a password"
-                {...register('password')}
+                name="password"
+                register={register}
               />
               <button
                 type="button"
@@ -100,9 +100,11 @@ const RegistrationForm = () => {
             </div>
             <p className={css.errorStyles}>{errors.password?.message}</p>
           </label>
-          <button className={css.buttonStyles} type="submit">
-            Register Now
-          </button>
+          <Button
+            className={css.buttonStyles}
+            type="submit"
+            buttonText="Register Now"
+          />
         </form>
       </div>
     </div>
