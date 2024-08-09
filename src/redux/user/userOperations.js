@@ -90,16 +90,3 @@ export const refreshUserThunk = createAsyncThunk(
 // email: 'heidie@modulesdsh.com';
 // name: 'ann';
 // password: 'aaAA1111';
-
-export const updateUserPreferencesThunk = createAsyncThunk(
-  'auth/updateUserPreferences',
-  async (preferences, thunkAPI) => {
-    try {
-      const { data } = await taskProApi.patch('api/auth/update', preferences);
-      console.log('data', data);
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
