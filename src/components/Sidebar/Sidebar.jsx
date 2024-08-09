@@ -11,14 +11,11 @@ import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
+  console.log(selectBoards);
+
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1440 });
-
-  useEffect(() => {
-    dispatch(fetchBoardsThunk());
-  }, [dispatch, selectBoards]);
 
   const handleToggleSidebar = () => {
     setIsOpen(prevState => !prevState);
@@ -32,7 +29,6 @@ const Sidebar = () => {
 
   useEffect(() => {
     let timeoutId;
-
     if (isOpen && isMobile) {
       timeoutId = setTimeout(() => {
         document.addEventListener('click', handleOutsideClick);

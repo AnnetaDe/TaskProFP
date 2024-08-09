@@ -3,15 +3,9 @@ import {
   backgroundUrl,
   changeBackground,
   createBoardThunk,
-  createCardThunk,
-  createColumnThunk,
   deleteBoardThunk,
-  deleteCardThunk,
-  deleteColumnThunk,
   fetchBoardsThunk,
   updateBoardThunk,
-  updateCardThunk,
-  updateColumnThunk,
 } from './boardsOperations';
 
 const initialState = {
@@ -124,86 +118,7 @@ const boardSlice = createSlice({
           return board;
         });
         state.currentBcg = action.payload.currentBg;
-      })
-
-      //додано по колонках і картках
-      .addCase(createColumnThunk.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(createColumnThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.lists.push(action.payload);
-      })
-      .addCase(createColumnThunk.rejected, state => {
-        state.isLoading = false;
-        state.error = true;
-      })
-      .addCase(updateColumnThunk.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(updateColumnThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.lists.findIndex(
-          list => list._id === action.payload._id
-        );
-        state.lists[index] = action.payload;
-      })
-      .addCase(updateColumnThunk.rejected, state => {
-        state.isLoading = false;
-        state.error = true;
-      })
-      .addCase(deleteColumnThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.lists.findIndex(
-          list => list._id === action.payload
-        );
-        state.lists.splice(index, 1);
-        state.cards = [];
-      })
-      //cards
-      .addCase(createCardThunk.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(createCardThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        state.cards.push(action.payload);
-      })
-      .addCase(createCardThunk.rejected, state => {
-        state.isLoading = false;
-        state.error = true;
-      })
-      .addCase(updateCardThunk.pending, state => {
-        state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(updateCardThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.cards.findIndex(
-          card => card._id === action.payload._id
-        );
-        state.cards[index] = action.payload;
-      })
-      .addCase(updateCardThunk.rejected, state => {
-        state.isLoading = false;
-        state.error = true;
-      })
-      .addCase(deleteCardThunk.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.error = null;
-        const index = state.cards.findIndex(
-          card => card._id === action.payload
-        );
-        state.cards.splice(index, 1);
       });
-    //
   },
 });
 

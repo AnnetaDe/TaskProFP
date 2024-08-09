@@ -78,6 +78,7 @@ const MyBoards = desk => {
             <Modal
               onClose={toggleModal}
               // children={<EditBoard desk={desk} onClose={toggleModal} />}
+              //dispatch(updateBoardThunk(bord, { title: 'NEW TITLE', icon: 'icon_4', backgroundImg: 'image_3' }))
             />
           ) : (
             <Modal

@@ -20,10 +20,6 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-  //   changeAvatar(state, action) {
-  //     state.user.avatar = action.payload;
-  },
 
   extraReducers: builder => {
     builder
@@ -65,14 +61,12 @@ const userSlice = createSlice({
       .addCase(refreshUserThunk.pending, state => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUserThunk.rejected, (state) => {
+      .addCase(refreshUserThunk.rejected, state => {
         state.error = true;
         state.isRefreshing = false;
         state.isLoggined = false;
       });
   },
 });
-
-
 
 export const userReducer = userSlice.reducer;
