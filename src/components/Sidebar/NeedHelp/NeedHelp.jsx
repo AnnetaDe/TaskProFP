@@ -11,11 +11,20 @@ import {
 import Modal from '../../Modal/Modal';
 import NeedHelpForm from './NeedHelpForm';
 import icon from '../../../images/icons.svg';
+import { useSelector } from 'react-redux';
+import { selectModal } from '../../../redux/modal/modalSelector';
+import { closeModal, openModal } from '../../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
 
 const NeedHelp = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useSelector(selectModal);
+  const dispatch = useDispatch();
   const toggleModal = () => {
-    setIsOpen(isOpen => !isOpen);
+    if (isOpen) {
+      dispatch(closeModal());
+    } else {
+      dispatch(openModal());
+    }
   };
   return (
     <div className={s.container}>
