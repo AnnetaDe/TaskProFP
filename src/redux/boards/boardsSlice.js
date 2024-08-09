@@ -48,8 +48,6 @@ const boardSlice = createSlice({
           board => board._id === action.payload
         );
         state.boards.splice(index, 1);
-        state.lists = [];
-        state.cards = [];
       });
     // .addCase(backgroundUrl.fulfilled, (state, action) => {
     //   state.error = false;
