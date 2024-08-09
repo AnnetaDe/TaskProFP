@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import InputField from '../InputField/InputField';
 import s from './EditModal.module.css';
-import {  useState } from 'react';
+import { useState } from 'react';
 import { EditUserScheme } from '../../schames/AuthSchames';
 import { useSelector } from 'react-redux';
 import {
@@ -16,15 +16,19 @@ import InputPassword from '../InputPassword/InputPassword';
 import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations';
-
-const EditModal = ({ closeModal }) => {
+import { closeModal } from '../../redux/modal/modalSlice';
+const EditModal = () => {
   const dispatch = useDispatch();
 
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
+  console.log(avatar);
+  
   const email = useSelector(selectUserEmail);
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+  };
   const {
     register,
     handleSubmit,
@@ -34,41 +38,48 @@ const EditModal = ({ closeModal }) => {
     defaultValues: {
       avatar: avatar,
       username: userName,
-      email: email,
+      // email: email,
       // password: '',
     },
-    resolver: yupResolver(EditUserScheme),
+    // resolver: yupResolver(EditUserScheme),
     mode: 'onChange',
   });
 
   const onSubmit = data => {
     console.log(data);
     console.log('submit');
-    // const formData = new FormData();
-    // formData.append('userAvatar', selectedAvatar);
+    const formData = new FormData();
+    formData.append('userAvatar', selectedAvatar);
     // formData.append('userName', data.username);
     // console.log(data.username);
 
-    // formData.append('email', data.email);
-    // formData.append('password', data.password);
-    // dispatch(updateUserPreferencesThunk(formData));
-    // console.log(formData);
-
+    dispatch(
+      updateUserPreferencesThunk({
+        // avatar: selectedAvatar,
+        username: data.username,
+      })
+    );
+    console.log(formData);
+    handleCloseModal()
     reset();
-    closeModal();
   };
   const handleFileChange = event => {
-    const file = event.target.files[0];
-    console.log(file);
+    console.log('File input change event triggered');
     
+    const file = event.target.files[0];
+    console.log('Selected file:', file);
+  
     if (file) {
       setSelectedAvatar(file);
+      console.log('Avatar selected:', file);
+    } else {
+      console.log('No file selected');
     }
   };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      autoComplete="off"
+      autoComplete="nope"
       className={s.edit_profile_form}
     >
       <div className={s.avatar_wrap}>
