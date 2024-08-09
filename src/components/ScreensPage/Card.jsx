@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectColumn } from '../../redux/boards/boardsSelectors';
 
-export const SingleCard = ({ card }) => {
+export const Card = ({ card }) => {
   const { title, description, priority, deadline } = card;
   const columns = useSelector(selectColumn);
   return (

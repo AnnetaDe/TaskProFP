@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { SingleCard } from './SingleCard';
-import { AddCard } from './AddCard';
 import { openModal } from '../../redux/modal/modalSlice';
+import { Card } from './Card';
+import { AddEditCard } from './AddEditCard';
 
-export const Column = ({ data, title }) => {
+export const Column = ({ column, title }) => {
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
-    dispatch(openModal({ content: AddCard }));
+    dispatch(openModal({ content: AddEditCard }));
   };
 
   return (
@@ -17,8 +17,8 @@ export const Column = ({ data, title }) => {
         <button className={s.editBtn}>Edit</button>
         <button className={s.deleteBtn}>Delete</button>
       </div>
-      {data.map(card => (
-        <SingleCard key={card.id} card={card} />
+      {column.map(card => (
+        <Card key={card.id} card={card} />
       ))}
       <button onClick={handleOpenModal}>Add another card</button>
     </>
