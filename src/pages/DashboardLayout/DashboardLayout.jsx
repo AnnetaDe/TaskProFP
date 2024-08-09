@@ -5,6 +5,7 @@ import { selectUserTheme } from '../../redux/user/userSelectors';
 import { useSelector } from 'react-redux';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { useDispatch } from 'react-redux';
+import Kanban from '../../components/Kanban/Kanban';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -21,6 +22,7 @@ const DashboardLayout = () => {
       <Header />
       <Sidebar />
       Dashboard
+      <Kanban />
     </div>
   );
 };

@@ -15,6 +15,7 @@ import { modalReducer } from './modal/modalSlice';
 import { registerReducer } from './user/registerSlice';
 import { userPreferencesReducer } from './themes/userPreferencesSlice';
 import { boardsReducer } from './boards/boardsSlice';
+import { columnsReducer } from './columns/columnsSlice';
 
 const persistUser = {
   key: ['user'],
@@ -35,6 +36,7 @@ export const store = configureStore({
     user: persistReducer(persistUser, userReducer),
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
     boards: boardsReducer,
+    columns: columnsReducer,
     modal: modalReducer,
   },
 
