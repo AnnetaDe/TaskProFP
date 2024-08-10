@@ -1,13 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import css from './AuthForm.module.css';
 // import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import icon from '../../images/icons.svg';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
+import InputPassword from '../InputPassword/InputPassword';
 
 const AuthForm = ({
   registerForm = false,
@@ -29,13 +27,6 @@ const AuthForm = ({
     resolver: yupResolver(scheme),
     mode: 'onChange',
   });
-
-  const [passwordShown, setPasswordShown] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordShown(!passwordShown);
-  };
-
   const onSubmit = data => {
     console.log(data);
     console.log('submit');
@@ -50,45 +41,26 @@ const AuthForm = ({
       autoComplete="nope"
     >
       {registerForm && (
-        <label>
-          <InputField
-            type="text"
-            name="username"
-            placeholder="Enter your name"
-            register={register}
-          />
-          <p className={css.errorStyles}>{errors.name?.message}</p>
-        </label>
-      )}
-      <label>
         <InputField
-          type="email"
-          name="email"
-          placeholder="Enter your email"
+          type="text"
+          name="username"
+          placeholder="Enter your name"
           register={register}
+          errors={errors}
         />
-        <p className={css.errorStyles}>{errors.email?.message}</p>
-      </label>
-      <label>
-        <div className={css.passwordContainer}>
-          <InputField
-            type={passwordShown ? 'text' : 'password'}
-            placeholder="Create a password"
-            name="password"
-            register={register}
-          />
-          <button
-            type="button"
-            className={css.buttonShowPassword}
-            onClick={togglePasswordVisibility}
-          >
-            <svg width="20px" height="20px">
-              <use href={icon + '#icon-eye'}></use>
-            </svg>
-          </button>
-        </div>
-        <p className={css.errorStyles}>{errors.password?.message}</p>
-      </label>
+      )}
+      <InputField
+        type="email"
+        name="email"
+        placeholder="Enter your email"
+        register={register}
+        errors={errors}
+      />
+      <InputPassword
+        name="password"
+        register={register}
+        errors={errors}
+      />
       <Button
         className={css.buttonStyles}
         type="submit"
