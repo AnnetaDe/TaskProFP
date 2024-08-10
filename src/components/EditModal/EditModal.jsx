@@ -15,11 +15,12 @@ import {
 } from '../../redux/user/userSelectors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditUserScheme } from '../../schames/AuthSchames';
-const EditModal = ({onClose}) => {
+import SvgIconAnonym from '../Header/SvgIconAnonym';
+const EditModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
-  // console.log(avatar, 'avatar');
+
 
   const email = useSelector(selectUserEmail);
 
@@ -39,8 +40,6 @@ const EditModal = ({onClose}) => {
     mode: 'onChange',
   });
 
-
-
   const onSubmit = data => {
     console.log(data);
     const formData = new FormData();
@@ -51,7 +50,7 @@ const EditModal = ({onClose}) => {
 
     dispatch(updateUserPreferencesThunk(formData));
     console.log(formData);
-    onClose()
+    onClose();
     reset();
   };
 
@@ -69,13 +68,26 @@ const EditModal = ({onClose}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className={s.edit_profile_form}>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      autoComplete="off"
+      className={s.edit_profile_form}
+    >
       <div className={s.avatar_wrap}>
         <label>
-          <img
-            src={selectedAvatar ? URL.createObjectURL(selectedAvatar) : avatar}
-            alt={`Avatar ${userName}`}
-          />
+          {(avatar || selectedAvatar) && (
+            <img
+              src={
+                selectedAvatar ? URL.createObjectURL(selectedAvatar) : avatar
+              }
+              alt={`Avatar ${userName}`}
+            />
+          )}
+          {!avatar && !selectedAvatar && (
+            
+              <SvgIconAnonym className={s.svg_anonym} fill="var(--user-icon-fill)" width='56' height='78' />
+            
+          )}
           <input
             className={s.input_avatar}
             type="file"
@@ -93,27 +105,31 @@ const EditModal = ({onClose}) => {
           />
         </label>
       </div>
-        <InputField
-          type="text"
-          name="username"
-          placeholder="Enter your name"
-          register={register}
-          errors={errors}
-        />
-        <InputField
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          value={email}
-          disabled
-          errors={errors}
-        />
-      <InputPassword disabled defaultValue={userName} errors={errors} name='password'/>
+      <InputField
+        type="text"
+        name="username"
+        placeholder="Enter your name"
+        register={register}
+        errors={errors}
+      />
+      <InputField
+        type="email"
+        name="email"
+        placeholder="Enter your email"
+        value={email}
+        disabled
+        errors={errors}
+      />
+      <InputPassword
+        disabled
+        defaultValue={userName}
+        errors={errors}
+        name="password"
+      />
       <Button buttonText="Send" type="submit" />
     </form>
   );
 };
-
 
 export default EditModal;
 
