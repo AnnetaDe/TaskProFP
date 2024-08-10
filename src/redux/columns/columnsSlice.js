@@ -11,7 +11,7 @@ const initialState = {
   boardTitle: null,
   boardIcon: null,
   boardBackground: [],
-  columns: [],
+  columns: null,
   isLoading: false,
   error: null,
 };

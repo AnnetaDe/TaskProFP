@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 import Modal from '../../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { createBoardThunk } from '../../../redux/boards/boardsOperations';
+import { useSelector } from 'react-redux';
+import { selectModal } from '../../../redux/modal/modalSelector';
 
 const CreateNewBoard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const openModal = useSelector(selectModal);
 
   // dispatch(
   //   createBoardThunk({
