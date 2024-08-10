@@ -73,6 +73,7 @@ const userSlice = createSlice({
         state.userTheme = action.payload.theme;
         state.userAvatar = action.payload.avatarUrl;
         state.userName = action.payload.username;
+        state.login.username = action.payload.username;
       })
       .addCase(updateUserPreferencesThunk.rejected, (state, action) => {
         console.error('Error updating user preferences:', action.payload);
