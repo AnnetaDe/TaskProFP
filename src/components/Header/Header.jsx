@@ -22,24 +22,29 @@ import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
 import EditModal from '../EditModal/EditModal.jsx';
 import { createPortal } from 'react-dom';
 import { selectModal } from '../../redux/modal/modalSelector.js';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux.jsx';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
+  console.log(avatar);
+  
   const userTheme = useSelector(selectUserTheme);
   const [theme, setTheme] = useState(
     selectOptions.filter(el => el.value === userTheme)
   );
-
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   // const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const { isDesktop } = useMedia();
-  const openedModal = useSelector(selectModal);
 
-  const handleOpenModal = () => {
-    dispatch(openModal());
-  };
   const handleChange = selectedOption => {
     setTheme(selectedOption);
     dispatch(updateUserPreferencesThunk({ theme: selectedOption.value }));
@@ -77,7 +82,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
           components={customComponents}
           isOptionSelected={true}
         />
-        <div className={s.user_info} onClick={handleOpenModal}>
+        <div className={s.user_info} onClick={() => openModal()}>
           <p>{userName ? userName : 'Anonym'}</p>
           {avatar ? (
             <div className={s.img_wrap}>
@@ -92,15 +97,23 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
           )}
         </div>
       </section>
-      {openedModal &&
+      {/* {openedModal &&
         createPortal(
           <Modal title="Edit profile">
             <EditModal />
           </Modal>,
           document.body
-        )}
+        )} */}
 
-      {/* <Modal title='Edit profile'><EditModal /></Modal> */}
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeModal}
+          title="Edit profile"
+        >
+          <EditModal onClose={closeModal}/>
+        </ModalWithoutRedux>
+      )}
     </header>
   );
 };
