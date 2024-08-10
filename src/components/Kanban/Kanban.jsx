@@ -1,13 +1,11 @@
-import { useDispatch } from 'react-redux';
-import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
-import { useEffect } from 'react';
+import { Board } from '../Board/Board';
 
 const Kanban = () => {
-  const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(fetchBoardsThunk());
-  //   }, [dispatch]);
-
-  return <div>Kanban</div>;
+  return (
+    <div>
+      Kanban
+      <Board />
+    </div>
+  );
 };
 export default Kanban;

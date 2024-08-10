@@ -7,6 +7,7 @@ import {
 } from './boardsOperations';
 const initialState = {
   boards: [],
+  boardsIds: [],
   isLoading: false,
   error: null,
 };
@@ -27,6 +28,7 @@ const boardSlice = createSlice({
         state.error = false;
         state.isLoading = false;
         state.boards = payload.data;
+        state.boardsIds = payload.data.map(board => board._id);
       })
       .addCase(createBoardThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
@@ -48,8 +50,6 @@ const boardSlice = createSlice({
           board => board._id === action.payload
         );
         state.boards.splice(index, 1);
-        state.lists = [];
-        state.cards = [];
       });
     // .addCase(backgroundUrl.fulfilled, (state, action) => {
     //   state.error = false;

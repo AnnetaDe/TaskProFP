@@ -9,11 +9,9 @@ import { useMediaQuery } from 'react-responsive';
 import CreateNewBoard from './CreateNewBoard/CreateNewBoard';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
+import { ListMyBoards } from './ListMyBoards/ListMyBoards';
 
 const Sidebar = () => {
-  const selectBoards = useSelector(selectBoard);
-  console.log(selectBoards);
-
   const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1440 });
 
@@ -63,6 +61,7 @@ const Sidebar = () => {
         <nav className={s.dashboards}>
           <MyBoards />
         </nav>
+        <ListMyBoards />
         <div className={s.needHelp}>
           <NeedHelp />
           <LogOut />

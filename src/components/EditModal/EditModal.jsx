@@ -44,6 +44,7 @@ const EditModal = () => {
   });
 
 
+
   const onSubmit = data => {
     console.log(data);
     const formData = new FormData();
@@ -116,6 +117,7 @@ const EditModal = () => {
     </form>
   );
 };
+
 
 export default EditModal;
 
