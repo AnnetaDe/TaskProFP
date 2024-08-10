@@ -1,0 +1,8 @@
+.dashboard_layout {
+    display: flex;
+    .right_side {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }

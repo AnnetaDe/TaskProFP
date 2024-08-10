@@ -16,6 +16,7 @@ const fileSchema = yup
     const maxSize = 5 * 1024 * 1024;
     return value.size <= maxSize;
   });
+
 export const LoginSchame = yup
   .object({
     email: yup
@@ -55,22 +56,22 @@ export const RegistrationSchame = yup
 
   export const EditUserScheme = yup
   .object({
-    avatar: fileSchema,
+    // avatar: fileSchema,
     username: yup
       .string()
       .required('Username is required')
       .matches(nameSchame, 'Invalid name format')
       .trim(),
-    email: yup
-      .string()
-      .required('Email is required')
-      .matches(emailSchame, 'Invalid email format')
-      .trim(),
-    password: yup
-      .string()
-      .min(8)
-      .max(64)
-      .matches(passwordSchame, 'Invalid password format')
-      .required('Password is required'),
+    // email: yup
+    //   .string()
+    //   .required('Email is required')
+    //   .matches(emailSchame, 'Invalid email format')
+    //   .trim(),
+    // password: yup
+    //   .string()
+    //   .min(8)
+    //   .max(64)
+    //   .matches(passwordSchame, 'Invalid password format')
+    //   .required('Password is required'),
   })
   .required();
