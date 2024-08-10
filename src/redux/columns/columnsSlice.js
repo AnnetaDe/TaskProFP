@@ -12,6 +12,7 @@ const initialState = {
   boardIcon: null,
   boardBackground: [],
   columns: null,
+  tasksWithinColumn: null,
   isLoading: false,
   error: null,
 };
@@ -28,6 +29,7 @@ const columnSlice = createSlice({
           state.boardId = payload._id;
           state.boardTitle = payload.title;
           state.columns = payload.columns;
+          state.tasksWithinColumn = payload.columns.map(column => column.tasks);
           state.boardIcon = payload.icon;
           state.boardBackground = payload.background;
         }

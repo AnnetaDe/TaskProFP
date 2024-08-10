@@ -23,7 +23,7 @@ export const Board = () => {
         ? columns.map(column => (
             <div key={column._id}>
               {column.title}
-              {'----tasks [..., ...]'}
+              {'tasks []'}
             </div>
           ))
         : null}
