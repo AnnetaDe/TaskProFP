@@ -23,7 +23,7 @@ import EditModal from '../EditModal/EditModal.jsx';
 import { createPortal } from 'react-dom';
 import { selectModal } from '../../redux/modal/modalSelector.js';
 
-const Header = () => {
+const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
@@ -32,7 +32,7 @@ const Header = () => {
     selectOptions.filter(el => el.value === userTheme)
   );
 
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  // const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const { isDesktop } = useMedia();
   const openedModal = useSelector(selectModal);
@@ -50,7 +50,7 @@ const Header = () => {
   }, [theme.value]);
 
   const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
+    setIsSidebarOpen(!isSidebarOpen);
     console.log(isSidebarOpen);
   };
   return (

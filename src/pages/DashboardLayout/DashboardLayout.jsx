@@ -1,26 +1,35 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { selectUserTheme } from '../../redux/user/userSelectors';
 import { useSelector } from 'react-redux';
+import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { useDispatch } from 'react-redux';
-import Kanban from '../../components/Kanban/Kanban';
+import s from './DashboardLayout.module.css';
+
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
-  const dispatch = useDispatch();
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
-  }, [colorScheme, dispatch]);
-
+  }, [colorScheme]);
   console.log(colorScheme);
-
+  const dispatch = useDispatch();
+  dispatch(fetchBoardsThunk());
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
-    <div>
-      <Header />
-      <Sidebar />
-
-      <Kanban />
+    <div className={s.dashboard_layout}>
+      <Sidebar
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+      <div className={s.right_side}>
+        <Header
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+        Dashboard
+      </div>
     </div>
   );
 };
