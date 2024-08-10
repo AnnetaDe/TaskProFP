@@ -15,7 +15,7 @@ import {
 } from '../../redux/user/userSelectors';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditUserScheme } from '../../schames/AuthSchames';
-const EditModal = () => {
+const EditModal = ({onClose}) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
@@ -24,10 +24,6 @@ const EditModal = () => {
   const email = useSelector(selectUserEmail);
 
   const [selectedAvatar, setSelectedAvatar] = useState(null);
-
-  const handleCloseModal = () => {
-    dispatch(closeModal());
-  };
 
   const {
     register,
@@ -55,7 +51,7 @@ const EditModal = () => {
 
     dispatch(updateUserPreferencesThunk(formData));
     console.log(formData);
-    handleCloseModal();
+    onClose()
     reset();
   };
 
