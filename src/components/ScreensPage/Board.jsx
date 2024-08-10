@@ -10,6 +10,7 @@ export const Board = ({ board, title }) => {
     dispatch(openModal({ content: AddEditColumn }));
   };
 
+  return console.log('board');
   return (
     <>
       <div className={s.boardHead}>

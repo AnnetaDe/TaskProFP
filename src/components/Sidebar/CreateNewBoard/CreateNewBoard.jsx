@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Modal from '../../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { createBoardThunk } from '../../../redux/boards/boardsOperations';
+import { Board } from '../../ScreensPage/Board';
 
 const CreateNewBoard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,11 +39,17 @@ const CreateNewBoard = () => {
             <use href={`${icons}#icon-plus-small`}> </use>
           </svg>
         </button>
+
         {isOpen && (
-          <Modal>
-            onClose={toggleModal}
-            {/* children={<ModalBoard onClose={toggleModal} />} */}
-          </Modal>
+          <>
+            {console.log('Board')}
+            <Modal>
+              onClose={toggleModal}
+              children=
+              {<Board onSubmitThunk={createBoardThunk} onClose={toggleModal} />}
+              {console.log('Help')}
+            </Modal>
+          </>
         )}
       </div>
     </>
