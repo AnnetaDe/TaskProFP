@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice';
-import { Board } from '../../components/ScreensPage/Board';
+import { AddEditBoard } from '../../components/ScreensPage/AddEditBoard';
 import { createBoardThunk } from '../../redux/boards/boardsOperations';
 
 export const ScreensPage = () => {
@@ -23,7 +23,7 @@ export const ScreensPage = () => {
         board serves as a powerful tool to organize the workflow and ensure
         effective collaboration among team members.
       </p>
-      {showBoard && <Board onSubmitThunk={createBoardThunk} />}
+      {showBoard && <AddEditBoard onSubmitThunk={createBoardThunk} />}
     </div>
   );
 };

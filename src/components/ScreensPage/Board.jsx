@@ -2,15 +2,18 @@ import { useDispatch } from 'react-redux';
 import { openModal } from '../../redux/modal/modalSlice';
 import { Column } from './Column';
 import { AddEditColumn } from './AddEditColumn';
+import { useSelector } from 'react-redux';
+import { selectBoard } from '../../redux/boards/boardsSelectors';
 
-export const Board = ({ board, title }) => {
+export const Board = ({ title }) => {
+  const board = useSelector(selectBoard);
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
     dispatch(openModal({ content: AddEditColumn }));
   };
 
-  // return console.log('board');
+  console.log(board);
   return (
     <>
       <div>

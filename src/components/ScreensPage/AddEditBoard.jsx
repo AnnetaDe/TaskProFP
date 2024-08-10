@@ -1,6 +1,9 @@
 import { useDispatch } from 'react-redux';
 import InputField from '../InputField/InputField';
 import Modal from '../Modal/Modal';
+import { useForm } from 'react-hook-form';
+import { Button } from '../Button/Button';
+import { closeModal } from '../../redux/modal/modalSlice';
 
 export const AddEditBoard = ({ editForm = false, addForm = false }) => {
   const dispatch = useDispatch();
@@ -23,28 +26,28 @@ export const AddEditBoard = ({ editForm = false, addForm = false }) => {
   };
 
   return (
-    // <Modal>
-    <form onSubmit={handleSubmit(onSubmit)} autoComplete="nope">
-      <h2>{addForm ? 'New board' : 'Edit board'}</h2>
-      <InputField
-        className
-        height
-        width
-        placeholder="Title"
-        name="title"
-        register={register}
-        errors
-      />
-      <p>Icons</p>
-      <p>Background</p>
-      <Button
-        buttonText={editForm ? 'Edit' : 'Create'}
-        onClick
-        type="submit"
-        typeStyle="primary"
-        icon="+"
-      />
-    </form>
-    // </Modal>
+    <Modal>
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete="nope">
+        <h2>{addForm ? 'New board' : 'Edit board'}</h2>
+        <InputField
+          className
+          height
+          width
+          placeholder="Title"
+          name="title"
+          register={register}
+          errors
+        />
+        <p>Icons</p>
+        <p>Background</p>
+        <Button
+          buttonText={editForm ? 'Edit' : 'Create'}
+          onClick={() => closeModal()}
+          type="submit"
+          typeStyle="primary"
+          icon="+"
+        />
+      </form>
+    </Modal>
   );
 };
