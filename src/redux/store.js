@@ -28,7 +28,7 @@ const persistUserPreferences = {
   key: ['preferences'],
   version: 1,
   storage,
-  whitelist: ['userTheme', 'userAvatar'],
+  whitelist: ['userTheme', 'userAvatar', 'userName'],
 };
 
 export const store = configureStore({
