@@ -13,9 +13,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
   const { isDesktop } = useMedia();
-  useEffect(() => {
-    dispatch(fetchBoardsThunk());
-  }, [dispatch, selectBoards]);
+  // useEffect(() => {
+  //   dispatch(fetchBoardsThunk());
+  // }, [dispatch, selectBoards]);
   const handleOutsideClick = event => {
     if (!event.target.closest('.sidebar')) {
       setIsSidebarOpen(false);
