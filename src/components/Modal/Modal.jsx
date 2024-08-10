@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import clsx from 'clsx';
 import icon from '../../images/icons.svg';
 
-const Modal = ({ title,children }) => {
+const Modal = ({ title, children }) => {
   const isOpen = useSelector(selectModal);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,13 +30,12 @@ const Modal = ({ title,children }) => {
   return ReactDOM.createPortal(
     <div className={css.wrapper} onClick={closeOnClickOutside}>
       <div className={css.content}>
-
-          <h2>{title}</h2>
-          <button className={css.closeBtn} onClick={() => dispatch(closeModal())}>
+        <h2>{title}</h2>
+        <button className={css.closeBtn} onClick={() => dispatch(closeModal())}>
           <svg width="18" height="18" className={css.icon}>
             <use href={`${icon}#icon-x-close`}></use>
           </svg>
-            {/* <svg
+          {/* <svg
               width="18"
               height="18"
               viewBox="0 0 18 18"
@@ -60,7 +59,7 @@ const Modal = ({ title,children }) => {
                 className={clsx(css.icon)}
               />
             </svg> */}
-          </button>
+        </button>
         {children}
       </div>
     </div>,

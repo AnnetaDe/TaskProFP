@@ -21,25 +21,25 @@ export const AddEditColumn = ({ editForm = false, addForm = false }) => {
   };
 
   return (
-    // <Modal>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>{addForm ? 'Add column' : 'Edit column'}</h2>
-      <InputField
-        className
-        height
-        width
-        placeholder="Title"
-        name="title"
-        errors
-      />
-      <Button
-        buttonText={editForm ? 'Edit' : 'Add'}
-        onClick
-        type="submit"
-        typeStyle="primary"
-        icon="+"
-      />
-    </form>
-    // </Modal>
+    <Modal>
+      <form>
+        <h2>{addForm ? 'Add column' : 'Edit column'}</h2>
+        <InputField
+          className
+          height
+          width
+          placeholder="Title"
+          name="title"
+          errors
+        />
+        <Button
+          buttonText={editForm ? 'Edit' : 'Add'}
+          onClick={handleSubmit(onSubmit)}
+          type="submit"
+          typeStyle="primary"
+          icon="+"
+        />
+      </form>
+    </Modal>
   );
 };

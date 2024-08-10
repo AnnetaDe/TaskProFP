@@ -10,10 +10,10 @@ export const Board = ({ board, title }) => {
     dispatch(openModal({ content: AddEditColumn }));
   };
 
-  return console.log('board');
+  // return console.log('board');
   return (
     <>
-      <div className={s.boardHead}>
+      <div>
         <h2>{title}</h2>
         <p>Filters</p>
       </div>
