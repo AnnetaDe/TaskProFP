@@ -13,6 +13,8 @@ import {
   selectUserEmail,
   selectUserName,
 } from '../../redux/user/userSelectors';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { EditUserScheme } from '../../schames/AuthSchames';
 const EditModal = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
@@ -37,6 +39,7 @@ const EditModal = () => {
       avatar: avatar,
       username: userName,
     },
+    resolver: yupResolver(EditUserScheme),
     mode: 'onChange',
   });
 
@@ -93,26 +96,22 @@ const EditModal = () => {
           />
         </label>
       </div>
-      <label>
         <InputField
           type="text"
           name="username"
           placeholder="Enter your name"
           register={register}
+          errors={errors}
         />
-        <p className={s.errorStyles}>{errors.username?.message}</p>
-      </label>
-      <label>
         <InputField
           type="email"
           name="email"
           placeholder="Enter your email"
           value={email}
           disabled
+          errors={errors}
         />
-        <p className={s.errorStyles}>{errors.email?.message}</p>
-      </label>
-      <InputPassword disabled defaultValue={userName} />
+      <InputPassword disabled defaultValue={userName} errors={errors} name='password'/>
       <Button buttonText="Send" type="submit" />
     </form>
   );

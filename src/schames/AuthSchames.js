@@ -56,7 +56,7 @@ export const RegistrationSchame = yup
 
   export const EditUserScheme = yup
   .object({
-    avatar: fileSchema,
+    // avatar: fileSchema,
     username: yup
       .string()
       .required('Username is required')
