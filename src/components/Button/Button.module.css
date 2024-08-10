@@ -52,10 +52,16 @@
 }
 .transparent {
   background-color: transparent;
+  min-width: 287px;
+  max-width: 335px;
   &:hover,
   &:focus {
     color: var(--text-color);
     background-color: var(--button-text-color);
+  }
+  @media only screen and (min-width: 768px) {
+    width: 344px;
+
   }
 }
 .primary {

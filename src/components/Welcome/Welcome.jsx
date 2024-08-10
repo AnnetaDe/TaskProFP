@@ -6,6 +6,8 @@ import {
   StartImgDesk1x,
   StartImgDesk2x,
 } from '../../assets/images/start';
+import { Button } from '../Button/Button';
+import Logo from '../Logo/Logo';
 import Lightning from './Lightning';
 import css from './Welcome.module.css';
 import { NavLink } from 'react-router-dom';
@@ -36,12 +38,13 @@ const Welcome = () => {
         />
       </picture>
 
-      <div className={css.logo}>
+      <Logo big />
+      {/* <div className={css.logo}>
         <span>
           <Lightning width={15} height={20} fillColor={'#fff'} />
         </span>
         <h1>Task Pro</h1>
-      </div>
+      </div> */}
 
       <p className={css.info}>
         Supercharge your productivity and take control of your tasks with Task
@@ -49,11 +52,11 @@ const Welcome = () => {
       </p>
 
       <div className={css.authNav}>
-        <NavLink className={css.authLink} to="/auth/register">
-          Registration
+        <NavLink to="/auth/register">
+          <Button typeStyle="transparent" buttonText="Registration" />
         </NavLink>
-        <NavLink className={css.authLink} to="/auth/login">
-          Log In
+        <NavLink to="/auth/login">
+          <Button typeStyle="transparent" buttonText="Log In" />
         </NavLink>
       </div>
     </div>

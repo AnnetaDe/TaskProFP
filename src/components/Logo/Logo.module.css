@@ -16,6 +16,7 @@
     align-items: center;
     width: 32px;
     height: 32px;
+    overflow: hidden;
     svg {
       fill: var(--logo-icon-fill);
       width: 12px;
@@ -26,9 +27,18 @@
 .big_logo {
   gap: 14px;
   font-size: 28px;
+  font-weight: 600;
+  color: var(--background-color);
+  @media only screen and (min-width: 768px) {
+    font-size: 40px;
+  }
   .icon_box {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
+    @media only screen and (min-width: 768px) {
+      width: 48px;
+      height: 48px;
+    }
     svg {
       width: 18px;
       height: 24px;
