@@ -12,15 +12,16 @@ export const Column = ({ column, title }) => {
 
   return (
     <>
-      <div className={s.columnHead}>
+      <p>Hello</p>
+      {/* <div>
         <h2>{title}</h2>
-        <button className={s.editBtn}>Edit</button>
-        <button className={s.deleteBtn}>Delete</button>
+        <button>Edit</button>
+        <button>Delete</button>
       </div>
       {column.map(card => (
         <Card key={card.id} card={card} />
       ))}
-      <button onClick={handleOpenModal}>Add another card</button>
+      <button onClick={handleOpenModal}>Add another card</button> */}
     </>
   );
 };

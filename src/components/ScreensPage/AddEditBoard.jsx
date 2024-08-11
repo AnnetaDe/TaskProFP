@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '../Button/Button';
 import { closeModal } from '../../redux/modal/modalSlice';
 
-export const AddEditBoard = ({ editForm = false, addForm = false }) => {
+export const AddEditBoard = ({ addForm = false, onSubmitThunk }) => {
   const dispatch = useDispatch();
   const isLoading = false;
   const {
@@ -14,15 +14,22 @@ export const AddEditBoard = ({ editForm = false, addForm = false }) => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: editForm
+    defaultValues: addForm
       ? { title: '', icon: '', backgroundImg: '' }
       : { title: '', icon: '', backgroundImg: '' },
     mode: 'onSubmit',
   });
   const onSubmit = data => {
     console.log(data, 'add/edit board');
-    dispatch(onSubmitThunk(data));
-    reset();
+    dispatch(onSubmitThunk(data)).then(data => {
+      console.log(data);
+      if (data.error !== undefined) {
+        console.log(data.error.message);
+      } else {
+        reset();
+        dispatch(closeModal());
+      }
+    });
   };
 
   return (
@@ -38,11 +45,26 @@ export const AddEditBoard = ({ editForm = false, addForm = false }) => {
           register={register}
           errors
         />
-        <p>Icons</p>
-        <p>Background</p>
+        <label>
+          <p>Icons</p>
+          <InputField
+            placeholder="Icon"
+            name="icon"
+            register={register}
+            errors
+          />
+        </label>
+        <label>
+          <p>Background</p>
+          <InputField
+            placeholder="Background"
+            name="backgroundImg"
+            register={register}
+            errors
+          />
+        </label>
         <Button
-          buttonText={editForm ? 'Edit' : 'Create'}
-          onClick={() => closeModal()}
+          buttonText={addForm ? 'Create' : 'Edit'}
           type="submit"
           typeStyle="primary"
           icon="+"
