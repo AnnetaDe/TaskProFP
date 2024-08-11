@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import {
   selectCreateBoardModal,
+  selectModal,
 } from '../../../redux/modal/modalSelector';
 import { Button } from '../../Button/Button';
 import {
@@ -21,6 +22,7 @@ const CreateNewBoard = () => {
     dispatch(openCreateBoardModaal());
   };
 
+
   return (
     <>
       <div className={s.boards}>
@@ -33,7 +35,24 @@ const CreateNewBoard = () => {
           onClick={HandleCreate}
           icon={`${icons}#icon-plus-small`}
         />
+        <Button
+          small
+          onClick={HandleCreate}
+          icon={`${icons}#icon-plus-small`}
+        />
       </div>
+      {isOpenCreateBoardModal && (
+        <Modal
+          title="New board"
+          isOpen={openCreateBoardModaal}
+          closeModal={closeCreateBoardModaal}
+        >
+          <BoardModal
+            type="create"
+            onClose={() => dispatch(closeCreateBoardModaal())}
+          />
+        </Modal>
+      )}
       {isOpenCreateBoardModal && (
         <Modal
           title="New board"
