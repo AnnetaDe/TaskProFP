@@ -18,6 +18,8 @@ const boardSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchBoardsThunk.fulfilled, (state, { payload }) => {
+        console.log(payload);
+        
         state.error = false;
         state.isLoading = false;
         state.boards = payload.data;

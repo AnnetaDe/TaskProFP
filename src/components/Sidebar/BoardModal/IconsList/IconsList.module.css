@@ -29,30 +29,3 @@
   .selected {
     opacity: 1;
   }
-
-/* .icons_list{
-    display: flex;
-    gap: 8px;
-    .icon_item{
-        cursor: pointer;
-        border-radius: 4px;
-        transition: border-color var(--transition-pattern);
-        svg{
-            opacity: 0.5;
-            fill: none;
-            stroke: var(--text-color);
-            transition: opacity var(--transition-pattern);
-            &:hover, &:focus{
-                opacity: 1;
-            }
-        }
-    }
-}
-.icon_item {
-    cursor: pointer;
-
-  }
-  
-  .selected {
-    opacity: 1;
-  } */
