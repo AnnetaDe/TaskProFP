@@ -4,7 +4,8 @@
   cursor: pointer;
   color: var(--button-text-color);
   height: 49px;
-  min-width: 287px;
+  min-width: 272px;
+  width: 100%;
   max-width: 335px;
   padding: 10px;
   font-size: 14px;
