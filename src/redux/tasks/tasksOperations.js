@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
-
+//https://task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks
 export const createNewTaskThunk = createAsyncThunk(
   'tasks/createTask',
-  async (board, column, task, thunkAPI) => {
+  async (boardid, columnid, task, thunkAPI) => {
     try {
       const { data } = await taskProApi.post(
-        `api/boards/${board.id}/columns/${column.id}/tasks`,
+        `api/boards/${boardid}/columns/${columnid}/tasks`,
         task
       );
       console.log(data);
@@ -16,14 +16,14 @@ export const createNewTaskThunk = createAsyncThunk(
     }
   }
 );
-
+//task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks/:taskId
 export const updateTaskThunk = createAsyncThunk(
   'tasks/updateTask',
-  async (board, column, task, thunkAPI) => {
+  async (boardid, columnid, taskid, thunkAPI) => {
     try {
       const { data } = await taskProApi.patch(
-        `api/boards/${board.id}/columns/${column.id}/tasks/${task.id}`,
-        task
+        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`,
+        data
       );
       return data;
     } catch (error) {
@@ -31,14 +31,16 @@ export const updateTaskThunk = createAsyncThunk(
     }
   }
 );
+//task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks/:taskId
+
 export const deleteTaskThunk = createAsyncThunk(
   'tasks/deleteTask',
-  async (board, column, task, thunkAPI) => {
+  async (boardid, columnid, taskid, thunkAPI) => {
     try {
       await taskProApi.delete(
-        `api/boards/${board.id}/columns/${column.id}/tasks/${task.id}`
+        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`
       );
-      return task.id;
+      return taskid;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

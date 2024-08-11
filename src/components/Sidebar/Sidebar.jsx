@@ -9,6 +9,7 @@ import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 import Logo from '../Logo/Logo';
 import { useMedia } from '../../hooks/useMedia';
+import { ListMyBoards } from './ListMyBoards/ListMyBoards';
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
@@ -35,7 +36,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   }, [isSidebarOpen, isDesktop]);
   return (
     <>
-     {!isDesktop && isSidebarOpen && (
+      {!isDesktop && isSidebarOpen && (
         <div className={s.backdrop} onClick={() => setIsSidebarOpen(false)} />
       )}
       <div
@@ -50,6 +51,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         <nav className={s.dashboards}>
           <MyBoards />
         </nav>
+        <ListMyBoards />
         <div className={s.needHelp}>
           <NeedHelp />
           <LogOut />

@@ -14,14 +14,7 @@ const initialState = {
 const boardSlice = createSlice({
   name: 'boards',
   initialState,
-  reducers: {
-    // changeBg(state, action) {
-    //   state.currentBcg = action.payload;
-    // },
-    // changeCurrentBoard(state, action) {
-    //   state.currentBoard = action.payload;
-    // },
-  },
+
   extraReducers: builder => {
     builder
       .addCase(fetchBoardsThunk.fulfilled, (state, { payload }) => {

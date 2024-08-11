@@ -22,7 +22,7 @@ const persistUser = {
   key: ['user'],
   version: 1,
   storage,
-  whitelist: ['refreshToken', 'accessToken', 'userTheme', 'userAvatar'],
+  whitelist: ['refreshToken', 'accessToken', 'sid', 'userTheme', 'userAvatar'],
 };
 const persistUserPreferences = {
   key: ['preferences'],
