@@ -50,12 +50,14 @@ export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const refreshToken = thunkAPI.getState().user.refreshToken;
-    if (!refreshToken) {
+    const sid = thunkAPI.getState().user.sid;
+    if (!refreshToken || !sid) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
+      setToken(refreshToken);
       const { data } = await taskProApi.post('api/auth/refresh', {
-        refreshToken,
+        sid,
       });
       return data;
     } catch (error) {
@@ -95,7 +97,7 @@ export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
     console.log(preferences);
-    
+
     try {
       const { data } = await taskProApi.patch('api/auth/update', preferences);
       console.log('data', data.data);
