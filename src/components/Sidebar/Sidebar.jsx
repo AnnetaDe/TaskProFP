@@ -48,9 +48,6 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           <Logo className={s.logo} />
           <CreateNewBoard />
         </div>
-        {/* <nav className={s.dashboards}>
-          <MyBoards />
-        </nav> */}
         <ListMyBoards className={s.boards_list}/>
         <div className={s.needHelp}>
           <NeedHelp />
