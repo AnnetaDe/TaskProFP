@@ -1,8 +1,9 @@
 import * as yup from 'yup';
 const emailSchame =
   /^([A-Za-z0-9_-]+.)*[A-Za-z0-9_-]+@[a-z0-9_-]+(.[a-z0-9_-]+)*.[a-z]{2,6}$/;
-const nameSchame = /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/;
-const passwordSchame = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const nameSchame =
+  /^[a-zA-Zа-яА-Я0-9]+(([' -][a-zA-Zа-яА-Я0-9 ])?[a-zA-Zа-яА-Я0-9]*)*$/;
+const passwordSchame = /^(?=.*\d)(?=.*[a-z])(?=.*[a-zA-Z]).{8,}$/;
 // Regex for password must contain at least eight characters, at least one number and both lower and uppercase letters and special characters
 const fileSchema = yup
   .mixed()
@@ -53,8 +54,7 @@ export const RegistrationSchame = yup
   })
   .required();
 
-
-  export const EditUserScheme = yup
+export const EditUserScheme = yup
   .object({
     // avatar: fileSchema,
     username: yup

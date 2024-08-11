@@ -25,11 +25,10 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await taskProApi.post('api/auth/login', credentials);
-      console.log('data', data.data.accessToken);
       setToken(data.data.accessToken);
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.response.status);
     }
   }
 );
