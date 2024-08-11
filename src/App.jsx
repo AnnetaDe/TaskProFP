@@ -8,9 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { lazy, useEffect } from 'react';
 
-const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-
+const Board = lazy(() => import('./components/Board/Board'));
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -22,38 +21,36 @@ function App() {
   return isRefreshing ? (
     <div>refreshing...</div>
   ) : (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <DashboardLayout />
-            </PrivateRoute>
-          }
-        >
-          <Route index element={<HomePage />} />
-          <Route path="board/:id" element={<ScreensPage />} />
-        </Route>
-        <Route
-          path="/welcome"
-          element={
-            <PublicRoute>
-              <WelcomePage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/auth/:type"
-          element={
-            <PublicRoute>
-              <AuthPage />
-            </PublicRoute>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        }
+      >
+        <Route index element={<HomePage />} />
+        <Route path="board/:id" element={<Board />} />
+      </Route>
+      <Route
+        path="/welcome"
+        element={
+          <PublicRoute>
+            <WelcomePage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/auth/:type"
+        element={
+          <PublicRoute>
+            <AuthPage />
+          </PublicRoute>
+        }
+      />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
