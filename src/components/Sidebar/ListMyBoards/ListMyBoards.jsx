@@ -18,9 +18,9 @@ export const ListMyBoards = () => {
     <ul className={s.boards_list}>
       {boards.map(board => (
         <NavLink
+        to={`board/${board._id}`}
           key={board._id}
           className={s.list_item}
-          onClick={() => navigate(`board/${board._id}`)}
         >
           <div>{board.title}</div>
         </NavLink>
