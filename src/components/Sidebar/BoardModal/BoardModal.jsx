@@ -9,6 +9,7 @@ import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
 import { useState } from 'react';
 import Select from 'react-select';
+
 const BoardModal = ({
   create,
   edit,
@@ -22,7 +23,12 @@ const BoardModal = ({
 }) => {
   const dispatch = useDispatch();
 
-  const [selectedIcon, setSelectedIcon] = useState('');
+  const [selectedIcon, setSelectedIcon] = useState(
+    chosenIcons ? chosenIcons : ''
+  );
+  const [selectedBgc, setSelectedBgc] = useState(
+    chosenBackGrounds ? chosenBackGrounds : ''
+  );
   const {
     register,
     handleSubmit,
@@ -30,20 +36,22 @@ const BoardModal = ({
     formState: { errors },
   } = useForm({
     defaultValues: create
-      ? { title: '', icons: '', background: '' }
-      : { title: title, icons: '', background: '' },
-    resolver: yupResolver(scheme),
+      ? { title: '', icon: '', background: '' }
+      : { title: title, icon: '', background: '' },
+    // resolver: yupResolver(scheme),
     mode: 'onChange',
   });
   const onSubmit = data => {
     const formData = {
       ...data,
       icon: selectedIcon,
+      background: selectedBgc,
     };
-    dispatch(onSubmitThunk(formData));
+    // dispatch(onSubmitThunk(formData));
+    console.log(formData);
+
     reset();
   };
-
 
   return (
     <form
@@ -61,14 +69,25 @@ const BoardModal = ({
 
       <section>
         <h2>Icons</h2>
-        <IconsList selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
+        <IconsList
+          selectedIcon={selectedIcon}
+          setSelectedIcon={setSelectedIcon}
+          register={register}
+          name="icon"
+        />
       </section>
       <section>
         <h2>Background</h2>
-        <BgcList backGrounds={backGrounds} />
+        <BgcList
+          selectedBgc={selectedBgc}
+          setSelectedBgc={setSelectedBgc}
+          register={register}
+          name='background'
+        />
       </section>
       <Button
         className={s.btn}
+        type='submit'
         buttonText={create ? 'Create' : 'Edit'}
         icon={`${icon}#icon-plus-small`}
       />

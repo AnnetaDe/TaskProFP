@@ -24,9 +24,7 @@ const CreateNewBoard = () => {
     dispatch(openCreateBoardModaal());
   };
 
-  const toggleModal = () => {
-    // setIsOpen(isOpen => !isOpen);
-  };
+
   return (
     <>
       <div className={s.boards}>
@@ -39,16 +37,10 @@ const CreateNewBoard = () => {
           onClick={HandleCreate}
           icon={`${icons}#icon-plus-small`}
         />
-        {/* <button type="button" className={s.createButton} onClick={toggleModal}>
-          <svg width="40px" height="20px" className={s.iconPlus}>
-            <use href={`${icons}#icon-plus-small`}> </use>
-          </svg>
-        </button> */}
       </div>
       {isOpenCreateBoardModal && (
         <Modal title='New board' isOpen={openCreateBoardModaal} closeModal={closeCreateBoardModaal}>
           <BoardModal create ti onClose={()=>dispatch(closeCreateBoardModaal())}/>
-          {/* children={<ModalBoard onClose={toggleModal} />} */}
         </Modal>
       )}
     </>
