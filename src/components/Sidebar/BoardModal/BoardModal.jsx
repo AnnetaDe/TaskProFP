@@ -1,17 +1,21 @@
 import { ErrorMessage, Formik } from "formik"
 import { Form } from "react-router-dom";
 
-import s from './ModalBoard.module.css';
+import s from './BoardModal.module.css';
 
 
 const BoardModal = () => {
   const initialValues = {
     name: '',
   };
+
+  console.log('modal');
+  
   return (
     <>
        <h2 className={s.title}>New board</h2>
-      <Formik
+       
+      {/* <Formik
         initialValues={initialValues}
       >
         <Form className={s.form}>
@@ -34,7 +38,7 @@ const BoardModal = () => {
             />
           </label>
         </Form>
-      </Formik>
+      </Formik> */}
     </>
   )
 }

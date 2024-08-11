@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/modal/modalSlice';
@@ -56,7 +56,7 @@ const EditModal = ({ onClose }) => {
 
   const handleFileChange = event => {
     console.log('File input change event triggered');
-    const file = event.target.files[0];
+    const file = event.currentTarget.files[0];
     console.log('Selected file:', file);
 
     if (file) {
@@ -66,7 +66,12 @@ const EditModal = ({ onClose }) => {
       console.log('No file selected');
     }
   };
-
+  const inputFileRef = useRef(null);
+  const handlePlusButtonClick = () => {
+    if (inputFileRef.current) {
+      inputFileRef.current.click();
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -94,6 +99,7 @@ const EditModal = ({ onClose }) => {
             accept="image/*"
             onChange={handleFileChange}
             name="avatar"
+            ref={inputFileRef}
           />
           <Button
             small
@@ -102,6 +108,7 @@ const EditModal = ({ onClose }) => {
             icon={`${icon}#icon-plus-small`}
             iconSize="10"
             className={s.plus_btn}
+            onClick={handlePlusButtonClick}
           />
         </label>
       </div>
