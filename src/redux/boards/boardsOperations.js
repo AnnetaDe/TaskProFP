@@ -76,3 +76,15 @@ export const deleteBoardThunk = createAsyncThunk(
 //     }
 //   }
 // );
+
+export const fetchBoardByIdThunk = createAsyncThunk(
+  'board/fetchBoardById',
+  async (boardId, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.get(`api/boards/${boardId}`);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

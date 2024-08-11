@@ -22,8 +22,8 @@ const boardSlice = createSlice({
         
         state.error = false;
         state.isLoading = false;
-        state.boards = payload.data;
-        state.boardsIds = payload.data.map(board => board._id);
+        state.boards = payload.data.boards;
+        state.boardsIds = payload.data.boards.map(board => board._id);
       })
       .addCase(createBoardThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
