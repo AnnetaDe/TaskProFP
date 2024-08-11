@@ -43,6 +43,7 @@
   --input-box-shadow: rgba(22, 22, 22, 0.08);
   --logout-icon-color: rgba(190, 219, 176, 1);
   --need-help-bgc: #1f1f1f;
+  --border-sidebar:rgba(255, 255, 255, 0.1);
 }
 [theme='light'] {
   --text-color: #000000;
@@ -72,6 +73,7 @@
   --input-box-shadow: rgba(22, 22, 22, 0.08);
   --logout-icon-color: rgba(190, 219, 176, 1);
   --need-help-bgc: #f6f6f7;
+  --border-sidebar: rgba(22, 22, 22, 0.1);
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -101,6 +103,7 @@
   --input-box-shadow: rgba(22, 22, 22, 0.08);
   --logout-icon-color: #fff;
   --need-help-bgc: rgba(236, 237, 253, 0.4);
+  --border-sidebar: rgba(255, 255, 255, 0.1);
 }
 
 body {
