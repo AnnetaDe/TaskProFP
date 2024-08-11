@@ -7,12 +7,11 @@ import {
 } from './columnsOperations';
 
 const initialState = {
-  boardId: null,
-  boardTitle: null,
-  boardIcon: null,
+  boardId: '',
+  boardTitle: '',
+  boardIcon: '',
   boardBackground: [],
-  columns: null,
-  tasksWithinColumn: null,
+  columns: [],
   isLoading: false,
   error: null,
 };
@@ -29,7 +28,7 @@ const columnSlice = createSlice({
           state.boardId = payload._id;
           state.boardTitle = payload.title;
           state.columns = payload.columns;
-          state.tasksWithinColumn = payload.columns.map(column => column.tasks);
+
           state.boardIcon = payload.icon;
           state.boardBackground = payload.background;
         }
