@@ -15,7 +15,7 @@ const DashboardLayout = () => {
   }, [colorScheme]);
   console.log(colorScheme);
   const dispatch = useDispatch();
-  dispatch(fetchBoardsThunk());
+  // dispatch(fetchBoardsThunk());
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <div className={s.dashboard_layout}>

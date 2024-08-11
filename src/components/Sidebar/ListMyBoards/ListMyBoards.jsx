@@ -2,29 +2,29 @@ import { useSelector } from 'react-redux';
 import { selectBoard } from '../../../redux/boards/boardsSelectors';
 import s from './ListMyBoards.module.css';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchBoardsThunk } from '../../../redux/boards/boardsOperations';
 
 export const ListMyBoards = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const myMenu = useSelector(selectBoard);
+  const boards = useSelector(selectBoard);
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch]);
-  console.log(myMenu);
+  console.log(boards);
   return (
-    <div>
-      {myMenu.map(board => (
-        <li
+    <ul className={s.boards_list}>
+      {boards.map(board => (
+        <NavLink
           key={board._id}
-          className={s.listItem}
+          className={s.list_item}
           onClick={() => navigate(`board/${board._id}`)}
         >
           <div>{board.title}</div>
-        </li>
+        </NavLink>
       ))}
-    </div>
+    </ul>
   );
 };

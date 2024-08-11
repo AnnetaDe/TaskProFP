@@ -46,8 +46,8 @@ const CreateNewBoard = () => {
         </button> */}
       </div>
       {isOpenCreateBoardModal && (
-        <Modal title='' isOpen={openCreateBoardModaal} closeModal={closeCreateBoardModaal}>
-          <BoardModal onClose={()=>dispatch(closeCreateBoardModaal())}/>
+        <Modal title='New board' isOpen={openCreateBoardModaal} closeModal={closeCreateBoardModaal}>
+          <BoardModal create ti onClose={()=>dispatch(closeCreateBoardModaal())}/>
           {/* children={<ModalBoard onClose={toggleModal} />} */}
         </Modal>
       )}
