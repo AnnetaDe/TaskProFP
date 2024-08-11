@@ -26,12 +26,17 @@ export const Board = () => {
   console.log('columns', columns);
 
   return (
-    <div className={s.board}>
-      <ul className={s.boardColumn}>
-        {columns
-          ? columns.map(column => <Column key={column._id} column={column} />)
-          : null}
-      </ul>
-    </div>
+    <>
+      <div className={s.boardTitle}>
+        <h2>{boardTitle}</h2>
+      </div>
+      <div className={s.board}>
+        <ul className={s.boardColumn}>
+          {columns
+            ? columns.map(column => <Column key={column._id} column={column} />)
+            : null}
+        </ul>
+      </div>
+    </>
   );
 };

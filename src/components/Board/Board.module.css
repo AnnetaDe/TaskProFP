@@ -1,7 +1,10 @@
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  outline: rgb(53, 210, 84) solid 1px;
+  column-gap: 24px;
   padding: 1rem;
-  overflow: auto;
+  overflow-x: scroll;
+}
+.boardTitle {
 }

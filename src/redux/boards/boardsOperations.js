@@ -7,7 +7,6 @@ export const fetchBoardsThunk = createAsyncThunk(
     try {
       const { data } = await taskProApi.get('api/boards');
       console.log('FETCHED BOARDS', data);
-      console.log('FETCHED BOARDS', data.boards);
 
       return data;
     } catch (error) {
