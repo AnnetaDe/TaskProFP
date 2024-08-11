@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import s from './DashboardLayout.module.css';
 import { Board } from '../../components/Board/Board';
 import ScreensPage from '../ScreensPage/ScreensPage';
+import { useDispatch } from 'react-redux';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
