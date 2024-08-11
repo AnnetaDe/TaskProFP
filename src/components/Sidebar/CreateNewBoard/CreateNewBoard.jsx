@@ -35,11 +35,11 @@ const CreateNewBoard = () => {
           onClick={HandleCreate}
           icon={`${icons}#icon-plus-small`}
         />
-        <Button
+        {/* <Button
           small
           onClick={HandleCreate}
           icon={`${icons}#icon-plus-small`}
-        />
+        /> */}
       </div>
       {isOpenCreateBoardModal && (
         <Modal
@@ -53,7 +53,7 @@ const CreateNewBoard = () => {
           />
         </Modal>
       )}
-      {isOpenCreateBoardModal && (
+      {/* {isOpenCreateBoardModal && (
         <Modal
           title="New board"
           isOpen={openCreateBoardModaal}
@@ -64,7 +64,7 @@ const CreateNewBoard = () => {
             onClose={() => dispatch(closeCreateBoardModaal())}
           />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };
