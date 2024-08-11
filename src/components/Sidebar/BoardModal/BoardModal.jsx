@@ -7,7 +7,8 @@ import icon from '../../../images/icons.svg';
 import { Button } from '../../Button/Button';
 import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
-
+import { useState } from 'react';
+import Select from 'react-select';
 const BoardModal = ({
   create,
   edit,
@@ -20,7 +21,8 @@ const BoardModal = ({
   chosenBackGrounds,
 }) => {
   const dispatch = useDispatch();
-  const isLoading = false;
+
+  const [selectedIcon, setSelectedIcon] = useState('');
   const {
     register,
     handleSubmit,
@@ -34,12 +36,14 @@ const BoardModal = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
-    console.log(data);
-    console.log('submit');
-    dispatch(onSubmitThunk(data));
+    const formData = {
+      ...data,
+      icon: selectedIcon,
+    };
+    dispatch(onSubmitThunk(formData));
     reset();
   };
-  console.log('modal');
+
 
   return (
     <form
@@ -57,42 +61,17 @@ const BoardModal = ({
 
       <section>
         <h2>Icons</h2>
-        <IconsList icons={icons} />
+        <IconsList selectedIcon={selectedIcon} setSelectedIcon={setSelectedIcon} />
       </section>
       <section>
         <h2>Background</h2>
         <BgcList backGrounds={backGrounds} />
       </section>
       <Button
+        className={s.btn}
         buttonText={create ? 'Create' : 'Edit'}
         icon={`${icon}#icon-plus-small`}
       />
-      {/* <h2 className={s.title}>New board</h2> */}
-
-      {/* <Formik
-        initialValues={initialValues}
-      >
-        <Form className={s.form}>
-          <label className={s.label} htmlFor="name">
-            <input
-              className={s.input}
-              type="text"
-              name="name"
-              placeholder="Title"
-              minLength="4"
-              maxLength="12"
-            />
-            <ErrorMessage
-              name="name" 
-              component="div"
-              style={{
-                color: 'red',
-                fontSize: 14,
-              }}
-            />
-          </label>
-        </Form>
-      </Formik> */}
     </form>
   );
 };
