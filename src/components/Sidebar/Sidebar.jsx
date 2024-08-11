@@ -36,7 +36,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   }, [isSidebarOpen, isDesktop]);
   return (
     <>
-     {!isDesktop && isSidebarOpen && (
+      {!isDesktop && isSidebarOpen && (
         <div className={s.backdrop} onClick={() => setIsSidebarOpen(false)} />
       )}
       <div

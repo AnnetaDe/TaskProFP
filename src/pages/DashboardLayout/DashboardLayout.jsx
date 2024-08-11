@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { useDispatch } from 'react-redux';
 import s from './DashboardLayout.module.css';
-
+import { Board } from '../../components/Board/Board';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -29,6 +29,7 @@ const DashboardLayout = () => {
           setIsSidebarOpen={setIsSidebarOpen}
         />
         Dashboard
+        <Board />
       </div>
     </div>
   );

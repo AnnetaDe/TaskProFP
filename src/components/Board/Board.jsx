@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectColumnsWithinBoard } from '../../redux/columns/columnsSelectors';
 import { useEffect } from 'react';
+import { Column } from '../Column/Column';
+import s from './Board.module.css';
 
 export const Board = () => {
   const dispatch = useDispatch();
@@ -18,15 +20,12 @@ export const Board = () => {
   console.log('columns', columns);
 
   return (
-    <div>
-      {columns
-        ? columns.map(column => (
-            <div key={column._id}>
-              {column.title}
-              {'----tasks [..., ...]'}
-            </div>
-          ))
-        : null}
+    <div className={s.board}>
+      <ul className={s.boardColumn}>
+        {columns
+          ? columns.map(column => <Column key={column._id} column={column} />)
+          : null}
+      </ul>
     </div>
   );
 };

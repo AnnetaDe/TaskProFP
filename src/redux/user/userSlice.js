@@ -5,12 +5,14 @@ import {
   refreshUserThunk,
   refreshTokensThunk,
   updateUserPreferencesThunk,
+  setToken,
 } from './userOperations';
 
 const initialState = {
   login: { avatarUrl: '', email: '', username: '', theme: '' },
   accessToken: null,
   refreshToken: null,
+  sid: null,
   userTheme: 'dark',
   userAvatar: '',
   userName: '',
@@ -30,6 +32,7 @@ const userSlice = createSlice({
         state.email = payload.data.email;
         state.accessToken = payload.data.accessToken;
         state.refreshToken = payload.data.refreshToken;
+        state.sid = payload.data.sid;
         state.userTheme = payload.data.user.theme;
         state.userAvatar = payload.data.user.avatarUrl;
         state.isLoggined = true;
@@ -37,9 +40,9 @@ const userSlice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, state => {
         state.login = { email: '', password: '', theme: '', avatar: '' };
-
         state.accessToken = null;
         state.refreshToken = null;
+        state.sid = null;
         state.isLoggined = false;
       })
       .addCase(loginThunk.pending, state => {
@@ -50,8 +53,10 @@ const userSlice = createSlice({
         state.error = true;
       })
       .addCase(refreshTokensThunk.fulfilled, (state, { payload }) => {
+        setToken(payload.data.accessToken);
         state.accessToken = payload.data.accessToken;
         state.refreshToken = payload.data.refreshToken;
+        state.sid = payload.data.sid;
       })
 
       .addCase(refreshUserThunk.fulfilled, (state, { payload }) => {
