@@ -13,10 +13,10 @@ export const ListMyBoards = () => {
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch]);
-  console.log(boards);
+  
   return (
     <ul className={s.boards_list}>
-      {boards.map(board => (
+      {boards.map((board) => (
         <NavLink
         to={`board/${board._id}`}
           key={board._id}

@@ -28,7 +28,7 @@ const boardSlice = createSlice({
       .addCase(createBoardThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.boards.push(payload);
+        state.boards.push(payload.data);
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
         const board = state.boards.find(

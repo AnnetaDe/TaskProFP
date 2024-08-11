@@ -1,4 +1,4 @@
-import icon from '../../../../images/icons.svg';
+import icon from '../../../images/icons.svg';
 
 export const previewBgc = [
   { previewName: 'none', src: `${icon}#icon-empty-bgc` },
@@ -63,3 +63,14 @@ export const previewBgc = [
     src: 'https://res.cloudinary.com/djejhblhf/image/upload/c_fill,w_28,h_28/q_auto:eco/f_webp/desktop_15_w8tgps.jpg',
   },
 ];
+
+export const icons = [
+    { iconName: 'icon_1', svg: `${icon}#icon-square` },
+    { iconName: 'icon_2', svg: `${icon}#icon-star` },
+    { iconName: 'icon_3', svg: `${icon}#icon-loading` },
+    { iconName: 'icon_4', svg: `${icon}#icon-puzzle` },
+    { iconName: 'icon_5', svg: `${icon}#icon-container` },
+    { iconName: 'icon_6', svg: `${icon}#icon-blitz` },
+    { iconName: 'icon_7', svg: `${icon}#icon-colors` },
+    { iconName: 'icon_8', svg: `${icon}#icon-hexagon` },
+  ];

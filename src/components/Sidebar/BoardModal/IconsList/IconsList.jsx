@@ -1,18 +1,7 @@
 import s from './IconsList.module.css';
-import icon from '../../../../images/icons.svg';
 import clsx from 'clsx';
 import { useEffect } from 'react';
-
-const icons = [
-  { iconName: 'icon_1', svg: `${icon}#icon-square` },
-  { iconName: 'icon_2', svg: `${icon}#icon-star` },
-  { iconName: 'icon_3', svg: `${icon}#icon-loading` },
-  { iconName: 'icon_4', svg: `${icon}#icon-puzzle` },
-  { iconName: 'icon_5', svg: `${icon}#icon-container` },
-  { iconName: 'icon_6', svg: `${icon}#icon-blitz` },
-  { iconName: 'icon_7', svg: `${icon}#icon-colors` },
-  { iconName: 'icon_8', svg: `${icon}#icon-hexagon` },
-];
+import { icons } from '../dataForBoardModal';
 
 const IconsList = ({ selectedIcon, setSelectedIcon , register, name}) => {
   useEffect(() => {
