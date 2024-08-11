@@ -3,7 +3,10 @@ import icons from '../../../images/icons.svg';
 import { useEffect, useState } from 'react';
 import Modal from '../../Modal/Modal';
 import { useDispatch } from 'react-redux';
-import { createBoardThunk } from '../../../redux/boards/boardsOperations';
+import {
+  createBoardThunk,
+  fetchBoardsThunk,
+} from '../../../redux/boards/boardsOperations';
 import { useSelector } from 'react-redux';
 import {
   selectCreateBoardModal,
@@ -24,7 +27,6 @@ const CreateNewBoard = () => {
     dispatch(openCreateBoardModaal());
   };
 
-
   return (
     <>
       <div className={s.boards}>
@@ -39,8 +41,15 @@ const CreateNewBoard = () => {
         />
       </div>
       {isOpenCreateBoardModal && (
-        <Modal title='New board' isOpen={openCreateBoardModaal} closeModal={closeCreateBoardModaal}>
-          <BoardModal create ti onClose={()=>dispatch(closeCreateBoardModaal())}/>
+        <Modal
+          title="New board"
+          isOpen={openCreateBoardModaal}
+          closeModal={closeCreateBoardModaal}
+        >
+          <BoardModal
+            type="create"
+            onClose={() => dispatch(closeCreateBoardModaal())}
+          />
         </Modal>
       )}
     </>

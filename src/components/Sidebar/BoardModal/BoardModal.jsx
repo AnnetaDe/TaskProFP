@@ -9,47 +9,55 @@ import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
 import { useState } from 'react';
 import Select from 'react-select';
+import { BoardForm } from '../../../schames/BoardFormSchemes';
+import {
+  createBoardThunk,
+  updateBoardThunk,
+} from '../../../redux/boards/boardsOperations';
 
-const BoardModal = ({
-  create,
-  edit,
-  title,
-  onSubmitThunk,
-  scheme,
-  icons,
-  chosenIcons,
-  backGrounds,
-  chosenBackGrounds,
-}) => {
+const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
   const dispatch = useDispatch();
 
-  const [selectedIcon, setSelectedIcon] = useState(
-    chosenIcons ? chosenIcons : ''
-  );
-  const [selectedBgc, setSelectedBgc] = useState(
-    chosenBackGrounds ? chosenBackGrounds : ''
-  );
+  const options = {
+    create: {
+      scheme: BoardForm,
+      onSubmitThunk: createBoardThunk,
+      defaultValues: { title: '', icon: '', backgroundImg: '' },
+    },
+    edit: {
+      create: {
+        scheme: BoardForm,
+        onSubmitThunk: updateBoardThunk,
+        defaultValues: {
+          title: title,
+          icon: chosenIcon,
+          backgroundImg: chosenBackGround,
+        },
+      },
+    },
+  };
+
+  const [selectedIcon, setSelectedIcon] = useState(options[type].icon);
+  const [selectedBgc, setSelectedBgc] = useState(options[type].backgroundImg);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: create
-      ? { title: '', icon: '', background: '' }
-      : { title: title, icon: '', background: '' },
-    // resolver: yupResolver(scheme),
+    defaultValues: { title: title, icon: '', backgroundImg: '' },
+    resolver: yupResolver(options[type].scheme),
     mode: 'onChange',
   });
   const onSubmit = data => {
     const formData = {
       ...data,
       icon: selectedIcon,
-      background: selectedBgc,
+      backgroundImg: selectedBgc,
     };
-    // dispatch(onSubmitThunk(formData));
+    dispatch(options[type].onSubmitThunk(formData));
     console.log(formData);
-
+    onClose()
     reset();
   };
 
@@ -82,13 +90,13 @@ const BoardModal = ({
           selectedBgc={selectedBgc}
           setSelectedBgc={setSelectedBgc}
           register={register}
-          name='background'
+          name="backgroundImg"
         />
       </section>
       <Button
         className={s.btn}
-        type='submit'
-        buttonText={create ? 'Create' : 'Edit'}
+        type="submit"
+        buttonText={type === 'create' ? 'Create' : 'Edit'}
         icon={`${icon}#icon-plus-small`}
       />
     </form>
