@@ -22,12 +22,9 @@ const CreateNewBoard = () => {
     dispatch(openCreateBoardModaal());
   };
 
-
   return (
-    <>
-      <div className={s.boards}>
-        <p className={s.text}>My boards</p>
-      </div>
+    <aside>
+      <h2 className={s.text}>My boards</h2>
       <div className={s.create}>
         <p className={s.title}>Create a new board</p>
         <Button
@@ -48,7 +45,7 @@ const CreateNewBoard = () => {
           />
         </Modal>
       )}
-    </>
+    </aside>
   );
 };
 

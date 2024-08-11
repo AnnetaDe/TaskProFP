@@ -9,17 +9,28 @@ import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 import Logo from '../Logo/Logo';
 import { useMedia } from '../../hooks/useMedia';
-import { ListMyBoards } from './ListMyBoards/ListMyBoards';
+import ListMyBoards from './ListMyBoards/ListMyBoards';
+import clsx from 'clsx';
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const selectBoards = useSelector(selectBoard);
   const { isDesktop } = useMedia();
 
   const handleOutsideClick = event => {
-    if (!event.target.closest('.sidebar')) {
-      setIsSidebarOpen(false);
+    const target = event.target;
+    if (
+      target.closest('a') ||
+      target.closest('button') ||
+      target.closest('input') ||
+      target.closest('svg') ||
+      target.closest('li')
+    ) {
+      return;
     }
+
+    setIsSidebarOpen(false);
   };
+
   useEffect(() => {
     let timeoutId;
     if (isSidebarOpen && !isDesktop) {
@@ -40,15 +51,15 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         <div className={s.backdrop} onClick={() => setIsSidebarOpen(false)} />
       )}
       <div
-        className={`${s.container} ${
-          !isDesktop && isSidebarOpen ? s.mobile : ''
-        }`}
+        className={clsx(s.container, {
+          [s.mobile]: !isDesktop && isSidebarOpen,
+        })}
       >
         <div className={s.navigation}>
           <Logo className={s.logo} />
           <CreateNewBoard />
         </div>
-        <ListMyBoards className={s.boards_list}/>
+        <ListMyBoards className={s.boards_list} />
         <div className={s.needHelp}>
           <NeedHelp />
           <LogOut />
