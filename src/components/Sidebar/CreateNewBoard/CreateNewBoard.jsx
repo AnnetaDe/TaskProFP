@@ -1,16 +1,10 @@
 import s from './CreateNewBoard.module.css';
 import icons from '../../../images/icons.svg';
-import { useEffect, useState } from 'react';
 import Modal from '../../Modal/Modal';
 import { useDispatch } from 'react-redux';
-import {
-  createBoardThunk,
-  fetchBoardsThunk,
-} from '../../../redux/boards/boardsOperations';
 import { useSelector } from 'react-redux';
 import {
   selectCreateBoardModal,
-  selectModal,
 } from '../../../redux/modal/modalSelector';
 import { Button } from '../../Button/Button';
 import {
