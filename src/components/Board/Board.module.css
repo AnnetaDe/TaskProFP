@@ -3,8 +3,14 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 24px;
   padding: 1rem;
-  /* overflow-x: scroll; */
+  height: 90%;
+  overflow-y: hidden;
+  overflow-x: auto;
   max-width: 1180px;
 }
 .boardTitle {
+}
+.boardColumn{
+  /* width: 358px;
+  overflow-y: scroll; */
 }

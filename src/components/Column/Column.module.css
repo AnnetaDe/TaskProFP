@@ -1,10 +1,16 @@
+.li_col{
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+}
 .column {
   display: block;
-  height: 70vh;
-
-  overflow-y: scroll;
+  /* height: 70vh; */
+height: 100%;
+  /* overflow-y: scroll; */
 }
 .columnWrapper {
+  overflow-y: scroll;
   width: 358px;
 }
 ::-webkit-scrollbar {
@@ -18,3 +24,6 @@
   width: 334px;
   outline: #636625 solid 1px;
 }
+/* .btn_column{
+flex: 0 0 auto;
+} */

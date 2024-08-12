@@ -31,13 +31,13 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-      </div>
 
-      <div>
+
+      <div className={s.outlet}>
         <Suspense fallback="suspense">
           <Outlet />
         </Suspense>
-      </div>
+      </div>      </div>
     </div>
   );
 };
