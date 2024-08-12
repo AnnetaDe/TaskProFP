@@ -12,12 +12,55 @@ const initialState = {
   boardIcon: '',
   boardBackground: [],
   columns: [],
+  columnsOrderId: [],
+  tasksWithinBoard: [],
+  tasksOrderId: [],
   isLoading: false,
   error: null,
 };
 const columnSlice = createSlice({
   name: 'columns',
   initialState,
+  reducers: {
+    // updateColumnOrder: (state, action) => {
+    //   const { source, destination } = action.payload;
+    //   if (!destination) {
+    //     return;
+    //   }
+    //   const sourceColumn = state.columns.find(
+    //     column => column._id === source.droppableId
+    //   );
+    //   const destinationColumn = state.columns.find(
+    //     column => column._id === destination.droppableId
+    //   );
+    //   const [removed] = sourceColumn.tasks.splice(source.index, 1);
+    //   destinationColumn.tasks.splice(destination.index, 0, removed);
+    // },
+    updateTaskOrder: (state, action) => {
+      const { source, destination, sourceColumnId, destinationColumnId } =
+        action.payload;
+
+      if (!destination) {
+        return;
+      }
+
+      const sourceColumn = state.columns.find(
+        column => column._id === sourceColumnId
+      );
+      const destinationColumn = state.columns.find(
+        column => column._id === destinationColumnId
+      );
+
+      if (sourceColumnId === destinationColumnId) {
+        const [removed] = sourceColumn.tasks.splice(source.index, 1);
+        sourceColumn.tasks.splice(destination.index, 0, removed);
+      } else {
+        const [removed] = sourceColumn.tasks.splice(source.index, 1);
+        destinationColumn.tasks.splice(destination.index, 0, removed);
+      }
+    },
+  },
+
   extraReducers: builder => {
     builder
       .addCase(
@@ -27,10 +70,17 @@ const columnSlice = createSlice({
           state.isLoading = false;
           state.boardId = payload._id;
           state.boardTitle = payload.title;
-          state.columns = payload.columns;
-
           state.boardIcon = payload.icon;
           state.boardBackground = payload.background;
+
+          state.columns = payload.columns;
+          state.columnsOrderId = payload.columns.map(column => column._id);
+          state.tasksWithinBoard = payload.columns.reduce((acc, column) => {
+            return [...acc, ...column.tasks];
+          }, []);
+          state.tasksOrderId = payload.columns.reduce((acc, column) => {
+            return [...acc, ...column.tasks.map(task => task._id)];
+          }, []);
         }
       )
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
@@ -54,4 +104,5 @@ const columnSlice = createSlice({
       });
   },
 });
+export const { updateColumnOrder, updateTaskOrder } = columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;

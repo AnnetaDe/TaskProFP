@@ -8,6 +8,7 @@ import s from './DashboardLayout.module.css';
 import { Board } from '../../components/Board/Board';
 import ScreensPage from '../ScreensPage/ScreensPage';
 import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -17,27 +18,25 @@ const DashboardLayout = () => {
     document.documentElement.setAttribute('theme', colorScheme);
   }, [colorScheme]);
 
-  console.log(colorScheme);
-  const dispatch = useDispatch();
-  // dispatch(fetchBoardsThunk());
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
-    <div className={s.dashboard_layout}>
-      <Sidebar
-        isSidebarOpen={isSidebarOpen}
-        setIsSidebarOpen={setIsSidebarOpen}
-      />
-      <div className={s.right_side}>
+    <div className={s.gridContainer}>
+      <div className={s.gridSidebar}>
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+      </div>
+      <div className={s.gridHeader}>
         <Header
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        {/* <ScreensPage
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={setIsSidebarOpen}
-        /> */}
-        Dashboard
-        <Board />
+      </div>
+
+      <div>
+        <Suspense fallback="suspense">
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );
