@@ -95,11 +95,22 @@ export const refreshUserThunk = createAsyncThunk(
 export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
-    console.log(preferences);
-
     try {
       const { data } = await taskProApi.patch('api/auth/update', preferences);
-      console.log('data', data.data);
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const resendVerificationEmailThunk = createAsyncThunk(
+  'auth/resendVerificationEmail',
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.post('api/auth/verify', {
+        email: body,
+      });
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

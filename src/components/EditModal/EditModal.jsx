@@ -16,11 +16,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditUserScheme } from '../../schames/AuthSchames';
 import SvgIconAnonym from '../Header/SvgIconAnonym';
+
 const EditModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
-
 
   const email = useSelector(selectUserEmail);
 
@@ -89,9 +89,12 @@ const EditModal = ({ onClose }) => {
             />
           )}
           {!avatar && !selectedAvatar && (
-            
-              <SvgIconAnonym className={s.svg_anonym} fill="var(--user-icon-fill)" width='56' height='78' />
-            
+            <SvgIconAnonym
+              className={s.svg_anonym}
+              fill="var(--user-icon-fill)"
+              width="56"
+              height="78"
+            />
           )}
           <input
             className={s.input_avatar}

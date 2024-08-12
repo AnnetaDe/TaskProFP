@@ -6,13 +6,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
 import InputPassword from '../InputPassword/InputPassword';
-import { selectIsVerified } from '../../redux/user/userSelectors';
+import {
+  selectIsVerified,
+  selectUserEmail,
+} from '../../redux/user/userSelectors';
 import { useEffect } from 'react';
-import { selectModal } from '../../redux/modal/modalSelector';
-import { openModal } from '../../redux/modal/modalSlice';
+import {
+  selectModal,
+  selectResendVerifyEmailModal,
+} from '../../redux/modal/modalSelector';
+import {
+  closeResendVerifyEmailModal,
+  openModal,
+  openResendVerifyEmailModal,
+} from '../../redux/modal/modalSlice';
 import { createPortal } from 'react-dom';
 import Modal from '../../components/Modal/Modal';
 import EmailResendModal from '../EmailResendModal/EmailResendModal';
+import { setIsVerified, setUserEmail } from '../../redux/user/userSlice';
+import { resendVerificationEmailThunk } from '../../redux/user/userOperations';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthForm = ({
   registerForm = false,
@@ -20,14 +34,21 @@ const AuthForm = ({
   scheme,
   onSubmitThunk,
 }) => {
+  const userEmail = useSelector(selectUserEmail);
   const isVerified = useSelector(selectIsVerified);
-  const modalIsOpen = useSelector(selectModal);
+  const isResendVerifyEmailModalOpen = useSelector(
+    selectResendVerifyEmailModal
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isVerified === false) {
-      console.log('Opening modal...');
-      dispatch(openModal());
+      dispatch(openResendVerifyEmailModal());
+
+      dispatch(resendVerificationEmailThunk(userEmail));
+
+      dispatch(setIsVerified());
     }
   }, [isVerified, dispatch]);
 
@@ -44,18 +65,27 @@ const AuthForm = ({
     resolver: yupResolver(scheme),
     mode: 'onChange',
   });
-  const onSubmit = data => {
-    dispatch(onSubmitThunk(data));
-    reset();
-  };
 
-  const handleClick = () => {};
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(onSubmitThunk(data)).unwrap();
+      toast.success('Action completed successfully!');
+      await dispatch(setUserEmail(data));
+      reset();
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    }
+  };
 
   return (
     <>
-      {modalIsOpen &&
+      {isResendVerifyEmailModalOpen &&
         createPortal(
-          <Modal>
+          <Modal
+            isOpen={openResendVerifyEmailModal}
+            closeModal={closeResendVerifyEmailModal}
+            title={'Email verification is required'}
+          >
             <EmailResendModal />
           </Modal>,
           document.getElementById('modal-root')
@@ -86,7 +116,6 @@ const AuthForm = ({
           className={css.buttonStyles}
           type="submit"
           buttonText={registerForm ? 'Register Now' : 'Log In Now'}
-          onClick={handleClick}
         />
       </form>
     </>

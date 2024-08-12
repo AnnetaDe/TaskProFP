@@ -1,36 +1,47 @@
 import { useForm } from 'react-hook-form';
+import InputField from '../../InputField/InputField';
+import { yupResolver } from '@hookform/resolvers/yup';
+import s from './NeedHelpForm.module.css';
+import { Button } from '../../Button/Button';
+import { useSelector } from 'react-redux';
+import { selectUserEmail } from '../../../redux/user/userSelectors';
+import { useDispatch } from 'react-redux';
+import { contactSupportThunk } from '../../../redux/support/supportOperations';
+import { NeedHelpFormScheme } from '../../../schames/AuthSchames';
+const NeedHelpForm = ({onClose}) => {
+  const dispatch = useDispatch()
+  const email = useSelector(selectUserEmail);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: { email: email, message: '' },
+    resolver: yupResolver(NeedHelpFormScheme),
+    mode: 'onChange',
+  });
 
-const NeedHelpForm = () => {
+  const onSubmit = data => {
+    console.log(data);
+    dispatch(contactSupportThunk(data))
+    onClose()
+    reset();
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={formStyle}>
-      <div style={fieldStyle}>
-        <label htmlFor="email">Email Address</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          {...register('email', { required: true })}
-          style={inputStyle}
-        />
-        {errors.email && <span style={errorStyle}>This field is required</span>}
-      </div>
-
-      <div style={fieldStyle}>
-        <label htmlFor="comment">Comment</label>
-        <textarea
-          id="comment"
-          placeholder="Enter your comment"
-          {...register('comment', { required: true })}
-          style={{ ...inputStyle, height: '100px' }}
-        />
-        {errors.comment && (
-          <span style={errorStyle}>This field is required</span>
-        )}
-      </div>
-
-      <button type="submit" style={buttonStyle}>
-        Submit
-      </button>
+<form
+    className={s.need_help_form}
+    onSubmit={handleSubmit(onSubmit)}
+    autoComplete="nope"
+  >
+      <InputField register={register} name="email" errors={errors} />
+      <InputField
+        register={register}
+        name="message"
+        errors={errors}
+        isTextArea
+      />
+      <Button buttonText="Send" type='submit'/>
     </form>
   );
 };
