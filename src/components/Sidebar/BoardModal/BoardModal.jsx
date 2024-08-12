@@ -8,7 +8,7 @@ import { Button } from '../../Button/Button';
 import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
 import { useState } from 'react';
-import { BoardForm } from '../../../schames/BoardFormSchemes';
+import { BoardFormScheme } from '../../../schames/BoardFormSchemes';
 import {
   createBoardThunk,
   updateBoardThunk,
@@ -22,12 +22,12 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
 
   const options = {
     create: {
-      // scheme: BoardForm,
+      scheme: BoardFormScheme,
       onSubmitThunk: createBoardThunk,
       defaultValues: { title: '', icon: '', backgroundImg: '' },
     },
     edit: {
-      // scheme: BoardForm,
+      scheme: BoardFormScheme,
       onSubmitThunk: updateBoardThunk,
       defaultValues: {
         title: title,

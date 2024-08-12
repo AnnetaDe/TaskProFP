@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -13,6 +13,8 @@ import CusDatePicker from '../DatePicker/DatePicker';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
 import PriorityList from './PriorityList/PriorityList';
+import { priorities } from '../../constants/dataForBoardModal';
+import { CardFormScheme } from '../../schames/BoardFormSchemes';
 
 const CardForm = ({
   type,
@@ -28,12 +30,10 @@ const CardForm = ({
 
   const options = {
     create: {
-    //   scheme: BoardForm,
       onSubmitThunk: createNewTaskThunk,
       defaultValues: { title: '', description: '', priority: '', deadline: '' },
     },
     edit: {
-    //   scheme: BoardForm,
       onSubmitThunk: updateTaskThunk,
       defaultValues: {
         title: title,
@@ -45,19 +45,25 @@ const CardForm = ({
   };
 
   const [selectedPriority, setSelectedPriority] = useState(
-    options[type].priority
+    options[type].priority || priorities[3].priorityLevel
   );
+  // const [selectedDeadline, setSelectedDeadline] = useState(
+  //   options[type].deadline
+  // );
   const {
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors },
   } = useForm({
     defaultValues: options[type].defaultValues,
-    // resolver: yupResolver(options[type].scheme),
+    resolver: yupResolver(CardFormScheme),
     mode: 'onChange',
   });
-  const onSubmit = data => {
+  const onSubmit = (data) => {
+    console.log(title, description, priority, deadline);
+
     const formData = {
       boardid,
       columnid,
@@ -65,7 +71,7 @@ const CardForm = ({
     };
     dispatch(options[type].onSubmitThunk(formData));
     console.log(formData);
-    onClose();
+    // onClose();
     reset();
   };
 
@@ -75,27 +81,39 @@ const CardForm = ({
       onSubmit={handleSubmit(onSubmit)}
       autoComplete="nope"
     >
-      <InputField
-        type="text"
-        name="title"
-        placeholder="Title"
-        register={register}
-        errors={errors}
-      />
-
-      <section>
-        <h2>Label color</h2>
-        <PriorityList
-          selectedIcon={selectedPriority}
-          setSelectedIcon={setSelectedPriority}
+      <div className={s.text_inputs}>
+        <InputField
+          type="text"
+          name="title"
+          placeholder="Title"
           register={register}
-          name="icon"
+          errors={errors}
         />
-      </section>
-      <section>
-        <h2>Deadline</h2>
-        <CusDatePicker />
-      </section>
+        <InputField
+          isTextArea
+          type="text"
+          name="description"
+          placeholder="Description"
+          register={register}
+          errors={errors}
+        />
+      </div>
+      <div className={s.bottom_inputs}>
+        <section>
+          <h2>Label color</h2>
+          <PriorityList
+            selectedPriority={selectedPriority}
+            setSelectedPriority={setSelectedPriority}
+            register={register}
+            name="priority"
+          />
+        </section>
+        <section>
+          <h2>Deadline</h2>
+          <CusDatePicker control={control} name="deadline" />
+        </section>
+      </div>
+
       <Button
         className={s.btn}
         type="submit"

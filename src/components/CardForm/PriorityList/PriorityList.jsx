@@ -1,42 +1,43 @@
 import s from './PriorityList.module.css';
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import { icons } from '../../../constants/dataForBoardModal';
+import { priorities } from '../../../constants/dataForBoardModal';
 
-
-const PriorityList = ({ selectedIcon, setSelectedIcon , register, name}) => {
+const PriorityList = ({
+  selectedPriority,
+  setSelectedPriority,
+  register,
+  name,
+}) => {
   useEffect(() => {
-    if (!selectedIcon) {
-      setSelectedIcon(icons[0].iconName);
+    if (!selectedPriority) {
+      setSelectedPriority(priorities[3].priorityLevel);
     }
-  }, [selectedIcon, setSelectedIcon]);
+  }, [selectedPriority, setSelectedPriority]);
+
   return (
-    <ul className={s.icons_list}>
-      {icons.map((icon, idx) => (
-        <li key={idx} className={s.icon_item}>
+    <ul className={s.priorities_list}>
+      {priorities.map((priority, idx) => (
+        <li key={idx} className={s.priority_item}>
           <input
             type="radio"
-            id={icon.iconName}
-            name="icon"
-            value={icon.iconName}
-            checked={selectedIcon === icon.iconName}
+            id={priority.priorityLevel}
+            name='priority'
+            value={priority.priorityLevel}
+            checked={selectedPriority === priority.priorityLevel}
             onClick={() => {
-              setSelectedIcon(icon.iconName);
-              console.log(selectedIcon);
+              setSelectedPriority(priority.priorityLevel); 
             }}
-            className={s.icon_radio}
+            className={s.priority_radio}
             {...register(name)}
           />
-          <label htmlFor={icon.iconName}>
-            <svg
-              width="18"
-              height="18"
-              className={clsx(s.icon_svg, {
-                [s.selected]: selectedIcon === icon.iconName,
+          <label htmlFor={priority.priorityLevel}>
+            <span
+              className={clsx(s.icon_circle, {
+                [s.selected]: selectedPriority === priority.priorityLevel,
               })}
-            >
-              <use href={icon.svg}></use>
-            </svg>
+              style={{ backgroundColor: priority.color }}
+            ></span>
           </label>
         </li>
       ))}

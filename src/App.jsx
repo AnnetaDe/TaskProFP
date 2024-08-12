@@ -7,8 +7,6 @@ import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { lazy, useEffect } from 'react';
-import CardForm from './components/CardForm/CardForm';
-import Modal from './components/Modal/Modal';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
@@ -23,12 +21,7 @@ function App() {
   return isRefreshing ? (
     <div>refreshing...</div>
   ) : (
-    <>
-    <Modal isOpen={true}>
-
-    <CardForm type='create'/>
-    </Modal>
-      {/* <Routes>
+      <Routes>
         <Route
           path="/"
           element={
@@ -57,8 +50,7 @@ function App() {
           }
         />
         <Route path="*" element={<NotFound />} />
-      </Routes> */}
-    </>
+      </Routes>
   );
 }
 

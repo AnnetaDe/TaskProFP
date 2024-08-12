@@ -75,9 +75,9 @@ export const icons = [
     { iconName: 'icon_8', svg: `${icon}#icon-hexagon` },
   ];
 
-export const priority  = [
-{  priorityLevel: 'low', color: ''},
-{  priorityLevel: 'medium', color: ''},
-{  priorityLevel: 'high', color: ''},
-{  priorityLevel: 'without', color: ''},
+export const priorities  = [
+{  priorityLevel: 'low', color: '#8fa1d0'},
+{  priorityLevel: 'medium', color: '#e09cb5'},
+{  priorityLevel: 'high', color: '#bedbb0'},
+{  priorityLevel: 'without', color: 'rgba(255, 255, 255, 0.3)'},
 ]

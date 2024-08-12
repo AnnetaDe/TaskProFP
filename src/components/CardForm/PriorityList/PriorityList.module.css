@@ -1,13 +1,13 @@
-.icons_list {
+.priorities_list {
     display: flex;
     gap: 12px;
   }
   
-  .icon_item {
+  .priority_item {
     list-style: none;
   }
   
-  .icon_radio {
+  .priority_radio {
     position: absolute;
     opacity: 0;
     pointer-events: none;
@@ -15,17 +15,22 @@
   
   label {
     cursor: pointer;
+    display: flex;
+    gap: 8px;
   }
   
-  .icon_svg {
+  .icon_circle {
+
     opacity: 0.5;
-    fill: none;
-    stroke: var(--text-color);
-    transition: opacity var(--transition-pattern);
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    transition: opacity var(--transition-pattern), scale var(--transition-pattern);
   }
   
   .icon_svg:hover,
   .icon_svg:focus,
   .selected {
+    scale: 1.1;
     opacity: 1;
   }
