@@ -62,16 +62,18 @@ export const EditUserScheme = yup
       .required('Username is required')
       .matches(nameSchame, 'Invalid name format')
       .trim(),
-    // email: yup
-    //   .string()
-    //   .required('Email is required')
-    //   .matches(emailSchame, 'Invalid email format')
-    //   .trim(),
-    // password: yup
-    //   .string()
-    //   .min(8)
-    //   .max(64)
-    //   .matches(passwordSchame, 'Invalid password format')
-    //   .required('Password is required'),
+  })
+  .required();
+export const NeedHelpFormScheme = yup
+  .object({
+    email: yup
+      .string()
+      .required('Email is required')
+      .matches(emailSchame, 'Invalid email format'),
+    message: yup
+      .string()
+      .required('Comment is required')
+      .min(2, 'Comment must be at least 2 characters long')
+      .max(64, 'Comment must be at most 64 characters long'),
   })
   .required();

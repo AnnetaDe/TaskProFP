@@ -11,12 +11,26 @@ import {
 import Modal from '../../Modal/Modal';
 import NeedHelpForm from './NeedHelpForm';
 import icon from '../../../images/icons.svg';
+import { createPortal } from 'react-dom';
+import { useSelector } from 'react-redux';
+import { selectNeedHelpModal } from '../../../redux/modal/modalSelector';
+import { closeModal, closeNeedHelpModal, openModal, openNeedHelpModal } from '../../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
 
 const NeedHelp = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleModal = () => {
-    setIsOpen(isOpen => !isOpen);
-  };
+  const isOpen = useSelector(selectNeedHelpModal);
+  const dispatch = useDispatch();
+  // const toggleModal = () => {
+  //   if (isOpen) {
+  //     dispatch(closeModal());
+  //   } else {
+  //     dispatch(openModal());
+  //   }
+  // };
+  const handleOpen = ()=>{
+    dispatch(openNeedHelpModal())
+  }
+
   return (
     <div className={s.container}>
       <picture className={s.image}>
@@ -48,7 +62,7 @@ const NeedHelp = () => {
           resources or reach out to our customer support team.
         </p>
 
-        <button type="button" className={s.btn} onClick={toggleModal}>
+        <button type="button" className={s.btn} onClick={handleOpen}>
           <svg width="20px" height="20px" className={s.icon}>
             <use href={icon + '#icon-help'}></use>
           </svg>
@@ -56,12 +70,13 @@ const NeedHelp = () => {
         </button>
       </div>
 
-      {isOpen && (
-        <Modal
-          onClose={toggleModal}
-          children={<NeedHelpForm onClose={toggleModal} />}
-        />
-      )}
+      {isOpen &&
+        createPortal(
+          <Modal title="Need help" isOpen={isOpen} closeModal={closeNeedHelpModal}>
+            <NeedHelpForm onClose={()=>dispatch(closeNeedHelpModal())}/>
+          </Modal>,
+          document.body
+        )}
     </div>
   );
 };
