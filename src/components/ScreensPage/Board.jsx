@@ -22,7 +22,7 @@ export const Board = ({ boardId }) => {
     );
   }, [dispatch]);
 
-  console.log(board);
+  // console.log(board);
   return (
     <>
       {board ? (

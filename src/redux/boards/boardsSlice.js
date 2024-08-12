@@ -20,13 +20,13 @@ const boardSlice = createSlice({
       .addCase(fetchBoardsThunk.fulfilled, (state, { payload }) => {
         state.error = false;
         state.isLoading = false;
-        state.boards = payload.data.boards;
-        state.boardsIds = payload.data.boards.map(board => board._id);
+        state.boards = payload.data;
+        state.boardsIds = payload.data.map(board => board._id);
       })
       .addCase(createBoardThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.boards.push(payload);
+        state.boards.push(payload.data);
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
         const board = state.boards.find(
@@ -34,7 +34,7 @@ const boardSlice = createSlice({
         );
         board.title = action.payload.title;
         board.icon = action.payload.icon;
-        board.backgroundImg = action.payload.backgroundImg; //{ _id, title, icon,backgroundImg :{mobile: "link", ...} }
+        board.backgroundImg = action.payload.backgroundImg;
       })
       .addCase(deleteBoardThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -44,26 +44,6 @@ const boardSlice = createSlice({
         );
         state.boards.splice(index, 1);
       });
-    // .addCase(backgroundUrl.fulfilled, (state, action) => {
-    //   state.error = false;
-    //   state.isLoading = false;
-    //   state.backgroundUrl = action.payload;
-    // })
-    // .addCase(changeBackground.fulfilled, (state, action) => {
-    //   state.error = false;
-    //   state.isLoading = false;
-    //   state.boards = state.boards.map(board => {
-    //     if (board._id === action.payload._id) {
-    //       return {
-    //         ...board,
-    //         currentBg: action.payload.currentBg,
-    //       };
-    //     }
-    //     return board;
-    //   });
-    //   state.currentBcg = action.payload.currentBg;
-    // });
   },
 });
 export const boardsReducer = boardSlice.reducer;
-export const { changeBg, changeCurrentBoard } = boardSlice.actions;

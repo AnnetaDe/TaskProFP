@@ -33,8 +33,8 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        Dashboard
-        <Board />
+        {/* Dashboard
+        <Board /> */}
       </div>
     </div>
   );

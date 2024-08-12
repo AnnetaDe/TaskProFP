@@ -5,7 +5,7 @@ export const Card = ({ card }) => {
   const { title, description, priority, deadline } = card;
   // const columns = useSelector(selectColumn);
   return (
-    <div key={item.id} value={item.id} className={s.taskCard}>
+    <div key={card.id} value={card.id} className={s.taskCard}>
       <h3>{title}</h3>
       <p>{description}</p>
       <div className={s.taskInfo}>
