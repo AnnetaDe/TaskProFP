@@ -12,6 +12,6 @@ export const BoardForm = yup
     .required('Icon is required'),
     backgroundImg: yup
     .string()
-    .required('Background is required'),
+    // .required('Background is required'),
   })
   .required();

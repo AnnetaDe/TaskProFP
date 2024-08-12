@@ -29,12 +29,15 @@ const boardSlice = createSlice({
         state.boards.push(payload.data);
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
         const board = state.boards.find(
-          board => board._id === action.payload._id
+          board => board._id === action.payload.data._id
         );
-        board.title = action.payload.title;
-        board.icon = action.payload.icon;
-        board.backgroundImg = action.payload.backgroundImg;
+         if (board) {
+        board.title = action.payload.data.title;
+        board.icon = action.payload.data.icon;
+        board.backgroundImg = action.payload.data.backgroundImg;}
       })
       .addCase(deleteBoardThunk.fulfilled, (state, action) => {
         state.isLoading = false;
