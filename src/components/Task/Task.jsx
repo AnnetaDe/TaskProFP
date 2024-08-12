@@ -1,9 +1,16 @@
 import clsx from 'clsx';
 import s from './Task.module.css';
 import icons from '../../images/icons.svg';
+import { useSelector } from 'react-redux';
+import { selectUserTheme } from '../../redux/user/userSelectors';
+import { useEffect } from 'react';
 
 export const Task = ({ task }) => {
   const { title, description, priority, deadline } = task;
+  const colorScheme = useSelector(selectUserTheme);
+  useEffect(() => {
+    document.documentElement.setAttribute('theme', colorScheme);
+  }, [colorScheme]);
   return (
     <li
       className={clsx(

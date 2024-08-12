@@ -10,6 +10,10 @@
   --button-background-color: #9dc888;
   --button-text-color: #161616;
   --transition-pattern: 250ms ease-in;
+  --without-priority-background-color: #1616164d;
+  --low-priority-background-color: #8fa1d0;
+  --medium-priority-background-color: #e09cb5;
+  --high-priority-background-color: #bedbb0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -44,8 +48,10 @@
   --input-box-shadow: rgba(22, 22, 22, 0.08);
   --logout-icon-color: rgba(190, 219, 176, 1);
   --need-help-bgc: #1f1f1f;
-  --border-sidebar:rgba(255, 255, 255, 0.1);
+  --border-sidebar: rgba(255, 255, 255, 0.1);
   --sidebar-board-item-bgc: rgba(31, 31, 31, 0.4);
+  --task-line: #ffffff1a;
+  --task-main: #ffffff80;
 }
 [theme='light'] {
   --text-color: #000000;
@@ -76,8 +82,9 @@
   --logout-icon-color: rgba(190, 219, 176, 1);
   --need-help-bgc: #f6f6f7;
   --border-sidebar: rgba(22, 22, 22, 0.1);
-  --sidebar-board-item-bgc:rgba(246, 246, 247, 0.4);
-
+  --sidebar-board-item-bgc: rgba(246, 246, 247, 0.4);
+  --task-line: #1616161a;
+  --task-main: rgba(22, 22, 22, 0.7);
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -108,7 +115,9 @@
   --logout-icon-color: #fff;
   --need-help-bgc: rgba(236, 237, 253, 0.4);
   --border-sidebar: rgba(255, 255, 255, 0.1);
-  --sidebar-board-item-bgc:rgba(255, 255, 255, 0.2);
+  --sidebar-board-item-bgc: rgba(255, 255, 255, 0.2);
+  --task-line: #1616161a;
+  --task-main: rgba(22, 22, 22, 0.7);
 }
 
 body {
