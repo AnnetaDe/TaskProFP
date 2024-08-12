@@ -25,6 +25,8 @@ import Modal from '../../components/Modal/Modal';
 import EmailResendModal from '../EmailResendModal/EmailResendModal';
 import { setIsVerified, setUserEmail } from '../../redux/user/userSlice';
 import { resendVerificationEmailThunk } from '../../redux/user/userOperations';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthForm = ({
   registerForm = false,
@@ -63,12 +65,16 @@ const AuthForm = ({
     resolver: yupResolver(scheme),
     mode: 'onChange',
   });
-  const onSubmit = data => {
-    dispatch(onSubmitThunk(data));
 
-    dispatch(setUserEmail(data));
-
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(onSubmitThunk(data)).unwrap();
+      toast.success('Action completed successfully!');
+      await dispatch(setUserEmail(data));
+      reset();
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    }
   };
 
   return (
