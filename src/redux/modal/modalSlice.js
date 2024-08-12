@@ -4,8 +4,9 @@ const modalSlice = createSlice({
   name: 'modal',
   initialState: {
     isOpen: false,
-    isEditProfile: false,
+    isEditProfileOpen: false,
     isCreateBoardOpen: false,
+    isEditBoardOpen: false,
   },
   reducers: {
     openModal: state => {
@@ -15,16 +16,22 @@ const modalSlice = createSlice({
       state.isOpen = false;
     },
     openEditProfileModal: state => {
-      state.isEditProfile = true;
+      state.isEditProfileOpen = true;
     },
     closeEditProfileModal: state => {
-      state.isEditProfile = false;
+      state.isEditProfileOpen = false;
     },
     openCreateBoardModaal: state => {
       state.isCreateBoardOpen = true;
     },
     closeCreateBoardModaal: state => {
       state.isCreateBoardOpen = false;
+    },
+    openEditBoarModaal: state => {
+      state.isEditBoardOpen = true;
+    },
+    closeEditBoardModaal: state => {
+      state.isEditBoardOpen = false;
     },
   },
 });
@@ -36,6 +43,8 @@ export const {
   closeEditProfileModal,
   openCreateBoardModaal,
   closeCreateBoardModaal,
+  openEditBoarModaal,
+  closeEditBoardModaal,
 } = modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

@@ -4,9 +4,13 @@ import { previewBgc } from '../dataForBoardModal';
 import { useEffect } from 'react';
 
 const BgcList = ({ selectedBgc, setSelectedBgc, register, name }) => {
+  console.log(selectedBgc);
+  
   useEffect(() => {
     if (!selectedBgc) {
       setSelectedBgc(previewBgc[0].previewName);
+    }else{
+      setSelectedBgc(selectedBgc)
     }
   }, [selectedBgc, setSelectedBgc]);
   return (
