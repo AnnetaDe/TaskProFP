@@ -1,13 +1,24 @@
-/* .dashboard_layout {
+.gridContainer {
   display: flex;
-  .right_side {
+  width: 100vw;
+  height: 100vh;;
+  overflow: hidden;
+  .gridSidebar{
+    height: 100vh;
+  }
+  .gridHeader {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
-} */
-
-.gridContainer {
+}
+.outlet{
+  /* overflow-y: hidden; */
+/* overflow-x: scroll; */
+overflow: hidden;
+height: 80%;
+}
+/* .gridContainer {
   height: 100vh;
 
   outline: 1px solid rgb(53, 210, 84);
@@ -23,4 +34,4 @@
 }
 .gridContent {
   grid-area: main;
-}
+} */
