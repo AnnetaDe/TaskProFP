@@ -28,6 +28,9 @@ const userSlice = createSlice({
     setIsVerified: state => {
       state.isVerified = null;
     },
+    setUserEmail: (state, { payload }) => {
+      state.login.email = payload.email;
+    },
   },
   extraReducers: builder => {
     builder
@@ -92,5 +95,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setIsVerified } = userSlice.actions;
+export const { setIsVerified, setUserEmail } = userSlice.actions;
 export const userReducer = userSlice.reducer;

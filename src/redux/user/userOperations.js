@@ -106,3 +106,18 @@ export const updateUserPreferencesThunk = createAsyncThunk(
     }
   }
 );
+
+export const resendVerificationEmailThunk = createAsyncThunk(
+  'auth/resendVerificationEmail',
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.post('api/auth/verify', {
+        email: body,
+      });
+      return data.data;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

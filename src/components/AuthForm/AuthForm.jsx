@@ -6,7 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
 import InputPassword from '../InputPassword/InputPassword';
-import { selectIsVerified } from '../../redux/user/userSelectors';
+import {
+  selectIsVerified,
+  selectUserEmail,
+} from '../../redux/user/userSelectors';
 import { useEffect } from 'react';
 import {
   selectModal,
@@ -20,7 +23,8 @@ import {
 import { createPortal } from 'react-dom';
 import Modal from '../../components/Modal/Modal';
 import EmailResendModal from '../EmailResendModal/EmailResendModal';
-import { setIsVerified } from '../../redux/user/userSlice';
+import { setIsVerified, setUserEmail } from '../../redux/user/userSlice';
+import { resendVerificationEmailThunk } from '../../redux/user/userOperations';
 
 const AuthForm = ({
   registerForm = false,
@@ -32,14 +36,13 @@ const AuthForm = ({
   const isResendVerifyEmailModalOpen = useSelector(
     selectResendVerifyEmailModal
   );
+  const userEmail = useSelector(selectUserEmail);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isVerified === false) {
       dispatch(openResendVerifyEmailModal());
-
-      console.log('Resending email...');
-
+      dispatch(resendVerificationEmailThunk(userEmail));
       dispatch(setIsVerified());
     }
   }, [isVerified, dispatch]);
@@ -59,6 +62,7 @@ const AuthForm = ({
   });
   const onSubmit = data => {
     dispatch(onSubmitThunk(data));
+    dispatch(setUserEmail(data));
     reset();
   };
 
