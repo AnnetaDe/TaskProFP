@@ -32,17 +32,20 @@ const AuthForm = ({
   scheme,
   onSubmitThunk,
 }) => {
+  const userEmail = useSelector(selectUserEmail);
   const isVerified = useSelector(selectIsVerified);
   const isResendVerifyEmailModalOpen = useSelector(
     selectResendVerifyEmailModal
   );
-  const userEmail = useSelector(selectUserEmail);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isVerified === false) {
       dispatch(openResendVerifyEmailModal());
+
       dispatch(resendVerificationEmailThunk(userEmail));
+
       dispatch(setIsVerified());
     }
   }, [isVerified, dispatch]);
@@ -62,7 +65,9 @@ const AuthForm = ({
   });
   const onSubmit = data => {
     dispatch(onSubmitThunk(data));
+
     dispatch(setUserEmail(data));
+
     reset();
   };
 
