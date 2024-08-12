@@ -8,56 +8,68 @@ import { Button } from '../../Button/Button';
 import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
 import { useState } from 'react';
-import Select from 'react-select';
 import { BoardForm } from '../../../schames/BoardFormSchemes';
 import {
   createBoardThunk,
   updateBoardThunk,
 } from '../../../redux/boards/boardsOperations';
+import { useParams } from 'react-router-dom';
 
 const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
+  console.log(title, chosenIcon, chosenBackGround);
 
   const options = {
     create: {
-      scheme: BoardForm,
+      // scheme: BoardForm,
       onSubmitThunk: createBoardThunk,
       defaultValues: { title: '', icon: '', backgroundImg: '' },
     },
     edit: {
-      create: {
-        scheme: BoardForm,
-        onSubmitThunk: updateBoardThunk,
-        defaultValues: {
-          title: title,
-          icon: chosenIcon,
-          backgroundImg: chosenBackGround,
-        },
+      // scheme: BoardForm,
+      onSubmitThunk: updateBoardThunk,
+      defaultValues: {
+        title: title,
+        icon: chosenIcon,
+        backgroundImg: chosenBackGround,
       },
     },
   };
 
-  const [selectedIcon, setSelectedIcon] = useState(options[type].icon);
-  const [selectedBgc, setSelectedBgc] = useState(options[type].backgroundImg);
+  const [selectedIcon, setSelectedIcon] = useState(
+    options[type].defaultValues.icon
+  );
+  const [selectedBgc, setSelectedBgc] = useState(
+    options[type].defaultValues.backgroundImg
+  );
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: { title: title, icon: '', backgroundImg: '' },
-    resolver: yupResolver(options[type].scheme),
+    defaultValues: options[type].defaultValues,
+    resolver: yupResolver(BoardForm),
     mode: 'onChange',
   });
   const onSubmit = data => {
-    const formData = {
-      ...data,
-      icon: selectedIcon,
-      backgroundImg: selectedBgc,
-    };
+    const formData =
+      type === 'create'
+        ? {
+            ...data,
+            icon: selectedIcon,
+            backgroundImg: selectedBgc === 'none' ? null : selectedBgc,
+          }
+        : {
+            ...data,
+            icon: selectedIcon,
+            backgroundImg: selectedBgc === 'none' ? null : selectedBgc,
+            _id: id,
+          };
     dispatch(options[type].onSubmitThunk(formData));
     console.log(formData);
-    onClose()
+    onClose();
     reset();
   };
 

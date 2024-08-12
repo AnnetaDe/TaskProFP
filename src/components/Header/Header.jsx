@@ -42,14 +42,6 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
     selectOptions.filter(el => el.value === userTheme)
   );
   const isOpen = useSelector(selectEditProfileModal);
-  // const [isOpen, setIsOpen] = useState(false);
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
-  // const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const { isDesktop } = useMedia();
 
