@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import s from './BgcList.module.css';
-import { previewBgc } from '../dataForBoardModal';
+import { previewBgc } from '../../../../constants/dataForBoardModal';
 import { useEffect } from 'react';
 
 const BgcList = ({ selectedBgc, setSelectedBgc, register, name }) => {

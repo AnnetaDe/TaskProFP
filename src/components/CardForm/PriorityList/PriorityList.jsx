@@ -1,9 +1,10 @@
-import s from './IconsList.module.css';
+import s from './PriorityList.module.css';
 import clsx from 'clsx';
 import { useEffect } from 'react';
-import { icons } from '../../../../constants/dataForBoardModal';
+import { icons } from '../../../constants/dataForBoardModal';
 
-const IconsList = ({ selectedIcon, setSelectedIcon , register, name}) => {
+
+const PriorityList = ({ selectedIcon, setSelectedIcon , register, name}) => {
   useEffect(() => {
     if (!selectedIcon) {
       setSelectedIcon(icons[0].iconName);
@@ -43,4 +44,4 @@ const IconsList = ({ selectedIcon, setSelectedIcon , register, name}) => {
   );
 };
 
-export default IconsList;
+export default PriorityList;

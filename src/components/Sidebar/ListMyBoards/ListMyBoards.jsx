@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { fetchBoardsThunk } from '../../../redux/boards/boardsOperations';
 import clsx from 'clsx';
 import iconsSprite from '../../../images/icons.svg';
-import { icons } from '../BoardModal/dataForBoardModal';
+import { icons } from '../../../constants/dataForBoardModal';
 
 const ListMyBoards = ({ className }) => {
   const dispatch = useDispatch();

@@ -7,6 +7,8 @@ import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { lazy, useEffect } from 'react';
+import CardForm from './components/CardForm/CardForm';
+import Modal from './components/Modal/Modal';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
@@ -21,36 +23,42 @@ function App() {
   return isRefreshing ? (
     <div>refreshing...</div>
   ) : (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
-        }
-      >
-        <Route index element={<HomePage />} />
-        <Route path="board/:id" element={<ScreensPage />} />
-      </Route>
-      <Route
-        path="/welcome"
-        element={
-          <PublicRoute>
-            <WelcomePage />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/auth/:type"
-        element={
-          <PublicRoute>
-            <AuthPage />
-          </PublicRoute>
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+    <Modal isOpen={true}>
+
+    <CardForm type='create'/>
+    </Modal>
+      {/* <Routes>
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <DashboardLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<HomePage />} />
+          <Route path="board/:id" element={<ScreensPage />} />
+        </Route>
+        <Route
+          path="/welcome"
+          element={
+            <PublicRoute>
+              <WelcomePage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/auth/:type"
+          element={
+            <PublicRoute>
+              <AuthPage />
+            </PublicRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes> */}
+    </>
   );
 }
 

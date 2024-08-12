@@ -14,6 +14,7 @@ const CusDatePicker = () => {
           setFieldValue('dedlineDate', date);
         }}
         dateFormat="eeee,dd MMMM"
+        minDate={new Date()}  
         // className={s.dateInput}
         customInput={<CustomInputCalendar />}
       />
