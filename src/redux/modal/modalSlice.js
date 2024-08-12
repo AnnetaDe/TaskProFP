@@ -6,6 +6,7 @@ const modalSlice = createSlice({
     isOpen: false,
     isEditProfileOpen: false,
     isCreateBoardOpen: false,
+    isResendVerifyEmailOpen: false,
     isEditBoardOpen: false,
   },
   reducers: {
@@ -33,6 +34,12 @@ const modalSlice = createSlice({
     closeEditBoardModaal: state => {
       state.isEditBoardOpen = false;
     },
+    openResendVerifyEmailModal: state => {
+      state.isResendVerifyEmailOpen = true;
+    },
+    closeResendVerifyEmailModal: state => {
+      state.isResendVerifyEmailOpen = false;
+    },
   },
 });
 
@@ -45,6 +52,8 @@ export const {
   closeCreateBoardModaal,
   openEditBoarModaal,
   closeEditBoardModaal,
+  openResendVerifyEmailModal,
+  closeResendVerifyEmailModal,
 } = modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

@@ -1,5 +1,6 @@
 @import url('./css/fonts.css');
 @import url('./css/reset.css');
+@import 'react-datepicker/dist/react-datepicker.css';
 
 :root {
   --font-family: 'Poppins', sans-serif;
@@ -144,3 +145,29 @@ div {
 button:hover {
   background-color: var(--button-background-color-hoover);
 } */
+
+/*Start Стилі  бібліотека react-datepicker */
+div .react-datepicker {
+  background-color: var(--background-header);
+  border: 1px solid var(--button-background-color);
+}
+div .react-datepicker__day--011 {
+  background-color: var(--button-background-color);
+  border-radius: 50px;
+}
+div .react-datepicker__day {
+  color: var(--text-color);
+}
+div .react-datepicker__header {
+  background-color: var(--background-header);
+}
+div .react-datepicker__day-name {
+  color: var(--header-arrow-color);
+}
+div .react-datepicker-ignore-onclickoutside {
+  border: none;
+  outline: none;
+  color: var(--button-background-color);
+  background-color: inherit;
+}
+/* End Стилі  бібліотека react-datepicker  */
