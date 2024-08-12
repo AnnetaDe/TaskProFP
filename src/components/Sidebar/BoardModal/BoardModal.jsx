@@ -22,12 +22,12 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
 
   const options = {
     create: {
-      scheme: BoardForm,
+      // scheme: BoardForm,
       onSubmitThunk: createBoardThunk,
       defaultValues: { title: '', icon: '', backgroundImg: '' },
     },
     edit: {
-      scheme: BoardForm,
+      // scheme: BoardForm,
       onSubmitThunk: updateBoardThunk,
       defaultValues: {
         title: title,
@@ -36,7 +36,6 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
       },
     },
   };
-  console.log(options[type]);
 
   const [selectedIcon, setSelectedIcon] = useState(
     options[type].defaultValues.icon
@@ -50,8 +49,8 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: { title: title, icon: '', backgroundImg: '' },
-    resolver: yupResolver(options[type].scheme),
+    defaultValues: options[type].defaultValues,
+    resolver: yupResolver(BoardForm),
     mode: 'onChange',
   });
   const onSubmit = data => {
@@ -60,7 +59,7 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
         ? {
             ...data,
             icon: selectedIcon,
-            backgroundImg: selectedBgc,
+            backgroundImg: selectedBgc === 'none' ? null : selectedBgc,
           }
         : {
             ...data,
