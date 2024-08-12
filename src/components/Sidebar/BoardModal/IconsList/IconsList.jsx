@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useEffect } from 'react';
 import { icons } from '../../../../constants/dataForBoardModal';
 
-const IconsList = ({ selectedIcon, setSelectedIcon , register, name}) => {
+const IconsList = ({ selectedIcon, setSelectedIcon, register, name }) => {
   useEffect(() => {
     if (!selectedIcon) {
       setSelectedIcon(icons[0].iconName);
@@ -21,7 +21,6 @@ const IconsList = ({ selectedIcon, setSelectedIcon , register, name}) => {
             checked={selectedIcon === icon.iconName}
             onClick={() => {
               setSelectedIcon(icon.iconName);
-              console.log(selectedIcon);
             }}
             className={s.icon_radio}
             {...register(name)}

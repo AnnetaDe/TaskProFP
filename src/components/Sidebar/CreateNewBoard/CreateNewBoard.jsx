@@ -3,10 +3,7 @@ import icons from '../../../images/icons.svg';
 import Modal from '../../Modal/Modal';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {
-  selectCreateBoardModal,
-  selectModal,
-} from '../../../redux/modal/modalSelector';
+import { selectCreateBoardModal } from '../../../redux/modal/modalSelector';
 import { Button } from '../../Button/Button';
 import {
   closeCreateBoardModaal,

@@ -35,7 +35,6 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
-  console.log(avatar);
 
   const userTheme = useSelector(selectUserTheme);
   const [theme, setTheme] = useState(
@@ -60,7 +59,6 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-    console.log(isSidebarOpen);
   };
   return (
     <header className={s.header}>

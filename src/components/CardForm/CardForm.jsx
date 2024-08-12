@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import { Controller, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -61,16 +61,14 @@ const CardForm = ({
     resolver: yupResolver(CardFormScheme),
     mode: 'onChange',
   });
-  const onSubmit = (data) => {
-    console.log(title, description, priority, deadline);
-
+  const onSubmit = data => {
     const formData = {
       boardid,
       columnid,
       task: { ...data },
     };
     dispatch(options[type].onSubmitThunk(formData));
-    console.log(formData);
+
     // onClose();
     reset();
   };

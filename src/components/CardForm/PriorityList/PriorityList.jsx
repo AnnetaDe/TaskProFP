@@ -22,11 +22,11 @@ const PriorityList = ({
           <input
             type="radio"
             id={priority.priorityLevel}
-            name='priority'
+            name="priority"
             value={priority.priorityLevel}
             checked={selectedPriority === priority.priorityLevel}
             onClick={() => {
-              setSelectedPriority(priority.priorityLevel); 
+              setSelectedPriority(priority.priorityLevel);
             }}
             className={s.priority_radio}
             {...register(name)}
