@@ -13,7 +13,11 @@ import {
 } from '../../redux/user/userSelectors.js';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { openModal } from '../../redux/modal/modalSlice.js';
+import {
+  closeEditProfileModal,
+  openEditProfileModal,
+  openModal,
+} from '../../redux/modal/modalSlice.js';
 import Modal from '../Modal/Modal.jsx';
 import { useMedia } from '../../hooks/useMedia.jsx';
 import icons from '../../images/icons.svg';
@@ -21,7 +25,10 @@ import SvgIconAnonym from './SvgIconAnonym.jsx';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
 import EditModal from '../EditModal/EditModal.jsx';
 import { createPortal } from 'react-dom';
-import { selectModal } from '../../redux/modal/modalSelector.js';
+import {
+  selectEditProfileModal,
+  selectModal,
+} from '../../redux/modal/modalSelector.js';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux.jsx';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
@@ -29,21 +36,26 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const userName = useSelector(selectUserName);
   const avatar = useSelector(selectAvatar);
   console.log(avatar);
-  
+
   const userTheme = useSelector(selectUserTheme);
   const [theme, setTheme] = useState(
     selectOptions.filter(el => el.value === userTheme)
   );
-  const [isOpen, setIsOpen] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  const isOpen = useSelector(selectEditProfileModal);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
   // const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const { isDesktop } = useMedia();
+
+  const handleOpen = ()=>{
+    dispatch(openEditProfileModal())
+  }
 
   const handleChange = selectedOption => {
     setTheme(selectedOption);
@@ -82,7 +94,10 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
           components={customComponents}
           isOptionSelected={true}
         />
-        <div className={s.user_info} onClick={() => openModal()}>
+        <div
+          className={s.user_info}
+          onClick={handleOpen}
+        >
           <p>{userName ? userName : 'Anonym'}</p>
           {avatar ? (
             <div className={s.img_wrap}>
@@ -97,22 +112,15 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
           )}
         </div>
       </section>
-      {/* {openedModal &&
-        createPortal(
-          <Modal title="Edit profile">
-            <EditModal />
-          </Modal>,
-          document.body
-        )} */}
 
       {isOpen && (
-        <ModalWithoutRedux
+        <Modal
           isOpen={isOpen}
-          onClose={closeModal}
+          closeModal={closeEditProfileModal}
           title="Edit profile"
         >
-          <EditModal onClose={closeModal}/>
-        </ModalWithoutRedux>
+          <EditModal onClose={()=>dispatch(closeEditProfileModal())} />
+        </Modal>
       )}
     </header>
   );

@@ -16,12 +16,6 @@ const MyBoards = desk => {
     return null;
   }
 
-  // const addColumns = id => {
-  //   // dispatch(fetchColumns(id));
-  //   dispatch(changeBg(desk.desk.currentBg));
-  //   dispatch(changeCurrentBoard(id));
-  // };
-
   const deskRoute = desk.desk.title.split(' ').join('-');
 
   const projectIcons = `#${desk.desk.icon}`;

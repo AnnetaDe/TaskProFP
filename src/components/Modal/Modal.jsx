@@ -1,14 +1,14 @@
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../redux/modal/modalSlice';
+// import { closeModal } from '../../redux/modal/modalSlice';
 import css from './Modal.module.css';
 import { selectModal } from '../../redux/modal/modalSelector';
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import icon from '../../images/icons.svg';
 
-const Modal = ({ title, children }) => {
-  const isOpen = useSelector(selectModal);
+const Modal = ({ isOpen, title, children, closeModal }) => {
+  // const isOpen = useSelector(selectModal);
   const dispatch = useDispatch();
   useEffect(() => {
     const addCloseEvent = e => {

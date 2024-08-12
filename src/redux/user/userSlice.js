@@ -12,7 +12,7 @@ const initialState = {
   login: { avatarUrl: '', email: '', username: '', theme: '' },
   accessToken: null,
   refreshToken: null,
-  sid: null,
+  isVerified: null,
   userTheme: 'dark',
   userAvatar: '',
   userName: '',
@@ -48,8 +48,9 @@ const userSlice = createSlice({
       .addCase(loginThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(loginThunk.rejected, state => {
+      .addCase(loginThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.isVerified = payload === 403 ? false : null;
         state.error = true;
       })
       .addCase(refreshTokensThunk.fulfilled, (state, { payload }) => {

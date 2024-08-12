@@ -1,8 +1,37 @@
-.dashboard_layout {
-    display: flex;
-    .right_side {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
+.gridContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;;
+  overflow: hidden;
+  .gridSidebar{
+    height: 100vh;
   }
+  .gridHeader {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+.outlet{
+  /* overflow-y: hidden; */
+/* overflow-x: scroll; */
+overflow: hidden;
+height: 80%;
+}
+/* .gridContainer {
+  height: 100vh;
+
+  outline: 1px solid rgb(53, 210, 84);
+  max-width: 1440px;
+  display: grid;
+  grid-template-areas: 'header header' 'sidebar main';
+}
+.gridHeader {
+  grid-area: header;
+}
+.gridSidebar {
+  grid-area: sidebar;
+}
+.gridContent {
+  grid-area: main;
+} */
