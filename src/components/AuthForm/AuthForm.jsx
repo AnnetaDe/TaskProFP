@@ -8,11 +8,19 @@ import { Button } from '../Button/Button';
 import InputPassword from '../InputPassword/InputPassword';
 import { selectIsVerified } from '../../redux/user/userSelectors';
 import { useEffect } from 'react';
-import { selectModal } from '../../redux/modal/modalSelector';
-import { openModal } from '../../redux/modal/modalSlice';
+import {
+  selectModal,
+  selectResendVerifyEmailModal,
+} from '../../redux/modal/modalSelector';
+import {
+  closeResendVerifyEmailModal,
+  openModal,
+  openResendVerifyEmailModal,
+} from '../../redux/modal/modalSlice';
 import { createPortal } from 'react-dom';
 import Modal from '../../components/Modal/Modal';
 import EmailResendModal from '../EmailResendModal/EmailResendModal';
+import { setIsVerified } from '../../redux/user/userSlice';
 
 const AuthForm = ({
   registerForm = false,
@@ -21,13 +29,18 @@ const AuthForm = ({
   onSubmitThunk,
 }) => {
   const isVerified = useSelector(selectIsVerified);
-  const modalIsOpen = useSelector(selectModal);
+  const isResendVerifyEmailModalOpen = useSelector(
+    selectResendVerifyEmailModal
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isVerified === false) {
-      console.log('Opening modal...');
-      dispatch(openModal());
+      dispatch(openResendVerifyEmailModal());
+
+      console.log('Resending email...');
+
+      dispatch(setIsVerified());
     }
   }, [isVerified, dispatch]);
 
@@ -49,13 +62,15 @@ const AuthForm = ({
     reset();
   };
 
-  const handleClick = () => {};
-
   return (
     <>
-      {modalIsOpen &&
+      {isResendVerifyEmailModalOpen &&
         createPortal(
-          <Modal>
+          <Modal
+            isOpen={openResendVerifyEmailModal}
+            closeModal={closeResendVerifyEmailModal}
+            title={'Email verification is required'}
+          >
             <EmailResendModal />
           </Modal>,
           document.getElementById('modal-root')
@@ -86,7 +101,6 @@ const AuthForm = ({
           className={css.buttonStyles}
           type="submit"
           buttonText={registerForm ? 'Register Now' : 'Log In Now'}
-          onClick={handleClick}
         />
       </form>
     </>
