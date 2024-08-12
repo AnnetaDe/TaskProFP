@@ -24,7 +24,14 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-
+  reducers: {
+    setIsVerified: state => {
+      state.isVerified = null;
+    },
+    setUserEmail: (state, { payload }) => {
+      state.login.email = payload.email;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
@@ -47,6 +54,7 @@ const userSlice = createSlice({
       })
       .addCase(loginThunk.pending, state => {
         state.isLoading = true;
+        state.isVerified = null;
       })
       .addCase(loginThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -87,4 +95,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { setIsVerified, setUserEmail } = userSlice.actions;
 export const userReducer = userSlice.reducer;
