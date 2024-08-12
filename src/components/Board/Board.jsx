@@ -15,7 +15,6 @@ import {
 import { useEffect } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
-
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -32,19 +31,12 @@ export const Board = () => {
   const tasksWithinBoard = useSelector(selectTasksWithinColumn);
   const tasksOrderId = useSelector(selectTasksOrderId);
 
-  console.log(id);
-  console.log('tasksWithinBoard', tasksWithinBoard);
-  console.log('boardTitle', boardTitle);
-  console.log('columns', columns);
   const onDragEnd = result => {
     const { source, destination } = result;
-
-    // If dropped outside the list
     if (!destination) {
       return;
     }
 
-    // Handle task reorder within a column
     if (source.droppableId === destination.droppableId) {
       dispatch(
         updateTaskOrder({
@@ -55,7 +47,6 @@ export const Board = () => {
         })
       );
     } else {
-      // Handle moving tasks between columns
       dispatch(
         updateTaskOrder({
           source,
