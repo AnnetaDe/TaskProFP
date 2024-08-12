@@ -50,6 +50,7 @@ const modalSlice = createSlice({
   },
 });
 
+
 export const {
   openModal,
   closeModal,
