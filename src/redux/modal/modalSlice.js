@@ -7,7 +7,7 @@ const modalSlice = createSlice({
     isEditProfileOpen: false,
     isCreateBoardOpen: false,
     isResendVerifyEmailOpen: false,
-    isNeedHelpOpen: false
+    isNeedHelpOpen: false,
     isEditBoardOpen: false,
   },
   reducers: {
