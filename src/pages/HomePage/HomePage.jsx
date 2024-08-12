@@ -1,6 +1,7 @@
 import { Board } from '../../components/Board/Board';
 import Modal from '../../components/Modal/Modal';
 import CardForm from '../../components/CardForm/CardForm'
+import ColumnForm from '../../components/ColumnForm/ColumnForm';
 
 export const Home = () => {
   
@@ -8,9 +9,9 @@ export const Home = () => {
     <>
       <h1>Home</h1>
 
-          <Modal isOpen={true}>
+          <Modal title='Add column' isOpen={true}>
 
-    <CardForm type='create'/>
+    <ColumnForm type='create'/>
     </Modal>
     </>
   );
