@@ -9,6 +9,7 @@ import { Board } from '../../components/Board/Board';
 import ScreensPage from '../ScreensPage/ScreensPage';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import FilterSelect from '../../components/FilterSelect/FilterSelect';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -31,13 +32,13 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-
-
-      <div className={s.outlet}>
-        <Suspense fallback="suspense">
-          <Outlet />
-        </Suspense>
-      </div>      </div>
+        <FilterSelect />
+        <div className={s.outlet}>
+          <Suspense fallback="suspense">
+            <Outlet />
+          </Suspense>
+        </div>{' '}
+      </div>
     </div>
   );
 };
