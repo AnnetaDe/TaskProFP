@@ -4,6 +4,7 @@ import { LoginSchame, RegistrationSchame } from '../../schames/AuthSchames';
 import { loginThunk, registerThunk } from '../../redux/user/userOperations';
 import css from './AuthPage.module.css';
 import DocumentTitle from '../../components/Title/Title';
+
 export const AuthPage = () => {
   const { type } = useParams();
 
