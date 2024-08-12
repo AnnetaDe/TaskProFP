@@ -13,6 +13,8 @@ import { openModal } from '../../redux/modal/modalSlice';
 import { createPortal } from 'react-dom';
 import Modal from '../../components/Modal/Modal';
 import EmailResendModal from '../EmailResendModal/EmailResendModal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthForm = ({
   registerForm = false,
@@ -44,9 +46,15 @@ const AuthForm = ({
     resolver: yupResolver(scheme),
     mode: 'onChange',
   });
-  const onSubmit = data => {
-    dispatch(onSubmitThunk(data));
-    reset();
+
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(onSubmitThunk(data)).unwrap();
+      toast.success('Action completed successfully!');
+      reset();
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    }
   };
 
   const handleClick = () => {};
