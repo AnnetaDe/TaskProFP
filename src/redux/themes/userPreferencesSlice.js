@@ -6,12 +6,17 @@ const userPreferencesSlice = createSlice({
   initialState: {
     userTheme: 'dark',
     userAvatar: '',
+    userName:''
   },
 
   extraReducers: builder => {
     builder.addCase(updateUserPreferencesThunk.fulfilled, (state, action) => {
-      state.userTheme = action.payload.userTheme;
-      state.userAvatar = action.payload.userAvatar;
+      state.userTheme = action.payload.theme;
+      state.userAvatar = action.payload.avatarUrl;
+      state.userName = action.payload.username;
+    })
+    .addCase(updateUserPreferencesThunk.rejected, (state, action) => {
+      console.error('Error updating user preferences:', action.payload);
     });
   },
 });

@@ -6,6 +6,8 @@ export const fetchBoardsThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await taskProApi.get('api/boards');
+      console.log('FETCHED BOARDS', data);
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -29,7 +31,10 @@ export const updateBoardThunk = createAsyncThunk(
   'boards/updateBoard',
   async (board, thunkAPI) => {
     try {
-      const { data } = await taskProApi.patch(`api/boards/${board._id}`, board);
+      const { data } = await taskProApi.patch(
+        `api/boards/:${board._id}`,
+        board
+      );
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -40,7 +45,7 @@ export const deleteBoardThunk = createAsyncThunk(
   'boards/deleteBoard',
   async (boardId, thunkAPI) => {
     try {
-      await taskProApi.delete(`api/boards/${boardId}`);
+      await taskProApi.delete(`api/boards/:${boardId}`);
       return boardId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -73,3 +78,15 @@ export const deleteBoardThunk = createAsyncThunk(
 //     }
 //   }
 // );
+
+export const fetchBoardByIdThunk = createAsyncThunk(
+  'board/fetchBoardById',
+  async (boardId, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.get(`api/boards/${boardId}`);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

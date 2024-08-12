@@ -13,37 +13,46 @@ const InputField = ({
   name,
   errors,
   value,
+  disabled,
+  defaultValue,
   ...rest
 }) => {
   const style = {
     ...(height && { height }),
     ...(width && { width }),
   };
-  if (errors && errors[name]) {
-    return <p className={s.errorStyles}>{errors[name].message}</p>;
-  }
+
   if (isTextArea) {
     return (
       <div className={clsx(s.input_field, s.textarea_container)}>
         <textarea
+          value={value}
           className={clsx(s.textarea_field)}
           placeholder={placeholder}
           style={style}
+          {...(register ? register(name) : {})}
           {...rest}
         />
+        <p className={s.errorStyles}>{errors[name]?.message}</p>
       </div>
     );
   }
   return (
-    <input
-      value={value}
-      autoComplete={autoComplete}
-      className={clsx(s.input_field, className)}
-      type={type}
-      placeholder={placeholder}
-      {...(register ? register(name) : {})}
-      {...rest}
-    />
+    <label className={clsx(s.input_label)}>
+      <input
+        value={value}
+        defaultValue={defaultValue}
+        autoComplete={autoComplete}
+        disabled={disabled}
+        className={clsx(s.input_field, className)}
+        // className={className}
+        type={type}
+        placeholder={placeholder}
+        {...(register ? register(name) : {})}
+        {...rest}
+      />
+      <p className={s.errorStyles}>{errors[name]?.message}</p>
+    </label>
   );
 };
 export default InputField;

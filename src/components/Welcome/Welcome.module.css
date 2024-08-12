@@ -30,15 +30,18 @@
     @media screen and (min-width: 375px) {
       max-width: 335px;
     }
+    margin-top: 24px;
 
     @media screen and (min-width: 768px) {
       max-width: 473px;
+      margin-top: 30px;
+
     }
   }
 }
 
 .logo {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   gap: 14px;
@@ -46,7 +49,7 @@
 
   @media screen and (min-width: 768px) {
     margin-bottom: 30px;
-  }
+  } */
 
   h1 {
     font-weight: 600;
@@ -83,14 +86,16 @@
 }
 
 .authNav {
+
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0px;
   margin-top: 48px;
+
 }
 
-.authLink {
+/* .authLink {
   margin: 0, auto;
   border-radius: 8px;
   width: 335px;
@@ -121,4 +126,4 @@
   @media screen and (min-width: 768px) {
     max-width: 344px;
   }
-}
+} */

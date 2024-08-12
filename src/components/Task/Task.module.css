@@ -1,0 +1,12 @@
+.boardTask {
+  background-color: #af86a8;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 334px;
+  height: 154px;
+  margin: 8px;
+
+  ul {
+    flex-direction: column;
+  }
+}

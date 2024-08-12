@@ -2,10 +2,10 @@ import clsx from 'clsx';
 import icons from '../../images/icons.svg';
 
 import s from './Logo.module.css';
-const Logo = ({ big = false }) => {
+const Logo = ({ big = false, className }) => {
   return (
     <div
-      className={clsx(s.logo, {
+      className={clsx(s.logo, className, {
         [s.big_logo]: big,
       })}
     >

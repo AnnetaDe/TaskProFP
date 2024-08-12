@@ -15,12 +15,14 @@ import { modalReducer } from './modal/modalSlice';
 import { registerReducer } from './user/registerSlice';
 import { userPreferencesReducer } from './themes/userPreferencesSlice';
 import { boardsReducer } from './boards/boardsSlice';
+import { supportReducer } from './support/supportSlice';
+import { columnsReducer } from './columns/columnsSlice';
 
 const persistUser = {
   key: ['user'],
   version: 1,
   storage,
-  whitelist: ['refreshToken', 'accessToken', 'userTheme', 'userAvatar'],
+  whitelist: ['refreshToken', 'accessToken', 'sid', 'userTheme', 'userAvatar'],
 };
 const persistUserPreferences = {
   key: ['preferences'],
@@ -35,7 +37,9 @@ export const store = configureStore({
     user: persistReducer(persistUser, userReducer),
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
     boards: boardsReducer,
+    columns: columnsReducer,
     modal: modalReducer,
+    support: supportReducer,
   },
 
   middleware: getDefaultMiddleware =>

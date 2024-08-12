@@ -4,7 +4,8 @@
   cursor: pointer;
   color: var(--button-text-color);
   height: 49px;
-  min-width: 287px;
+  min-width: 272px;
+  width: 100%;
   max-width: 335px;
   padding: 10px;
   font-size: 14px;
@@ -52,10 +53,16 @@
 }
 .transparent {
   background-color: transparent;
+  min-width: 287px;
+  max-width: 335px;
   &:hover,
   &:focus {
     color: var(--text-color);
     background-color: var(--button-text-color);
+  }
+  @media only screen and (min-width: 768px) {
+    width: 344px;
+
   }
 }
 .primary {

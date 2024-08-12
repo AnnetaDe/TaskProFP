@@ -1,26 +1,43 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { selectUserTheme } from '../../redux/user/userSelectors';
 import { useSelector } from 'react-redux';
-import { fetchBoardsThunk } from '../../redux/boards/boardsOperations';
+
+import s from './DashboardLayout.module.css';
+import { Board } from '../../components/Board/Board';
+import ScreensPage from '../ScreensPage/ScreensPage';
 import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
-  const dispatch = useDispatch();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
-    dispatch(fetchBoardsThunk());
-  }, [colorScheme, dispatch]);
-
-  console.log(colorScheme);
+  }, [colorScheme]);
 
   return (
-    <div>
-      <Header />
-      <Sidebar />
-      Dashboard
+    <div className={s.gridContainer}>
+      <div className={s.gridSidebar}>
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+      </div>
+      <div className={s.gridHeader}>
+        <Header
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+
+
+      <div className={s.outlet}>
+        <Suspense fallback="suspense">
+          <Outlet />
+        </Suspense>
+      </div>      </div>
     </div>
   );
 };

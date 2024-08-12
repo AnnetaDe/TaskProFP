@@ -10,15 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.3",
     "clsx": "^2.1.1",
-    "formik": "^2.4.6",
     "lodash": "^4.17.21",
     "modern-normalize": "^2.0.0",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
+    "react-datepicker": "^7.3.0",
     "react-dom": "^18.3.1",
     "react-ellipsis-text": "^1.2.1",
     "react-helmet-async": "^2.0.5",
@@ -28,6 +29,7 @@
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.26.0",
     "react-select": "^5.8.0",
+    "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "yup": "^1.4.0"

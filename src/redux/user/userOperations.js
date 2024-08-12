@@ -25,11 +25,10 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const { data } = await taskProApi.post('api/auth/login', credentials);
-      console.log('data', data.data.accessToken);
       setToken(data.data.accessToken);
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.response.status);
     }
   }
 );
@@ -50,12 +49,14 @@ export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
     const refreshToken = thunkAPI.getState().user.refreshToken;
-    if (!refreshToken) {
+    const sid = thunkAPI.getState().user.sid;
+    if (!refreshToken || !sid) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
     }
     try {
+      setToken(refreshToken);
       const { data } = await taskProApi.post('api/auth/refresh', {
-        refreshToken,
+        sid,
       });
       return data;
     } catch (error) {
@@ -96,8 +97,21 @@ export const updateUserPreferencesThunk = createAsyncThunk(
   async (preferences, thunkAPI) => {
     try {
       const { data } = await taskProApi.patch('api/auth/update', preferences);
-      console.log('data', data);
-      return data;
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const resendVerificationEmailThunk = createAsyncThunk(
+  'auth/resendVerificationEmail',
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await taskProApi.post('api/auth/verify', {
+        email: body,
+      });
+      return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -1,13 +1,32 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import css from './AuthForm.module.css';
 // import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import icon from '../../images/icons.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
+import InputPassword from '../InputPassword/InputPassword';
+import {
+  selectIsVerified,
+  selectUserEmail,
+} from '../../redux/user/userSelectors';
+import { useEffect } from 'react';
+import {
+  selectModal,
+  selectResendVerifyEmailModal,
+} from '../../redux/modal/modalSelector';
+import {
+  closeResendVerifyEmailModal,
+  openModal,
+  openResendVerifyEmailModal,
+} from '../../redux/modal/modalSlice';
+import { createPortal } from 'react-dom';
+import Modal from '../../components/Modal/Modal';
+import EmailResendModal from '../EmailResendModal/EmailResendModal';
+import { setIsVerified, setUserEmail } from '../../redux/user/userSlice';
+import { resendVerificationEmailThunk } from '../../redux/user/userOperations';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthForm = ({
   registerForm = false,
@@ -15,7 +34,24 @@ const AuthForm = ({
   scheme,
   onSubmitThunk,
 }) => {
+  const userEmail = useSelector(selectUserEmail);
+  const isVerified = useSelector(selectIsVerified);
+  const isResendVerifyEmailModalOpen = useSelector(
+    selectResendVerifyEmailModal
+  );
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isVerified === false) {
+      dispatch(openResendVerifyEmailModal());
+
+      dispatch(resendVerificationEmailThunk(userEmail));
+
+      dispatch(setIsVerified());
+    }
+  }, [isVerified, dispatch]);
+
   const isLoading = false;
   const {
     register,
@@ -30,71 +66,59 @@ const AuthForm = ({
     mode: 'onChange',
   });
 
-  const [passwordShown, setPasswordShown] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordShown(!passwordShown);
-  };
-
-  const onSubmit = data => {
-    console.log(data);
-    console.log('submit');
-    dispatch(onSubmitThunk(data));
-    reset();
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(onSubmitThunk(data)).unwrap();
+      toast.success('Action completed successfully!');
+      await dispatch(setUserEmail(data));
+      reset();
+    } catch (error) {
+      toast.error('Something went wrong. Please try again.');
+    }
   };
 
   return (
-    <form
-      className={css.formStyle}
-      onSubmit={handleSubmit(onSubmit)}
-      autoComplete="nope"
-    >
-      {registerForm && (
-        <label>
+    <>
+      {isResendVerifyEmailModalOpen &&
+        createPortal(
+          <Modal
+            isOpen={openResendVerifyEmailModal}
+            closeModal={closeResendVerifyEmailModal}
+            title={'Email verification is required'}
+          >
+            <EmailResendModal />
+          </Modal>,
+          document.getElementById('modal-root')
+        )}
+      <form
+        className={css.formStyle}
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="nope"
+      >
+        {registerForm && (
           <InputField
             type="text"
             name="username"
             placeholder="Enter your name"
             register={register}
+            errors={errors}
           />
-          <p className={css.errorStyles}>{errors.name?.message}</p>
-        </label>
-      )}
-      <label>
+        )}
         <InputField
           type="email"
           name="email"
           placeholder="Enter your email"
           register={register}
+          errors={errors}
         />
-        <p className={css.errorStyles}>{errors.email?.message}</p>
-      </label>
-      <label>
-        <div className={css.passwordContainer}>
-          <InputField
-            type={passwordShown ? 'text' : 'password'}
-            placeholder="Create a password"
-            name="password"
-            register={register}
-          />
-          <button
-            type="button"
-            className={css.buttonShowPassword}
-            onClick={togglePasswordVisibility}
-          >
-            <svg width="20px" height="20px">
-              <use href={icon + '#icon-eye'}></use>
-            </svg>
-          </button>
-        </div>
-        <p className={css.errorStyles}>{errors.password?.message}</p>
-      </label>
-      <Button
-        className={css.buttonStyles}
-        type="submit"
-        buttonText={registerForm ? 'Register Now' : 'Log In Now'}
-      />
-    </form>
+        <InputPassword name="password" register={register} errors={errors} />
+        <Button
+          className={css.buttonStyles}
+          type="submit"
+          buttonText={registerForm ? 'Register Now' : 'Log In Now'}
+        />
+      </form>
+    </>
   );
 };
 
