@@ -46,6 +46,9 @@
   stroke-opacity: 0.5;
   fill: none;
 }
+.taskIconGlocke {
+  stroke: var(--small-btn-bgc);
+}
 .taskTitle {
   font-weight: 600;
   font-size: 14px;
@@ -89,6 +92,7 @@
 }
 .deadlineBox {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   gap: 7px;
 }
