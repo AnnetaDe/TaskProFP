@@ -2,6 +2,7 @@ import { Draggable, Droppable } from '@hello-pangea/dnd';
 import { Task } from '../Task/Task';
 import s from './Column.module.css';
 import { Button } from '../Button/Button';
+import icon from '../../images/icons.svg'
 
 export const Column = ({ column }) => {
   return (
@@ -24,23 +25,30 @@ export const Column = ({ column }) => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className={s.content_draggle}
                     >
-                      <Task key={task.id} task={task} index={index} />
+                      <Task
+                        key={task.id}
+                        task={task}
+                        index={index}
+                        className={s.task}
+                      />
                     </div>
                   )}
                 </Draggable>
               ))}
+              <Button
+              icon={`${icon}#icon-plus-big`}
+                className={s.btn_column}
+                width="100%"
+                typeStyle="primary"
+                buttonText="Add another card"
+              />
             </ul>
             {provided.placeholder}
           </div>
         )}
       </Droppable>
-
-      <Button
-        className={s.btn_column}
-        typeStyle="secondary"
-        buttonText="Add another card"
-      />
     </li>
   );
 };

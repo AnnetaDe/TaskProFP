@@ -27,7 +27,7 @@ const DashboardLayout = () => {
           setIsSidebarOpen={setIsSidebarOpen}
         />
       </div>
-      <div className={s.gridHeader}>
+      <div className={s.rightSide}>
         <Header
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}

@@ -53,11 +53,14 @@
   --task-line: #ffffff1a;
   --task-main: #ffffff80;
   --dedline-bell:#BEDBB0;
+  --board-scroll-thumb: rgba(255, 255, 255, 0.1);
+  --board-scroll-track: #161616;
+
 }
 [theme='light'] {
   --text-color: #000000;
   --text-color-sidebar: #000000;
-  --background-color: #fdfdfd;
+  --background-color:  #f6f6f7;
   --background-header: #fcfcfc;
   --background-sidebar: #ffffff;
   --background-logo: #000000;
@@ -87,6 +90,9 @@
   --task-line: #1616161a;
   --task-main: rgba(22, 22, 22, 0.7);
   --dedline-bell:#BEDBB0;
+  --board-scroll-thumb: #e8e8e8;
+  --board-scroll-track: white;
+
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -121,6 +127,9 @@
   --task-line: #1616161a;
   --task-main: rgba(22, 22, 22, 0.7);
   --dedline-bell:#5255BC;
+  --board-scroll-thumb: #b8bcfd;
+  --board-scroll-track: white;
+
 }
 
 body {
