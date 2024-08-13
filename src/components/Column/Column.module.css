@@ -21,7 +21,7 @@
   /* height: 70vh; */
   height: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 10px;
   &::-webkit-scrollbar {
     width: 12px;
@@ -42,7 +42,7 @@
 }
 .btn_column {
   margin-top: 10px;
-  width: 334px;
+  max-width: 334px;
 }
 .content_draggle {
 }

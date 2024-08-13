@@ -34,12 +34,16 @@ export const Button = ({
         <button
           type={type}
           onClick={onClick ? onClick : null}
-          className={clsx(s.btn,className, {
-            [s.transparent]: typeStyle === 'transparent',
-            [s.primary]: typeStyle === 'primary',
-            [s.secondary]: typeStyle === 'secondary',
-            [s.small]: typeStyle === 'small',
-          })}
+          className={clsx(
+            s.btn,
+            {
+              [s.transparent]: typeStyle === 'transparent',
+              [s.primary]: typeStyle === 'primary',
+              [s.secondary]: typeStyle === 'secondary',
+              [s.small]: typeStyle === 'small',
+            },
+            className
+          )}
           style={buttonStyle}
         >
           {icon && (
