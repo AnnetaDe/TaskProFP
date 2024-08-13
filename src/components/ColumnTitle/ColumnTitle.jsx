@@ -4,7 +4,6 @@ import {
   openEditColumnModal,
   closeEditColumnModal,
 } from '../../redux/modal/modalSlice';
-import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
 import iconsSprite from '../../images/icons.svg';
 import { deleteColumnThunk } from '../../redux/columns/columnsOperations';
 import { useSelector } from 'react-redux';
@@ -20,8 +19,8 @@ const ColumnTitle = ({ title, columnId }) => {
   const handleEditOpen = () => {
     dispatch(openEditColumnModal(columnId));
   };
-  const handleDelete = columnId => {
-    dispatch(deleteColumnThunk(columnId));
+  const handleDelete = columnId => {   
+    dispatch(deleteColumnThunk({ boardId: id, columnId }));
   };
 
   return (
