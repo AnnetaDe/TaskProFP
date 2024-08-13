@@ -23,7 +23,6 @@ const NeedHelpForm = ({onClose}) => {
   });
 
   const onSubmit = data => {
-    console.log(data);
     dispatch(contactSupportThunk(data))
     onClose()
     reset();

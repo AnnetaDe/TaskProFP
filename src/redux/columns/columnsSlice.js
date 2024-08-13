@@ -14,6 +14,8 @@ const initialState = {
   columns: [],
   columnsOrderId: [],
   tasksWithinBoard: [],
+  filter: null,
+  filteredColumns: [],
   tasksOrderId: [],
   isLoading: false,
   error: null,
@@ -58,6 +60,31 @@ const columnSlice = createSlice({
         const [removed] = sourceColumn.tasks.splice(source.index, 1);
         destinationColumn.tasks.splice(destination.index, 0, removed);
       }
+    },
+    setFilter: (state, { payload }) => {
+      state.filter = payload;
+    },
+    filterColumns: (state, { payload }) => {
+      state.filteredColumns = state.columns
+        .map(column => {
+          const filteredTasks = column.tasks.filter(task => {
+            if (payload === 'all') {
+              return true;
+            }
+
+            if (payload === 'without_priority') {
+              return task.priority === null;
+            }
+
+            return task.priority === payload;
+          });
+
+          return {
+            ...column,
+            tasks: filteredTasks,
+          };
+        })
+        .filter(column => column.tasks.length > 0);
     },
   },
 
@@ -104,5 +131,6 @@ const columnSlice = createSlice({
       });
   },
 });
-export const { updateColumnOrder, updateTaskOrder } = columnSlice.actions;
+export const { updateColumnOrder, updateTaskOrder, setFilter, filterColumns } =
+  columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;

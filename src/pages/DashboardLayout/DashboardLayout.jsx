@@ -6,6 +6,13 @@ import { useSelector } from 'react-redux';
 
 import s from './DashboardLayout.module.css';
 import { Board } from '../../components/Board/Board';
+<<<<<<< HEAD
+=======
+import ScreensPage from '../ScreensPage/ScreensPage';
+import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import FilterSelect from '../../components/FilterSelect/FilterSelect';
+>>>>>>> main
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -28,8 +35,12 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        Dashboard
-        <Board />
+        <FilterSelect />
+        <div className={s.outlet}>
+          <Suspense fallback="suspense">
+            <Outlet />
+          </Suspense>
+        </div>{' '}
       </div>
     </div>
   );

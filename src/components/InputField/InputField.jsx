@@ -45,7 +45,6 @@ const InputField = ({
         autoComplete={autoComplete}
         disabled={disabled}
         className={clsx(s.input_field, className)}
-        // className={className}
         type={type}
         placeholder={placeholder}
         {...(register ? register(name) : {})}

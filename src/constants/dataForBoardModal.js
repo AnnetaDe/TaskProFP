@@ -1,4 +1,4 @@
-import icon from '../../../images/icons.svg';
+import icon from '../images/icons.svg';
 
 export const previewBgc = [
   { previewName: 'none', src: `${icon}#icon-empty-bgc` },
@@ -74,3 +74,10 @@ export const icons = [
     { iconName: 'icon_7', svg: `${icon}#icon-colors` },
     { iconName: 'icon_8', svg: `${icon}#icon-hexagon` },
   ];
+
+export const priorities  = [
+{  priorityLevel: 'low', color: '#8fa1d0'},
+{  priorityLevel: 'medium', color: '#e09cb5'},
+{  priorityLevel: 'high', color: '#bedbb0'},
+{  priorityLevel: 'without', color: 'rgba(255, 255, 255, 0.3)'},
+]

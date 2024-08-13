@@ -8,6 +8,7 @@ import {
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
+  selectFilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
@@ -27,6 +28,7 @@ export const Board = () => {
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
+  const filteredColumns = useSelector(selectFilteredColumns);
   const columnOrderId = useSelector(selectColumnsOrderId);
   const tasksWithinBoard = useSelector(selectTasksWithinColumn);
   const tasksOrderId = useSelector(selectTasksOrderId);
@@ -66,11 +68,13 @@ export const Board = () => {
 
           <div className={s.board}>
             <ul className={s.boardColumn}>
-              {columns
+              {!filteredColumns.length
                 ? columns.map(column => (
                     <Column key={column._id} column={column} />
                   ))
-                : null}
+                : filteredColumns.map(column => (
+                    <Column key={column._id} column={column} />
+                  ))}
             </ul>
           </div>
         </div>

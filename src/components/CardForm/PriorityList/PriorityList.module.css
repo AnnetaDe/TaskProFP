@@ -1,0 +1,35 @@
+.priorities_list {
+  display: flex;
+  gap: 12px;
+}
+
+.priority_item {
+  list-style: none;
+}
+
+.priority_radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+label {
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+}
+
+.icon_circle {
+  opacity: 0.5;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  transition: opacity var(--transition-pattern), scale var(--transition-pattern);
+}
+
+.icon_svg:hover,
+.icon_svg:focus,
+.selected {
+  scale: 1.1;
+  opacity: 1;
+}
