@@ -72,10 +72,6 @@ const columnSlice = createSlice({
               return true;
             }
 
-            if (payload === 'without_priority') {
-              return task.priority === null;
-            }
-
             return task.priority === payload;
           });
 

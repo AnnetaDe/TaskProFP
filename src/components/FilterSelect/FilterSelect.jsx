@@ -17,7 +17,7 @@ const FilterSelect = () => {
       className={css.select}
       onChange={event => handleChange(event.target.value)}
     >
-      <option value="without_priority">Without priority</option>
+      <option value="none">Without priority</option>
       <option value="low">Low</option>
       <option value="medium">Medium</option>
       <option value="high">High</option>
