@@ -52,11 +52,13 @@
   --sidebar-board-item-bgc: rgba(31, 31, 31, 0.4);
   --task-line: #ffffff1a;
   --task-main: #ffffff80;
+  --board-scroll-thumb: rgba(255, 255, 255, 0.1);
+  --board-scroll-track: #161616;
 }
 [theme='light'] {
   --text-color: #000000;
   --text-color-sidebar: #000000;
-  --background-color: #fdfdfd;
+  --background-color:  #f6f6f7;
   --background-header: #fcfcfc;
   --background-sidebar: #ffffff;
   --background-logo: #000000;
@@ -85,6 +87,8 @@
   --sidebar-board-item-bgc: rgba(246, 246, 247, 0.4);
   --task-line: #1616161a;
   --task-main: rgba(22, 22, 22, 0.7);
+  --board-scroll-thumb: #e8e8e8;
+  --board-scroll-track: white;
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -118,6 +122,8 @@
   --sidebar-board-item-bgc: rgba(255, 255, 255, 0.2);
   --task-line: #1616161a;
   --task-main: rgba(22, 22, 22, 0.7);
+  --board-scroll-thumb: #b8bcfd;
+  --board-scroll-track: white;
 }
 
 body {

@@ -46,7 +46,7 @@ import { useSelector } from 'react-redux';
 //       )}
 //     </div>}
 import { Board } from '../../components/Board/Board';
-
+import s from './ScreensPage.module.css'
 export const ScreensPage = () => {
   const dispatch = useDispatch();
   // const boards = useSelector(selectBoard);
@@ -63,7 +63,10 @@ export const ScreensPage = () => {
   // console.log(boards);
 
   return (
-    <Board />
+    <div className={s.screen_page}>
+
+      <Board />
+    </div>
 
     // <>
     //   <p>Filter</p>
