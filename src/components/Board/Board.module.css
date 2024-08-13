@@ -15,7 +15,7 @@
   overflow-x: auto;
   gap: 8px;
   display: flex;
-  height: 95%;
+  height: 98%;
 
 
   &::-webkit-scrollbar {
