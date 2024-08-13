@@ -3,6 +3,7 @@ import { Task } from '../Task/Task';
 import s from './Column.module.css';
 import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
+import ColumnTitle from '../ColumnTitle/ColumnTitle';
 
 export const Column = ({ column }) => {
   return (
@@ -14,10 +15,11 @@ export const Column = ({ column }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            <div className={s.columnTitle}>
+            {/* <div className={s.columnTitle}>
               <p>{column.title}</p>
-            </div>
-            <div className={s.column}>
+            </div> */}
+            <ColumnTitle title={column.title} columnId={column._id} />
+            <ul className={s.column}>
               {column.tasks.map((task, index) => (
                 <Draggable key={task._id} draggableId={task._id} index={index}>
                   {provided => (
@@ -44,7 +46,7 @@ export const Column = ({ column }) => {
                 typeStyle="primary"
                 buttonText="Add another card"
               />
-            </div>
+            </ul>
             {provided.placeholder}
           </div>
         )}

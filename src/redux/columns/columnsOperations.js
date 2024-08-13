@@ -32,11 +32,12 @@ export const createNewColumnThunk = createAsyncThunk(
 
 export const updateColumnThunk = createAsyncThunk(
   'columns/updateColumn',
-  async (board, column, thunkAPI) => {
+  async ({boardid, columnId, title}, thunkAPI) => {
+
     try {
       const { data } = await taskProApi.patch(
-        `api/boards/:${board.id}/columns/:${column.id}`,
-        column
+        `api/boards/${boardid}/columns/${columnId}`,
+        {title}
       );
       return data;
     } catch (error) {
