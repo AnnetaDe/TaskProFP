@@ -2,8 +2,11 @@ import { useDispatch } from 'react-redux';
 import InputField from '../InputField/InputField';
 import Modal from '../Modal/Modal';
 import { createNewTaskThunk } from '../../redux/tasks/tasksOperations';
+import CusDatePicker from '../DatePicker/DatePicker';
+import { useForm, Controller } from 'react-hook-form';
 
 export const AddEditCard = ({ editForm = false, addForm = false }) => {
+  const { control } = useForm();
   const dispatch = useDispatch();
   const isLoading = false;
   const {
@@ -56,10 +59,11 @@ export const AddEditCard = ({ editForm = false, addForm = false }) => {
       </label>
       <label>
         <p>Deadline</p>
-        <InputField
-          placeholder="Set deadline"
+        <CusDatePicker
+          selectedDeadline={deadline}
+          control={control}
           name="deadline"
-          register={register}
+          // register={register}
         />
       </label>
       <Button

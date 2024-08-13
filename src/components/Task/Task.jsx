@@ -11,6 +11,16 @@ export const Task = ({ task }) => {
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
   }, [colorScheme]);
+  const formatDate = dateString => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const year = date.getUTCFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  const formattedDate = formatDate(deadline);
+  const today = formatDate(new Date());
+
   return (
     <li
       className={clsx(
@@ -43,19 +53,16 @@ export const Task = ({ task }) => {
           </div>
           <div className={s.deadlineBox}>
             Deadline
-            <span className={s.taskProps}>2000</span>{' '}
-            {/* change for DatePicker */}
-            {/* <span className={s.taskProps}>{deadline}</span> */}
+            <span className={s.taskProps}>{formattedDate}</span>
           </div>
           <ul className={s.taskActions}>
-            <li>
-              <svg
-                className={s.taskIcon}
-                // onClick={}
-              >
-                <use href={`${icons}#icon-glocke`}></use>
-              </svg>
-            </li>
+            {today === formattedDate && (
+              <li>
+                <svg className={clsx(s.taskIcon, s.taskIconGlocke)}>
+                  <use href={`${icons}#icon-glocke`}></use>
+                </svg>
+              </li>
+            )}
             <li>
               <svg
                 className={s.taskIcon}
