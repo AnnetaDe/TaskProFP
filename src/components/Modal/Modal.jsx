@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import clsx from 'clsx';
 import icon from '../../images/icons.svg';
 
-const Modal = ({isOpen, title, children, closeModal }) => {
+const Modal = ({ isOpen, title, children, closeModal }) => {
   // const isOpen = useSelector(selectModal);
   const dispatch = useDispatch();
   useEffect(() => {

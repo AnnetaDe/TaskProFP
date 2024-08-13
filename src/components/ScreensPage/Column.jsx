@@ -3,7 +3,7 @@ import { openModal } from '../../redux/modal/modalSlice';
 import { Card } from './Card';
 import { AddEditCard } from './AddEditCard';
 
-export const Column = ({ column, title }) => {
+export const Column = ({ column }) => {
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
@@ -12,16 +12,16 @@ export const Column = ({ column, title }) => {
 
   return (
     <>
-      <p>Hello</p>
-      {/* <div>
-        <h2>{title}</h2>
+      {/* <p>Hello</p> */}
+      <div>
+        <h2>{column.title}</h2>
         <button>Edit</button>
         <button>Delete</button>
       </div>
       {column.map(card => (
         <Card key={card.id} card={card} />
       ))}
-      <button onClick={handleOpenModal}>Add another card</button> */}
+      <button onClick={handleOpenModal}>Add another card</button>
     </>
   );
 };

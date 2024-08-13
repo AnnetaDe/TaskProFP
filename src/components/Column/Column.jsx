@@ -5,7 +5,7 @@ import { Button } from '../Button/Button';
 
 export const Column = ({ column }) => {
   return (
-    <li  className={s.li_col}>
+    <li className={s.li_col}>
       <Droppable droppableId={column._id}>
         {provided => (
           <div
@@ -36,7 +36,11 @@ export const Column = ({ column }) => {
         )}
       </Droppable>
 
-      <Button className={s.btn_column} typeStyle="secondary" buttonText="Add another card" />
+      <Button
+        className={s.btn_column}
+        typeStyle="secondary"
+        buttonText="Add another card"
+      />
     </li>
   );
 };
