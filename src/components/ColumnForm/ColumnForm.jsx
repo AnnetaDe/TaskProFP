@@ -48,7 +48,7 @@ const ColumnForm = ({ type, title, onClose, boardid, columnId }) => {
     dispatch(options[type].onSubmitThunk(formData));
     console.log(formData);
 
-    onClose();
+    onClose(columnId);
     reset();
   };
 

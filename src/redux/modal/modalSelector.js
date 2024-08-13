@@ -6,4 +6,6 @@ export const selectResendVerifyEmailModal = state =>
 export const selectNeedHelpModal = state => state.modal.isNeedHelpOpen;
 export const selectEditBoardOpen = state => state.modal.isEditBoardOpen;
 export const selectEditTaskOpen = state => state.modal.isEditTaskOpen;
-export const selectEditColumnOpen = state => state.modal.isEditColumnOpen;
+export const selectEditColumnOpen = (state, columnId) => {
+  return !!state.modal.isEditColumnOpen[columnId]; 
+};

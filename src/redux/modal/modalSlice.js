@@ -10,7 +10,7 @@ const modalSlice = createSlice({
     isNeedHelpOpen: false,
     isEditBoardOpen: false,
     isEditTaskOpen: false,
-    isEditColumnOpen: false,
+    isEditColumnOpen: {},
   },
   reducers: {
     openModal: state => {
@@ -55,11 +55,11 @@ const modalSlice = createSlice({
     closeEditTaskModal: state => {
       state.isEditTaskOpen = false;
     },
-    openEditColumnModal: state => {
-      state.isEditColumnOpen = true;
+    openEditColumnModal: (state, action) => {      
+      state.isEditColumnOpen[action.payload] = true;
     },
-    closeEditColumnModal: state => {
-      state.isEditColumnOpen = false;
+    closeEditColumnModal: (state, action) => {
+      state.isEditColumnOpen[action.payload] = false;
     },
   },
 });

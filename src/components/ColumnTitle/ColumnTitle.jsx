@@ -48,7 +48,7 @@ const ColumnTitle = ({ title, columnId }) => {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          closeModal={closeEditColumnModal}
+          closeModal={() => dispatch(closeEditColumnModal(columnId))}
           title="Edit column"
         >
           <ColumnForm
