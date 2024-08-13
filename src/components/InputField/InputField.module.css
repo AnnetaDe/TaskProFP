@@ -1,4 +1,4 @@
-.input_label{
+.input_label {
   position: relative;
   width: 100%;
   @media only screen and (min-width: 768px) {
@@ -18,7 +18,6 @@
   padding: 14px 18px;
   background-color: var(--input-bgc);
   border: 1px solid var(--input-border);
-  /* border: 1px solid red; */
   border-radius: 8px;
   color: var(--input-text-color);
   box-shadow: 0 4px 16px 0 var(--input-box-shadow);
@@ -28,16 +27,16 @@
   position: relative;
   outline: none;
   &:focus,
-  &:hover{
+  &:hover {
     opacity: 1;
   }
   &:disabled {
-    background-color: var(--input-bgc); 
+    background-color: var(--input-bgc);
     border-color: var(--input-border);
-    color: var(--input-text-color); 
-    opacity: 0.5; 
-    cursor: not-allowed; 
-    box-shadow: none; 
+    color: var(--input-text-color);
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
   }
   @media only screen and (min-width: 768px) {
     width: 100%;
@@ -46,10 +45,17 @@
 }
 .textarea_container {
   height: 154px;
+  opacity: 0.5;
+  transition: opacity var(--transition-pattern);
+
+  &:focus-within {
+    opacity: 1;
+  }
 }
 .textarea_field {
   color: var(--input-text-color);
   width: 100%;
+
   min-width: 287px;
   height: 100%;
   outline: none;
@@ -60,7 +66,10 @@
   border-radius: 8px;
   transition: color var(--transition-pattern),
     background-color var(--transition-pattern);
-
+  &:focus .input_field,
+  &:hover .input_field {
+    opacity: 1;
+  }
   @media only screen and (min-width: 768px) {
     max-width: 352px;
   }

@@ -8,7 +8,7 @@ import { Button } from '../../Button/Button';
 import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
 import { useState } from 'react';
-import { BoardForm } from '../../../schames/BoardFormSchemes';
+import { BoardFormScheme } from '../../../schames/BoardFormSchemes';
 import {
   createBoardThunk,
   updateBoardThunk,
@@ -18,16 +18,15 @@ import { useParams } from 'react-router-dom';
 const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  console.log(title, chosenIcon, chosenBackGround);
 
   const options = {
     create: {
-      // scheme: BoardForm,
+      scheme: BoardFormScheme,
       onSubmitThunk: createBoardThunk,
       defaultValues: { title: '', icon: '', backgroundImg: '' },
     },
     edit: {
-      // scheme: BoardForm,
+      scheme: BoardFormScheme,
       onSubmitThunk: updateBoardThunk,
       defaultValues: {
         title: title,
@@ -50,7 +49,7 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
     formState: { errors },
   } = useForm({
     defaultValues: options[type].defaultValues,
-    resolver: yupResolver(BoardForm),
+    resolver: yupResolver(BoardFormScheme),
     mode: 'onChange',
   });
   const onSubmit = data => {
@@ -68,7 +67,6 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
             _id: id,
           };
     dispatch(options[type].onSubmitThunk(formData));
-    console.log(formData);
     onClose();
     reset();
   };

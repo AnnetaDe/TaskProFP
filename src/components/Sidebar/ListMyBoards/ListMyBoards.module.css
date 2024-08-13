@@ -34,12 +34,12 @@
         background-color: var(--sidebar-board-item-bgc);
         opacity: 1;
       }
-      &.active::after{
+      &.active::after {
         content: '';
         display: block;
         width: 8px;
         height: 100%;
-        position:absolute;
+        position: absolute;
         border-radius: 70%;
         right: -4px;
         top: 0;
@@ -50,10 +50,9 @@
         background-color: var(--sidebar-board-item-bgc);
         opacity: 0.8;
       }
-       &:hover .right_side,
+      &:hover .right_side,
       &:focus .right_side {
         display: flex;
-
       }
       .left_side {
         display: flex;
@@ -72,7 +71,7 @@
         right: 5%;
         transform: translateY(-50%);
         gap: 8px;
-        button{
+        button {
           background-color: transparent;
           display: flex;
           justify-content: center;
@@ -84,11 +83,10 @@
           }
         }
       }
-
     }
   }
 }
-.li_board_item:hover .right_side{
+.li_board_item:hover .right_side {
   display: flex;
 }
 .boardButton {

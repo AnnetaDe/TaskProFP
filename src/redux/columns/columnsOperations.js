@@ -7,7 +7,6 @@ export const getAllCoulumnsWithBoardIdThunk = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const data = await taskProApi.get(`/api/boards/${boardId}`);
-      console.log('data', data.data.data);
       return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
