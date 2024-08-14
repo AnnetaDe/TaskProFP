@@ -7,6 +7,7 @@
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .icon_close_wrapper {
@@ -31,11 +32,13 @@
   align-items: center;
   width: 16px;
   height: 16px;
-  stroke: rgba(255, 255, 255, 0.8);
+  stroke: var(--filter-btn-color);
 }
 
 .text {
-  color: rgba(255, 255, 255, 0.8);
+  /* color: rgba(255, 255, 255, 0.8); */
+  color: var(--text-color);
+  font-weight: 500;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -57,13 +60,13 @@
   font-weight: 500;
   font-size: 18px;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .separator {
   width: 100%;
   height: 1px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--filter-separator);
   margin: 14px 0;
 }
 
@@ -72,7 +75,7 @@
   font-weight: 500;
   font-size: 14px;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text-color);
 }
 
 .selectAllButton {
@@ -82,7 +85,7 @@
   letter-spacing: -0.02em;
   text-decoration: underline;
   text-decoration-skip-ink: none;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--filter-btn-color);
   background-color: transparent;
   position: absolute;
   top: 74.4px;
@@ -90,5 +93,5 @@
 }
 
 .selectAllButton:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--filter-btn-color-hover);
 }
