@@ -28,7 +28,7 @@
   width: 12px;
   border-radius: 50%;
 }
-.priorityColor {
+/* .priorityColor {
   background: var(--without-priority-background-color);
 }
 .priorityLow {
@@ -39,14 +39,8 @@
 }
 .priorityHigh {
   background: var(--high-priority-background-color);
-}
-.taskIcon {
-  width: 16px;
-  height: 16px;
-  stroke: var(--input-text-color);
-  stroke-opacity: 0.5;
-  fill: none;
-}
+} */
+
 .taskIconGlocke {
   stroke: var(--small-btn-bgc);
 }
@@ -97,8 +91,8 @@
   flex-direction: column;
   gap: 7px;
 }
-.taskActions {
+/* .taskActions {
   margin-left: auto;
   align-items: flex-end;
   gap: 8px;
-}
+} */

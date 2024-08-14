@@ -2,6 +2,9 @@ import { Draggable, Droppable } from '@hello-pangea/dnd';
 import { Task } from '../Task/Task';
 import s from './Column.module.css';
 import { Button } from '../Button/Button';
+import icon from '../../images/icons.svg';
+import ColumnTitle from '../ColumnTitle/ColumnTitle';
+
 
 export const Column = ({ column }) => {
   return (
@@ -13,9 +16,7 @@ export const Column = ({ column }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className={s.columnTitle}>
-              <div>{column.title}</div>
-            </div>
+            <ColumnTitle title={column.title} columnId={column._id} />
             <ul className={s.column}>
               {column.tasks.map((task, index) => (
                 <Draggable key={task._id} draggableId={task._id} index={index}>
@@ -30,6 +31,16 @@ export const Column = ({ column }) => {
                   )}
                 </Draggable>
               ))}
+
+              <Button
+                icon={`${icon}#icon-plus-big`}
+                className={s.btn_column}
+                width="100%"
+                typeStyle="primary"
+                buttonText="Add another card"
+              />
+
+
             </ul>
             {provided.placeholder}
           </div>
