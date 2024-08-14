@@ -16,6 +16,7 @@ import {
 import { useEffect } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
+import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -38,26 +39,38 @@ export const Board = () => {
     if (!destination) {
       return;
     }
-
-    if (source.droppableId === destination.droppableId) {
-      dispatch(
-        updateTaskOrder({
-          source,
-          destination,
-          sourceColumnId: source.droppableId,
-          destinationColumnId: destination.droppableId,
-        })
-      );
-    } else {
-      dispatch(
-        updateTaskOrder({
-          source,
-          destination,
-          sourceColumnId: source.droppableId,
-          destinationColumnId: destination.droppableId,
-        })
-      );
-    }
+    dispatch(
+      updateTaskOrder({
+        source,
+        destination,
+        sourceColumnId: source.droppableId,
+        destinationColumnId: destination.droppableId,
+      })
+    );
+    dispatch(
+      updateTaskThunk(id, source.droppableId, source.droppableId, {
+        columnId: destination.droppableId,
+      })
+    );
+    // if (source.droppableId === destination.droppableId) {
+    //   dispatch(
+    //     updateTaskOrder({
+    //       source,
+    //       destination,
+    //       sourceColumnId: source.droppableId,
+    //       destinationColumnId: destination.droppableId,
+    //     })
+    //   );
+    // } else {
+    //   dispatch(
+    //     updateTaskOrder({
+    //       source,
+    //       destination,
+    //       sourceColumnId: source.droppableId,
+    //       destinationColumnId: destination.droppableId,
+    //     })
+    //   );
+    // }
   };
 
   return (

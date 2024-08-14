@@ -25,6 +25,7 @@ export const updateTaskThunk = createAsyncThunk(
         `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`,
         body
       );
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
