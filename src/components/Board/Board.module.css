@@ -1,8 +1,18 @@
+.board_wrap {
+  padding-left: 24px;
+}
+.boardTitle {
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  padding: 10px;
+}
 .board {
   display: flex;
   flex-wrap: nowrap;
 
-  padding: 10px;
+  padding: 10px 0;
   height: 100%;
   width: 100%;
   max-width: 100%;
@@ -16,7 +26,6 @@
   gap: 8px;
   display: flex;
   height: 98%;
-
 
   &::-webkit-scrollbar {
     height: 12px;
