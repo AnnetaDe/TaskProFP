@@ -17,7 +17,8 @@ const customStyles = {
   }),
   menu: () => ({
     textAlign: 'left',
-    border: '1px solid rgba(190, 219, 176, 0.5)',
+    border: '1px solid var(--button-background-color-hoover)',
+    backgroundColor: ' var(--filter-bgc)',
     borderRadius: '8px',
     width: '300px',
     height: '234px',
@@ -25,6 +26,7 @@ const customStyles = {
     position: 'absolute',
     top: '38px',
     right: '20px',
+    
   }),
   menuList: () => ({
     position: 'absolute',
@@ -40,9 +42,10 @@ const customStyles = {
     fontWeight: '400',
     fontSize: '12px',
     letterSpacing: '-0.02em',
-    color: state.isSelected ? '#fff' : 'rgba(255, 255, 255, 0.5)',
+    color: state.isSelected ?'var(--filter-btn-color-hover)' : 'var(--filter-btn-color)',
     ':hover': {
-      color: state.isSelected ? '#fff' : 'rgba(255, 255, 255, 0.6)',
+      color: state.isSelected ? 'var(--filter-btn-color-hover)' : 'var(--filter-btn-color)',
+
     },
     cursor: 'pointer',
     minWidth: '23px',
