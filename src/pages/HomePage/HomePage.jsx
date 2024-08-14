@@ -1,4 +1,4 @@
-export const Home = () => {
-  return <h1>Home</h1>;
+export const HomePage = () => {
+  return <></>;
 };
-export default Home;
+export default HomePage;
