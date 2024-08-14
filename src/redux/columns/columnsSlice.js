@@ -11,7 +11,7 @@ const initialState = {
   boardTitle: '',
   boardIcon: '',
   boardBackground: [],
-  columns: [],
+  columnsL: [],
   columnsOrderId: [],
   tasksWithinBoard: [],
   filter: null,
@@ -29,10 +29,10 @@ const columnSlice = createSlice({
     //   if (!destination) {
     //     return;
     //   }
-    //   const sourceColumn = state.columns.find(
+    //   const sourceColumn = state.columnsL.find(
     //     column => column._id === source.droppableId
     //   );
-    //   const destinationColumn = state.columns.find(
+    //   const destinationColumn = state.columnsL.find(
     //     column => column._id === destination.droppableId
     //   );
     //   const [removed] = sourceColumn.tasks.splice(source.index, 1);
@@ -46,10 +46,10 @@ const columnSlice = createSlice({
         return;
       }
 
-      const sourceColumn = state.columns.find(
+      const sourceColumn = state.columnsL.find(
         column => column._id === sourceColumnId
       );
-      const destinationColumn = state.columns.find(
+      const destinationColumn = state.columnsL.find(
         column => column._id === destinationColumnId
       );
 
@@ -65,7 +65,8 @@ const columnSlice = createSlice({
       state.filter = payload;
     },
     filterColumns: (state, { payload }) => {
-      state.filteredColumns = state.columns
+      state.filter = payload;
+      state.columnsL = state.columnsL
         .map(column => {
           const filteredTasks = column.tasks.filter(task => {
             if (payload === 'all') {
@@ -99,8 +100,7 @@ const columnSlice = createSlice({
           state.boardTitle = payload.title;
           state.boardIcon = payload.icon;
           state.boardBackground = payload.background;
-
-          state.columns = payload.columns;
+          state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
           state.tasksWithinBoard = payload.columns.reduce((acc, column) => {
             return [...acc, ...column.tasks];
@@ -113,21 +113,21 @@ const columnSlice = createSlice({
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.columns.push(payload);
+        state.columnsL.push(payload);
       })
       .addCase(updateColumnThunk.fulfilled, (state, action) => {
-        const column = state.columns.find(
+        const column = state.columnsL.find(
           column => column._id === action.payload.data._id
-        );        
+        );
         column.title = action.payload.data.title;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.columns.findIndex(
+        const index = state.columnsL.findIndex(
           column => column._id === action.payload
         );
-        state.columns.splice(index, 1);
+        state.columnsL.splice(index, 1);
       });
   },
 });

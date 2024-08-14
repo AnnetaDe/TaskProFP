@@ -28,25 +28,7 @@
   width: 12px;
   border-radius: 50%;
 }
-.priorityColor {
-  background: var(--without-priority-background-color);
-}
-.priorityLow {
-  background: var(--low-priority-background-color);
-}
-.priorityMedium {
-  background: var(--medium-priority-background-color);
-}
-.priorityHigh {
-  background: var(--high-priority-background-color);
-}
-.taskIcon {
-  width: 16px;
-  height: 16px;
-  stroke: var(--input-text-color);
-  stroke-opacity: 0.5;
-  fill: none;
-}
+
 .taskTitle {
   font-weight: 600;
   font-size: 14px;
@@ -93,8 +75,8 @@
   flex-direction: column;
   gap: 7px;
 }
-.taskActions {
+/* .taskActions {
   margin-left: auto;
   align-items: flex-end;
   gap: 8px;
-}
+} */

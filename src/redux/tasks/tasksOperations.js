@@ -19,12 +19,17 @@ export const createNewTaskThunk = createAsyncThunk(
 //task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks/:taskId
 export const updateTaskThunk = createAsyncThunk(
   'tasks/updateTask',
-  async (boardid, columnid, taskid, thunkAPI) => {
+  async (data, thunkAPI) => {
+    const { boardid, columnid, taskid, body } = data;
+    // const { columnId } = body;
+    console.log(boardid, columnid, taskid, body);
+
     try {
       const { data } = await taskProApi.patch(
         `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`,
-        data
+        body
       );
+      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
