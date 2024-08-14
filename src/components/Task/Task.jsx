@@ -3,10 +3,24 @@ import s from './Task.module.css';
 import icons from '../../images/icons.svg';
 import { useSelector } from 'react-redux';
 import { selectUserTheme } from '../../redux/user/userSelectors';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { openModal } from '../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
+import { AddEditCard } from '../ScreensPage/AddEditCard';
+import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 
-export const Task = ({ task }) => {
-  const { title, description, priority, deadline } = task;
+export const Task = ({
+  boardId,
+  columnId,
+  task: { _id, title, description, priority, deadline },
+}) => {
+  // const  = task;
+  const [showEditTask, setShowEditTask] = useState(false);
+  const dispatch = useDispatch();
+  const handleEditTask = () => {
+    dispatch(openModal());
+    setShowEditTask(true);
+  };
   const colorScheme = useSelector(selectUserTheme);
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
@@ -22,74 +36,82 @@ export const Task = ({ task }) => {
   const today = formatDate(new Date());
 
   return (
-    <li
-      className={clsx(
-        s.boardTaskBackground,
-        s.priorityColor,
-        priority === 'low' && s.priorityLow,
-        priority === 'medium' && s.priorityMedium,
-        priority === 'high' && s.priorityHigh
-      )}
-      key={task._id}
-    >
-      <ul className={s.boardTask}>
-        <li className={s.taskTitle}>{title}</li>
-        <li className={s.taskDescr}>{description}</li>
-        <li className={s.taskInfo}>
-          <div>
-            Priority
-            <div className={s.priorityBox}>
-              <span
-                className={clsx(
-                  s.priorityCircle,
-                  s.priorityColor,
-                  priority === 'low' && s.priorityLow,
-                  priority === 'medium' && s.priorityMedium,
-                  priority === 'high' && s.priorityHigh
-                )}
-              ></span>
-              <span className={s.taskProps}>{priority}</span>
+    <>
+      <li
+        className={clsx(
+          s.boardTaskBackground,
+          s.priorityColor,
+          priority === 'low' && s.priorityLow,
+          priority === 'medium' && s.priorityMedium,
+          priority === 'high' && s.priorityHigh
+        )}
+        key={_id}
+      >
+        <ul className={s.boardTask}>
+          <li className={s.taskTitle}>{title}</li>
+          <li className={s.taskDescr}>{description}</li>
+          <li className={s.taskInfo}>
+            <div>
+              Priority
+              <div className={s.priorityBox}>
+                <span
+                  className={clsx(
+                    s.priorityCircle,
+                    s.priorityColor,
+                    priority === 'low' && s.priorityLow,
+                    priority === 'medium' && s.priorityMedium,
+                    priority === 'high' && s.priorityHigh
+                  )}
+                ></span>
+                <span className={s.taskProps}>{priority}</span>
+              </div>
             </div>
-          </div>
-          <div className={s.deadlineBox}>
-            Deadline
-            <span className={s.taskProps}>{formattedDate}</span>
-          </div>
-          <ul className={s.taskActions}>
-            {today === formattedDate && (
+            <div className={s.deadlineBox}>
+              Deadline
+              <span className={s.taskProps}>{formattedDate}</span>
+            </div>
+            <ul className={s.taskActions}>
+              {today === formattedDate && (
+                <li>
+                  <svg className={clsx(s.taskIcon, s.taskIconGlocke)}>
+                    <use href={`${icons}#icon-glocke`}></use>
+                  </svg>
+                </li>
+              )}
               <li>
-                <svg className={clsx(s.taskIcon, s.taskIconGlocke)}>
-                  <use href={`${icons}#icon-glocke`}></use>
+                <svg
+                  className={s.taskIcon}
+                  // onClick={}
+                >
+                  <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
                 </svg>
               </li>
-            )}
-            <li>
-              <svg
-                className={s.taskIcon}
-                // onClick={}
-              >
-                <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
-              </svg>
-            </li>
-            <li>
-              <svg
-                className={s.taskIcon}
-                // onClick={}
-              >
-                <use href={`${icons}#icon-pencil`}></use>
-              </svg>
-            </li>
-            <li>
-              <svg
-                className={s.taskIcon}
-                // onClick={}
-              >
-                <use href={`${icons}#icon-trash`}></use>
-              </svg>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+              <li>
+                <svg className={s.taskIcon} onClick={() => handleEditTask}>
+                  <use href={`${icons}#icon-pencil`}></use>
+                </svg>
+              </li>
+              <li>
+                <svg
+                  className={s.taskIcon}
+                  // onClick={}
+                >
+                  <use href={`${icons}#icon-trash`}></use>
+                </svg>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      {showEditTask && (
+        <AddEditCard
+          addForm={false}
+          onSubmitThunk={updateTaskThunk}
+          boardId={boardId}
+          columnId={columnId}
+          isOpen={openModal()}
+        />
+      )}
+    </>
   );
 };
