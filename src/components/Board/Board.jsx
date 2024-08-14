@@ -36,9 +36,13 @@ export const Board = () => {
 
   const onDragEnd = result => {
     const { source, destination } = result;
+    console.log(result);
+
     if (!destination) {
       return;
     }
+
+    // console.log(result.draggableId);
     dispatch(
       updateTaskOrder({
         source,
@@ -47,11 +51,17 @@ export const Board = () => {
         destinationColumnId: destination.droppableId,
       })
     );
+
+    // console.log(id,22222 source.droppableId, destination.droppableId)111;
     dispatch(
-      updateTaskThunk(id, source.droppableId, source.droppableId, {
-        columnId: destination.droppableId,
+      updateTaskThunk({
+        boardid: id,
+        columnid: source.droppableId,
+        taskid: result.draggableId,
+        body: { columnId: destination.droppableId },
       })
     );
+
     // if (source.droppableId === destination.droppableId) {
     //   dispatch(
     //     updateTaskOrder({
@@ -81,13 +91,9 @@ export const Board = () => {
         </div>
         <div className={s.board}>
           <ul className={s.boardColumn}>
-            {!filteredColumns.length
-              ? columns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))
-              : filteredColumns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))}
+            {columns.map(column => (
+              <Column key={column._id} column={column} />
+            ))}
           </ul>
         </div>
       </DragDropContext>
