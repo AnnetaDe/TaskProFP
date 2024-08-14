@@ -28,7 +28,7 @@ export const Task = ({ task }) => {
             Priority
             <div className={s.priorityBox}>
               <span
-                style={{ backgroundColor: priorityColor }}
+                style={{ backgroundColor: priorityColor.color }}
                 className={s.priorityCircle}
               ></span>
               <span className={s.taskProps}>{priority}</span>
