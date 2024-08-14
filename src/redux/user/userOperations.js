@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
+import { taskProApiUnAutorized } from '../../config/api';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -7,11 +8,18 @@ export const setToken = accessToken => {
 export const clearToken = () => {
   taskProApi.defaults.headers.common.Authorization = ``;
 };
+export const setTokenOnLogin = accessToken => {
+  taskProApiUnAutorized.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+};
+
 export const registerThunk = createAsyncThunk(
   'auth/register',
   async (credentials, thunkApi) => {
     try {
-      const { data } = await taskProApi.post('api/auth/register', credentials);
+      const { data } = await taskProApiUnAutorized.post(
+        'api/auth/register',
+        credentials
+      );
       console.log(data);
       return data;
     } catch (error) {
@@ -24,8 +32,11 @@ export const loginThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkApi) => {
     try {
-      const { data } = await taskProApi.post('api/auth/login', credentials);
-      setToken(data.data.accessToken);
+      const { data } = await taskProApiUnAutorized.post(
+        'api/auth/login',
+        credentials
+      );
+      setTokenOnLogin(data.data.accessToken);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.status);

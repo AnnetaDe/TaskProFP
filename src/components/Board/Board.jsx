@@ -62,21 +62,20 @@ export const Board = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
         <div className={s.boardTitle}>
           <h2>{boardTitle}</h2>
-
-          <div className={s.board}>
-            <ul className={s.boardColumn}>
-              {!filteredColumns.length
-                ? columns.map(column => (
-                    <Column key={column._id} column={column} />
-                  ))
-                : filteredColumns.map(column => (
-                    <Column key={column._id} column={column} />
-                  ))}
-            </ul>
-          </div>
+        </div>
+        <div className={s.board}>
+          <ul className={s.boardColumn}>
+            {!filteredColumns.length
+              ? columns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))
+              : filteredColumns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))}
+          </ul>
         </div>
       </DragDropContext>
     </>

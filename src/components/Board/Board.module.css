@@ -1,16 +1,32 @@
 .board {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 24px;
-  padding: 1rem;
-  height: 90%;
-  overflow-y: hidden;
-  overflow-x: auto;
-  max-width: 1180px;
+  display: flex;
+  flex-wrap: nowrap;
+
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
 }
+
 .boardTitle {
 }
-.boardColumn{
-  /* width: 358px;
-  overflow-y: scroll; */
+.boardColumn {
+  overflow-y: hidden;
+  overflow-x: auto;
+  gap: 8px;
+  display: flex;
+  height: 98%;
+
+
+  &::-webkit-scrollbar {
+    height: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: var(--board-scroll-track);
+    border-radius: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--board-scroll-thumb);
+    border-radius: 12px;
+  }
 }
