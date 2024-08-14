@@ -72,6 +72,10 @@ const columnSlice = createSlice({
               return true;
             }
 
+            if (payload === 'without_priority') {
+              return task.priority === null;
+            }
+
             return task.priority === payload;
           });
 
@@ -113,9 +117,9 @@ const columnSlice = createSlice({
       })
       .addCase(updateColumnThunk.fulfilled, (state, action) => {
         const column = state.columns.find(
-          column => column._id === action.payload._id
-        );
-        column.title = action.payload.title;
+          column => column._id === action.payload.data._id
+        );        
+        column.title = action.payload.data.title;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, action) => {
         state.isLoading = false;
