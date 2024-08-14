@@ -13,7 +13,7 @@ import {
   selectFilter,
 } from '../../redux/columns/columnsSelectors';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
 import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
@@ -27,6 +27,7 @@ import {
 } from '../../redux/modal/modalSlice';
 import Modal from '../Modal/Modal';
 import ColumnForm from '../ColumnForm/ColumnForm';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -50,6 +51,14 @@ export const Board = () => {
     dispatch(openCreateColumnModal());
   };
   console.log(columns);
+const [isOpen, setIsOpen] = useState()
+const openModal=()=>{
+  setIsOpen(true)
+}
+const closeModal=()=>{
+  setIsOpen(false)
+}
+
 
   const onDragEnd = result => {
     const { source, destination } = result;
@@ -117,25 +126,25 @@ export const Board = () => {
             buttonText="Add another column"
             typeStyle="secondary"
             icon={`${icon}#icon-plus-small`}
-            onClick={handleOpen}
+            onClick={openModal}
           />
           </div>
 
         </div>
       </DragDropContext>
 
-      {isCreateColumn && (
-        <Modal
-          isOpen={isCreateColumn}
-          closeModal={closeCreateColumnModal}
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeModal}
           title="Add column"
         >
           <ColumnForm
-            onClose={() => dispatch(closeEditProfileModal())}
+            onClose={closeModal}
             type="create"
             boardId={id}
           />
-        </Modal>
+        </ModalWithoutRedux>
       )}
     </div>
   );

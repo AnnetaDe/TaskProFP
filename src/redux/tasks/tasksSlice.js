@@ -23,8 +23,10 @@ const tasksSlice = createSlice({
         state.error = null;
       })
       .addCase(createNewTaskThunk.fulfilled, (state, action) => {
+        console.log(action);
+        
         state.isLoading = false;
-        const { boardId, columnId } = action.meta.arg;
+        const { boardId, columnId } = action.payload;
         const task = action.payload.data;
         
         if (!state.tasks[boardId]) {

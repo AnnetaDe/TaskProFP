@@ -57,7 +57,7 @@ const modalSlice = createSlice({
     closeEditTaskModal: state => {
       state.isEditTaskOpen = false;
     },
-    openEditColumnModal: (state, action) => {      
+    openEditColumnModal: (state, action) => {
       state.isEditColumnOpen[action.payload] = true;
     },
     closeEditColumnModal: (state, action) => {
@@ -69,11 +69,14 @@ const modalSlice = createSlice({
     closeCreateColumnModal: state => {
       state.isCreateColumnOpen = false;
     },
-    openCreateTaskModal: state => {
-      state.isCreateTaskOpen = true;
+    openCreateTaskModal:  (state, action) => {
+      console.log(action);
+      
+      state.isCreateTaskOpen[action.payload] = true;
     },
-    closeCreateTaskModal: state => {
-      state.isCreateTaskOpen = false;
+    closeCreateTaskModal:  (state, action) => {
+      state.isCreateTaskOpen[action.payload] = false;
+    },
   },
 });
 
@@ -95,7 +98,9 @@ export const {
   openEditColumnModal,
   closeEditColumnModal,
   openCreateColumnModal,
-  closeCreateColumnModal
+  closeCreateColumnModal,
+  openCreateTaskModal,
+  closeCreateTaskModal
 } = modalSlice.actions;
 
 export const modalReducer = modalSlice.reducer;

@@ -15,6 +15,7 @@ import { Button } from '../Button/Button';
 import PriorityList from './PriorityList/PriorityList';
 import { priorities } from '../../constants/dataForBoardModal';
 import { CardFormScheme } from '../../schames/BoardFormSchemes';
+import { format } from 'date-fns';
 
 const CardForm = ({
   type,
@@ -23,8 +24,8 @@ const CardForm = ({
   priority,
   deadline,
   onClose,
-  boardid,
-  columnid,
+  boardId,
+  columnId,
 }) => {
   const dispatch = useDispatch();
 
@@ -62,14 +63,17 @@ const CardForm = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
+    console.log(data);
+    
     const formData = {
-      boardid,
-      columnid,
-      task: { ...data },
+      boardId,
+      columnId,
+      task: { ...data, deadline: data.deadline ? data.deadline : format(new Date(), 'yyyy-MM-dd') },
     };
+    console.log(formData);
     dispatch(options[type].onSubmitThunk(formData));
 
-    // onClose();
+    onClose();
     reset();
   };
 

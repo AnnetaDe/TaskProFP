@@ -10,4 +10,6 @@ export const selectEditColumnOpen = (state, columnId) => {
   return !!state.modal.isEditColumnOpen[columnId];
 };
 export const selectCreateColumnOpen = state => state.modal.isCreateColumnOpen;
-export const selectCreateTaskOpen = state => state.modal.isCreateTaskOpen;
+export const selectCreateTaskOpen =  (state, columnId) => {
+  return !!state.modal.isCreateTaskOpen[columnId];
+};
