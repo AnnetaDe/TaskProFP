@@ -3,16 +3,12 @@ import { useDispatch } from 'react-redux';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {
-  filterColumns,
-  updateTaskOrder,
-} from '../../redux/columns/columnsSlice';
+import { updateTaskOrder } from '../../redux/columns/columnsSlice';
 import {
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
-  selectFilter,
-  selectfilteredColumns,
+  selectFilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
@@ -25,8 +21,6 @@ import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilter);
-  const filteredColumns = useSelector(selectfilteredColumns);
 
   useEffect(() => {
     if (id) {
@@ -65,26 +59,6 @@ export const Board = () => {
         body: { columnId: destination.droppableId },
       })
     );
-
-    // if (source.droppableId === destination.droppableId) {
-    //   dispatch(
-    //     updateTaskOrder({
-    //       source,
-    //       destination,
-    //       sourceColumnId: source.droppableId,
-    //       destinationColumnId: destination.droppableId,
-    //     })
-    //   );
-    // } else {
-    //   dispatch(
-    //     updateTaskOrder({
-    //       source,
-    //       destination,
-    //       sourceColumnId: source.droppableId,
-    //       destinationColumnId: destination.droppableId,
-    //     })
-    //   );
-    // }
   };
 
   return (
