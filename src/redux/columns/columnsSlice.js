@@ -151,9 +151,14 @@ const columnSlice = createSlice({
         state.isLoading = false;
         state.error = null;
 
-        const { columnId, taskId } = action.meta.arg;
-        const column = state.columnsL.find(column => column._id === columnId);
-        state.tasks = column.tasks.find(task => task._id === taskId);
+        const { columnid, taskid } = action.meta.arg;
+        const column = state.columnsL.find(column => column._id === columnid);
+        if (column) {
+          const taskIndex = column.tasks.findIndex(task => task._id === taskid);
+          if (taskIndex !== -1) {
+            column.tasks[taskIndex] = action.payload.data;
+          }
+        }
       })
       .addMatcher(
         action =>
