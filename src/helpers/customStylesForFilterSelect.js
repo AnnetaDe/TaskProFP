@@ -84,9 +84,11 @@ const customStyles = {
     position: 'absolute',
     top: '38px',
     right: '20px',
+    zIndex: '12',
   }),
   menuList: () => ({
     position: 'absolute',
+    zIndex: '12',
     bottom: '30px',
     display: 'flex',
     flexDirection: 'column',

@@ -94,6 +94,7 @@
 } */
 .container {
   position: absolute;
+
   top: 82px;
   right: 24px;
   display: flex;
