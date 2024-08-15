@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
   FLUSH,
   REHYDRATE,
@@ -31,6 +31,12 @@ const persistUserPreferences = {
   storage,
   whitelist: ['userTheme', 'userAvatar'],
 };
+const persistColumns = {
+  key: ['columns'],
+  version: 1,
+  storage,
+  whitelist: ['columns', 'filter'],
+};
 
 export const store = configureStore({
   reducer: {
@@ -39,7 +45,7 @@ export const store = configureStore({
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
     boards: boardsReducer,
     tasks: tasksReducer,
-    columns: columnsReducer,
+    columns: persistReducer(persistColumns, columnsReducer),
     modal: modalReducer,
     support: supportReducer,
   },

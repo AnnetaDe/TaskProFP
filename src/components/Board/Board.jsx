@@ -3,61 +3,85 @@ import { useDispatch } from 'react-redux';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateTaskOrder } from '../../redux/columns/columnsSlice';
+import {
+  filterColumns,
+  updateTaskOrder,
+} from '../../redux/columns/columnsSlice';
 import {
   selectBoardTitle,
-  selectColumnsOrderId,
   selectColumnsWithinBoard,
-  selectFilteredColumns,
-  selectTasksOrderId,
-  selectTasksWithinColumn,
+  selectFilter,
 } from '../../redux/columns/columnsSelectors';
 
 import { useEffect } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
+import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const filter = useSelector(selectFilter);
   useEffect(() => {
+    console.log(filter);
+
     if (id) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
-  }, [dispatch, id]);
+    if (filter) {
+      dispatch(filterColumns(filter));
+    }
+  }, [dispatch, id, filter]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
-  const filteredColumns = useSelector(selectFilteredColumns);
-  const columnOrderId = useSelector(selectColumnsOrderId);
-  const tasksWithinBoard = useSelector(selectTasksWithinColumn);
-  const tasksOrderId = useSelector(selectTasksOrderId);
 
   const onDragEnd = result => {
     const { source, destination } = result;
+    console.log(result);
+
     if (!destination) {
       return;
     }
 
-    if (source.droppableId === destination.droppableId) {
-      dispatch(
-        updateTaskOrder({
-          source,
-          destination,
-          sourceColumnId: source.droppableId,
-          destinationColumnId: destination.droppableId,
-        })
-      );
-    } else {
-      dispatch(
-        updateTaskOrder({
-          source,
-          destination,
-          sourceColumnId: source.droppableId,
-          destinationColumnId: destination.droppableId,
-        })
-      );
-    }
+    // console.log(result.draggableId);
+    dispatch(
+      updateTaskOrder({
+        source,
+        destination,
+        sourceColumnId: source.droppableId,
+        destinationColumnId: destination.droppableId,
+      })
+    );
+
+    // console.log(id,22222 source.droppableId, destination.droppableId)111;
+    dispatch(
+      updateTaskThunk({
+        boardid: id,
+        columnid: source.droppableId,
+        taskid: result.draggableId,
+        body: { columnId: destination.droppableId },
+      })
+    );
+
+    // if (source.droppableId === destination.droppableId) {
+    //   dispatch(
+    //     updateTaskOrder({
+    //       source,
+    //       destination,
+    //       sourceColumnId: source.droppableId,
+    //       destinationColumnId: destination.droppableId,
+    //     })
+    //   );
+    // } else {
+    //   dispatch(
+    //     updateTaskOrder({
+    //       source,
+    //       destination,
+    //       sourceColumnId: source.droppableId,
+    //       destinationColumnId: destination.droppableId,
+    //     })
+    //   );
+    // }
   };
 
   return (
@@ -68,13 +92,9 @@ export const Board = () => {
         </div>
         <div className={s.board}>
           <ul className={s.boardColumn}>
-            {!filteredColumns.length
-              ? columns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))
-              : filteredColumns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))}
+            {columns.map(column => (
+              <Column key={column._id} column={column} />
+            ))}
           </ul>
         </div>
       </DragDropContext>

@@ -32,13 +32,11 @@ export const createNewColumnThunk = createAsyncThunk(
 
 export const updateColumnThunk = createAsyncThunk(
   'columns/updateColumn',
-  async ({boardId, columnId, title}, thunkAPI) => {
-console.log({boardId, columnId, title});
-
+  async ({ boardId, columnId, title }, thunkAPI) => {
     try {
       const { data } = await taskProApi.patch(
         `api/boards/${boardId}/columns/${columnId}`,
-        {title}
+        { title }
       );
       return data;
     } catch (error) {
@@ -48,8 +46,7 @@ console.log({boardId, columnId, title});
 );
 export const deleteColumnThunk = createAsyncThunk(
   'columns/deleteColumn',
-  async ({boardId, columnId}, thunkAPI) => {
-   
+  async ({ boardId, columnId }, thunkAPI) => {
     try {
       await taskProApi.delete(`api/boards/${boardId}/columns/${columnId}`);
       return columnId;
