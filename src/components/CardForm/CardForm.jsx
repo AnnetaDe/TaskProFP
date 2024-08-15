@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -15,19 +15,21 @@ import { Button } from '../Button/Button';
 import PriorityList from './PriorityList/PriorityList';
 import { priorities } from '../../constants/dataForBoardModal';
 import { CardFormScheme } from '../../schames/BoardFormSchemes';
+import { format } from 'date-fns';
 
 const CardForm = ({
   type,
-  title,
-  description,
-  priority,
-  deadline,
+  // title,
+  // description,
+  // priority,
+  // deadline,
+  task,
   onClose,
-  boardid,
-  columnid,
+  boardId,
+  columnId,
 }) => {
   const dispatch = useDispatch();
-
+  const { title, description, deadline, priority } = task;
   const options = {
     create: {
       onSubmitThunk: createNewTaskThunk,
@@ -62,14 +64,23 @@ const CardForm = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
+    console.log(data, task);
+
     const formData = {
-      boardid,
-      columnid,
-      task: { ...data },
+      boardId,
+      columnId,
+      taskId: task._id,
+      task: {
+        ...data,
+        deadline: data.deadline
+          ? data.deadline
+          : format(new Date(), 'yyyy-MM-dd'),
+      },
     };
+    console.log(formData);
     dispatch(options[type].onSubmitThunk(formData));
 
-    // onClose();
+    onClose();
     reset();
   };
 

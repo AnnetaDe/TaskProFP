@@ -2,6 +2,14 @@
   margin-left: auto;
   align-items: flex-end;
   gap: 8px;
+
+}
+.btn_icon{
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .taskIcon {
   width: 16px;

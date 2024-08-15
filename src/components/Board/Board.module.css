@@ -1,23 +1,10 @@
-.board {
-  display: flex;
-  flex-wrap: nowrap;
-
-  padding: 10px;
+.board_wrap {
+  padding-left: 24px;
   height: 100%;
   width: 100%;
   max-width: 100%;
-}
-
-.boardTitle {
-}
-.boardColumn {
   overflow-y: hidden;
   overflow-x: auto;
-  gap: 8px;
-  display: flex;
-  height: 98%;
-
-
   &::-webkit-scrollbar {
     height: 12px;
   }
@@ -29,4 +16,42 @@
     background-color: var(--board-scroll-thumb);
     border-radius: 12px;
   }
+}
+.boardTitle {
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  text-align: left;
+  padding: 10px;
+}
+.board {
+  display: flex;
+  flex-wrap: nowrap;
+
+  padding: 10px 0;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.boardTitle {
+}
+.boardColumn {
+  /* overflow-y: hidden;
+  overflow-x: auto; */
+  gap: 8px;
+  display: flex;
+  height: 98%;
+
+  /* &::-webkit-scrollbar {
+    height: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: var(--board-scroll-track);
+    border-radius: 12px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--board-scroll-thumb);
+    border-radius: 12px;
+  } */
 }

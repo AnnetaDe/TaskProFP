@@ -4,9 +4,22 @@ import s from './Column.module.css';
 import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
-
+import CardForm from '../CardForm/CardForm';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 
 export const Column = ({ column }) => {
+  const { id } = useParams();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <li className={s.li_col}>
       <Droppable droppableId={column._id}>
@@ -38,20 +51,27 @@ export const Column = ({ column }) => {
                 width="100%"
                 typeStyle="primary"
                 buttonText="Add another card"
+                onClick={openModal}
               />
-
-
             </ul>
             {provided.placeholder}
           </div>
         )}
       </Droppable>
-
-      <Button
-        className={s.btn_column}
-        typeStyle="secondary"
-        buttonText="Add another card"
-      />
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeModal}
+          title="Add card"
+        >
+          <CardForm
+            onClose={() => closeModal()}
+            type="create"
+            boardId={id}
+            columnId={column._id}
+          />
+        </ModalWithoutRedux>
+      )}
     </li>
   );
 };
