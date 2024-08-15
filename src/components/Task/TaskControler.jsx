@@ -43,11 +43,10 @@ export const TaskControler = ({
       <ul className={clsx(s.taskActions, className)}>
         <li>
           <button className={s.btn_icon}>
-
-         
             <WarningDedline />
           </button>
         </li>
+
         {/* <li>
           <button className={s.btn_icon}>
             <svg
@@ -74,6 +73,9 @@ export const TaskControler = ({
         <li>
           <button className={s.btn_icon} onClick={openEditModal}>
             <svg className={s.taskIcon}>
+              <use href={`${icons}#icon-pencil`}></use>
+            </svg>
+          </button>
         </li>
         <li>
           <button className={s.btn_icon} onClick={openEditModal}>
@@ -87,13 +89,10 @@ export const TaskControler = ({
         </li>
         <li>
           <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
-
-            <svg className={s.taskIcon}>
             <svg
               className={s.taskIcon}
               // onClick={}
             >
-
               <use href={`${icons}#icon-trash`}></use>
             </svg>
           </button>
