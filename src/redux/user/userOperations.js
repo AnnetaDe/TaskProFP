@@ -20,7 +20,6 @@ export const registerThunk = createAsyncThunk(
         'api/auth/register',
         credentials
       );
-      console.log(data);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -36,6 +35,7 @@ export const loginThunk = createAsyncThunk(
         'api/auth/login',
         credentials
       );
+      setToken(data.data.accessToken);
       setTokenOnLogin(data.data.accessToken);
       return data;
     } catch (error) {

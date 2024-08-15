@@ -11,6 +11,7 @@ import {
   selectBoardTitle,
   selectColumnsWithinBoard,
   selectFilter,
+  selectfilteredColumns,
 } from '../../redux/columns/columnsSelectors';
 
 import { useEffect } from 'react';
@@ -21,10 +22,10 @@ export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
-  useEffect(() => {
-    console.log(filter);
+  const filteredColumns = useSelector(selectfilteredColumns);
 
-    if (id) {
+  useEffect(() => {
+    if (id && !filter) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
     if (filter) {
@@ -92,9 +93,13 @@ export const Board = () => {
         </div>
         <div className={s.board}>
           <ul className={s.boardColumn}>
-            {columns.map(column => (
-              <Column key={column._id} column={column} />
-            ))}
+            {filteredColumns.length
+              ? filteredColumns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))
+              : columns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))}
           </ul>
         </div>
       </DragDropContext>

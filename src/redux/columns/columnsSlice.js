@@ -65,8 +65,7 @@ const columnSlice = createSlice({
       state.filter = payload;
     },
     filterColumns: (state, { payload }) => {
-      state.filter = payload;
-      state.columnsL = state.columnsL
+      state.filteredColumns = state.columnsL
         .map(column => {
           const filteredTasks = column.tasks.filter(task => {
             if (payload === 'all') {

@@ -2,11 +2,10 @@ import { components } from 'react-select';
 
 const CustomOption = props => {
   const isSelected = props.isSelected;
-console.log(props);
 
   return (
     <components.Option {...props}>
-      <div style={{ display: 'flex', alignItems: 'center', height: '20px'}}>
+      <div style={{ display: 'flex', alignItems: 'center', height: '20px' }}>
         <div
           style={{
             display: 'inline-block',
