@@ -14,8 +14,6 @@ export const Column = ({ column, boardid }) => {
   const { id } = useParams();
   const columnid = column._id;
   const dispatch = useDispatch();
-
-  
   const [isOpen, setIsOpen] = useState();
   const openCreateModal = () => {
     setIsOpen(true);
@@ -82,12 +80,6 @@ export const Column = ({ column, boardid }) => {
           />
         </ModalWithoutRedux>
       )}
-      {/* 
-      <Button
-        className={s.btn_column}
-        typeStyle="secondary"
-        buttonText="Add another card"
-      /> */}
     </li>
   );
 };
