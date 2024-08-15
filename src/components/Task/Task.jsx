@@ -3,8 +3,10 @@ import s from './Task.module.css';
 import { TaskControler } from './TaskControler';
 import { priorities } from '../../constants/dataForBoardModal';
 
-export const Task = ({ task }) => {
+export const Task = ({ task, columnid }) => {
   const { title, description, priority, deadline } = task;
+  console.log(task);
+  console.log(columnid);
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
@@ -27,7 +29,7 @@ export const Task = ({ task }) => {
           </div>
           <div className={s.deadlineBox}>
             Deadline
-            <span className={s.taskProps}> 2000</span>{' '}
+            <span className={s.taskProps}> {deadline}</span>{' '}
             {/* change for DatePicker */}
             {/* <span className={s.taskProps}>{deadline}</span> */}
           </div>

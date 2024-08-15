@@ -5,8 +5,8 @@ import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
 
-
 export const Column = ({ column }) => {
+  console.log(column._id);
   return (
     <li className={s.li_col}>
       <Droppable droppableId={column._id}>
@@ -26,7 +26,12 @@ export const Column = ({ column }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <Task key={task.id} task={task} index={index} />
+                      <Task
+                        key={task.id}
+                        task={task}
+                        columnid={column._id}
+                        index={index}
+                      />
                     </div>
                   )}
                 </Draggable>
@@ -39,8 +44,6 @@ export const Column = ({ column }) => {
                 typeStyle="primary"
                 buttonText="Add another card"
               />
-
-
             </ul>
             {provided.placeholder}
           </div>
