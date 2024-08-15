@@ -133,13 +133,13 @@ const columnSlice = createSlice({
       .addCase(createNewTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const { columnid } = action.meta.arg;
+        const columnid = action.meta.arg;
         const column = state.columnsL.find(column => column._id === columnid);
-        const  newTask  = action.payload.data;
+        const newTask = action.payload.data;
         console.log(action.payload, 'payload');
         console.log(columnid, column, state.columnsL);
-        console.log( newTask);
-        
+        console.log(newTask);
+
         column.tasks.push(newTask);
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
