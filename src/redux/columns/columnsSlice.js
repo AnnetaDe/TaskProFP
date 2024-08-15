@@ -133,19 +133,30 @@ const columnSlice = createSlice({
       .addCase(createNewTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const columnid = action.meta.arg;
+      
+        const {columnid} = action.meta.arg;
+        console.log(columnid);
+        
         const column = state.columnsL.find(column => column._id === columnid);
-        const newTask = action.payload.data;
-        console.log(action.payload, 'payload');
-        console.log(columnid, column, state.columnsL);
-        console.log(newTask);
-
-        column.tasks.push(newTask);
+      
+        if (column) {
+          const newTask = action.payload.data;
+          column.tasks.push(newTask);
+        } else {
+          console.error(`Column with id ${columnid} not found`);
+        }
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.tasks = state.tasks.filter(task => task._id !== action.payload);
+      
+        const { columnid, taskid } = action.meta.arg;
+        const column = state.columnsL.find(column => column._id === columnid);
+      
+        if (column) {
+          // Видаляємо задачу з масиву tasks у відповідній колонці
+          column.tasks = column.tasks.filter(task => task._id !== taskid);
+        }
       })
       .addCase(updateTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
