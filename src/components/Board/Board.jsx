@@ -21,6 +21,7 @@ import { useEffect } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
 import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
+
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -28,21 +29,20 @@ export const Board = () => {
   const filteredColumns = useSelector(selectfilteredColumns);
 
   useEffect(() => {
-    if (id && !filter) {
+    if (id) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
 
     if (filter) {
       dispatch(filterColumns(filter));
     }
-  }, [dispatch, id, filter]);
+  }, [dispatch, id]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
 
   const onDragEnd = result => {
     const { source, destination } = result;
-    console.log(result);
 
     if (!destination) {
       return;
@@ -95,7 +95,7 @@ export const Board = () => {
         </div>
         <div className={s.board}>
           <ul>
-            {filteredColumns.length
+            {filter
               ? filteredColumns.map(column => (
                   <Column key={column._id} column={column} />
                 ))
