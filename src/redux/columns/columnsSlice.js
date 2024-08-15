@@ -38,34 +38,50 @@ const columnSlice = createSlice({
         return;
       }
 
-      const sourceColumn = state.columnsL.find(
-        column => column._id === sourceColumnId
-      );
-      const destinationColumn = state.columnsL.find(
-        column => column._id === destinationColumnId
-      );
+      if (state.filteredColumns.length) {
+        const sourceColumn = state.filteredColumns.find(
+          column => column._id === sourceColumnId
+        );
+        const destinationColumn = state.filteredColumns.find(
+          column => column._id === destinationColumnId
+        );
 
-      if (sourceColumnId === destinationColumnId) {
-        const [removed] = sourceColumn.tasks.splice(source.index, 1);
-        sourceColumn.tasks.splice(destination.index, 0, removed);
+        if (sourceColumnId === destinationColumnId) {
+          const [removed] = sourceColumn.tasks.splice(source.index, 1);
+          sourceColumn.tasks.splice(destination.index, 0, removed);
+        } else {
+          const [removed] = sourceColumn.tasks.splice(source.index, 1);
+          destinationColumn.tasks.splice(destination.index, 0, removed);
+        }
       } else {
-        const [removed] = sourceColumn.tasks.splice(source.index, 1);
-        destinationColumn.tasks.splice(destination.index, 0, removed);
+        const sourceColumn = state.columnsL.find(
+          column => column._id === sourceColumnId
+        );
+        const destinationColumn = state.columnsL.find(
+          column => column._id === destinationColumnId
+        );
+
+        if (sourceColumnId === destinationColumnId) {
+          const [removed] = sourceColumn.tasks.splice(source.index, 1);
+          sourceColumn.tasks.splice(destination.index, 0, removed);
+        } else {
+          const [removed] = sourceColumn.tasks.splice(source.index, 1);
+          destinationColumn.tasks.splice(destination.index, 0, removed);
+        }
       }
     },
     setFilter: (state, { payload }) => {
       state.filter = payload;
     },
+    setFilteredColumns: state => {
+      state.filteredColumns = [];
+    },
     filterColumns: (state, { payload }) => {
-      state.columnsL = state.columnsL
+      state.filteredColumns = state.columnsL
         .map(column => {
           const filteredTasks = column.tasks.filter(task => {
             if (payload === 'all') {
               return true;
-            }
-
-            if (payload === 'without_priority') {
-              return task.priority === null;
             }
 
             return task.priority === payload;
@@ -98,6 +114,10 @@ const columnSlice = createSlice({
           state.boardTitle = payload.title;
           state.boardIcon = payload.icon;
           state.boardBackground = payload.backgroundImg;
+
+          //if (state.filteredColumns.length) {
+          //  state.colufilteredColumnsmnsL = payload.columns;
+          //}
 
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
@@ -193,6 +213,7 @@ export const {
   updateColumnOrder,
   updateTaskOrder,
   setFilter,
+  setFilteredColumns,
   filterColumns,
   deleteTask,
 } = columnSlice.actions;

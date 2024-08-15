@@ -18,6 +18,10 @@ import {
 } from '../../../redux/modal/modalSlice';
 import Modal from '../../Modal/Modal';
 import BoardModal from '../BoardModal/BoardModal';
+import {
+  setFilter,
+  setFilteredColumns,
+} from '../../../redux/columns/columnsSlice';
 
 const ListMyBoards = ({ className }) => {
   const dispatch = useDispatch();
@@ -36,6 +40,11 @@ const ListMyBoards = ({ className }) => {
   const handleDelete = boardId => {
     dispatch(deleteBoardThunk(boardId));
   };
+  const handleClick = board => {
+    setChosenBoard(board);
+    dispatch(setFilter(null));
+    dispatch(setFilteredColumns());
+  };
 
   return (
     <ul className={clsx(s.boards_list, className)}>
@@ -45,7 +54,7 @@ const ListMyBoards = ({ className }) => {
         return (
           <li
             key={board._id}
-            onClick={() => setChosenBoard(board)}
+            onClick={() => handleClick(board)}
             className={s.li_board_item}
           >
             <NavLink

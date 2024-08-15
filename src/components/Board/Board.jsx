@@ -3,13 +3,17 @@ import { useDispatch } from 'react-redux';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateTaskOrder } from '../../redux/columns/columnsSlice';
+import {
+  filterColumns,
+  updateTaskOrder,
+} from '../../redux/columns/columnsSlice';
 import {
   selectBoardBackground,
   selectBoardIcon,
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
+  selectFilter,
   selectFilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
@@ -23,15 +27,22 @@ import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 import { Button } from '../Button/Button';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import ColumnForm from '../ColumnForm/ColumnForm';
+
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  const filteredColumns = useSelector(selectFilteredColumns);
 
   useEffect(() => {
     if (id) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
-  }, [dispatch, id]);
+
+    if (filter) {
+      dispatch(filterColumns(filter));
+    }
+  }, [dispatch, id, filter]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const boardBackground = useSelector(selectBoardBackground);
@@ -104,10 +115,14 @@ export const Board = () => {
           <h2>{boardTitle}</h2>
         </div>
         <div className={s.board}>
-          <ul className={s.boardColumn}>
-            {columns.map(column => (
-              <Column key={column._id} column={column} boardid={id} />
-            ))}
+          <ul>
+            {filter
+              ? filteredColumns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))
+              : columns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))}
           </ul>
           <Button
             buttonText="Add another column"
