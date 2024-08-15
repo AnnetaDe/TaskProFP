@@ -6,11 +6,14 @@ import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateColumnThunk } from '../../redux/columns/columnsOperations';
 export const Column = ({ column, boardid }) => {
   const { id } = useParams();
   const columnid = column._id;
+  const dispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState();
   const openCreateModal = () => {
