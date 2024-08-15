@@ -106,7 +106,21 @@
   position: absolute;
   top: 50%;
   right: 20px;
-  li{
+  li {
     cursor: pointer;
   }
+}
+
+.task_controller {
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  right: 20px;
+}
+
+.task_controller {
+  position: absolute;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  right: 20px;
 }
