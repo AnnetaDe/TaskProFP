@@ -37,7 +37,7 @@
 .boardColumn {
   gap: 8px;
   display: flex;
-  height: 98%;
+  height: 95%;
 
   /* overflow-y: hidden;
   overflow-x: auto;
