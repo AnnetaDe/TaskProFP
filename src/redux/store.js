@@ -35,7 +35,7 @@ const persistColumns = {
   key: ['columns'],
   version: 1,
   storage,
-  whitelist: ['columnsL'],
+  whitelist: ['columns'],
 };
 
 export const store = configureStore({
