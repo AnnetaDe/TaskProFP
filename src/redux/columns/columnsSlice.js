@@ -97,7 +97,7 @@ const columnSlice = createSlice({
           state.boardId = payload._id;
           state.boardTitle = payload.title;
           state.boardIcon = payload.icon;
-          state.boardBackground = payload.background;
+          state.boardBackground = payload.backgroundImg;
 
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
