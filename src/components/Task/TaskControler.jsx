@@ -9,6 +9,7 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -59,7 +60,7 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
         </button>
       </li>
       <li>
-        <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
+        <button className={s.btn_icon} onClick={taskid => handleDelete(taskid)}>
           <svg
             className={s.taskIcon}
             // onClick={}
