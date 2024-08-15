@@ -14,7 +14,7 @@ import css from './FilterSelect.module.css';
 const FilterSelect = () => {
   const dispatch = useDispatch();
 
-  const handleChange = async ({ value }, selectProps) => {
+  const handleChange = ({ value }, selectProps) => {
     dispatch(setFilter(value));
     dispatch(filterColumns(value));
 
