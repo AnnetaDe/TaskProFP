@@ -9,7 +9,7 @@ import {
   selectColumnsOrderId,
   selectColumnsWithinBoard,
   selectFilter,
-  selectFilteredColumns,
+  selectfilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
