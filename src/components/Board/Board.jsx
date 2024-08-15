@@ -22,7 +22,7 @@ export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
-  const filteredColumns = useSelector(selectFilteredColumns);
+  const filteredColumns = useSelector(selectfilteredColumns);
 
   useEffect(() => {
     if (id && !filter) {
