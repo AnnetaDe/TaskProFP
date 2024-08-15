@@ -10,3 +10,11 @@
   stroke-opacity: 0.5;
   fill: none;
 }
+.btn_icon {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

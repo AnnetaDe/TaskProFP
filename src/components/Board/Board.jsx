@@ -55,26 +55,6 @@ export const Board = () => {
         body: { columnId: destination.droppableId },
       })
     );
-
-    // if (source.droppableId === destination.droppableId) {
-    //   dispatch(
-    //     updateTaskOrder({
-    //       source,
-    //       destination,
-    //       sourceColumnId: source.droppableId,
-    //       destinationColumnId: destination.droppableId,
-    //     })
-    //   );
-    // } else {
-    //   dispatch(
-    //     updateTaskOrder({
-    //       source,
-    //       destination,
-    //       sourceColumnId: source.droppableId,
-    //       destinationColumnId: destination.droppableId,
-    //     })
-    //   );
-    // }
   };
 
   return (
@@ -86,7 +66,7 @@ export const Board = () => {
         <div className={s.board}>
           <ul className={s.boardColumn}>
             {columns.map(column => (
-              <Column key={column._id} column={column} />
+              <Column key={column._id} column={column} boardid={id} />
             ))}
           </ul>
         </div>
