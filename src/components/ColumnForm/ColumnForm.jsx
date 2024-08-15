@@ -12,8 +12,9 @@ import {
   updateColumnThunk,
 } from '../../redux/columns/columnsOperations';
 
-const ColumnForm = ({ type, title, onClose, boardid }) => {
+const ColumnForm = ({ type, title, onClose, boardid, columnId }) => {
   const dispatch = useDispatch();
+  console.log('open');
 
   const options = {
     create: {
@@ -41,11 +42,13 @@ const ColumnForm = ({ type, title, onClose, boardid }) => {
   const onSubmit = data => {
     const formData = {
       boardid,
-      ...data,
+      columnId,
+      title: data.title,
     };
     dispatch(options[type].onSubmitThunk(formData));
+    console.log(formData);
 
-    // onClose();
+    onClose(columnId);
     reset();
   };
 

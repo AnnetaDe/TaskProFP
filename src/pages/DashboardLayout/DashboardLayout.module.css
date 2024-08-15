@@ -1,22 +1,25 @@
 .gridContainer {
   display: flex;
   width: 100vw;
-  height: 100vh;;
+  height: 100vh;
   overflow: hidden;
-  .gridSidebar{
+  .gridSidebar {
     height: 100vh;
   }
-  .gridHeader {
+  .rightSide {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
+    @media only screen and (min-width: 1440px) {
+      width: calc(100% - 260px);
+    }
   }
 }
-.outlet{
-  /* overflow-y: hidden; */
-/* overflow-x: scroll; */
-overflow: hidden;
-height: 80%;
+.outlet {
+  overflow: hidden;
+  height: 99%;
+  width: 100%;
 }
 /* .gridContainer {
   height: 100vh;

@@ -6,21 +6,26 @@ import { format } from 'date-fns';
 import { Controller } from 'react-hook-form';
 
 const CusDatePicker = ({ selectedDeadline, control, name, ...props }) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    selectedDeadline ? new Date(selectedDeadline) : new Date()
+  );
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { onChange, onBlur, value, ref } }) => (
         <ReactDatePicker
-          selected={selectedDeadline ? new Date(selectedDeadline) : startDate}
+          selected={startDate}
           onChange={date => {
             if (date) {
               const formattedDate = format(date, 'yyyy-MM-dd');
-              onChange(formattedDate);
-              setStartDate(date);
+              console.log('Selected date:', formattedDate); // Log the selected date
+              onChange(formattedDate); // Pass the formatted date to react-hook-form
+              setStartDate(date); // Update local state
             } else {
-              onChange('');
+              onChange(''); // Handle date clearing
+              setStartDate(null); // Reset local state if cleared
             }
           }}
           dateFormat="eeee, dd MMMM"
