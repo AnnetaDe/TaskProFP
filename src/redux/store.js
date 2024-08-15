@@ -17,7 +17,7 @@ import { userPreferencesReducer } from './themes/userPreferencesSlice';
 import { boardsReducer } from './boards/boardsSlice';
 import { supportReducer } from './support/supportSlice';
 import { columnsReducer } from './columns/columnsSlice';
-import { tasksReducer } from './tasks/tasksSlice';
+// import { tasksReducer } from './tasks/tasksSlice';
 
 const persistUser = {
   key: ['user'],
@@ -44,7 +44,7 @@ export const store = configureStore({
     user: persistReducer(persistUser, userReducer),
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
     boards: boardsReducer,
-    tasks: tasksReducer,
+    // tasks: tasksReducer,
     columns: persistReducer(persistColumns, columnsReducer),
     modal: modalReducer,
     support: supportReducer,
