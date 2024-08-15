@@ -135,11 +135,15 @@ const columnSlice = createSlice({
         state.error = null;
         const { columnid } = action.meta.arg;
         const column = state.columnsL.find(column => column._id === columnid);
+<<<<<<< Updated upstream
         const  newTask  = action.payload.data;
         console.log(action.payload, 'payload');
         console.log(columnid, column, state.columnsL);
         console.log( newTask);
         
+=======
+        const newTask = action.payload.data;
+>>>>>>> Stashed changes
         column.tasks.push(newTask);
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
@@ -151,9 +155,9 @@ const columnSlice = createSlice({
         state.isLoading = false;
         state.error = null;
 
-        const { columnId, taskId } = action.meta.arg;
-        const column = state.columnsL.find(column => column._id === columnId);
-        state.tasks = column.tasks.find(task => task._id === taskId);
+        const { columnid, taskid } = action.meta.arg;
+        const column = state.columnsL.find(column => column._id === columnid);
+        state.tasks = column.tasks.find(task => task._id === taskid);
       })
       .addMatcher(
         action =>
