@@ -49,7 +49,7 @@ const tasksSlice = createSlice({
       })
       .addCase(updateTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { boardId, columnId, taskId } = action.meta.arg;
+        const { boardId, columnId, taskId } = action.payload;
         const updatedTask = action.payload.data;
         
         const columnTasks = state.tasks[boardId]?.[columnId] || [];
