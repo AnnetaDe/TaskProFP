@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateTaskOrder } from '../../redux/columns/columnsSlice';
+import {
+  filterColumns,
+  updateTaskOrder,
+} from '../../redux/columns/columnsSlice';
 import {
   selectBoardTitle,
   selectColumnsOrderId,
@@ -22,7 +25,7 @@ export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
-  const filteredColumns = useSelector(selectFilteredColumns);
+  const filteredColumns = useSelector(selectfilteredColumns);
 
   useEffect(() => {
     if (id && !filter) {
@@ -91,15 +94,15 @@ export const Board = () => {
           <h2>{boardTitle}</h2>
         </div>
         <div className={s.board}>
-            <ul>
-              {filteredColumns.length
-                ? filteredColumns.map(column => (
-                    <Column key={column._id} column={column} />
-                  ))
-                : columns.map(column => (
-                    <Column key={column._id} column={column} />
-                  ))}
-            </ul>
+          <ul>
+            {filteredColumns.length
+              ? filteredColumns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))
+              : columns.map(column => (
+                  <Column key={column._id} column={column} />
+                ))}
+          </ul>
         </div>
       </DragDropContext>
     </>
