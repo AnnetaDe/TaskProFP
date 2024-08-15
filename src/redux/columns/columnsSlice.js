@@ -113,7 +113,7 @@ const columnSlice = createSlice({
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.columnsL.push(payload);
+        state.columnsL.push(payload.data);
       })
       .addCase(updateColumnThunk.fulfilled, (state, action) => {
         const column = state.columnsL.find(

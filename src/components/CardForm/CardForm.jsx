@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -38,10 +38,10 @@ const CardForm = ({
     edit: {
       onSubmitThunk: updateTaskThunk,
       defaultValues: {
-        title: task.title || '',
-        description: task.description || '',
-        priority: task.priority || '',
-        deadline: task.deadline || '',
+        title: task ? task.title : '',
+        description: task ? task.description : '',
+        priority: task ? task.priority : '',
+        deadline: task ? task.deadline : '',
       },
     },
   };
@@ -64,16 +64,29 @@ const CardForm = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
-    const formData = type==='create'?{
-      boardid,
-      columnid,
-      task: { ...data, deadline: data.deadline? data.deadline: format(new Date(), 'yyyy-MM-dd') },
-    }: {
-      boardid,
-      columnid,
-      taskid:task._id,
-      body: { ...data, deadline: data.deadline? data.deadline: format(new Date(), 'yyyy-MM-dd') },
-    }
+    const formData =
+      type === 'create'
+        ? {
+            boardid,
+            columnid,
+            task: {
+              ...data,
+              deadline: data.deadline
+                ? data.deadline
+                : format(new Date(), 'yyyy-MM-dd'),
+            },
+          }
+        : {
+            boardid,
+            columnid,
+            taskid: task._id,
+            body: {
+              ...data,
+              deadline: data.deadline
+                ? data.deadline
+                : format(new Date(), 'yyyy-MM-dd'),
+            },
+          };
     dispatch(options[type].onSubmitThunk(formData));
 
     onClose();

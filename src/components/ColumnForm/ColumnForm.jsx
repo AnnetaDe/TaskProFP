@@ -40,11 +40,18 @@ const ColumnForm = ({ type, title, onClose, boardid, columnId }) => {
     mode: 'onChange',
   });
   const onSubmit = data => {
-    const formData = {
-      boardid,
-      columnId,
-      title: data.title,
-    };
+    const formData =
+      type === 'create'
+        ? {
+            boardid,
+            title: data.title,
+          }
+        : {
+            boardid,
+            columnId,
+            title: data.title,
+          };
+
     dispatch(options[type].onSubmitThunk(formData));
     console.log(formData);
 
