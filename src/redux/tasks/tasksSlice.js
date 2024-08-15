@@ -15,10 +15,10 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
 
-      .addCase(createNewTaskThunk.pending, (state) => {
+      .addCase(createNewTaskThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -28,7 +28,7 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         const { boardId, columnId } = action.payload;
         const task = action.payload.data;
-        
+
         if (!state.tasks[boardId]) {
           state.tasks[boardId] = {};
         }
@@ -42,8 +42,7 @@ const tasksSlice = createSlice({
         state.error = action.payload;
       })
 
-
-      .addCase(updateTaskThunk.pending, (state) => {
+      .addCase(updateTaskThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
@@ -51,9 +50,9 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         const { boardId, columnId, taskId } = action.payload;
         const updatedTask = action.payload.data;
-        
+
         const columnTasks = state.tasks[boardId]?.[columnId] || [];
-        const index = columnTasks.findIndex((t) => t._id === taskId);
+        const index = columnTasks.findIndex(t => t._id === taskId);
         if (index !== -1) {
           columnTasks[index] = updatedTask;
         }
@@ -63,8 +62,7 @@ const tasksSlice = createSlice({
         state.error = action.payload;
       })
 
-
-      .addCase(deleteTaskThunk.pending, (state) => {
+      .addCase(deleteTaskThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
       })

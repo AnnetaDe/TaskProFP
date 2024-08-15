@@ -1,13 +1,24 @@
 import clsx from 'clsx';
 import s from './Task.module.css';
+import icons from '../../images/icons.svg';
+import { useSelector } from 'react-redux';
+import { selectUserTheme } from '../../redux/user/userSelectors';
+import { useEffect, useState } from 'react';
+import { openModal } from '../../redux/modal/modalSlice';
+import { useDispatch } from 'react-redux';
+import { AddEditCard } from '../ScreensPage/AddEditCard';
+import {
+  deleteTaskThunk,
+  updateTaskThunk,
+} from '../../redux/tasks/tasksOperations';
+import { selectBoardid, selectColumnid } from '../../redux/tasks/tasksSelctors';
 import { TaskControler } from './TaskControler';
-import { priorities } from '../../constants/dataForBoardModal';
 
 export const Task = ({ task,  columnId }) => {
   const { title, description, priority, deadline } = task;
-  const priorityColor = priorities.find(
-    item => item.priorityLevel === priority
-  );
+  // const priorityColor = priorities.find(
+  //   item => item.priorityLevel === priority
+  // );
   console.log(columnId);
 
   return (
@@ -20,7 +31,7 @@ export const Task = ({ task,  columnId }) => {
             Priority
             <div className={s.priorityBox}>
               <span
-                style={{ backgroundColor: priorityColor }}
+                // style={{ backgroundColor: priorityColor }}
                 className={s.priorityCircle}
               ></span>
               <span className={s.taskProps}>{priority}</span>

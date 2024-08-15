@@ -28,20 +28,25 @@ import {
 import Modal from '../Modal/Modal';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import { Button } from '../Button/Button';
+import icon from '../../images/icons.svg';
+import { selectCreateColumnOpen } from '../../redux/modal/modalSelector';
+import {
+  closeCreateColumnModal,
+  closeEditProfileModal,
+  openCreateColumnModal,
+} from '../../redux/modal/modalSlice';
+import Modal from '../Modal/Modal';
+import ColumnForm from '../ColumnForm/ColumnForm';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilter);
   useEffect(() => {
-    console.log(filter);
-
     if (id) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
-    if (filter) {
-      dispatch(filterColumns(filter));
-    }
-  }, [dispatch, id, filter]);
+  }, [dispatch, id]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
@@ -68,7 +73,6 @@ const closeModal=()=>{
       return;
     }
 
-    // console.log(result.draggableId);
     dispatch(
       updateTaskOrder({
         source,
@@ -78,12 +82,11 @@ const closeModal=()=>{
       })
     );
 
-    // console.log(id,22222 source.droppableId, destination.droppableId)111;
     dispatch(
       updateTaskThunk({
-        boardid: id,
-        columnid: source.droppableId,
-        taskid: result.draggableId,
+        boardId: id,
+        columnId: source.droppableId,
+        taskId: result.draggableId,
         body: { columnId: destination.droppableId },
       })
     );

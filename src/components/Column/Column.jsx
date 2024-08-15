@@ -8,6 +8,10 @@ import CardForm from '../CardForm/CardForm';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import CardForm from '../CardForm/CardForm';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 
 export const Column = ({ column }) => {
   const { id } = useParams();
@@ -52,12 +56,27 @@ export const Column = ({ column }) => {
                 typeStyle="primary"
                 buttonText="Add another card"
                 onClick={openModal}
+                onClick={openModal}
               />
             </ul>
             {provided.placeholder}
           </div>
         )}
       </Droppable>
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeModal}
+          title="Add card"
+        >
+          <CardForm
+            onClose={() => closeModal()}
+            type="create"
+            boardId={id}
+            columnId={column._id}
+          />
+        </ModalWithoutRedux>
+      )}
       {isOpen && (
         <ModalWithoutRedux
           isOpen={isOpen}

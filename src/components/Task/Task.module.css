@@ -28,6 +28,28 @@
   width: 12px;
   border-radius: 50%;
 }
+.priorityColor {
+  background: var(--without-priority-background-color);
+}
+.priorityLow {
+  background: var(--low-priority-background-color);
+}
+.priorityMedium {
+  background: var(--medium-priority-background-color);
+}
+.priorityHigh {
+  background: var(--high-priority-background-color);
+}
+.taskIcon {
+  width: 16px;
+  height: 16px;
+  stroke: var(--input-text-color);
+  stroke-opacity: 0.5;
+  fill: none;
+}
+.taskIconGlocke {
+  stroke: var(--small-btn-bgc);
+}
 
 .taskTitle {
   font-weight: 600;
@@ -57,6 +79,7 @@
   width: 290px;
   gap: 14px;
   position: relative;
+  position: relative;
 }
 .priorityBox {
   display: flex;
@@ -73,10 +96,11 @@
 }
 .deadlineBox {
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   gap: 7px;
 }
-/* .taskActions {
+.taskActions {
   margin-left: auto;
   align-items: flex-end;
   gap: 8px;
