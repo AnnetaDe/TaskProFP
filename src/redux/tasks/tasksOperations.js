@@ -40,7 +40,8 @@ export const updateTaskThunk = createAsyncThunk(
 
 export const deleteTaskThunk = createAsyncThunk(
   'tasks/deleteTask',
-  async (boardid, columnid, taskid, thunkAPI) => {
+  async ({ boardid, columnid, taskid }, thunkAPI) => {
+    console.log(boardid, columnid, taskid);
     try {
       await taskProApi.delete(
         `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`
