@@ -16,6 +16,7 @@ const customStyles = {
     caretColor: 'transparent',
   }),
   menu: () => ({
+    backgroundColor: '#151515',
     textAlign: 'left',
     border: '1px solid rgba(190, 219, 176, 0.5)',
     borderRadius: '8px',
@@ -25,6 +26,7 @@ const customStyles = {
     position: 'absolute',
     top: '38px',
     right: '20px',
+    zIndex: '1',
   }),
   menuList: () => ({
     position: 'absolute',
