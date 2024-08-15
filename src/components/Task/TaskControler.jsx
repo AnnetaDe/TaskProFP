@@ -7,6 +7,7 @@ import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
 import { clsx } from 'clsx';
+import WarningDedline from '../WarningDedline/WarningDedline';
 export const TaskControler = ({
   taskid,
   columnid,
@@ -42,40 +43,29 @@ export const TaskControler = ({
       <ul className={clsx(s.taskActions, className)}>
         <li>
           <button className={s.btn_icon}>
-            <svg
-              className={s.taskIcon}
-              // onClick={}
-            >
-              <use href={`${icons}#icon-glocke`}></use>
-            </svg>
+            {' '}
+            <WarningDedline />
           </button>
         </li>
-        <li>
+        {/* <li>
           <button className={s.btn_icon}>
             <svg
               className={s.taskIcon}
-              // onClick={}
             >
               <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
             </svg>
           </button>
-        </li>
+        </li> */}
         <li>
           <button className={s.btn_icon} onClick={openEditModal}>
-            <svg
-              className={s.taskIcon}
-              // onClick={}
-            >
+            <svg className={s.taskIcon}>
               <use href={`${icons}#icon-pencil`}></use>
             </svg>
           </button>
         </li>
         <li>
           <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
-            <svg
-              className={s.taskIcon}
-              // onClick={}
-            >
+            <svg className={s.taskIcon}>
               <use href={`${icons}#icon-trash`}></use>
             </svg>
           </button>

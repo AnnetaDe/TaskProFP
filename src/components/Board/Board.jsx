@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { updateTaskOrder } from '../../redux/columns/columnsSlice';
 import {
+  selectBoardBackground,
+  selectBoardIcon,
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
@@ -32,6 +34,9 @@ export const Board = () => {
   }, [dispatch, id]);
 
   const boardTitle = useSelector(selectBoardTitle);
+  const boardBackground = useSelector(selectBoardBackground);
+  const boardIcon = useSelector(selectBoardIcon);
+  console.log('boardBackground', boardBackground);
   const columns = useSelector(selectColumnsWithinBoard);
   const [isOpen, setIsOpen] = useState();
   const openModal = () => {

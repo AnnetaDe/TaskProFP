@@ -15,7 +15,7 @@ const initialState = {
   boardId: '',
   boardTitle: '',
   boardIcon: '',
-  boardBackground: [],
+  boardBackground: {},
   columnsL: [],
   columnsOrderId: [],
   tasks: [],
@@ -97,7 +97,7 @@ const columnSlice = createSlice({
           state.boardId = payload._id;
           state.boardTitle = payload.title;
           state.boardIcon = payload.icon;
-          state.boardBackground = payload.background;
+          state.boardBackground = payload.backgroundImg;
 
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
@@ -133,12 +133,12 @@ const columnSlice = createSlice({
       .addCase(createNewTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-      
-        const {columnid} = action.meta.arg;
+
+        const { columnid } = action.meta.arg;
         console.log(columnid);
-        
+
         const column = state.columnsL.find(column => column._id === columnid);
-      
+
         if (column) {
           const newTask = action.payload.data;
           column.tasks.push(newTask);
@@ -149,10 +149,10 @@ const columnSlice = createSlice({
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-      
+
         const { columnid, taskid } = action.meta.arg;
         const column = state.columnsL.find(column => column._id === columnid);
-      
+
         if (column) {
           // Видаляємо задачу з масиву tasks у відповідній колонці
           column.tasks = column.tasks.filter(task => task._id !== taskid);
