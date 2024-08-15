@@ -29,7 +29,9 @@ const CardForm = ({
   columnId,
 }) => {
   const dispatch = useDispatch();
-  const { title, description, deadline, priority } = task;
+  // const { title, description, deadline, priority } = task;
+  console.log(type);
+  
   const options = {
     create: {
       onSubmitThunk: createNewTaskThunk,
@@ -38,10 +40,10 @@ const CardForm = ({
     edit: {
       onSubmitThunk: updateTaskThunk,
       defaultValues: {
-        title: title,
-        description: description,
-        priority: priority,
-        deadline: deadline,
+        title: task?.title || '',
+        description: task?.description || '',
+        priority: task?.priority || '',
+        deadline: task?.deadline || '',
       },
     },
   };
@@ -63,10 +65,21 @@ const CardForm = ({
     resolver: yupResolver(CardFormScheme),
     mode: 'onChange',
   });
+
+  
   const onSubmit = data => {
     console.log(data, task);
 
-    const formData = {
+    const formData = type==='create'? {
+      boardId,
+      columnId,
+      task: {
+        ...data,
+        deadline: data.deadline
+          ? data.deadline
+          : format(new Date(), 'yyyy-MM-dd'),
+      },
+    }:{
       boardId,
       columnId,
       taskId: task._id,

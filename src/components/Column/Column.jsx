@@ -53,7 +53,6 @@ export const Column = ({ column }) => {
                 typeStyle="primary"
                 buttonText="Add another card"
                 onClick={openModal}
-                onClick={openModal}
               />
             </ul>
             {provided.placeholder}
