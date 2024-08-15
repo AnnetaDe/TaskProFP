@@ -19,13 +19,20 @@ export const createNewTaskThunk = createAsyncThunk(
 //task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks/:taskId
 export const updateTaskThunk = createAsyncThunk(
   'tasks/updateTask',
-  async ({ boardId, columnid, taskid }, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const { data } = await taskProApi.patch(
-        `api/boards/${boardId}/columns/${columnid}/tasks/${taskid}`,
-        data
+      const res = await taskProApi.patch(
+        `api/boards/${data.boardId}/columns/${data.columnId}/tasks/${data.taskId}`,
+        {
+          columnId: data.columnId,
+          title: data.task.title,
+          description: data.task.description,
+          priority: data.task.priority,
+          deadline: data.task.deadline,
+        }
       );
-      return data;
+
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -35,12 +42,13 @@ export const updateTaskThunk = createAsyncThunk(
 
 export const deleteTaskThunk = createAsyncThunk(
   'tasks/deleteTask',
-  async (boardid, columnid, taskid, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
       await taskProApi.delete(
-        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`
+        `api/boards/${data.boardId}/columns/${data.columnId}/tasks/${data.taskId}`
       );
-      return taskid;
+      console.log(data);
+      return data.taskId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

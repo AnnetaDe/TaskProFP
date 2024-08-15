@@ -4,78 +4,101 @@ import Modal from '../Modal/Modal';
 import CusDatePicker from '../DatePicker/DatePicker';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from '../Button/Button';
-import { openModal } from '../../redux/modal/modalSlice';
+import { closeEditColumnModal, closeModal } from '../../redux/modal/modalSlice';
+import PriorityList from '../CardForm/PriorityList/PriorityList';
+import { useState } from 'react';
+import { priorities } from '../../constants/dataForBoardModal';
+import s from './AddEditCard.module.css';
 
 export const AddEditCard = ({
   addForm = false,
   onSubmitThunk,
   boardId,
   columnId,
+  taskId,
   isOpen,
+  formattedDate,
 }) => {
-  const { control } = useForm();
-  const dispatch = useDispatch();
-  const isLoading = false;
   const {
+    control,
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: addForm
-      ? { title: '', description: '', priority: '', deadline: '' }
-      : { title: '', description: '', priority: '', deadline: '' },
+    defaultValues: {
+      title: '',
+      description: '',
+      priority: '',
+      deadline: formattedDate || '',
+    },
     mode: 'onSubmit',
   });
+  const [selectedPriority, setSelectedPriority] = useState(priorities);
+  const dispatch = useDispatch();
+  const isLoading = false;
+
   const onSubmit = data => {
     console.log(data, 'add/edit card');
-    dispatch(onSubmitThunk(boardId, columnId, data));
-    reset();
+    dispatch(onSubmitThunk({ boardId, columnId, taskId, task: data })).then(
+      data => {
+        console.log(data);
+        if (data.error !== undefined) {
+          console.log(data.error.message);
+        } else {
+          reset();
+          dispatch(closeModal());
+        }
+      }
+    );
   };
 
   return (
-    <Modal isOpen={isOpen}>
-      <form onSubmit={handleSubmit(onSubmit)} autoComplete="nope">
+    <Modal
+      isOpen={isOpen}
+      closeModal={() => dispatch(closeEditColumnModal(taskId))}
+    >
+      <form
+        className={s.taskForm}
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+      >
         <h2>{addForm ? 'Add card' : 'Edit card'}</h2>
         <InputField
           className
-          height
-          width
           placeholder="Title"
           name="title"
           register={register}
-          errors
+          errors={errors}
         />
         <InputField
           className
           isTextArea="true"
-          height
-          width
           placeholder="Description"
           name="description"
           register={register}
-          errors
+          errors={errors}
         />
-        <label>
-          <p>Priority</p>
-          <InputField
-            placeholder="Set color"
-            name="priority"
+        <label className={s.label}>
+          <p>Label color</p>
+          <PriorityList
+            selectedPriority={selectedPriority}
+            setSelectedPriority={setSelectedPriority}
             register={register}
+            name="priority"
           />
         </label>
-        {/* <label>
+        <label className={s.label}>
           <p>Deadline</p>
           <CusDatePicker
-            selectedDeadline={deadline}
+            className={s.deadlinePicker}
+            selectedDeadline={formattedDate}
             control={control}
             name="deadline"
-            register={register}
           />
-        </label> */}
+        </label>
         <Button
           buttonText={addForm ? 'Add' : 'Edit'}
-          onClick
           type="submit"
           typeStyle="primary"
           icon="+"

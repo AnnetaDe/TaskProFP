@@ -5,7 +5,6 @@ import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
 
-
 export const Column = ({ column }) => {
   return (
     <li className={s.li_col}>
@@ -26,7 +25,12 @@ export const Column = ({ column }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <Task key={task.id} task={task} index={index} />
+                      <Task
+                        key={task.id}
+                        columnid={column._id}
+                        task={task}
+                        index={index}
+                      />
                     </div>
                   )}
                 </Draggable>
@@ -39,8 +43,6 @@ export const Column = ({ column }) => {
                 typeStyle="primary"
                 buttonText="Add another card"
               />
-
-
             </ul>
             {provided.placeholder}
           </div>

@@ -7,19 +7,23 @@ import { useEffect, useState } from 'react';
 import { openModal } from '../../redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 import { AddEditCard } from '../ScreensPage/AddEditCard';
-import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
+import {
+  deleteTaskThunk,
+  updateTaskThunk,
+} from '../../redux/tasks/tasksOperations';
+import { selectBoardid, selectColumnid } from '../../redux/tasks/tasksSelctors';
 
-export const Task = ({
-  boardId,
-  columnId,
-  task: { _id, title, description, priority, deadline },
-}) => {
-  // const  = task;
+export const Task = ({ columnid, task }) => {
+  const boardid = useSelector(selectBoardid);
+  const taskid = task._id;
   const [showEditTask, setShowEditTask] = useState(false);
   const dispatch = useDispatch();
   const handleEditTask = () => {
     dispatch(openModal());
     setShowEditTask(true);
+  };
+  const handleDeleteTask = data => {
+    dispatch(deleteTaskThunk(data));
   };
   const colorScheme = useSelector(selectUserTheme);
   useEffect(() => {
@@ -32,7 +36,7 @@ export const Task = ({
     const year = date.getUTCFullYear();
     return `${day}/${month}/${year}`;
   };
-  const formattedDate = formatDate(deadline);
+  const formattedDate = formatDate(task.deadline);
   const today = formatDate(new Date());
 
   return (
@@ -41,15 +45,15 @@ export const Task = ({
         className={clsx(
           s.boardTaskBackground,
           s.priorityColor,
-          priority === 'low' && s.priorityLow,
-          priority === 'medium' && s.priorityMedium,
-          priority === 'high' && s.priorityHigh
+          task.priority === 'low' && s.priorityLow,
+          task.priority === 'medium' && s.priorityMedium,
+          task.priority === 'high' && s.priorityHigh
         )}
-        key={_id}
+        key={taskid}
       >
         <ul className={s.boardTask}>
-          <li className={s.taskTitle}>{title}</li>
-          <li className={s.taskDescr}>{description}</li>
+          <li className={s.taskTitle}>{task.title}</li>
+          <li className={s.taskDescr}>{task.description}</li>
           <li className={s.taskInfo}>
             <div>
               Priority
@@ -58,12 +62,12 @@ export const Task = ({
                   className={clsx(
                     s.priorityCircle,
                     s.priorityColor,
-                    priority === 'low' && s.priorityLow,
-                    priority === 'medium' && s.priorityMedium,
-                    priority === 'high' && s.priorityHigh
+                    task.priority === 'low' && s.priorityLow,
+                    task.priority === 'medium' && s.priorityMedium,
+                    task.priority === 'high' && s.priorityHigh
                   )}
                 ></span>
-                <span className={s.taskProps}>{priority}</span>
+                <span className={s.taskProps}>{task.priority}</span>
               </div>
             </div>
             <div className={s.deadlineBox}>
@@ -87,14 +91,20 @@ export const Task = ({
                 </svg>
               </li>
               <li>
-                <svg className={s.taskIcon} onClick={() => handleEditTask}>
+                <svg className={s.taskIcon} onClick={handleEditTask}>
                   <use href={`${icons}#icon-pencil`}></use>
                 </svg>
               </li>
               <li>
                 <svg
                   className={s.taskIcon}
-                  // onClick={}
+                  onClick={() => {
+                    handleDeleteTask({
+                      boardId: boardid,
+                      columnId: columnid,
+                      taskId: taskid,
+                    });
+                  }}
                 >
                   <use href={`${icons}#icon-trash`}></use>
                 </svg>
@@ -107,8 +117,9 @@ export const Task = ({
         <AddEditCard
           addForm={false}
           onSubmitThunk={updateTaskThunk}
-          boardId={boardId}
-          columnId={columnId}
+          boardId={boardid}
+          columnId={columnid}
+          taskId={taskid}
           isOpen={openModal()}
         />
       )}
