@@ -11,7 +11,7 @@ export const Task = ({ task, columnid, boardid }) => {
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
-  console.log(priorityColor);
+  // console.log(priorityColor);
 
   const formattedDeadline = format(new Date(deadline), 'dd/MM/yyyy');
   return (

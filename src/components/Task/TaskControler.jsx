@@ -7,7 +7,7 @@ import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
 export const TaskControler = ({ taskid, columnid, boardid, onOpen, task }) => {
-  console.log(taskid, columnid, boardid);
+  // console.log(taskid, columnid, boardid);
 const {id}=useParams()
   const dispatch = useDispatch();
 

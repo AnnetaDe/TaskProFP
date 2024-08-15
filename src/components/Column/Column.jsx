@@ -15,6 +15,7 @@ export const Column = ({ column, boardid }) => {
   const columnid = column._id;
   const dispatch = useDispatch();
 
+  
   const [isOpen, setIsOpen] = useState();
   const openCreateModal = () => {
     setIsOpen(true);
