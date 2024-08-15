@@ -3,11 +3,15 @@ import { useDispatch } from 'react-redux';
 import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOperations';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { updateTaskOrder } from '../../redux/columns/columnsSlice';
+import {
+  filterColumns,
+  updateTaskOrder,
+} from '../../redux/columns/columnsSlice';
 import {
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
+  selectFilter,
   selectFilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
@@ -21,6 +25,8 @@ import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const filter = useSelector(selectFilter);
+  const filteredColumns = useSelector(selectFilteredColumns);
 
   useEffect(() => {
     if (id) {
@@ -30,7 +36,7 @@ export const Board = () => {
     if (filter) {
       dispatch(filterColumns(filter));
     }
-  }, [dispatch, id]);
+  }, [dispatch, id, filter]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
