@@ -94,14 +94,7 @@
   margin-top: 48px;
 
 }
-.btn{
-  &:hover,
-  &:focus {
-    background-color: #161616;
-    color: #fff;
-  }
 
-}
 /* .authLink {
   margin: 0, auto;
   border-radius: 8px;

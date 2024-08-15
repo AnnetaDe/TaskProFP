@@ -55,10 +55,7 @@
   --dedline-bell:#BEDBB0;
   --board-scroll-thumb: rgba(255, 255, 255, 0.1);
   --board-scroll-track: #161616;
-  --filter-separator:  rgba(255, 255, 255, 0.1);
-  --filter-btn-color:rgba(255, 255, 255, 0.4);;
-  --filter-btn-color-hover:rgba(255, 255, 255, 0.7);;
-  --filter-bgc: #151515;
+
 }
 [theme='light'] {
   --text-color: #000000;
@@ -95,10 +92,6 @@
   --dedline-bell:#BEDBB0;
   --board-scroll-thumb: #e8e8e8;
   --board-scroll-track: white;
-  --filter-separator: rgba(22, 22, 22, 0.1);
-  --filter-btn-color:rgba(22, 22, 22, 0.4);
-  --filter-btn-color-hover:rgb(22, 22, 22);
-  --filter-bgc: #fcfcfc;
 
 }
 [theme='violet'] {
@@ -136,10 +129,7 @@
   --dedline-bell:#5255BC;
   --board-scroll-thumb: #b8bcfd;
   --board-scroll-track: white;
-  --filter-separator:  rgba(22, 22, 22, 0.1);
-  --filter-btn-color:rgba(22, 22, 22, 0.4);
-  --filter-btn-color-hover:rgb(22, 22, 22);
-  --filter-bgc: #fcfcfc;
+
 }
 
 body {

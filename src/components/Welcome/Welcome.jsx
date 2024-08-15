@@ -53,10 +53,10 @@ const Welcome = () => {
 
       <div className={css.authNav}>
         <NavLink to="/auth/register">
-          <Button typeStyle="transparent" buttonText="Registration" className={css.btn}/>
+          <Button typeStyle="transparent" buttonText="Registration" />
         </NavLink>
         <NavLink to="/auth/login">
-          <Button typeStyle="transparent" buttonText="Log In"  className={css.btn}/>
+          <Button typeStyle="transparent" buttonText="Log In" />
         </NavLink>
       </div>
     </div>

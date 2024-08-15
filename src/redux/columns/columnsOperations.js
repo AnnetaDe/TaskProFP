@@ -7,7 +7,6 @@ export const getAllCoulumnsWithBoardIdThunk = createAsyncThunk(
   async (boardId, thunkAPI) => {
     try {
       const data = await taskProApi.get(`/api/boards/${boardId}`);
-
       return data.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -18,13 +17,13 @@ export const getAllCoulumnsWithBoardIdThunk = createAsyncThunk(
 //task-pro-backend-xdd4.onrender.com/api/boards/:${boardid}/columns
 export const createNewColumnThunk = createAsyncThunk(
   'columns/createColumn',
-  async ({boardId, title}, thunkAPI) => {
+  async (id, newColumn, thunkAPI) => {
     try {
       const data = await taskProApi.post(
-        `/api/boards/${boardId}/columns`,
-        {title}
+        `/api/boards/${id}/columns`,
+        newColumn
       );
-      return data.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -34,6 +33,8 @@ export const createNewColumnThunk = createAsyncThunk(
 export const updateColumnThunk = createAsyncThunk(
   'columns/updateColumn',
   async ({ boardId, columnId, title }, thunkAPI) => {
+    // console.log({ boardId, columnId, title });
+
     try {
       const { data } = await taskProApi.patch(
         `api/boards/${boardId}/columns/${columnId}`,

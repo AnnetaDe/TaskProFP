@@ -15,20 +15,18 @@ const tasksSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
 
-      .addCase(createNewTaskThunk.pending, state => {
+      .addCase(createNewTaskThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(createNewTaskThunk.fulfilled, (state, action) => {
-        console.log(action);
-
         state.isLoading = false;
-        const { boardId, columnId } = action.payload;
+        const { boardId, columnId } = action.meta.arg;
         const task = action.payload.data;
-
+        
         if (!state.tasks[boardId]) {
           state.tasks[boardId] = {};
         }
@@ -42,7 +40,8 @@ const tasksSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(updateTaskThunk.pending, state => {
+
+      .addCase(updateTaskThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
@@ -50,9 +49,9 @@ const tasksSlice = createSlice({
         state.isLoading = false;
         const { boardId, columnId, taskId } = action.meta.arg;
         const updatedTask = action.payload.data;
-
+        
         const columnTasks = state.tasks[boardId]?.[columnId] || [];
-        const index = columnTasks.findIndex(t => t._id === taskId);
+        const index = columnTasks.findIndex((t) => t._id === taskId);
         if (index !== -1) {
           columnTasks[index] = updatedTask;
         }
@@ -62,19 +61,18 @@ const tasksSlice = createSlice({
         state.error = action.payload;
       })
 
-      .addCase(deleteTaskThunk.pending, state => {
+
+      .addCase(deleteTaskThunk.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { boardId, columnId, taskId } = action.payload;
-
-        if (state.tasks[boardId] && state.tasks[boardId][columnId]) {
-          state.tasks[boardId][columnId] = state.tasks[boardId][
-            columnId
-          ].filter(t => t._id !== taskId);
-        }
+        const { boardId, columnId, taskId } = action.meta.arg;
+        
+        state.tasks[boardId][columnId] = state.tasks[boardId][columnId].filter(
+          (t) => t._id !== taskId
+        );
       })
       .addCase(deleteTaskThunk.rejected, (state, action) => {
         state.isLoading = false;

@@ -51,7 +51,6 @@ const userSlice = createSlice({
         state.refreshToken = null;
         state.sid = null;
         state.isLoggined = false;
-        state.userTheme='dark'
       })
       .addCase(loginThunk.pending, state => {
         state.isLoading = true;
