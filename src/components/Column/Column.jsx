@@ -8,10 +8,7 @@ import CardForm from '../CardForm/CardForm';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
-import CardForm from '../CardForm/CardForm';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+
 
 export const Column = ({ column }) => {
   const { id } = useParams();

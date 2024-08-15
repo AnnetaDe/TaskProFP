@@ -28,17 +28,7 @@ import {
 import Modal from '../Modal/Modal';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
-import { Button } from '../Button/Button';
-import icon from '../../images/icons.svg';
-import { selectCreateColumnOpen } from '../../redux/modal/modalSelector';
-import {
-  closeCreateColumnModal,
-  closeEditProfileModal,
-  openCreateColumnModal,
-} from '../../redux/modal/modalSlice';
-import Modal from '../Modal/Modal';
-import ColumnForm from '../ColumnForm/ColumnForm';
-import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
