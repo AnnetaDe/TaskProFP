@@ -7,9 +7,16 @@ import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
 import { clsx } from 'clsx';
-export const TaskControler = ({ taskid, columnid, boardid, onOpen, task, className }) => {
+export const TaskControler = ({
+  taskid,
+  columnid,
+  boardid,
+  onOpen,
+  task,
+  className,
+}) => {
   // console.log(taskid, columnid, boardid);
-const {id}=useParams()
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const [isEditOpen, setIsEditOpen] = useState();
@@ -32,50 +39,49 @@ const {id}=useParams()
 
   return (
     <>
-
-    <ul className={clsx(s.taskActions, className)}>
-      <li>
-        <button className={s.btn_icon}>
-          <svg
-            className={s.taskIcon}
-            // onClick={}
-          >
-            <use href={`${icons}#icon-glocke`}></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button className={s.btn_icon}>
-          <svg
-            className={s.taskIcon}
-            // onClick={}
-          >
-            <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button className={s.btn_icon} onClick={openEditModal}>
-          <svg
-            className={s.taskIcon}
-            // onClick={}
-          >
-            <use href={`${icons}#icon-pencil`}></use>
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
-          <svg
-            className={s.taskIcon}
-            // onClick={}
-          >
-            <use href={`${icons}#icon-trash`}></use>
-          </svg>
-        </button>
-      </li>
-    </ul>   
-    {isEditOpen && (
+      <ul className={clsx(s.taskActions, className)}>
+        <li>
+          <button className={s.btn_icon}>
+            <svg
+              className={s.taskIcon}
+              // onClick={}
+            >
+              <use href={`${icons}#icon-glocke`}></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button className={s.btn_icon}>
+            <svg
+              className={s.taskIcon}
+              // onClick={}
+            >
+              <use href={`${icons}#icon-arrow-circle-broken-right`}></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button className={s.btn_icon} onClick={openEditModal}>
+            <svg
+              className={s.taskIcon}
+              // onClick={}
+            >
+              <use href={`${icons}#icon-pencil`}></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
+            <svg
+              className={s.taskIcon}
+              // onClick={}
+            >
+              <use href={`${icons}#icon-trash`}></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+      {isEditOpen && (
         <ModalWithoutRedux
           isOpen={isEditOpen}
           onClose={closeEditModal}
@@ -90,6 +96,6 @@ const {id}=useParams()
           />
         </ModalWithoutRedux>
       )}
-     </>
+    </>
   );
 };

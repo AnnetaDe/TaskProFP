@@ -48,6 +48,13 @@ export const Column = ({ column, boardid }) => {
                         columnid={columnid}
                         boardid={boardid}
                       />
+                      <Task
+                        key={task.id}
+                        task={task}
+                        index={index}
+                        columnid={columnid}
+                        boardid={boardid}
+                      />
                     </div>
                   )}
                 </Draggable>
@@ -59,6 +66,7 @@ export const Column = ({ column, boardid }) => {
                 width="100%"
                 typeStyle="primary"
                 buttonText="Add another card"
+                onClick={openCreateModal}
                 onClick={openCreateModal}
               />
             </ul>
