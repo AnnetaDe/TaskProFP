@@ -55,6 +55,7 @@
   --dedline-bell:#BEDBB0;
   --board-scroll-thumb: rgba(255, 255, 255, 0.1);
   --board-scroll-track: #161616;
+  --priority-none:rgba(255, 255, 255, 0.1);
 
 }
 [theme='light'] {
@@ -92,7 +93,7 @@
   --dedline-bell:#BEDBB0;
   --board-scroll-thumb: #e8e8e8;
   --board-scroll-track: white;
-
+ --priority-none:rgba(22, 22, 22, 0.3);
 }
 [theme='violet'] {
   --text-color: #000000;
@@ -129,6 +130,7 @@
   --dedline-bell:#5255BC;
   --board-scroll-thumb: #b8bcfd;
   --board-scroll-track: white;
+  --priority-none:rgba(22, 22, 22, 0.3);
 
 }
 
