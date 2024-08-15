@@ -49,16 +49,7 @@ export const Task = ({ columnid, task }) => {
 
   return (
     <>
-      <li
-        className={clsx(
-          s.boardTaskBackground,
-          s.priorityColor,
-          task.priority === 'low' && s.priorityLow,
-          task.priority === 'medium' && s.priorityMedium,
-          task.priority === 'high' && s.priorityHigh
-        )}
-        key={task._id}
-      >
+      <li className={s.boardTaskBackground} key={task._id}>
         <ul className={s.boardTask}>
           <li className={s.taskTitle}>{task.title}</li>
           <li className={s.taskDescr}>{task.description}</li>
@@ -67,13 +58,8 @@ export const Task = ({ columnid, task }) => {
               Priority
               <div className={s.priorityBox}>
                 <span
-                  className={clsx(
-                    s.priorityCircle,
-                    s.priorityColor,
-                    task.priority === 'low' && s.priorityLow,
-                    task.priority === 'medium' && s.priorityMedium,
-                    task.priority === 'high' && s.priorityHigh
-                  )}
+                  style={{ backgroundColor: s.priorityColor }}
+                  className={s.priorityCircle}
                 ></span>
                 <span className={s.taskProps}>{task.priority}</span>
               </div>
