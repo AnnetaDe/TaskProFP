@@ -79,5 +79,5 @@ export const priorities  = [
 {  priorityLevel: 'low', color: '#8fa1d0'},
 {  priorityLevel: 'medium', color: '#e09cb5'},
 {  priorityLevel: 'high', color: '#bedbb0'},
-{  priorityLevel: 'without', color: 'rgba(255, 255, 255, 0.3)'},
+{  priorityLevel: 'none', color: 'var(--priority-none)'},
 ]

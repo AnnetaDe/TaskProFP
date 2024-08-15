@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -15,13 +15,15 @@ import { Button } from '../Button/Button';
 import PriorityList from './PriorityList/PriorityList';
 import { priorities } from '../../constants/dataForBoardModal';
 import { CardFormScheme } from '../../schames/BoardFormSchemes';
+import { format } from 'date-fns';
 
 const CardForm = ({
   type,
-  title,
-  description,
-  priority,
-  deadline,
+  // title,
+  // description,
+  // priority,
+  // deadline,
+  task,
   onClose,
   boardid,
   columnid,
@@ -36,10 +38,10 @@ const CardForm = ({
     edit: {
       onSubmitThunk: updateTaskThunk,
       defaultValues: {
-        title: title,
-        description: description,
-        priority: priority,
-        deadline: deadline,
+        title: task ? task.title : '',
+        description: task ? task.description : '',
+        priority: task ? task.priority : '',
+        deadline: task ? task.deadline : '',
       },
     },
   };
@@ -62,14 +64,32 @@ const CardForm = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
-    const formData = {
-      boardid,
-      columnid,
-      task: { ...data },
-    };
+    const formData =
+      type === 'create'
+        ? {
+            boardid,
+            columnid,
+            task: {
+              ...data,
+              deadline: data.deadline
+                ? data.deadline
+                : format(new Date(), 'yyyy-MM-dd'),
+            },
+          }
+        : {
+            boardid,
+            columnid,
+            taskid: task._id,
+            body: {
+              ...data,
+              deadline: data.deadline
+                ? data.deadline
+                : format(new Date(), 'yyyy-MM-dd'),
+            },
+          };
     dispatch(options[type].onSubmitThunk(formData));
 
-    // onClose();
+    onClose();
     reset();
   };
 

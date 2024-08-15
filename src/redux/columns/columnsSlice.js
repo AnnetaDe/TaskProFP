@@ -5,6 +5,11 @@ import {
   updateColumnThunk,
   deleteColumnThunk,
 } from './columnsOperations';
+import {
+  createNewTaskThunk,
+  deleteTaskThunk,
+  updateTaskThunk,
+} from '../tasks/tasksOperations';
 
 const initialState = {
   boardId: '',
@@ -13,7 +18,8 @@ const initialState = {
   boardBackground: [],
   columnsL: [],
   columnsOrderId: [],
-  tasksWithinBoard: [],
+  tasks: [],
+
   filter: null,
   filteredColumns: [],
   tasksOrderId: [],
@@ -24,20 +30,6 @@ const columnSlice = createSlice({
   name: 'columns',
   initialState,
   reducers: {
-    // updateColumnOrder: (state, action) => {
-    //   const { source, destination } = action.payload;
-    //   if (!destination) {
-    //     return;
-    //   }
-    //   const sourceColumn = state.columnsL.find(
-    //     column => column._id === source.droppableId
-    //   );
-    //   const destinationColumn = state.columnsL.find(
-    //     column => column._id === destination.droppableId
-    //   );
-    //   const [removed] = sourceColumn.tasks.splice(source.index, 1);
-    //   destinationColumn.tasks.splice(destination.index, 0, removed);
-    // },
     updateTaskOrder: (state, action) => {
       const { source, destination, sourceColumnId, destinationColumnId } =
         action.payload;
@@ -102,6 +94,13 @@ const columnSlice = createSlice({
         })
         .filter(column => column.tasks.length > 0);
     },
+
+    deleteTask: (state, { payload }) => {
+      state.columnsL = state.columnsL.map(column => {
+        column.tasks = column.tasks.filter(task => task._id !== payload);
+        return column;
+      });
+    },
   },
 
   extraReducers: builder => {
@@ -122,9 +121,11 @@ const columnSlice = createSlice({
 
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
-          state.tasksWithinBoard = payload.columns.reduce((acc, column) => {
+
+          state.tasks = payload.columns.reduce((acc, column) => {
             return [...acc, ...column.tasks];
           }, []);
+
           state.tasksOrderId = payload.columns.reduce((acc, column) => {
             return [...acc, ...column.tasks.map(task => task._id)];
           }, []);
@@ -133,7 +134,7 @@ const columnSlice = createSlice({
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-        state.columnsL.push(payload);
+        state.columnsL.push(payload.data);
       })
       .addCase(updateColumnThunk.fulfilled, (state, action) => {
         const column = state.columnsL.find(
@@ -148,7 +149,64 @@ const columnSlice = createSlice({
           column => column._id === action.payload
         );
         state.columnsL.splice(index, 1);
-      });
+      })
+      .addCase(createNewTaskThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      
+        const {columnid} = action.meta.arg;
+        console.log(columnid);
+        
+        const column = state.columnsL.find(column => column._id === columnid);
+      
+        if (column) {
+          const newTask = action.payload.data;
+          column.tasks.push(newTask);
+        } else {
+          console.error(`Column with id ${columnid} not found`);
+        }
+      })
+      .addCase(deleteTaskThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      
+        const { columnid, taskid } = action.meta.arg;
+        const column = state.columnsL.find(column => column._id === columnid);
+      
+        if (column) {
+          // Видаляємо задачу з масиву tasks у відповідній колонці
+          column.tasks = column.tasks.filter(task => task._id !== taskid);
+        }
+      })
+      .addCase(updateTaskThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+
+        const { columnid, taskid } = action.meta.arg;
+        const column = state.columnsL.find(column => column._id === columnid);
+        if (column) {
+          const taskIndex = column.tasks.findIndex(task => task._id === taskid);
+          if (taskIndex !== -1) {
+            column.tasks[taskIndex] = action.payload.data;
+          }
+        }
+      })
+      .addMatcher(
+        action =>
+          action.type.includes('fulfilled') && action.type.includes('columns'),
+        state => {
+          state.isLoading = false;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        action =>
+          action.type.includes('pending') && action.type.includes('columns'),
+        state => {
+          state.isLoading = true;
+          state.error = null;
+        }
+      );
   },
 });
 export const {
@@ -157,5 +215,6 @@ export const {
   setFilter,
   setFilteredColumns,
   filterColumns,
+  deleteTask,
 } = columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;

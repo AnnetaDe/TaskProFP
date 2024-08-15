@@ -16,11 +16,15 @@ import {
   selectTasksOrderId,
   selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
+import icon from '../../images/icons.svg';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Column } from '../Column/Column';
 import s from './Board.module.css';
 import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
+import { Button } from '../Button/Button';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import ColumnForm from '../ColumnForm/ColumnForm';
 
 export const Board = () => {
   const { id } = useParams();
@@ -40,7 +44,13 @@ export const Board = () => {
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
-
+  const [isOpen, setIsOpen] = useState();
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   const onDragEnd = result => {
     const { source, destination } = result;
 
@@ -68,7 +78,7 @@ export const Board = () => {
   };
 
   return (
-    <>
+    <div className={s.board_wrap}>
       <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
         <div className={s.boardTitle}>
           <h2>{boardTitle}</h2>
@@ -83,8 +93,23 @@ export const Board = () => {
                   <Column key={column._id} column={column} />
                 ))}
           </ul>
+          <Button
+            buttonText="Add another column"
+            onClick={openModal}
+            typeStyle="secondary"
+            icon={`${icon}#icon-plus-big`}
+          />
         </div>
       </DragDropContext>
-    </>
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeModal}
+          title="Add another column"
+        >
+          <ColumnForm onClose={closeModal} type="create" boardid={id} />
+        </ModalWithoutRedux>
+      )}
+    </div>
   );
 };

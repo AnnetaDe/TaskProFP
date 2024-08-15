@@ -4,9 +4,27 @@ import s from './Column.module.css';
 import { Button } from '../Button/Button';
 import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
-
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import CardForm from '../CardForm/CardForm';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateColumnThunk } from '../../redux/columns/columnsOperations';
 export const Column = ({ column, boardid }) => {
+  const { id } = useParams();
   const columnid = column._id;
+  const dispatch = useDispatch();
+
+
+  
+  const [isOpen, setIsOpen] = useState();
+  const openCreateModal = () => {
+    setIsOpen(true);
+  };
+  const closeCreateModal = () => {
+    setIsOpen(false);
+  };
+
 
   return (
     <li className={s.li_col}>
@@ -45,18 +63,33 @@ export const Column = ({ column, boardid }) => {
                 width="100%"
                 typeStyle="primary"
                 buttonText="Add another card"
+                onClick={openCreateModal}
               />
             </ul>
             {provided.placeholder}
           </div>
         )}
       </Droppable>
-
+      {isOpen && (
+        <ModalWithoutRedux
+          isOpen={isOpen}
+          onClose={closeCreateModal}
+          title="Add another card"
+        >
+          <CardForm
+            onClose={closeCreateModal}
+            type="create"
+            boardid={id}
+            columnid={columnid}
+          />
+        </ModalWithoutRedux>
+      )}
+      {/* 
       <Button
         className={s.btn_column}
         typeStyle="secondary"
         buttonText="Add another card"
-      />
+      /> */}
     </li>
   );
 };

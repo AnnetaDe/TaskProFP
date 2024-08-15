@@ -1,11 +1,41 @@
 import s from './TaskControler.module.css';
 import icons from '../../images/icons.svg';
 import { useParams } from 'react-router-dom';
-export const TaskControler = ({ taskid, columnid, boardid }) => {
-  console.log(taskid, columnid, boardid);
+
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import CardForm from '../CardForm/CardForm';
+import { clsx } from 'clsx';
+export const TaskControler = ({ taskid, columnid, boardid, onOpen, task, className }) => {
+  // console.log(taskid, columnid, boardid);
+const {id}=useParams()
+  const dispatch = useDispatch();
+
+  const [isEditOpen, setIsEditOpen] = useState();
+  const openEditModal = () => {
+    setIsEditOpen(true);
+  };
+  const closeEditModal = () => {
+    setIsEditOpen(false);
+  };
+  const handleDelete = taskid => {
+    dispatch(deleteTaskThunk({ boardid, columnid, taskid }));
+  };
+
+  // updateTaskThunk({
+  //   boardid: id,
+  //   columnid: columnid,
+  //   taskid: columnid,
+  //   body: { taskId: taskid },
+  // });
+
 
   return (
-    <ul className={s.taskActions}>
+    <>
+
+    <ul className={clsx(s.taskActions, className)}>
       <li>
         <button className={s.btn_icon}>
           <svg
@@ -27,7 +57,9 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
         </button>
       </li>
       <li>
-        <button className={s.btn_icon}>
+
+        <button className={s.btn_icon} onClick={openEditModal}>
+
           <svg
             className={s.taskIcon}
             // onClick={}
@@ -37,7 +69,7 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
         </button>
       </li>
       <li>
-        <button className={s.btn_icon}>
+        <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
           <svg
             className={s.taskIcon}
             // onClick={}
@@ -46,6 +78,22 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
           </svg>
         </button>
       </li>
-    </ul>
+    </ul>   
+    {isEditOpen && (
+        <ModalWithoutRedux
+          isOpen={isEditOpen}
+          onClose={closeEditModal}
+          title="Edit card"
+        >
+          <CardForm
+            onClose={closeEditModal}
+            type="edit"
+            boardid={id}
+            columnid={columnid}
+            task={task}
+          />
+        </ModalWithoutRedux>
+      )}
+     </>
   );
 };

@@ -3,7 +3,7 @@ import { taskProApi } from '../../config/api';
 //https://task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks
 export const createNewTaskThunk = createAsyncThunk(
   'tasks/createTask',
-  async (boardid, columnid, task, thunkAPI) => {
+  async ({boardid, columnid, task}, thunkAPI) => {
     try {
       const { data } = await taskProApi.post(
         `api/boards/${boardid}/columns/${columnid}/tasks`,
@@ -40,12 +40,13 @@ export const updateTaskThunk = createAsyncThunk(
 
 export const deleteTaskThunk = createAsyncThunk(
   'tasks/deleteTask',
-  async (boardid, columnid, taskid, thunkAPI) => {
+  async (data, thunkAPI) => {
+    console.log(data);
     try {
       await taskProApi.delete(
-        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`
+        `api/boards/${data.boardid}/columns/${data.columnid}/tasks/${data.taskid}`
       );
-      return taskid;
+      return data.taskid;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

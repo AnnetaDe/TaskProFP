@@ -2,16 +2,26 @@ import clsx from 'clsx';
 import s from './Task.module.css';
 import { TaskControler } from './TaskControler';
 import { priorities } from '../../constants/dataForBoardModal';
+import { useState } from 'react';
+import { format } from 'date-fns';
 
 export const Task = ({ task, columnid, boardid }) => {
   const { title, description, priority, deadline } = task;
-  const taskid = task._id;
+
+  // const taskid = task._id;
+
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
+  // console.log(priorityColor);
 
+  const formattedDeadline = format(new Date(deadline), 'dd/MM/yyyy');
   return (
-    <li className={s.boardTaskBackground} key={task._id}>
+    <li
+      className={s.boardTaskBackground}
+      key={task._id}
+      style={{ borderColor: priorityColor.color }}
+    >
       <ul className={s.boardTask}>
         <li className={s.taskTitle}>{title}</li>
         <li className={s.taskDescr}>{description}</li>
@@ -20,7 +30,7 @@ export const Task = ({ task, columnid, boardid }) => {
             Priority
             <div className={s.priorityBox}>
               <span
-                style={{ backgroundColor: priorityColor }}
+                style={{ backgroundColor: priorityColor.color }}
                 className={s.priorityCircle}
               ></span>
               <span className={s.taskProps}>{priority}</span>
@@ -28,14 +38,16 @@ export const Task = ({ task, columnid, boardid }) => {
           </div>
           <div className={s.deadlineBox}>
             Deadline
-            <span className={s.taskProps}> 2000</span>{' '}
             {/* change for DatePicker */}
-            {/* <span className={s.taskProps}>{deadline}</span> */}
+            <span className={s.taskProps}>{formattedDeadline}</span>
           </div>
           <TaskControler
-            taskid={taskid}
+
+            taskid={task._id}
             columnid={columnid}
             boardid={boardid}
+            task={task}
+            className={s.task_controller}
           />
         </li>
       </ul>
