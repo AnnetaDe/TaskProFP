@@ -2,13 +2,15 @@ import clsx from 'clsx';
 import s from './Task.module.css';
 import { TaskControler } from './TaskControler';
 import { priorities } from '../../constants/dataForBoardModal';
+import { useState } from 'react';
 
 export const Task = ({ task, columnid, boardid }) => {
   const { title, description, priority, deadline } = task;
-  const taskid = task._id;
+  // const taskid = task._id;
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
+
 
   return (
     <li className={s.boardTaskBackground} key={task._id}>
@@ -33,9 +35,10 @@ export const Task = ({ task, columnid, boardid }) => {
             {/* <span className={s.taskProps}>{deadline}</span> */}
           </div>
           <TaskControler
-            taskid={taskid}
+            taskid={task._id}
             columnid={columnid}
             boardid={boardid}
+            task={task}
           />
         </li>
       </ul>

@@ -4,17 +4,19 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
-export const TaskControler = ({ taskid, columnid, boardid }) => {
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
+import CardForm from '../CardForm/CardForm';
+export const TaskControler = ({ taskid, columnid, boardid, onOpen, task }) => {
   console.log(taskid, columnid, boardid);
-
-  const [isOpen, setIsOpen] = useState(false);
+const {id}=useParams()
   const dispatch = useDispatch();
 
-  const openModal = () => {
-    setIsOpen(true);
+  const [isEditOpen, setIsEditOpen] = useState();
+  const openEditModal = () => {
+    setIsEditOpen(true);
   };
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeEditModal = () => {
+    setIsEditOpen(false);
   };
   const handleDelete = taskid => {
     dispatch(deleteTaskThunk({ boardid, columnid, taskid }));
@@ -28,6 +30,8 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
   // });
 
   return (
+    <>
+
     <ul className={s.taskActions}>
       <li>
         <button className={s.btn_icon}>
@@ -50,7 +54,7 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
         </button>
       </li>
       <li>
-        <button className={s.btn_icon}>
+        <button className={s.btn_icon} onClick={openEditModal}>
           <svg
             className={s.taskIcon}
             // onClick={}
@@ -60,7 +64,7 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
         </button>
       </li>
       <li>
-        <button className={s.btn_icon} onClick={taskid => handleDelete(taskid)}>
+        <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
           <svg
             className={s.taskIcon}
             // onClick={}
@@ -69,6 +73,22 @@ export const TaskControler = ({ taskid, columnid, boardid }) => {
           </svg>
         </button>
       </li>
-    </ul>
+    </ul>   
+    {isEditOpen && (
+        <ModalWithoutRedux
+          isOpen={isEditOpen}
+          onClose={closeEditModal}
+          title="Edit card"
+        >
+          <CardForm
+            onClose={closeEditModal}
+            type="edit"
+            boardid={id}
+            columnid={columnid}
+            task={task}
+          />
+        </ModalWithoutRedux>
+      )}
+     </>
   );
 };
