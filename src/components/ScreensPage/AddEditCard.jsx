@@ -9,6 +9,7 @@ import PriorityList from '../CardForm/PriorityList/PriorityList';
 import { useState } from 'react';
 import { priorities } from '../../constants/dataForBoardModal';
 import s from './AddEditCard.module.css';
+import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 
 export const AddEditCard = ({
   addForm = false,
@@ -16,7 +17,7 @@ export const AddEditCard = ({
   boardId,
   columnId,
   taskId,
-  isOpen,
+  task,
   formattedDate,
 }) => {
   const {
@@ -35,6 +36,13 @@ export const AddEditCard = ({
     mode: 'onSubmit',
   });
   const [selectedPriority, setSelectedPriority] = useState(priorities);
+  const [isOpen, setIsOpen] = useState();
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
   const dispatch = useDispatch();
   const isLoading = false;
 
@@ -47,18 +55,17 @@ export const AddEditCard = ({
           console.log(data.error.message);
         } else {
           reset();
-          dispatch(closeModal());
+          // dispatch(closeModal());
+          closeModal();
         }
       }
     );
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      closeModal={() => dispatch(closeEditColumnModal(taskId))}
-    >
+    <ModalWithoutRedux isOpen={openModal} onClose={closeModal}>
       <form
+        onClose={closeModal}
         className={s.taskForm}
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
@@ -104,6 +111,6 @@ export const AddEditCard = ({
           icon="+"
         />
       </form>
-    </Modal>
+    </ModalWithoutRedux>
   );
 };

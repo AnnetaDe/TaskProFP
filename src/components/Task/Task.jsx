@@ -43,17 +43,17 @@ export const Task = ({ columnid, task }) => {
     <>
       <li className={s.boardTaskBackground} key={task._id}>
         <ul className={s.boardTask}>
-          <li className={s.taskTitle}>{title}</li>
-          <li className={s.taskDescr}>{description}</li>
+          <li className={s.taskTitle}>{task.title}</li>
+          <li className={s.taskDescr}>{task.description}</li>
           <li className={s.taskInfo}>
             <div>
               Priority
               <div className={s.priorityBox}>
                 <span
-                  style={{ backgroundColor: priorityColor }}
+                  style={{ backgroundColor: s.priorityColor }}
                   className={s.priorityCircle}
                 ></span>
-                <span className={s.taskProps}>{priority}</span>
+                <span className={s.taskProps}>{task.priority}</span>
               </div>
             </div>
             <div className={s.deadlineBox}>
