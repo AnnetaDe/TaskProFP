@@ -15,6 +15,7 @@ export const Column = ({ column, boardid }) => {
   const columnid = column._id;
   const dispatch = useDispatch();
 
+
   
   const [isOpen, setIsOpen] = useState();
   const openCreateModal = () => {
@@ -23,6 +24,7 @@ export const Column = ({ column, boardid }) => {
   const closeCreateModal = () => {
     setIsOpen(false);
   };
+
 
   return (
     <li className={s.li_col}>

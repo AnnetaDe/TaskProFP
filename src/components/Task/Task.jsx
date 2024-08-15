@@ -7,7 +7,9 @@ import { format } from 'date-fns';
 
 export const Task = ({ task, columnid, boardid }) => {
   const { title, description, priority, deadline } = task;
+
   // const taskid = task._id;
+
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
@@ -40,6 +42,7 @@ export const Task = ({ task, columnid, boardid }) => {
             <span className={s.taskProps}>{formattedDeadline}</span>
           </div>
           <TaskControler
+
             taskid={task._id}
             columnid={columnid}
             boardid={boardid}

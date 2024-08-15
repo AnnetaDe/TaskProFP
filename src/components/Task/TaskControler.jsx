@@ -1,6 +1,7 @@
 import s from './TaskControler.module.css';
 import icons from '../../images/icons.svg';
 import { useParams } from 'react-router-dom';
+
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
@@ -30,6 +31,7 @@ const {id}=useParams()
   //   body: { taskId: taskid },
   // });
 
+
   return (
     <>
 
@@ -55,7 +57,9 @@ const {id}=useParams()
         </button>
       </li>
       <li>
+
         <button className={s.btn_icon} onClick={openEditModal}>
+
           <svg
             className={s.taskIcon}
             // onClick={}
