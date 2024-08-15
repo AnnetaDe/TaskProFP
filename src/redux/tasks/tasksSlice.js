@@ -70,11 +70,12 @@ const tasksSlice = createSlice({
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        const { boardId, columnId, taskId } = action.meta.arg;
+        const { boardId, columnId, taskId } = action.payload;
         
-        state.tasks[boardId][columnId] = state.tasks[boardId][columnId].filter(
-          (t) => t._id !== taskId
-        );
+        if (state.tasks[boardId] && state.tasks[boardId][columnId]) {
+          state.tasks[boardId][columnId] = state.tasks[boardId][columnId].filter(
+            (t) => t._id !== taskId
+          )}
       })
       .addCase(deleteTaskThunk.rejected, (state, action) => {
         state.isLoading = false;

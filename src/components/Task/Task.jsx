@@ -3,11 +3,12 @@ import s from './Task.module.css';
 import { TaskControler } from './TaskControler';
 import { priorities } from '../../constants/dataForBoardModal';
 
-export const Task = ({ task }) => {
+export const Task = ({ task,  columnId }) => {
   const { title, description, priority, deadline } = task;
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
+  console.log(columnId);
 
   return (
     <li className={s.boardTaskBackground} key={task._id}>
@@ -31,7 +32,7 @@ export const Task = ({ task }) => {
             {/* change for DatePicker */}
             {/* <span className={s.taskProps}>{deadline}</span> */}
           </div>
-          <TaskControler />
+          <TaskControler className={s.task_controller} columnId={columnId} task={task} />
         </li>
       </ul>
     </li>

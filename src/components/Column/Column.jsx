@@ -39,7 +39,7 @@ export const Column = ({ column }) => {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <Task key={task.id} task={task} index={index} />
+                      <Task key={task.id} task={task} index={index}   columnId={column._id}/>
                     </div>
                   )}
                 </Draggable>

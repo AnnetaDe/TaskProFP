@@ -20,14 +20,13 @@ export const createNewTaskThunk = createAsyncThunk(
 export const updateTaskThunk = createAsyncThunk(
   'tasks/updateTask',
   async (data, thunkAPI) => {
-    const { boardid, columnid, taskid, body } = data;
-    // const { columnId } = body;
-    console.log(boardid, columnid, taskid, body);
+    const { boardId, columnId, taskId, task } = data;
+
 
     try {
       const { data } = await taskProApi.patch(
-        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`,
-        body
+        `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+        task
       );
       console.log(data);
       return data;
@@ -40,12 +39,12 @@ export const updateTaskThunk = createAsyncThunk(
 
 export const deleteTaskThunk = createAsyncThunk(
   'tasks/deleteTask',
-  async (boardid, columnid, taskid, thunkAPI) => {
+  async ({boardId, columnId, taskId}, thunkAPI) => {
     try {
       await taskProApi.delete(
-        `api/boards/${boardid}/columns/${columnid}/tasks/${taskid}`
+        `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
       );
-      return taskid;
+      return taskId;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

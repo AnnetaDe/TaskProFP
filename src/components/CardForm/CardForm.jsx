@@ -1,6 +1,6 @@
 import s from './CardForm.module.css';
 import { useDispatch } from 'react-redux';
-import {  useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import icon from '../../images/icons.svg';
 import { useState } from 'react';
@@ -19,16 +19,17 @@ import { format } from 'date-fns';
 
 const CardForm = ({
   type,
-  title,
-  description,
-  priority,
-  deadline,
+  // title,
+  // description,
+  // priority,
+  // deadline,
+  task,
   onClose,
   boardId,
   columnId,
 }) => {
   const dispatch = useDispatch();
-
+  const { title, description, deadline, priority } = task;
   const options = {
     create: {
       onSubmitThunk: createNewTaskThunk,
@@ -63,12 +64,18 @@ const CardForm = ({
     mode: 'onChange',
   });
   const onSubmit = data => {
-    console.log(data);
-    
+    console.log(data, task);
+
     const formData = {
       boardId,
       columnId,
-      task: { ...data, deadline: data.deadline ? data.deadline : format(new Date(), 'yyyy-MM-dd') },
+      taskId: task._id,
+      task: {
+        ...data,
+        deadline: data.deadline
+          ? data.deadline
+          : format(new Date(), 'yyyy-MM-dd'),
+      },
     };
     console.log(formData);
     dispatch(options[type].onSubmitThunk(formData));
