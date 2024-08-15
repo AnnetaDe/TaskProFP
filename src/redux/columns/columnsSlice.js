@@ -18,8 +18,8 @@ const initialState = {
   boardBackground: [],
   columnsL: [],
   columnsOrderId: [],
-  tasksWithinBoard: [],
   tasks: [],
+
   filter: null,
   filteredColumns: [],
   tasksOrderId: [],
@@ -101,9 +101,7 @@ const columnSlice = createSlice({
 
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
-          state.tasksWithinBoard = payload.columns.reduce((acc, column) => {
-            return [...acc, ...column.tasks];
-          }, []);
+
           state.tasks = payload.columns.reduce((acc, column) => {
             return [...acc, ...column.tasks];
           }, []);
@@ -137,7 +135,9 @@ const columnSlice = createSlice({
         state.error = null;
         const { columnId } = action.meta.arg;
         const column = state.columnsL.find(column => column._id === columnId);
-        column.tasks.push(action.payload);
+        const { newTask } = action;
+
+        column.tasks.push(newTask);
       })
       .addCase(deleteTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -147,10 +147,10 @@ const columnSlice = createSlice({
       .addCase(updateTaskThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+
         const { columnId, taskId } = action.meta.arg;
         const column = state.columnsL.find(column => column._id === columnId);
-        const task = column.tasks.find(task => task._id === taskId);
-        Object.assign(task, action.payload);
+        state.tasks = column.tasks.find(task => task._id === taskId);
       })
       .addMatcher(
         action =>
