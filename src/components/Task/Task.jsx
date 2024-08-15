@@ -18,10 +18,18 @@ export const Task = ({ columnid, task }) => {
   const taskid = task._id;
   const [showEditTask, setShowEditTask] = useState(false);
   const dispatch = useDispatch();
-  const handleEditTask = () => {
-    dispatch(openModal());
+  // const [isOpen, setIsOpen] = useState();
+  const openModal = () => {
     setShowEditTask(true);
   };
+  const closeModal = () => {
+    setShowEditTask(false);
+  };
+
+  // const handleEditTask = () => {
+  //   dispatch(openModal());
+  //   setShowEditTask(true);
+  // };
   const handleDeleteTask = data => {
     dispatch(deleteTaskThunk(data));
   };
@@ -77,7 +85,7 @@ export const Task = ({ columnid, task }) => {
                 </svg>
               </li>
               <li>
-                <svg className={s.taskIcon} onClick={handleEditTask}>
+                <svg className={s.taskIcon} onClick={openModal}>
                   <use href={`${icons}#icon-pencil`}></use>
                 </svg>
               </li>
@@ -106,7 +114,8 @@ export const Task = ({ columnid, task }) => {
           boardId={boardid}
           columnId={columnid}
           taskId={taskid}
-          isOpen={openModal()}
+          isOpen={showEditTask}
+          onClose={closeModal}
         />
       )}
     </>

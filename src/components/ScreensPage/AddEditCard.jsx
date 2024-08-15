@@ -17,8 +17,10 @@ export const AddEditCard = ({
   boardId,
   columnId,
   taskId,
+  isOpen,
   task,
   formattedDate,
+  onClose
 }) => {
   const {
     control,
@@ -36,13 +38,13 @@ export const AddEditCard = ({
     mode: 'onSubmit',
   });
   const [selectedPriority, setSelectedPriority] = useState(priorities);
-  const [isOpen, setIsOpen] = useState();
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const closeModal = () => {
-    setIsOpen(false);
-  };
+  // const [isOpen, setIsOpen] = useState();
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
   const dispatch = useDispatch();
   const isLoading = false;
 
@@ -56,16 +58,17 @@ export const AddEditCard = ({
         } else {
           reset();
           // dispatch(closeModal());
-          closeModal();
+          // closeModal();
+          onClose()
         }
       }
     );
   };
 
   return (
-    <ModalWithoutRedux isOpen={openModal} onClose={closeModal}>
+    <ModalWithoutRedux isOpen={isOpen} onClose={onClose}>
       <form
-        onClose={closeModal}
+        // onClose={closeModal}
         className={s.taskForm}
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
