@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { deleteTaskThunk } from '../../redux/tasks/tasksOperations';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
-export const TaskControler = ({ taskid, columnid, boardid, onOpen, task }) => {
+import { clsx } from 'clsx';
+export const TaskControler = ({ taskid, columnid, boardid, onOpen, task, className }) => {
   // console.log(taskid, columnid, boardid);
 const {id}=useParams()
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const {id}=useParams()
   return (
     <>
 
-    <ul className={s.taskActions}>
+    <ul className={clsx(s.taskActions, className)}>
       <li>
         <button className={s.btn_icon}>
           <svg

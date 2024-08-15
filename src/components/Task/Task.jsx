@@ -44,6 +44,7 @@ export const Task = ({ task, columnid, boardid }) => {
             columnid={columnid}
             boardid={boardid}
             task={task}
+            className={s.task_controller}
           />
         </li>
       </ul>

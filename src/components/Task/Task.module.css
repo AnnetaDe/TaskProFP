@@ -48,7 +48,7 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.taskInfo {
+.taskInfo {position: relative;
   margin-top: 14px;
   padding-top: 14px;
   border-top: 1px solid var(--task-line);
@@ -81,3 +81,8 @@
   align-items: flex-end;
   gap: 8px;
 } */
+.task_controller{
+  position: absolute;
+  top: 50%;
+  right: 5px;
+}
