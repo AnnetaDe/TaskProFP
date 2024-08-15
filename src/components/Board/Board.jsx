@@ -39,7 +39,11 @@ export const Board = () => {
     if (id && !filter) {
       dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
-  }, [dispatch, id]);
+
+    if (filter) {
+      dispatch(filterColumns(filter));
+    }
+  }, [dispatch, id, filter]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectColumnsWithinBoard);
@@ -105,7 +109,7 @@ export const Board = () => {
     // }
   };
 
-    return (
+  return (
     <div className={s.board_wrap}>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className={s.boardTitle}>
