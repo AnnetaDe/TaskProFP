@@ -1,4 +1,4 @@
-.board_wrap{
+.board_wrap {
   padding-left: 24px;
   overflow-y: hidden;
   overflow-x: auto;
@@ -22,7 +22,6 @@
   display: flex;
   flex-wrap: nowrap;
 
-  padding: 10px;
   height: 100%;
   width: 100%;
   max-width: 100%;
@@ -32,11 +31,10 @@
   padding: 10px 0;
   text-align: left;
   font-weight: 500;
-font-size: 18px;
-letter-spacing: -0.02em;
+  font-size: 18px;
+  letter-spacing: -0.02em;
 }
 .boardColumn {
-
   gap: 8px;
   display: flex;
   height: 98%;
