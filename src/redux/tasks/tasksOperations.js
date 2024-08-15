@@ -3,7 +3,7 @@ import { taskProApi } from '../../config/api';
 //https://task-pro-backend-xdd4.onrender.com/api/boards/:boardId/columns/:columnId/tasks
 export const createNewTaskThunk = createAsyncThunk(
   'tasks/createTask',
-  async (boardid, columnid, task, thunkAPI) => {
+  async ({boardid, columnid, task}, thunkAPI) => {
     try {
       const { data } = await taskProApi.post(
         `api/boards/${boardid}/columns/${columnid}/tasks`,

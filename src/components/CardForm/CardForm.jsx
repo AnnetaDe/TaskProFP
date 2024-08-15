@@ -15,6 +15,7 @@ import { Button } from '../Button/Button';
 import PriorityList from './PriorityList/PriorityList';
 import { priorities } from '../../constants/dataForBoardModal';
 import { CardFormScheme } from '../../schames/BoardFormSchemes';
+import { format } from 'date-fns';
 
 const CardForm = ({
   type,
@@ -65,11 +66,11 @@ const CardForm = ({
     const formData = {
       boardid,
       columnid,
-      task: { ...data },
+      task: { ...data, deadline: data.deadline? data.deadline: format(new Date(), 'yyyy-MM-dd') },
     };
     dispatch(options[type].onSubmitThunk(formData));
 
-    // onClose();
+    onClose();
     reset();
   };
 
