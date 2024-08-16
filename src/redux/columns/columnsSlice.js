@@ -119,7 +119,7 @@ const columnSlice = createSlice({
           //if (state.filteredColumns.length) {
           //  state.colufilteredColumnsmnsL = payload.columns;
           //}
-          state.currentBoardId = payload._id;
+          state.currentBoardId = payload._id
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
 
@@ -142,7 +142,7 @@ const columnSlice = createSlice({
           column => column._id === action.payload.data._id
         );
         column.title = action.payload.data.title;
-        state.boardBackground = action.payload.backgroundImg;
+        state.boardBackground = action.payload.backgroundImg
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
         state.boardBackground = action.payload.data.backgroundImg;
