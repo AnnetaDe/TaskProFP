@@ -39,7 +39,9 @@ export const Board = () => {
   const currentBoardId = useSelector(selectCurrentBoardId);
   const boardId = currentBoardId ? currentBoardId : id;
   useEffect(() => {
-    if (boardId) {
+    console.log(boardId);
+    
+    if (Object.entries(boardId).length) {
       dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
     }
 
