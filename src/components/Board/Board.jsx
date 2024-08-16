@@ -40,15 +40,16 @@ export const Board = () => {
   const boardId = currentBoardId ? currentBoardId : id;
   useEffect(() => {
     console.log(boardId);
-    
-    if (Object.entries(boardId).length) {
-      dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
+    if(Object.entries(currentBoardId).length){
+      dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
+    }else{
+      dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
 
     if (filter) {
       dispatch(filterColumns(filter));
     }
-  }, [dispatch, boardId, filter, currentBoardId]);
+  }, [dispatch, boardId, filter, currentBoardId, id]);
 
   const boardTitle = useSelector(selectBoardTitle);
 

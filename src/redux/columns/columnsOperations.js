@@ -5,6 +5,8 @@ import { taskProApi } from '../../config/api';
 export const getAllCoulumnsWithBoardIdThunk = createAsyncThunk(
   'columns/getAllColumns',
   async (boardId, thunkAPI) => {
+    console.log(boardId);
+    
     try {
       const data = await taskProApi.get(`/api/boards/${boardId}`);
 
