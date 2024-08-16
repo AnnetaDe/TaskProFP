@@ -37,7 +37,7 @@ export const TaskControler = ({
       <ul className={clsx(s.taskActions, className)}>
         <li>
           <button className={s.btn_icon}>
-            <WarningDedline />
+            <WarningDedline deadline={task.deadline} />
           </button>
         </li>
 
