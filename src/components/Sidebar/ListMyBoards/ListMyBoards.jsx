@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
   deleteBoardThunk,
+  fetchBoardByIdThunk,
   fetchBoardsThunk,
 } from '../../../redux/boards/boardsOperations';
 import clsx from 'clsx';
@@ -22,11 +23,14 @@ import {
   setFilter,
   setFilteredColumns,
 } from '../../../redux/columns/columnsSlice';
+import { getAllCoulumnsWithBoardIdThunk } from '../../../redux/columns/columnsOperations';
+import { selectCurrentBoardId } from '../../../redux/columns/columnsSelectors';
 
 const ListMyBoards = ({ className }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const boards = useSelector(selectBoard);
+  const currentBoardId = useSelector(selectCurrentBoardId)
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch]);
@@ -45,7 +49,9 @@ const ListMyBoards = ({ className }) => {
     dispatch(setFilter(null));
     dispatch(setFilteredColumns());
   };
-
+  const handleSetCurrentBoardId = (boardId)=>{
+    dispatch(getAllCoulumnsWithBoardIdThunk(boardId))
+  }
   return (
     <ul className={clsx(s.boards_list, className)}>
       {boards.map(board => {
@@ -60,8 +66,9 @@ const ListMyBoards = ({ className }) => {
             <NavLink
               to={`board/${board._id}`}
               className={({ isActive }) =>
-                clsx(s.board_item, isActive && s.active)
+                clsx(s.board_item, board._id === currentBoardId ? s.active : '')
               }
+              onClick={()=>handleSetCurrentBoardId(board._id)}
             >
               <div className={s.left_side}>
                 <svg width="18" height="18" className={s.board_item_svg}>

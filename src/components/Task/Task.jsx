@@ -1,8 +1,7 @@
-import clsx from 'clsx';
 import s from './Task.module.css';
 import { TaskControler } from './TaskControler';
 import { priorities } from '../../constants/dataForBoardModal';
-import { useState } from 'react';
+
 import { format } from 'date-fns';
 
 export const Task = ({ task, columnid, boardid }) => {
@@ -10,7 +9,6 @@ export const Task = ({ task, columnid, boardid }) => {
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
-  // console.log(priorityColor);
 
   const formattedDeadline = format(new Date(deadline), 'dd/MM/yyyy');
   return (

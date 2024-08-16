@@ -5,12 +5,14 @@ import {
   fetchBoardsThunk,
   updateBoardThunk,
 } from './boardsOperations';
+import { updateColumnThunk } from '../columns/columnsOperations';
 const initialState = {
   boards: [],
   boardsIds: [],
   isLoading: false,
   error: null,
-  boardBackground: {}
+  boardBackground: {},
+  currentBoard: null,
 };
 const boardSlice = createSlice({
   name: 'boards',
@@ -30,20 +32,16 @@ const boardSlice = createSlice({
         state.boards.push(payload.data);
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
-        console.log(action.payload);
-        
         const board = state.boards.find(
           board => board._id === action.payload.data._id
         );
-         if (board) {
-          console.log(board, 'board', action.payload.data.backgroundImg);
-          
-        board.title = action.payload.data.title;
-        board.icon = action.payload.data.icon;
-        board.backgroundImg = action.payload.data.backgroundImg;
-          // board.boardBackground = 
-      }
-      state.boardBackground = action.payload.data.backgroundImg
+        if (board) {
+          board.title = action.payload.data.title;
+          board.icon = action.payload.data.icon;
+          board.backgroundImg = action.payload.data.backgroundImg;
+          // board.boardBackground =
+        }
+        state.boardBackground = action.payload.data.backgroundImg;
       })
       .addCase(deleteBoardThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -52,8 +50,7 @@ const boardSlice = createSlice({
           board => board._id === action.payload
         );
         state.boards.splice(index, 1);
-      })
-      
+      });
   },
 });
 export const boardsReducer = boardSlice.reducer;

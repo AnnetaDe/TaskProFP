@@ -14,7 +14,6 @@ import {
 
 const ColumnForm = ({ type, title, onClose, boardid, columnId }) => {
   const dispatch = useDispatch();
-  console.log('open');
 
   const options = {
     create: {
@@ -53,8 +52,6 @@ const ColumnForm = ({ type, title, onClose, boardid, columnId }) => {
           };
 
     dispatch(options[type].onSubmitThunk(formData));
-    console.log(formData);
-
     onClose(columnId);
     reset();
   };

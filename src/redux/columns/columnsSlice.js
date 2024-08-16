@@ -10,6 +10,7 @@ import {
   deleteTaskThunk,
   updateTaskThunk,
 } from '../tasks/tasksOperations';
+import { updateBoardThunk } from '../boards/boardsOperations';
 
 const initialState = {
   boardId: '',
@@ -19,7 +20,7 @@ const initialState = {
   columnsL: [],
   columnsOrderId: [],
   tasks: [],
-
+  currentBoardId: {},
   filter: null,
   filteredColumns: [],
   tasksOrderId: [],
@@ -118,7 +119,7 @@ const columnSlice = createSlice({
           //if (state.filteredColumns.length) {
           //  state.colufilteredColumnsmnsL = payload.columns;
           //}
-
+          state.currentBoardId = payload._id
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
 
@@ -141,6 +142,10 @@ const columnSlice = createSlice({
           column => column._id === action.payload.data._id
         );
         column.title = action.payload.data.title;
+        state.boardBackground = action.payload.backgroundImg
+      })
+      .addCase(updateBoardThunk.fulfilled, (state, action) => {
+        state.boardBackground = action.payload.data.backgroundImg;
       })
       .addCase(deleteColumnThunk.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -155,7 +160,6 @@ const columnSlice = createSlice({
         state.error = null;
 
         const { columnid } = action.meta.arg;
-        console.log(columnid);
 
         const column = state.columnsL.find(column => column._id === columnid);
 

@@ -35,7 +35,7 @@ const persistColumns = {
   key: ['columns'],
   version: 1,
   storage,
-  whitelist: ['columns'],
+  whitelist: ['columns', 'currentBoardId'],
 };
 
 export const store = configureStore({

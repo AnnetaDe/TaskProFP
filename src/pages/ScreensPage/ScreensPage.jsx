@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 export const ScreensPage = () => {
   const boards = useSelector(selectBoard);
   const { id } = useParams();
-console.log(boards, 'boards');
 
   return (
     <div className={s.screen_page}>

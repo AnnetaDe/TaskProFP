@@ -37,7 +37,7 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = data => {
-    console.log(data);
+
     dispatch(registerThunk(data));
     reset();
   };

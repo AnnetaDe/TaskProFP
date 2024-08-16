@@ -1,5 +1,16 @@
 .board_wrap {
-  padding-left: 24px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+
+  padding:  0 0 10px 24px  ;
+  height: 100%;
+  width: 100%;
+
+} 
+.nested_wrap{
+  height: 100%;
+  width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
   display: flex;
@@ -8,6 +19,7 @@
   width: 100%;
   &::-webkit-scrollbar {
     height: 12px;
+    padding: 30px;
   }
   &::-webkit-scrollbar-track {
     background-color: var(--board-scroll-track);
@@ -18,6 +30,7 @@
     border-radius: 12px;
   }
 }
+
 .board {
   display: flex;
   flex-wrap: nowrap;

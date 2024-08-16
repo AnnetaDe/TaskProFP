@@ -13,6 +13,7 @@ import {
   selectBoardTitle,
   selectColumnsOrderId,
   selectColumnsWithinBoard,
+  selectCurrentBoardId,
   selectFilter,
   selectFilteredColumns,
   selectTasksOrderId,
@@ -35,20 +36,20 @@ export const Board = () => {
   const filter = useSelector(selectFilter);
   const filteredColumns = useSelector(selectFilteredColumns);
 
+  const currentBoardId = useSelector(selectCurrentBoardId);
+  const boardId = currentBoardId ? currentBoardId : id;
   useEffect(() => {
-    if (id) {
-      dispatch(getAllCoulumnsWithBoardIdThunk(id));
+    if (boardId) {
+      dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
     }
 
     if (filter) {
       dispatch(filterColumns(filter));
     }
-  }, [dispatch, id, filter]);
+  }, [dispatch, boardId, filter, currentBoardId]);
 
   const boardTitle = useSelector(selectBoardTitle);
-  const boardBackground = useSelector(selectBoardBackground);
-  const boardIcon = useSelector(selectBoardIcon);
-  console.log('boardBackground', boardBackground);
+
   const columns = useSelector(selectColumnsWithinBoard);
   const backgroundImg = useSelector(selectBoardBackground);
 
@@ -59,11 +60,11 @@ export const Board = () => {
     const width = window.innerWidth;
 
     if (width <= 768) {
-      return mobile; // mobile version
-    } else if (width <= 1024) {
-      return tablet; // tablet version
+      return mobile;
+    } else if (width <= 1440) {
+      return tablet; 
     } else {
-      return desktop; // desktop version
+      return desktop;
     }
   };
 
@@ -111,6 +112,7 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
+      <div className={s.nested_wrap}>
       <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
         <div className={s.boardTitle}>
           <h2>{boardTitle}</h2>
@@ -132,7 +134,9 @@ export const Board = () => {
             icon={`${icon}#icon-plus-big`}
           />
         </div>
-      </DragDropContext>
+      </DragDropContext>        
+      </div>
+
       {isOpen && (
         <ModalWithoutRedux
           isOpen={isOpen}

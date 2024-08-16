@@ -18,7 +18,7 @@ export const TaskControler = ({
   task,
   className,
 }) => {
-  // console.log(taskid, columnid, boardid);
+
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState();
