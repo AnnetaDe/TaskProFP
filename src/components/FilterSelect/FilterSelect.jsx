@@ -15,15 +15,11 @@ const FilterSelect = () => {
 
   const handleChange = ({ value }, selectProps) => {
     dispatch(setNewFilter(value));
-    // dispatch(filterColumns(value));
-
-    if (selectProps && selectProps.onMenuClose) {
-      selectProps.onMenuClose();
-    }
   };
 
   return (
     <>
+      filter
       <div className={css.container}>
         <svg className={css.icon_filter}>
           <use href={`${svg}#icon-filter-1`}></use>

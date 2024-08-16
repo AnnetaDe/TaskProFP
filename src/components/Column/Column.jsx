@@ -9,7 +9,12 @@ import CardForm from '../CardForm/CardForm';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
+import { updateColumnThunk } from '../../redux/columns/columnsOperations';
+import { useSelector } from 'react-redux';
+import {
+  selectFilteredTasks,
+  selectTasks,
+} from '../../redux/columns/columnsSelectors';
 export const Column = ({ column, boardid }) => {
   const { id } = useParams();
   const columnid = column._id;
@@ -24,7 +29,6 @@ export const Column = ({ column, boardid }) => {
 
   return (
     <li className={s.li_col}>
-      <pre>{column._id}</pre>
       <Droppable droppableId={column._id}>
         {provided => (
           <div
@@ -32,7 +36,7 @@ export const Column = ({ column, boardid }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <ColumnTitle title={column.title} columnid={column._id} />
+            <ColumnTitle title={column.title} columnId={column._id} />
             <ul className={s.column}>
               {column.tasks.map((task, index) => (
                 <Draggable key={task._id} draggableId={task._id} index={index}>

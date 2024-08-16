@@ -29,7 +29,7 @@ import { updateBoardThunk } from '../../redux/boards/boardsOperations';
 import { NewFilter } from '../NewFilter/NewFilter';
 import FilterSelect from '../FilterSelect/FilterSelect';
 import { useMedia } from '../../hooks/useMedia';
-import {getBackgroundImage} from '../../helpers/getBackgroundImage.js';
+import { getBackgroundImage } from '../../helpers/getBackgroundImage.js';
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -44,7 +44,6 @@ export const Board = () => {
       dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
     }
   }, [boardId, dispatch]);
-
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);
