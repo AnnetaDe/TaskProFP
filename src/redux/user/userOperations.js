@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
 import { taskProApiUnAutorized } from '../../config/api';
+import { set } from 'date-fns';
 
 export const setToken = accessToken => {
   taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -37,7 +38,7 @@ export const loginThunk = createAsyncThunk(
         credentials
       );
       setToken(data.data.accessToken);
-      setTokenOnLogin(data.data.accessToken);
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.response.status);
@@ -60,20 +61,20 @@ export const logoutThunk = createAsyncThunk(
 export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
-    const refreshToken = thunkAPI.getState().user.refreshToken;
     const sid = thunkAPI.getState().user.sid;
-    if (!refreshToken || !sid) {
-      return thunkAPI.rejectWithValue('Unable to fetch user');
+    const refreshToken = thunkAPI.getState().user.refreshToken;
+    if (refreshToken && sid) {
+      try {
+        setToken(refreshToken);
+        const { data } = await taskProApi.post('api/auth/refresh', {
+          sid,
+        });
+        return data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
-    try {
-      setToken(refreshToken);
-      const { data } = await taskProApi.post('api/auth/refresh', {
-        sid,
-      });
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
+    return thunkAPI.rejectWithValue('No refresh token or sid');
   }
 );
 

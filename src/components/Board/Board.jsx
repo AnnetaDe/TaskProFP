@@ -11,14 +11,10 @@ import {
   selectBoardBackground,
   selectBoardIcon,
   selectBoardTitle,
-  selectColumnsOrderId,
-  selectColumnsWithinBoard,
   selectCurrentBoardId,
   selectFilteredTasks,
   // selectFilter,
   // selectFilteredColumns,
-  selectTasksOrderId,
-  selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
 import icon from '../../images/icons.svg';
 
@@ -31,6 +27,7 @@ import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { updateBoardThunk } from '../../redux/boards/boardsOperations';
 import { NewFilter } from '../NewFilter/NewFilter';
+import FilterSelect from '../FilterSelect/FilterSelect';
 
 export const Board = () => {
   const { id } = useParams();
@@ -39,7 +36,8 @@ export const Board = () => {
   // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
-  const boardId = currentBoardId ? currentBoardId : id;
+  // const boardId = currentBoardId ? currentBoardId : id;
+  // console.log(boardId);
   useEffect(() => {
     // if (Object.entries(currentBoardId).length) {
     //   dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
@@ -51,8 +49,8 @@ export const Board = () => {
     //   dispatch(filterColumns(filter));
     // }
 
-    dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
-  }, [dispatch, boardId, currentBoardId]);
+    dispatch(getAllCoulumnsWithBoardIdThunk(id));
+  }, [dispatch, id]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);
@@ -95,7 +93,7 @@ export const Board = () => {
         destinationColumnId: destination.droppableId,
       })
     );
-
+    console.log(result);
     dispatch(
       updateTaskThunk({
         boardid: id,
@@ -115,7 +113,8 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
-      <NewFilter />
+      {/* <NewFilter /> */}
+      <FilterSelect />
 
       <div className={s.nested_wrap}>
         <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>

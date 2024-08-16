@@ -1,32 +1,30 @@
-// import Select from 'react-select';
-// import { useDispatch } from 'react-redux';
+import Select from 'react-select';
+import { useDispatch } from 'react-redux';
 
-// import { filterColumns, setFilter } from '../../redux/columns/columnsSlice';
+import { setNewFilter } from '../../redux/columns/filterSlice';
+import options from '../../helpers/optionsForFilterSelect';
+import CustomOption from '../../helpers/CustomOptionsForFilterSelect';
+import CustomMenu from '../../helpers/CustomMenuForFilterSelect';
+import customStyles from '../../helpers/customStylesForFilterSelect';
 
-// import options from '../../helpers/optionsForFilterSelect';
-// import CustomOption from '../../helpers/CustomOptionsForFilterSelect';
-// import CustomMenu from '../../helpers/CustomMenuForFilterSelect';
-// import customStyles from '../../helpers/customStylesForFilterSelect';
-
-// import svg from '../../images/icons.svg';
-// import css from './FilterSelect.module.css';
+import svg from '../../images/icons.svg';
+import css from './FilterSelect.module.css';
 
 const FilterSelect = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const handleChange = ({ value }, selectProps) => {
-  //   dispatch(setFilter(value));
-  //   dispatch(filterColumns(value));
+  const handleChange = ({ value }, selectProps) => {
+    dispatch(setNewFilter(value));
+    // dispatch(filterColumns(value));
 
-  //   if (selectProps && selectProps.onMenuClose) {
-  //     selectProps.onMenuClose();
-  //   }
-  // };
+    if (selectProps && selectProps.onMenuClose) {
+      selectProps.onMenuClose();
+    }
+  };
 
   return (
     <>
-      filter
-      {/* <div className={css.container}>
+      <div className={css.container}>
         <svg className={css.icon_filter}>
           <use href={`${svg}#icon-filter-1`}></use>
         </svg>
@@ -41,7 +39,7 @@ const FilterSelect = () => {
         selectProps={{
           handleChange,
         }}
-      /> */}
+      />
     </>
   );
 };

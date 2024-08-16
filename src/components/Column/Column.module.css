@@ -43,12 +43,10 @@
   outline: #636625 solid 1px;
 }
 .btn_column {
-
-    position: sticky;
-    bottom: 0;
-    z-index: 10; 
-    width: 100%;
-
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  width: 100%;
 
   margin-top: 10px;
   max-width: 334px;

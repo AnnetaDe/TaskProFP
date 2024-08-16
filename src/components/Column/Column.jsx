@@ -29,6 +29,7 @@ export const Column = ({ column, boardid }) => {
 
   return (
     <li className={s.li_col}>
+      <pre>{column._id}</pre>
       <Droppable droppableId={column._id}>
         {provided => (
           <div

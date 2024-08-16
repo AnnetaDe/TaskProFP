@@ -36,7 +36,14 @@ const persistColumns = {
   key: ['columns'],
   version: 1,
   storage,
-  whitelist: ['columns', 'currentBoardId'],
+  whitelist: ['currentBoardId'],
+};
+
+const persistFilter = {
+  key: ['filter'],
+  version: 1,
+  storage,
+  whitelist: ['filter'],
 };
 
 export const store = configureStore({
@@ -49,7 +56,7 @@ export const store = configureStore({
     columns: persistReducer(persistColumns, columnsReducer),
     modal: modalReducer,
     support: supportReducer,
-    filter: filterReducer,
+    filter: persistReducer(persistFilter, filterReducer),
   },
 
   middleware: getDefaultMiddleware =>
