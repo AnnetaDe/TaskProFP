@@ -19,7 +19,6 @@ const FilterSelect = () => {
 
   return (
     <>
-      filter
       <div className={css.container}>
         <svg className={css.icon_filter}>
           <use href={`${svg}#icon-filter-1`}></use>

@@ -70,6 +70,9 @@ const columnSlice = createSlice({
   //           return true;
   //         }
 
+  //         return task.priority === payload;
+  //       });
+
   //       return {
   //         ...column,
   //         tasks: filteredTasks,
@@ -96,10 +99,6 @@ const columnSlice = createSlice({
           state.boardTitle = payload.title;
           state.boardIcon = payload.icon;
           state.boardBackground = payload.backgroundImg;
-
-          //if (state.filteredColumns.length) {
-          //  state.colufilteredColumnsmnsL = payload.columns;
-          //}
           state.currentBoardId = payload._id;
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
