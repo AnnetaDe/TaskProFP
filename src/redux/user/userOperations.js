@@ -36,6 +36,7 @@ export const loginThunk = createAsyncThunk(
         'api/auth/login',
         credentials
       );
+      setToken(data.data.accessToken);
       setTokenOnLogin(data.data.accessToken);
       return data;
     } catch (error) {
