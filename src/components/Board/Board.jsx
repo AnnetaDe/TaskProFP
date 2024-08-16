@@ -39,7 +39,6 @@ export const Board = () => {
   const currentBoardId = useSelector(selectCurrentBoardId);
   const boardId = currentBoardId ? currentBoardId : id;
   useEffect(() => {
-    console.log(boardId);
     if(Object.entries(currentBoardId).length){
       dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
     }else{
@@ -49,7 +48,7 @@ export const Board = () => {
     if (filter) {
       dispatch(filterColumns(filter));
     }
-  }, [dispatch, boardId, filter, currentBoardId, id]);
+  }, [dispatch, boardId, filter, currentBoardId]);
 
   const boardTitle = useSelector(selectBoardTitle);
 
