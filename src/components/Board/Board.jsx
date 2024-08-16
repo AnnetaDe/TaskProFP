@@ -55,7 +55,6 @@ export const Board = () => {
   }, [dispatch, boardId, currentBoardId]);
 
   const boardTitle = useSelector(selectBoardTitle);
-
   const columns = useSelector(selectFilteredTasks);
   const backgroundImg = useSelector(selectBoardBackground);
 
@@ -73,9 +72,7 @@ export const Board = () => {
       return desktop;
     }
   };
-
   const backgroundImage = getBackgroundImage();
-
   const [isOpen, setIsOpen] = useState();
   const openModal = () => {
     setIsOpen(true);
