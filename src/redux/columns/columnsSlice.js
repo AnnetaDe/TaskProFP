@@ -178,7 +178,6 @@ const columnSlice = createSlice({
         const column = state.columnsL.find(column => column._id === columnid);
 
         if (column) {
-          // Видаляємо задачу з масиву tasks у відповідній колонці
           column.tasks = column.tasks.filter(task => task._id !== taskid);
         }
       })
