@@ -10,6 +10,11 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { updateColumnThunk } from '../../redux/columns/columnsOperations';
+import { useSelector } from 'react-redux';
+import {
+  selectFilteredTasks,
+  selectTasks,
+} from '../../redux/columns/columnsSelectors';
 export const Column = ({ column, boardid }) => {
   const { id } = useParams();
   const columnid = column._id;

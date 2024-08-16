@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import FilterSelect from '../../components/FilterSelect/FilterSelect';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
+import { NewFilter } from '../../components/NewFilter/NewFilter';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -18,7 +19,6 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const boards = useSelector(selectBoard);
   const path = useLocation().pathname;
-
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        <FilterSelect />
+        {/* <FilterSelect /> */}
         <div className={s.outlet}>
           <Suspense fallback="suspense">
             <Outlet />

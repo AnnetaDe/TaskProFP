@@ -18,6 +18,7 @@ import { boardsReducer } from './boards/boardsSlice';
 import { supportReducer } from './support/supportSlice';
 import { columnsReducer } from './columns/columnsSlice';
 // import { tasksReducer } from './tasks/tasksSlice';
+import { filterReducer } from './columns/filterSlice';
 
 const persistUser = {
   key: ['user'],
@@ -48,6 +49,7 @@ export const store = configureStore({
     columns: persistReducer(persistColumns, columnsReducer),
     modal: modalReducer,
     support: supportReducer,
+    filter: filterReducer,
   },
 
   middleware: getDefaultMiddleware =>

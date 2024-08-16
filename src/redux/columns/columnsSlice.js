@@ -71,30 +71,30 @@ const columnSlice = createSlice({
         }
       }
     },
-    setFilter: (state, { payload }) => {
-      state.filter = payload;
-    },
-    setFilteredColumns: state => {
-      state.filteredColumns = [];
-    },
-    filterColumns: (state, { payload }) => {
-      state.filteredColumns = state.columnsL
-        .map(column => {
-          const filteredTasks = column.tasks.filter(task => {
-            if (payload === 'all') {
-              return true;
-            }
+    // setFilter: (state, { payload }) => {
+    //   state.filter = payload;
+    // },
+    // setFilteredColumns: state => {
+    //   state.filteredColumns = [];
+    // },
+    // filterColumns: (state, { payload }) => {
+    //   state.filteredColumns = state.columnsL
+    //     .map(column => {
+    //       const filteredTasks = column.tasks.filter(task => {
+    //         if (payload === 'all') {
+    //           return true;
+    //         }
 
-            return task.priority === payload;
-          });
+    //         return task.priority === payload;
+    //       });
 
-          return {
-            ...column,
-            tasks: filteredTasks,
-          };
-        })
-        .filter(column => column.tasks.length > 0);
-    },
+    //       return {
+    //         ...column,
+    //         tasks: filteredTasks,
+    //       };
+    //     })
+    //     .filter(column => column.tasks.length > 0);
+    // },
 
     deleteTask: (state, { payload }) => {
       state.columnsL = state.columnsL.map(column => {
@@ -119,7 +119,7 @@ const columnSlice = createSlice({
           //if (state.filteredColumns.length) {
           //  state.colufilteredColumnsmnsL = payload.columns;
           //}
-          state.currentBoardId = payload._id
+          state.currentBoardId = payload._id;
           state.columnsL = payload.columns;
           state.columnsOrderId = payload.columns.map(column => column._id);
 
@@ -142,7 +142,7 @@ const columnSlice = createSlice({
           column => column._id === action.payload.data._id
         );
         column.title = action.payload.data.title;
-        state.boardBackground = action.payload.backgroundImg
+        state.boardBackground = action.payload.backgroundImg;
       })
       .addCase(updateBoardThunk.fulfilled, (state, action) => {
         state.boardBackground = action.payload.data.backgroundImg;
@@ -215,9 +215,9 @@ const columnSlice = createSlice({
 export const {
   updateColumnOrder,
   updateTaskOrder,
-  setFilter,
-  setFilteredColumns,
-  filterColumns,
+  // setFilter,
+  // setFilteredColumns,
+  // filterColumns,
   deleteTask,
 } = columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;

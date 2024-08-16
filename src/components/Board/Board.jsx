@@ -4,7 +4,7 @@ import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOpera
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  filterColumns,
+  // filterColumns,
   updateTaskOrder,
 } from '../../redux/columns/columnsSlice';
 import {
@@ -14,8 +14,9 @@ import {
   selectColumnsOrderId,
   selectColumnsWithinBoard,
   selectCurrentBoardId,
-  selectFilter,
-  selectFilteredColumns,
+  selectFilteredTasks,
+  // selectFilter,
+  // selectFilteredColumns,
   selectTasksOrderId,
   selectTasksWithinColumn,
 } from '../../redux/columns/columnsSelectors';
@@ -29,30 +30,33 @@ import { Button } from '../Button/Button';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import ColumnForm from '../ColumnForm/ColumnForm';
 import { updateBoardThunk } from '../../redux/boards/boardsOperations';
+import { NewFilter } from '../NewFilter/NewFilter';
 
 export const Board = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const filter = useSelector(selectFilter);
-  const filteredColumns = useSelector(selectFilteredColumns);
+  // const filter = useSelector(selectFilter);
+  // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
   const boardId = currentBoardId ? currentBoardId : id;
   useEffect(() => {
-    if(Object.entries(currentBoardId).length){
-      dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
-    }else{
-      dispatch(getAllCoulumnsWithBoardIdThunk(id));
-    }
+    // if (Object.entries(currentBoardId).length) {
+    //   dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
+    // } else {
+    //   dispatch(getAllCoulumnsWithBoardIdThunk(id));
+    // }
 
-    if (filter) {
-      dispatch(filterColumns(filter));
-    }
-  }, [dispatch, boardId, filter, currentBoardId]);
+    // if (filter) {
+    //   dispatch(filterColumns(filter));
+    // }
+
+    dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
+  }, [dispatch, boardId, currentBoardId]);
 
   const boardTitle = useSelector(selectBoardTitle);
 
-  const columns = useSelector(selectColumnsWithinBoard);
+  const columns = useSelector(selectFilteredTasks);
   const backgroundImg = useSelector(selectBoardBackground);
 
   const getBackgroundImage = () => {
@@ -64,7 +68,7 @@ export const Board = () => {
     if (width <= 768) {
       return mobile;
     } else if (width <= 1440) {
-      return tablet; 
+      return tablet;
     } else {
       return desktop;
     }
@@ -114,29 +118,27 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
+      <NewFilter />
+
       <div className={s.nested_wrap}>
-      <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
-        <div className={s.boardTitle}>
-          <h2>{boardTitle}</h2>
-        </div>
-        <div className={s.board}>
-          <ul>
-            {filter
-              ? filteredColumns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))
-              : columns.map(column => (
-                  <Column key={column._id} column={column} />
-                ))}
-          </ul>
-          <Button
-            buttonText="Add another column"
-            onClick={openModal}
-            typeStyle="secondary"
-            icon={`${icon}#icon-plus-big`}
-          />
-        </div>
-      </DragDropContext>        
+        <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
+          <div className={s.boardTitle}>
+            <h2>{boardTitle}</h2>
+          </div>
+          <div className={s.board}>
+            <ul>
+              {columns.map(column => (
+                <Column key={column._id} column={column} />
+              ))}
+            </ul>
+            <Button
+              buttonText="Add another column"
+              onClick={openModal}
+              typeStyle="secondary"
+              icon={`${icon}#icon-plus-big`}
+            />
+          </div>
+        </DragDropContext>
       </div>
 
       {isOpen && (
