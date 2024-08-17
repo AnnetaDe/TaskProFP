@@ -63,6 +63,11 @@ export const Board = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  const onDragStart = result => {
+    console.log(result);
+  };
+
   const onDragEnd = result => {
     const { source, destination } = result;
 
@@ -78,7 +83,7 @@ export const Board = () => {
         destinationColumnId: destination.droppableId,
       })
     );
-    console.log(result);
+
     dispatch(
       updateTaskThunk({
         boardid: id,
@@ -98,11 +103,14 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
-      {/* <NewFilter /> */}
-      <FilterSelect className={s.filter_select} />
+      <FilterSelect />
 
       <div className={s.nested_wrap}>
-        <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
+        <DragDropContext
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          className={s.board_wrap}
+        >
           <div className={s.boardTitle}>
             <h2>{boardTitle}</h2>
           </div>

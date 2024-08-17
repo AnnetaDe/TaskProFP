@@ -48,45 +48,19 @@ const columnSlice = createSlice({
       );
 
       if (sourceColumnId === destinationColumnId) {
+        const draggableId = action.payload.draggableId;
         const [removed] = sourceColumn.tasks.splice(source.index, 1);
         sourceColumn.tasks.splice(destination.index, 0, removed);
       } else {
         const [removed] = sourceColumn.tasks.splice(source.index, 1);
         destinationColumn.tasks.splice(destination.index, 0, removed);
       }
+      return {
+        ...state,
+        columnsL: [...state.columnsL],
+      };
     },
   },
-  // setFilter: (state, { payload }) => {
-  //   state.filter = payload;
-  // },
-  // setFilteredColumns: state => {
-  //   state.filteredColumns = [];
-  // },
-  // filterColumns: (state, { payload }) => {
-  //   state.filteredColumns = state.columnsL
-  //     .map(column => {
-  //       const filteredTasks = column.tasks.filter(task => {
-  //         if (payload === 'all') {
-  //           return true;
-  //         }
-
-  //         return task.priority === payload;
-  //       });
-
-  //       return {
-  //         ...column,
-  //         tasks: filteredTasks,
-  //       };
-  //     })
-  //     .filter(column => column.tasks.length > 0);
-  // },
-
-  // deleteTask: (state, { payload }) => {
-  //   state.columnsL = state.columnsL.map(column => {
-  //     column.tasks = column.tasks.filter(task => task._id !== payload);
-  //     return column;
-  //   });
-  // },
 
   extraReducers: builder => {
     builder
@@ -194,7 +168,7 @@ const columnSlice = createSlice({
   },
 });
 export const {
-  updateColumnOrder,
+  // updateColumnOrder,
   updateTaskOrder,
   // setFilter,
   // setFilteredColumns,
