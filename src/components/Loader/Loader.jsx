@@ -5,8 +5,8 @@ const Loader = () => {
   return (
     <div className={css.loaderwrapper}>
       <RotatingLines
-        height="80"
-        width="80"
+        height="25"
+        width="25"
         strokeWidth="5"
         animationDuration="0.75"
         visible={true}
