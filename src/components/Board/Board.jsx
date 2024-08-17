@@ -36,21 +36,19 @@ export const Board = () => {
   // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
-  // const boardId = currentBoardId ? currentBoardId : id;
-  // console.log(boardId);
+  const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
+  console.log(boardId);
   useEffect(() => {
-    // if (Object.entries(currentBoardId).length) {
-    //   dispatch(getAllCoulumnsWithBoardIdThunk(currentBoardId));
-    // } else {
-    //   dispatch(getAllCoulumnsWithBoardIdThunk(id));
-    // }
+    if (boardId){
+      dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
+    }
 
     // if (filter) {
     //   dispatch(filterColumns(filter));
     // }
 
-    dispatch(getAllCoulumnsWithBoardIdThunk(id));
-  }, [dispatch, id]);
+    // dispatch(getAllCoulumnsWithBoardIdThunk(id));
+  }, [boardId,  dispatch]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);
