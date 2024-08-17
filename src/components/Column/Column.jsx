@@ -6,15 +6,10 @@ import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { updateColumnThunk } from '../../redux/columns/columnsOperations';
-import { useSelector } from 'react-redux';
-import {
-  selectFilteredTasks,
-  selectTasks,
-} from '../../redux/columns/columnsSelectors';
+
 export const Column = ({ column, boardid }) => {
   const { id } = useParams();
   const columnid = column._id;

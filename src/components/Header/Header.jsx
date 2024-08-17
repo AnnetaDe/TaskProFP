@@ -16,7 +16,6 @@ import { useDispatch } from 'react-redux';
 import {
   closeEditProfileModal,
   openEditProfileModal,
-  openModal,
 } from '../../redux/modal/modalSlice.js';
 import Modal from '../Modal/Modal.jsx';
 import { useMedia } from '../../hooks/useMedia.jsx';
@@ -24,12 +23,9 @@ import icons from '../../images/icons.svg';
 import SvgIconAnonym from './SvgIconAnonym.jsx';
 import { updateUserPreferencesThunk } from '../../redux/user/userOperations.js';
 import EditModal from '../EditModal/EditModal.jsx';
-import { createPortal } from 'react-dom';
-import {
-  selectEditProfileModal,
-  selectModal,
-} from '../../redux/modal/modalSelector.js';
-import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux.jsx';
+
+import { selectEditProfileModal } from '../../redux/modal/modalSelector.js';
+
 import Loader from '../Loader/Loader.jsx';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {

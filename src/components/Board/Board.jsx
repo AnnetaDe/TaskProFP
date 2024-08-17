@@ -9,7 +9,6 @@ import {
 } from '../../redux/columns/columnsSlice';
 import {
   selectBoardBackground,
-  selectBoardIcon,
   selectBoardTitle,
   selectCurrentBoardId,
   selectFilteredTasks,
@@ -25,8 +24,7 @@ import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 import { Button } from '../Button/Button';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import ColumnForm from '../ColumnForm/ColumnForm';
-import { updateBoardThunk } from '../../redux/boards/boardsOperations';
-import { NewFilter } from '../NewFilter/NewFilter';
+
 import FilterSelect from '../FilterSelect/FilterSelect';
 import { useMedia } from '../../hooks/useMedia';
 import { getBackgroundImage } from '../../helpers/getBackgroundImage.js';
@@ -103,7 +101,7 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
-      <FilterSelect />
+      <FilterSelect className={s.filter_select} />
 
       <div className={s.nested_wrap}>
         <DragDropContext
