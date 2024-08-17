@@ -10,7 +10,7 @@ import {
   deleteTaskThunk,
   updateTaskThunk,
 } from '../tasks/tasksOperations';
-import { updateBoardThunk } from '../boards/boardsOperations';
+import { deleteBoardThunk, updateBoardThunk } from '../boards/boardsOperations';
 import { logoutThunk } from '../user/userOperations';
 
 const initialState = {
@@ -150,6 +150,12 @@ const columnSlice = createSlice({
       )
       .addCase(logoutThunk.fulfilled, (state, action) => {
         state.currentBoardId = {};
+      })
+      .addCase(deleteBoardThunk.fulfilled, (state, action)=>{
+
+        if(action.payload === state.currentBoardId){
+          state.currentBoardId = {}
+        }
       })
       .addCase(createNewColumnThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;

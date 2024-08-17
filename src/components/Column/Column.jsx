@@ -37,7 +37,7 @@ export const Column = ({ column, boardid }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <ColumnTitle title={column.title} columnId={column._id} />
+            <ColumnTitle title={column.title} columnid={column._id} />
             <ul className={s.column}>
               {column.tasks.map((task, index) => (
                 <Draggable key={task._id} draggableId={task._id} index={index}>

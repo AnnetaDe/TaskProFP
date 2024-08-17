@@ -18,26 +18,26 @@ import { useDebounce } from 'use-debounce';
 import { useEffect, useState } from 'react';
 import InputField from '../InputField/InputField';
 
-const ColumnTitle = ({ title, columnId }) => {
+const ColumnTitle = ({ title, columnid }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const isOpen = useSelector(state => selectEditColumnOpen(state, columnId));
+  const isOpen = useSelector(state => selectEditColumnOpen(state, columnid));
   const handleEditOpen = () => {
-    dispatch(openEditColumnModal(columnId));
+    dispatch(openEditColumnModal(columnid));
   };
   const [inputValue, setInputValue] = useState(title);
   const [debouncedText] = useDebounce(inputValue.trim(), 1000);
   const handleBlur = () => {
     if (debouncedText !== inputValue.trim() && debouncedText !== '') {
-      dispatch(updateColumnThunk({ boardId: id, columnId, title: inputValue }));
+      dispatch(updateColumnThunk({ boardId: id, columnid, title: inputValue }));
     }
   };
   const handleChange = e => {
     setInputValue(e.target.value);
   };
 
-  const handleDelete = columnId => {
-    dispatch(deleteColumnThunk({ boardId: id, columnId }));
+  const handleDelete = columnid => {
+    dispatch(deleteColumnThunk({ boardId: id, columnid }));
   };
 
   return (
@@ -61,7 +61,7 @@ const ColumnTitle = ({ title, columnId }) => {
           <button
             type="button"
             onClick={() => {
-              handleDelete(columnId);
+              handleDelete(columnid);
             }}
           >
             <svg width="16" height="16">
@@ -75,15 +75,15 @@ const ColumnTitle = ({ title, columnId }) => {
       {isOpen && (
         <Modal
           isOpen={isOpen}
-          closeModal={() => dispatch(closeEditColumnModal(columnId))}
+          closeModal={() => dispatch(closeEditColumnModal(columnid))}
           title="Edit column"
         >
           <ColumnForm
             boardid={id}
             type="edit"
             title={title}
-            columnId={columnId}
-            onClose={() => dispatch(closeEditColumnModal(columnId))}
+            columnid={columnid}
+            onClose={() => dispatch(closeEditColumnModal(columnid))}
           />
         </Modal>
       )}
@@ -103,7 +103,7 @@ export default ColumnTitle;
   <button
     type="button"
     onClick={() => {
-      handleDelete(columnId);
+      handleDelete(columnid);
     }}
   >
     <svg width="16" height="16">
@@ -115,15 +115,15 @@ export default ColumnTitle;
 {isOpen && (
   <Modal
     isOpen={isOpen}
-    closeModal={() => dispatch(closeEditColumnModal(columnId))}
+    closeModal={() => dispatch(closeEditColumnModal(columnid))}
     title="Edit column"
   >
     <ColumnForm
       boardid={id}
       type="edit"
       title={title}
-      columnId={columnId}
-      onClose={() => dispatch(closeEditColumnModal(columnId))}
+      columnid={columnid}
+      onClose={() => dispatch(closeEditColumnModal(columnid))}
     />
   </Modal>
 )}

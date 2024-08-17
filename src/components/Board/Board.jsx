@@ -38,18 +38,13 @@ export const Board = () => {
 
   const currentBoardId = useSelector(selectCurrentBoardId);
   const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
-  console.log(boardId);
+
   useEffect(() => {
-    if (boardId) {
+    if (boardId && Object.entries(boardId).length > 0) {
       dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
     }
-
-    // if (filter) {
-    //   dispatch(filterColumns(filter));
-    // }
-
-    // dispatch(getAllCoulumnsWithBoardIdThunk(id));
   }, [boardId, dispatch]);
+
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);
