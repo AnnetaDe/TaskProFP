@@ -32,18 +32,19 @@ import { useMedia } from '../../hooks/useMedia';
 import { getBackgroundImage } from '../../helpers/getBackgroundImage.js';
 export const Board = () => {
   const { id } = useParams();
+  console.log('id', id);
   const dispatch = useDispatch();
   // const filter = useSelector(selectFilter);
   // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
-  const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
+  console.log('currentBoardId', currentBoardId);
 
+  // const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
+  // console.log('boardid', boardId);
   useEffect(() => {
-    if (boardId && Object.entries(boardId).length > 0) {
-      dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
-    }
-  }, [boardId, dispatch]);
+    dispatch(getAllCoulumnsWithBoardIdThunk(id));
+  }, [id, dispatch]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);

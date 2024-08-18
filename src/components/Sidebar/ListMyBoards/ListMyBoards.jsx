@@ -36,7 +36,7 @@ const ListMyBoards = ({ className }) => {
   }, [dispatch]);
 
   const isEditBoardOpen = useSelector(selectEditBoardOpen);
-  const [chosenBoard, setChosenBoard] = useState('');
+  const [chosenBoard, setChosenBoard] = useState(null);
   const handleEditOpen = board => {
     setChosenBoard(board);
     dispatch(openEditBoarModaal());
@@ -44,31 +44,29 @@ const ListMyBoards = ({ className }) => {
   const handleDelete = boardId => {
     dispatch(deleteBoardThunk(boardId));
   };
-  const handleClick = board => {
-    setChosenBoard(board);
-    // dispatch(setFilter(null));
-    // dispatch(setFilteredColumns());
-  };
-  const handleSetCurrentBoardId = boardId => {
-    dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
-  };
+  // const handleClick = board => {
+  //   setChosenBoard(board);
+  //   // dispatch(setFilter(null));
+  //   // dispatch(setFilteredColumns());
+  // };
+  // const handleSetCurrentBoardId = boardId => {
+  //   dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
+  // };
   return (
     <ul className={clsx(s.boards_list, className)}>
       {boards.map(board => {
         const icon = icons.find(icon => icon.iconName === board.icon);
 
         return (
-          <li
-            key={board._id}
-            onClick={() => handleClick(board)}
-            className={s.li_board_item}
-          >
+          <li key={board._id} className={s.li_board_item}>
             <NavLink
               to={`board/${board._id}`}
               className={({ isActive }) =>
                 clsx(s.board_item, board._id === currentBoardId ? s.active : '')
               }
-              onClick={() => handleSetCurrentBoardId(board._id)}
+              // onClick={() =>
+              //   dispatch(getAllCoulumnsWithBoardIdThunk(board._id))
+              // }
             >
               <div className={s.left_side}>
                 <svg width="18" height="18" className={s.board_item_svg}>
@@ -78,7 +76,12 @@ const ListMyBoards = ({ className }) => {
                 <p>{board.title}</p>
               </div>
               <div className={s.right_side}>
-                <button onClick={() => handleEditOpen(board)}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleEditOpen(board);
+                  }}
+                >
                   <svg width="16" height="16">
                     <use href={`${iconsSprite}#icon-pencil`}></use>
                   </svg>
@@ -99,21 +102,22 @@ const ListMyBoards = ({ className }) => {
         );
       })}
 
-      {isEditBoardOpen && (
-        <Modal
-          isOpen={isEditBoardOpen}
-          closeModal={closeEditBoardModaal}
-          title="Edit profile"
-        >
-          <BoardModal
-            type="edit"
-            title={chosenBoard.title}
-            chosenIcon={chosenBoard.icon}
-            chosenBackGround={chosenBoard.preview}
-            onClose={() => dispatch(closeEditBoardModaal())}
-          />
-        </Modal>
-      )}
+      {isEditBoardOpen &&
+        chosenBoard(
+          <Modal
+            isOpen={isEditBoardOpen}
+            closeModal={closeEditBoardModaal}
+            title="Edit profile"
+          >
+            <BoardModal
+              type="edit"
+              title={chosenBoard.title}
+              chosenIcon={chosenBoard.icon}
+              chosenBackGround={chosenBoard.preview}
+              onClose={() => dispatch(closeEditBoardModaal())}
+            />
+          </Modal>
+        )}
     </ul>
   );
 };
