@@ -32,12 +32,12 @@ const persistUserPreferences = {
   storage,
   whitelist: ['userTheme', 'userAvatar'],
 };
-const persistColumns = {
-  key: ['columns'],
-  version: 1,
-  storage,
-  whitelist: ['currentBoardId'],
-};
+// const persistColumns = {
+//   key: ['columns'],
+//   version: 1,
+//   storage,
+//   whitelist: ['currentBoardId'],
+// };
 
 const persistFilter = {
   key: ['filter'],
@@ -53,7 +53,7 @@ export const store = configureStore({
     preferences: persistReducer(persistUserPreferences, userPreferencesReducer),
     boards: boardsReducer,
     // tasks: tasksReducer,
-    columns: persistReducer(persistColumns, columnsReducer),
+    columns: columnsReducer,
     modal: modalReducer,
     support: supportReducer,
     filter: persistReducer(persistFilter, filterReducer),

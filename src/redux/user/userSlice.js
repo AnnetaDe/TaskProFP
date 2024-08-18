@@ -9,7 +9,7 @@ import {
 } from './userOperations';
 
 const initialState = {
-  login: { avatarUrl: '', email: '', username: '', theme: '' },
+  // login: { avatarUrl: '', email: '', username: '', theme: '' },
   accessToken: null,
   refreshToken: null,
   isVerified: null,

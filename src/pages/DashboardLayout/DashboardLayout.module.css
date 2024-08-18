@@ -18,23 +18,6 @@
 }
 .outlet {
   overflow: hidden;
-  height: 99%;
+  height: 98%;
   width: 100%;
 }
-/* .gridContainer {
-  height: 100vh;
-
-  outline: 1px solid rgb(53, 210, 84);
-  max-width: 1440px;
-  display: grid;
-  grid-template-areas: 'header header' 'sidebar main';
-}
-.gridHeader {
-  grid-area: header;
-}
-.gridSidebar {
-  grid-area: sidebar;
-}
-.gridContent {
-  grid-area: main;
-} */
