@@ -1,4 +1,12 @@
+import { NoBoards } from '../../components/NoBoards/NoBoards';
+import ScreensPage from '../ScreensPage/ScreensPage';
+
 export const HomePage = () => {
-  return <></>;
+  console.log('HomePage');
+  return (
+    <>
+      <ScreensPage />
+    </>
+  );
 };
 export default HomePage;

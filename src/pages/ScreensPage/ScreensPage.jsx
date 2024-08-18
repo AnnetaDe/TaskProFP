@@ -7,17 +7,12 @@ import { NoBoards } from '../../components/NoBoards/NoBoards';
 
 export const ScreensPage = () => {
   const boards = useSelector(selectBoard);
-  const { id } = useParams();
+
+  console.log('Screens', boards);
 
   return (
     <div className={s.screen_page}>
-      {id && boards.length ? (
-        <Board />
-      ) : (
-        <div className={s.no_boards}>
-          <NoBoards />
-        </div>
-      )}
+      {boards.length ? <Board /> : <NoBoards />}
     </div>
   );
 };

@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import {
   startDrag,
   stopDrag,
-  // filterColumns,
   updateTaskOrder,
 } from '../../redux/columns/columnsSlice';
 import {
@@ -14,8 +13,6 @@ import {
   selectBoardTitle,
   selectCurrentBoardId,
   selectFilteredTasks,
-  // selectFilter,
-  // selectFilteredColumns,
 } from '../../redux/columns/columnsSelectors';
 import icon from '../../images/icons.svg';
 
@@ -34,8 +31,6 @@ export const Board = () => {
   const { id } = useParams();
   console.log('id', id);
   const dispatch = useDispatch();
-  // const filter = useSelector(selectFilter);
-  // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
   console.log('currentBoardId', currentBoardId);
@@ -43,7 +38,9 @@ export const Board = () => {
   // const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
   // console.log('boardid', boardId);
   useEffect(() => {
-    dispatch(getAllCoulumnsWithBoardIdThunk(id));
+    if (id) {
+      dispatch(getAllCoulumnsWithBoardIdThunk(id));
+    }
   }, [id, dispatch]);
 
   const boardTitle = useSelector(selectBoardTitle);
@@ -69,30 +66,35 @@ export const Board = () => {
     dispatch(startDrag());
   };
 
-  const onDragEnd = result => {
+  const onDragEnd = async result => {
     const { source, destination } = result;
 
     if (!destination) {
       dispatch(stopDrag());
       return;
     }
-
-    dispatch(
-      updateTaskOrder({
-        source,
-        destination,
-        sourceColumnId: source.droppableId,
-        destinationColumnId: destination.droppableId,
-      })
-    );
-    dispatch(
-      updateTaskThunk({
-        boardid: id,
-        columnid: source.droppableId,
-        taskid: result.draggableId,
-        body: { columnId: destination.droppableId },
-      })
-    );
+    try {
+      dispatch(
+        updateTaskOrder({
+          source,
+          destination,
+          sourceColumnId: source.droppableId,
+          destinationColumnId: destination.droppableId,
+        })
+      );
+      await dispatch(
+        updateTaskThunk({
+          boardid: id,
+          columnid: source.droppableId,
+          taskid: result.draggableId,
+          body: { columnId: destination.droppableId },
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(stopDrag());
+    }
 
     // dispatch(
     //   updateTaskThunk({
@@ -102,8 +104,6 @@ export const Board = () => {
     //     body: { columnId: destination.droppableId },
     //   })
     // );
-
-    dispatch(stopDrag());
   };
 
   return (

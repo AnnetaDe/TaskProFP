@@ -88,7 +88,9 @@ const ListMyBoards = ({ className }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => {
+                  onClick={e => {
+                    e.stopPropagation();
+
                     handleDelete(board._id);
                   }}
                 >

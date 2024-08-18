@@ -1,8 +1,5 @@
 import { components } from 'react-select';
 import { useDispatch } from 'react-redux';
-
-// import { filterColumns, setFilter } from '../redux/columns/columnsSlice';
-
 import svg from '../images/icons.svg';
 import css from '../components/FilterSelect/FilterSelect.module.css';
 import { setNewFilter } from '../redux/columns/filterSlice';
@@ -19,7 +16,6 @@ const CustomMenu = props => {
 
   const handleChange = ({ value }, selectProps) => {
     dispatch(setNewFilter(value));
-    // dispatch(filterColumns(value));
 
     if (selectProps && selectProps.onMenuClose) {
       selectProps.onMenuClose();

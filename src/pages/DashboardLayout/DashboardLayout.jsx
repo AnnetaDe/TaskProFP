@@ -22,16 +22,22 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
-    if (path === '/' && boards.length) {
+    // if (path === '/' && !boards.length) {
+    //   navigate('/');
+    // }
+
+    if (path === '/' && boards.length > 0) {
       const id = boards[0]._id;
-      const navigationToBoard = async () => {
-        try {
-          navigate(`/board/${id}`);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      navigationToBoard();
+      navigate(`/board/${id}`);
+
+      // const navigationToBoard = async () => {
+      //   try {
+      //     navigate(`/board/${id}`);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // };
+      // navigationToBoard();
     }
   }, [colorScheme, navigate, path, boards]);
 
