@@ -1,10 +1,4 @@
-import { NoBoards } from '../../components/NoBoards/NoBoards';
-
 export const HomePage = () => {
-  return (
-    <>
-      <NoBoards />
-    </>
-  );
+  return <></>;
 };
 export default HomePage;
