@@ -33,11 +33,21 @@ const PriorityList = ({
           />
           <label htmlFor={priority.priorityLevel}>
             <span
-              className={clsx(s.icon_circle, {
+              className={clsx(s.icon_wrap, {
                 [s.selected]: selectedPriority === priority.priorityLevel,
               })}
               style={{ backgroundColor: priority.color }}
-            ></span>
+            >
+              <span
+                className={clsx(
+                  s.icon_circle,
+                    {
+                    [s.selected]: selectedPriority === priority.priorityLevel,
+                  }
+                )}
+                style={{ backgroundColor: priority.color }}
+              ></span>
+            </span>
           </label>
         </li>
       ))}
