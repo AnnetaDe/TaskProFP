@@ -4,6 +4,8 @@ import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOpera
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
+  startDrag,
+  stopDrag,
   // filterColumns,
   updateTaskOrder,
 } from '../../redux/columns/columnsSlice';
@@ -62,17 +64,17 @@ export const Board = () => {
     setIsOpen(false);
   };
 
-  const onDragStart = result => {
-    console.log(result);
+  const onDragStart = () => {
+    dispatch(startDrag());
   };
 
   const onDragEnd = result => {
     const { source, destination } = result;
 
     if (!destination) {
+      dispatch(stopDrag());
       return;
     }
-
     dispatch(
       updateTaskOrder({
         source,
@@ -90,6 +92,8 @@ export const Board = () => {
         body: { columnId: destination.droppableId },
       })
     );
+
+    dispatch(stopDrag());
   };
 
   return (

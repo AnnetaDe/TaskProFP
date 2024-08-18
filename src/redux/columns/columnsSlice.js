@@ -22,6 +22,9 @@ const initialState = {
   columnsOrderId: [],
   tasks: [],
   currentBoardId: {},
+  status: 'idle',
+  isDragging: false,
+  undoList: [],
   // filter: null,
   // filteredColumns: [],
   tasksOrderId: [],
@@ -32,14 +35,24 @@ const columnSlice = createSlice({
   name: 'columns',
   initialState,
   reducers: {
+    startDrag: state => {
+      state.isDragging = true;
+    },
+    stopDrag: state => {
+      state.isDragging = false;
+    },
+    undoDrag: state => {
+      if (state.undoList.length) {
+        const lastState = state.undoList[state.undoList.length - 1];
+        state.columnsL = lastState.columnsL;
+      }
+    },
     updateTaskOrder: (state, action) => {
       const { source, destination, sourceColumnId, destinationColumnId } =
         action.payload;
-
       if (!destination) {
         return;
       }
-
       const sourceColumn = state.columnsL.find(
         column => column._id === sourceColumnId
       );
@@ -48,17 +61,12 @@ const columnSlice = createSlice({
       );
 
       if (sourceColumnId === destinationColumnId) {
-        const draggableId = action.payload.draggableId;
         const [removed] = sourceColumn.tasks.splice(source.index, 1);
         sourceColumn.tasks.splice(destination.index, 0, removed);
       } else {
         const [removed] = sourceColumn.tasks.splice(source.index, 1);
         destinationColumn.tasks.splice(destination.index, 0, removed);
       }
-      return {
-        ...state,
-        columnsL: [...state.columnsL],
-      };
     },
   },
 
@@ -169,13 +177,10 @@ const columnSlice = createSlice({
 });
 export const {
   // updateColumnOrder,
+  startDrag,
+  stopDrag,
+  undoDrag,
   updateTaskOrder,
-  // setFilter,
-  // setFilteredColumns,
-  // filterColumns,
-  // setFilter,
-  // setFilteredColumns,
-  // filterColumns,
   deleteTask,
 } = columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;
