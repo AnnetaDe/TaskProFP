@@ -75,6 +75,7 @@ export const Board = () => {
       dispatch(stopDrag());
       return;
     }
+
     dispatch(
       updateTaskOrder({
         source,
@@ -83,15 +84,21 @@ export const Board = () => {
         destinationColumnId: destination.droppableId,
       })
     );
+    updateTaskThunk({
+      boardid: id,
+      columnid: source.droppableId,
+      taskid: result.draggableId,
+      body: { columnId: destination.droppableId },
+    });
 
-    dispatch(
-      updateTaskThunk({
-        boardid: id,
-        columnid: source.droppableId,
-        taskid: result.draggableId,
-        body: { columnId: destination.droppableId },
-      })
-    );
+    // dispatch(
+    //   updateTaskThunk({
+    //     boardid: id,
+    //     columnid: source.droppableId,
+    //     taskid: result.draggableId,
+    //     body: { columnId: destination.droppableId },
+    //   })
+    // );
 
     dispatch(stopDrag());
   };
