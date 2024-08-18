@@ -109,7 +109,11 @@ export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
     try {
-      const { data } = await taskProApi.patch('api/auth/update', preferences);
+      const { data } = await taskProApi.patch('api/auth/update', preferences, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
