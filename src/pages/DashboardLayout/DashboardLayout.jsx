@@ -22,6 +22,9 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
+    if (!boards.length) {
+      navigate('/');
+    }
     if (path === '/' && boards.length) {
       const id = boards[0]._id;
       const navigationToBoard = async () => {
