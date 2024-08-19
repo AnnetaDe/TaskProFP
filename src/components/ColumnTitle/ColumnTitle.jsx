@@ -29,7 +29,7 @@ const ColumnTitle = ({ title, columnid }) => {
   const [debouncedText] = useDebounce(inputValue.trim(), 1000);
   const handleBlur = () => {
     if (debouncedText !== inputValue.trim() && debouncedText !== '') {
-      dispatch(updateColumnThunk({ boardId: id, columnid, title: inputValue }));
+      dispatch(updateColumnThunk({ boardid: id, columnid, title: inputValue }));
     }
   };
   const handleChange = e => {
@@ -37,7 +37,7 @@ const ColumnTitle = ({ title, columnid }) => {
   };
 
   const handleDelete = columnid => {
-    dispatch(deleteColumnThunk({ boardId: id, columnid }));
+    dispatch(deleteColumnThunk({ boardid: id, columnid }));
   };
 
   return (

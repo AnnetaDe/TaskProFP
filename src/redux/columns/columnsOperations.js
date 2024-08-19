@@ -49,10 +49,10 @@ export const updateColumnThunk = createAsyncThunk(
 );
 export const deleteColumnThunk = createAsyncThunk(
   'columns/deleteColumn',
-  async ({ boardId, columnId }, thunkAPI) => {
+  async ({ boardid, columnid }, thunkAPI) => {
     try {
-      await taskProApi.delete(`api/boards/${boardId}/columns/${columnId}`);
-      return columnId;
+      await taskProApi.delete(`api/boards/${boardid}/columns/${columnid}`);
+      return columnid;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
