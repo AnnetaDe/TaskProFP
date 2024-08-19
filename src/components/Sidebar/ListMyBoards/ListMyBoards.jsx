@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { selectBoard } from '../../../redux/boards/boardsSelectors';
 import s from './ListMyBoards.module.css';
 import { useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
   deleteBoardThunk,
@@ -27,6 +27,7 @@ import { getAllCoulumnsWithBoardIdThunk } from '../../../redux/columns/columnsOp
 import { selectCurrentBoardId } from '../../../redux/columns/columnsSelectors';
 
 const ListMyBoards = ({ className }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const boards = useSelector(selectBoard);
@@ -41,8 +42,9 @@ const ListMyBoards = ({ className }) => {
     setChosenBoard(board);
     dispatch(openEditBoarModaal());
   };
-  const handleDelete = boardId => {
-    dispatch(deleteBoardThunk(boardId));
+  const handleDelete = async boardId => {
+      await dispatch(deleteBoardThunk(boardId)).unwrap();
+      navigate('/');
   };
   const handleClick = board => {
     setChosenBoard(board);
