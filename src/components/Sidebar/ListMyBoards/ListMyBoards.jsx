@@ -25,6 +25,7 @@ import BoardModal from '../BoardModal/BoardModal';
 // } from '../../../redux/columns/columnsSlice';
 import { getAllCoulumnsWithBoardIdThunk } from '../../../redux/columns/columnsOperations';
 import { selectCurrentBoardId } from '../../../redux/columns/columnsSelectors';
+import ModalWithoutRedux from '../../ModalWithoutRedux/ModalWithoutRedux';
 
 const ListMyBoards = ({ className }) => {
   const { id } = useParams();
@@ -35,13 +36,20 @@ const ListMyBoards = ({ className }) => {
   useEffect(() => {
     dispatch(fetchBoardsThunk());
   }, [dispatch]);
+  const [isOpen, setIsOpen] = useState(false)
+  const openModal = ()=>{
+    setIsOpen(true)
+  }
+  const closeModal = ()=>{
+    setIsOpen(false)
+  }
 
-  const isEditBoardOpen = useSelector(selectEditBoardOpen);
-  const [chosenBoard, setChosenBoard] = useState(null);
-  const handleEditOpen = board => {
-    setChosenBoard(board);
-    dispatch(openEditBoarModaal());
-  };
+  // const isEditBoardOpen = useSelector(selectEditBoardOpen);
+  // const [chosenBoard, setChosenBoard] = useState(null);
+  // const handleEditOpen = board => {
+  //   setChosenBoard(board);
+  //   dispatch(openEditBoarModaal());
+  // };
   const handleDelete = async boardId => {
       await dispatch(deleteBoardThunk(boardId)).unwrap();
       navigate('/');
@@ -58,6 +66,7 @@ const ListMyBoards = ({ className }) => {
     <ul className={clsx(s.boards_list, className)}>
       {boards.map(board => {
         const icon = icons.find(icon => icon.iconName === board.icon);
+console.log(board);
 
         return (
           <li key={board._id} className={s.li_board_item}>
@@ -81,7 +90,7 @@ const ListMyBoards = ({ className }) => {
                 <button
                   type="button"
                   onClick={() => {
-                    handleEditOpen(board);
+                    openModal(board);
                   }}
                 >
                   <svg width="16" height="16">
@@ -102,26 +111,25 @@ const ListMyBoards = ({ className }) => {
                 </button>
               </div>
             </NavLink>
+            {isOpen && (
+                <ModalWithoutRedux
+                  isOpen={isOpen}
+                  onClose={closeModal}
+                  title="Edit profile"
+                >
+                  <BoardModal
+                    type="edit"
+                    title={board.title}
+                    chosenIcon={board.icon}
+                    chosenBackGround={board.preview}
+                    onClose={closeModal}
+                  />
+                </ModalWithoutRedux>
+              )}
           </li>
         );
       })}
 
-      {isEditBoardOpen &&
-        chosenBoard(
-          <Modal
-            isOpen={isEditBoardOpen}
-            closeModal={closeEditBoardModaal}
-            title="Edit profile"
-          >
-            <BoardModal
-              type="edit"
-              title={chosenBoard.title}
-              chosenIcon={chosenBoard.icon}
-              chosenBackGround={chosenBoard.preview}
-              onClose={() => dispatch(closeEditBoardModaal())}
-            />
-          </Modal>
-        )}
     </ul>
   );
 };
