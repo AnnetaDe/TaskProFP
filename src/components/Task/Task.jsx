@@ -18,7 +18,6 @@ export const Task = ({ task, columnid, boardid }) => {
       style={{ borderColor: priorityColor.color }}
     >
       <ul className={s.boardTask}>
-        <li>{task._id}</li>
         <li className={s.taskTitle}>{title}</li>
         <li className={s.taskDescr}>{description}</li>
         <li className={s.taskInfo}>
