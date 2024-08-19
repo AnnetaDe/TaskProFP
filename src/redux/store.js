@@ -17,7 +17,6 @@ import { userPreferencesReducer } from './themes/userPreferencesSlice';
 import { boardsReducer } from './boards/boardsSlice';
 import { supportReducer } from './support/supportSlice';
 import { columnsReducer } from './columns/columnsSlice';
-// import { tasksReducer } from './tasks/tasksSlice';
 import { filterReducer } from './columns/filterSlice';
 
 const persistUser = {

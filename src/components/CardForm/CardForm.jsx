@@ -49,9 +49,7 @@ const CardForm = ({
   const [selectedPriority, setSelectedPriority] = useState(
     options[type].priority || priorities[3].priorityLevel
   );
-  // const [selectedDeadline, setSelectedDeadline] = useState(
-  //   options[type].deadline
-  // );
+
   const {
     register,
     handleSubmit,

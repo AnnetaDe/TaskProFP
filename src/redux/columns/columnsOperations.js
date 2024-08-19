@@ -5,9 +5,10 @@ import { taskProApi } from '../../config/api';
 export const getAllCoulumnsWithBoardIdThunk = createAsyncThunk(
   'columns/getAllColumns',
   async (boardId, thunkAPI) => {
-    
     try {
       const data = await taskProApi.get(`/api/boards/${boardId}`);
+
+      console.log('data', data.data.data);
 
       return data.data.data;
     } catch (error) {
@@ -34,8 +35,6 @@ export const createNewColumnThunk = createAsyncThunk(
 export const updateColumnThunk = createAsyncThunk(
   'columns/updateColumn',
   async ({ boardid, columnid, title }, thunkAPI) => {
-
-
     try {
       const { data } = await taskProApi.patch(
         `api/boards/${boardid}/columns/${columnid}`,

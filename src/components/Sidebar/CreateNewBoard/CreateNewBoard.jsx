@@ -10,10 +10,12 @@ import {
   openCreateBoardModaal,
 } from '../../../redux/modal/modalSlice';
 import BoardModal from '../BoardModal/BoardModal';
+import { useNavigate } from 'react-router-dom';
 
 const CreateNewBoard = () => {
   const dispatch = useDispatch();
   const isOpenCreateBoardModal = useSelector(selectCreateBoardModal);
+  const navigate = useNavigate();
 
   const HandleCreate = () => {
     dispatch(openCreateBoardModaal());

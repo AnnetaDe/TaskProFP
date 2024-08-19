@@ -38,7 +38,6 @@ export const Task = ({ task, columnid, boardid }) => {
             <span className={s.taskProps}>{formattedDeadline}</span>
           </div>
           <TaskControler
-            taskid={task._id}
             columnid={columnid}
             boardid={boardid}
             task={task}

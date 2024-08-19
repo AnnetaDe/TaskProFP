@@ -70,7 +70,6 @@ const ColumnTitle = ({ title, columnid }) => {
           </button>
         </div>
       </InputField>
-      {/* <p>{title}</p> */}
 
       {isOpen && (
         <Modal

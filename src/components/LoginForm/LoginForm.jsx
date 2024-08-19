@@ -10,9 +10,11 @@ import { useDispatch } from 'react-redux';
 import { loginThunk } from '../../redux/user/userOperations';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
+import { useSelector } from 'react-redux';
+import { selectIsLoading } from '../../redux/user/userSelectors';
 
 const LoginForm = () => {
-  const isLoading = false; // from redux
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const {
     register,
@@ -35,7 +37,6 @@ const LoginForm = () => {
   };
 
   const onSubmit = data => {
-
     dispatch(loginThunk(data));
     reset();
   };

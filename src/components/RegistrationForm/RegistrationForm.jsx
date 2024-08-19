@@ -5,16 +5,19 @@ import css from './RegistrationForm.module.css';
 // import Loader from '../Loader/Loader';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerThunk } from '../../redux/user/userOperations';
 
 import icon from '../../images/icons.svg';
 import InputField from '../InputField/InputField';
 import { Button } from '../Button/Button';
+import { selectIsLoading } from '../../redux/user/userSelectors';
+import Loader from '../Loader/Loader';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch(); // from redux
-  const isLoading = false;
+
+  const isLoading = useSelector(selectIsLoading);
   const {
     register,
     handleSubmit,
@@ -37,14 +40,13 @@ const RegistrationForm = () => {
   };
 
   const onSubmit = data => {
-
     dispatch(registerThunk(data));
     reset();
   };
 
   return (
     <div className={css.background}>
-      {/* {isLoading && <Loader />} */}
+      {isLoading && <Loader />}
       <div className={css.formWrapper}>
         <ul className={css.authNav}>
           <li>

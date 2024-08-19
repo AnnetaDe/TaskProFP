@@ -69,7 +69,7 @@ const AuthForm = ({
   const onSubmit = async data => {
     try {
       await dispatch(onSubmitThunk(data)).unwrap();
-      toast.success('Action completed successfully!');
+      toast.success('Login OK!');
       await dispatch(setUserEmail(data));
       dispatch(openResendVerifyEmailModal());
       reset();

@@ -6,7 +6,7 @@ import icon from '../../images/icons.svg';
 import ColumnTitle from '../ColumnTitle/ColumnTitle';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -24,7 +24,6 @@ export const Column = ({ column, boardid }) => {
 
   return (
     <li className={s.li_col}>
-      <pre>{column._id}</pre>
       <Droppable droppableId={column._id}>
         {provided => (
           <div
@@ -32,7 +31,7 @@ export const Column = ({ column, boardid }) => {
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <ColumnTitle title={column.title} columnid={column._id} />
+            <ColumnTitle title={column.title} columnId={column._id} />
             <ul className={s.column}>
               {column.tasks.map((task, index) => (
                 <Draggable key={task._id} draggableId={task._id} index={index}>

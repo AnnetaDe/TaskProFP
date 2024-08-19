@@ -12,6 +12,8 @@ import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import FilterSelect from '../../components/FilterSelect/FilterSelect';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 import { NewFilter } from '../../components/NewFilter/NewFilter';
+import Loader from '../../components/Loader/Loader';
+import { selectCurrentBoardId } from '../../redux/columns/columnsSelectors';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -19,11 +21,14 @@ const DashboardLayout = () => {
   const navigate = useNavigate();
   const boards = useSelector(selectBoard);
   const path = useLocation().pathname;
+  const currentBoardId = useSelector(selectCurrentBoardId);
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
+
     if (path === '/' && boards.length) {
       const id = boards[0]._id;
+
       const navigationToBoard = async () => {
         try {
           navigate(`/board/${id}`);
@@ -48,9 +53,8 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        {/* <FilterSelect /> */}
         <div className={s.outlet}>
-          <Suspense fallback="suspense">
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </div>

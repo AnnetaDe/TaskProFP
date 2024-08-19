@@ -15,11 +15,6 @@ const FilterSelect = () => {
 
   const handleChange = ({ value }, selectProps) => {
     dispatch(setNewFilter(value));
-    // dispatch(filterColumns(value));
-
-    if (selectProps && selectProps.onMenuClose) {
-      selectProps.onMenuClose();
-    }
   };
 
   return (

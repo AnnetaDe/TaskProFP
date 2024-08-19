@@ -4,17 +4,15 @@ import { getAllCoulumnsWithBoardIdThunk } from '../../redux/columns/columnsOpera
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
-  // filterColumns,
+  startDrag,
+  stopDrag,
   updateTaskOrder,
 } from '../../redux/columns/columnsSlice';
 import {
   selectBoardBackground,
-  selectBoardIcon,
   selectBoardTitle,
   selectCurrentBoardId,
   selectFilteredTasks,
-  // selectFilter,
-  // selectFilteredColumns,
 } from '../../redux/columns/columnsSelectors';
 import icon from '../../images/icons.svg';
 
@@ -25,26 +23,25 @@ import { updateTaskThunk } from '../../redux/tasks/tasksOperations';
 import { Button } from '../Button/Button';
 import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import ColumnForm from '../ColumnForm/ColumnForm';
-import { updateBoardThunk } from '../../redux/boards/boardsOperations';
-import { NewFilter } from '../NewFilter/NewFilter';
+
 import FilterSelect from '../FilterSelect/FilterSelect';
 import { useMedia } from '../../hooks/useMedia';
-import {getBackgroundImage} from '../../helpers/getBackgroundImage.js';
+import { getBackgroundImage } from '../../helpers/getBackgroundImage.js';
 export const Board = () => {
   const { id } = useParams();
+  console.log('id', id);
   const dispatch = useDispatch();
-  // const filter = useSelector(selectFilter);
-  // const filteredColumns = useSelector(selectFilteredColumns);
 
   const currentBoardId = useSelector(selectCurrentBoardId);
-  const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
+  console.log('currentBoardId', currentBoardId);
 
+  // const boardId = Object.entries(currentBoardId).length ? currentBoardId : id;
+  // console.log('boardid', boardId);
   useEffect(() => {
-    if (boardId && Object.entries(boardId).length > 0) {
-      dispatch(getAllCoulumnsWithBoardIdThunk(boardId));
+    if (id) {
+      dispatch(getAllCoulumnsWithBoardIdThunk(id));
     }
-  }, [boardId, dispatch]);
-
+  }, [id, dispatch]);
 
   const boardTitle = useSelector(selectBoardTitle);
   const columns = useSelector(selectFilteredTasks);
@@ -64,30 +61,40 @@ export const Board = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const onDragEnd = result => {
+
+  const onDragStart = () => {
+    dispatch(startDrag());
+  };
+
+  const onDragEnd = async result => {
     const { source, destination } = result;
 
     if (!destination) {
+      dispatch(stopDrag());
       return;
     }
-
-    dispatch(
-      updateTaskOrder({
-        source,
-        destination,
-        sourceColumnId: source.droppableId,
-        destinationColumnId: destination.droppableId,
-      })
-    );
-    console.log(result);
-    dispatch(
-      updateTaskThunk({
-        boardid: id,
-        columnid: source.droppableId,
-        taskid: result.draggableId,
-        body: { columnId: destination.droppableId },
-      })
-    );
+    try {
+      dispatch(
+        updateTaskOrder({
+          source,
+          destination,
+          sourceColumnId: source.droppableId,
+          destinationColumnId: destination.droppableId,
+        })
+      );
+      await dispatch(
+        updateTaskThunk({
+          boardid: id,
+          columnid: source.droppableId,
+          taskid: result.draggableId,
+          body: { columnId: destination.droppableId },
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(stopDrag());
+    }
   };
 
   return (
@@ -99,11 +106,14 @@ export const Board = () => {
         backgroundPosition: 'center',
       }}
     >
-      {/* <NewFilter /> */}
       <FilterSelect className={s.filter_select} />
 
       <div className={s.nested_wrap}>
-        <DragDropContext onDragEnd={onDragEnd} className={s.board_wrap}>
+        <DragDropContext
+          onDragStart={onDragStart}
+          onDragEnd={onDragEnd}
+          className={s.board_wrap}
+        >
           <div className={s.boardTitle}>
             <h2>{boardTitle}</h2>
           </div>
