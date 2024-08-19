@@ -7,9 +7,10 @@ import { refreshUserThunk } from './redux/user/userOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/user/userSelectors';
 import { lazy, useEffect } from 'react';
+import Loader from './components/Loader/Loader';
+import { Board } from './components/Board/Board';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
-const ScreensPage = lazy(() => import('./pages/ScreensPage/ScreensPage'));
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
@@ -19,7 +20,7 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <div>refreshing...</div>
+    <Loader />
   ) : (
     <Routes>
       <Route
@@ -31,7 +32,7 @@ function App() {
         }
       >
         <Route index element={<HomePage />} />
-        <Route path="board/:id" element={<ScreensPage />} />
+        <Route path="board/:id" element={<Board />} />
       </Route>
       <Route
         path="/welcome"

@@ -12,6 +12,7 @@ import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import FilterSelect from '../../components/FilterSelect/FilterSelect';
 import { selectBoard } from '../../redux/boards/boardsSelectors';
 import { NewFilter } from '../../components/NewFilter/NewFilter';
+import Loader from '../../components/Loader/Loader';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -54,9 +55,8 @@ const DashboardLayout = () => {
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
         />
-        {/* <FilterSelect /> */}
         <div className={s.outlet}>
-          <Suspense fallback="suspense">
+          <Suspense fallback={<Loader />}>
             <Outlet />
           </Suspense>
         </div>

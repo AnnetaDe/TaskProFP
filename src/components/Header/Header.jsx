@@ -27,6 +27,7 @@ import EditModal from '../EditModal/EditModal.jsx';
 import { selectEditProfileModal } from '../../redux/modal/modalSelector.js';
 
 import Loader from '../Loader/Loader.jsx';
+import { selectLoadingData } from '../../redux/columns/columnsSelectors.js';
 
 const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
     selectOptions.filter(el => el.value === userTheme)
   );
   const isOpen = useSelector(selectEditProfileModal);
+  const isLoading = useSelector(selectLoadingData);
 
   const { isDesktop } = useMedia();
 
@@ -71,7 +73,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
       ) : (
         <span></span>
       )}
-      <Loader />
+      {isLoading ?? <Loader />}
       <section className={s.right}>
         <Select
           value={theme}
