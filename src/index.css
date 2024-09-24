@@ -59,6 +59,7 @@
   --filter-btn-color: rgba(255, 255, 255, 0.4);
   --filter-btn-color-hover: rgba(255, 255, 255, 0.7);
   --filter-bgc: #151515;
+  --input-background-color: transparent;
 }
 [theme='light'] {
   --text-color: #000000;
@@ -182,4 +183,3 @@ div .react-datepicker-ignore-onclickoutside {
   color: var(--button-background-color);
   background-color: inherit;
 }
-/* End Стилі  бібліотека react-datepicker  */

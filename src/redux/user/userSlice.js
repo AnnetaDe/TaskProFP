@@ -5,14 +5,13 @@ import {
   refreshUserThunk,
   refreshTokensThunk,
   updateUserPreferencesThunk,
-  setToken,
 } from './userOperations';
 
 const initialState = {
   login: { avatarUrl: '', email: '', username: '', theme: '' },
   accessToken: null,
   refreshToken: null,
-  isVerified: null,
+  isNotVerified: null,
   userTheme: 'dark',
   userAvatar: '',
   userName: '',
@@ -20,18 +19,20 @@ const initialState = {
   isLoading: false,
   isRefreshing: false,
   error: false,
+  notification: '',
 };
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setIsVerified: state => {
-      state.isVerified = null;
+    clearNotification(state) {
+      state.notification = '';
     },
-    setUserEmail: (state, { payload }) => {
-      state.login.email = payload.email;
+    setTheme(state, { payload }) {
+      state.userTheme = payload;
     },
   },
+
   extraReducers: builder => {
     builder
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
@@ -44,28 +45,42 @@ const userSlice = createSlice({
         state.userAvatar = payload.data.user.avatarUrl;
         state.isLoggined = true;
         state.isLoading = false;
+        state.error = false;
+        state.notification = 'You are logged in';
+      })
+      .addCase(loginThunk.pending, state => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(loginThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+
+        state.error = payload.message;
+        if (payload.status === 403) {
+          state.isNotVerified = true;
+          state.notification = state.error;
+        }
+
+        state.notification = state.error
+          ? state.error
+          : 'Something went wrong, please try again';
       })
       .addCase(logoutThunk.fulfilled, state => {
-        state.login = { email: '', password: '', theme: '', avatar: '' };
+        state.login = { email: '', password: '', theme: 'dark', avatar: '' };
         state.accessToken = null;
         state.refreshToken = null;
         state.sid = null;
         state.isLoggined = false;
-      })
-      .addCase(loginThunk.pending, state => {
-        state.isLoading = true;
-        state.isVerified = null;
-      })
-      .addCase(loginThunk.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.isVerified = payload === 403 ? false : null;
-        state.error = true;
+        state.error = false;
+        state.notification = 'You are logged out';
       })
       .addCase(refreshTokensThunk.fulfilled, (state, { payload }) => {
-        setToken(payload.data.accessToken);
         state.accessToken = payload.data.accessToken;
         state.refreshToken = payload.data.refreshToken;
         state.sid = payload.data.sid;
+        state.error = false;
+        state.isLoading = false;
+        state.notification = '';
       })
 
       .addCase(refreshUserThunk.fulfilled, (state, { payload }) => {
@@ -74,26 +89,44 @@ const userSlice = createSlice({
         state.userAvatar = payload.data.avatarUrl;
         state.isLoggined = true;
         state.isRefreshing = false;
+        state.error = false;
+        state.isLoading = false;
       })
       .addCase(refreshUserThunk.pending, state => {
         state.isRefreshing = true;
+        state.error = false;
+        state.isLoading = true;
       })
-      .addCase(refreshUserThunk.rejected, state => {
-        state.error = true;
+      .addCase(refreshUserThunk.rejected, (state, { payload }) => {
+        state.error = payload;
         state.isRefreshing = false;
         state.isLoggined = false;
+        state.error = payload.message;
+        state.isLoading = false;
+        state.notification = 'Error refreshing user, please log in again';
       })
-      .addCase(updateUserPreferencesThunk.fulfilled, (state, action) => {
-        state.userTheme = action.payload.theme;
-        state.userAvatar = action.payload.avatarUrl;
-        state.userName = action.payload.username;
-        state.login.username = action.payload.username;
+      .addCase(updateUserPreferencesThunk.pending, state => {
+        state.error = false;
+        state.isLoading = true;
       })
-      .addCase(updateUserPreferencesThunk.rejected, (state, action) => {
-        console.error('Error updating user preferences:', action.payload);
+      .addCase(updateUserPreferencesThunk.fulfilled, (state, { payload }) => {
+        state.userTheme = payload.theme;
+        state.userAvatar = payload.avatarUrl;
+        state.userName = payload.username;
+        state.login.username = payload.username;
+        state.error = false;
+        state.isLoading = false;
+        state.notification = 'User preferences updated';
+      })
+      .addCase(updateUserPreferencesThunk.rejected, (state, { payload }) => {
+        console.error('Error updating user preferences:', payload);
+        state.error = payload.message;
+        state.isLoading = false;
+        // state.notification =
+        //   state.error?.error || 'Error updating user preferences';
       });
   },
 });
 
-export const { setIsVerified, setUserEmail } = userSlice.actions;
+export const { clearNotification, setTheme } = userSlice.actions;
 export const userReducer = userSlice.reducer;

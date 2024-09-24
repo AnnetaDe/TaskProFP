@@ -8,9 +8,9 @@ export const setToken = accessToken => {
 export const clearToken = () => {
   taskProApi.defaults.headers.common.Authorization = ``;
 };
-export const setTokenOnLogin = accessToken => {
-  taskProApiUnAutorized.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-};
+// export const setTokenOnLogin = accessToken => {
+//   taskProApiUnAutorized.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+// };
 
 export const registerThunk = createAsyncThunk(
   'auth/register',
@@ -32,15 +32,21 @@ export const loginThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkApi) => {
     try {
-      const { data } = await taskProApiUnAutorized.post(
-        'api/auth/login',
-        credentials
-      );
+      const { data } = await taskProApi.post('api/auth/login', credentials);
+      console.log(data);
       setToken(data.data.accessToken);
-
       return data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.response.status);
+      if (error.response) {
+        const errorResponse = error.response;
+        console.log(errorResponse);
+        return thunkApi.rejectWithValue({
+          message: errorResponse.data.message,
+          status: errorResponse.status,
+        });
+      } else {
+        return thunkApi.rejectWithValue('Network Error');
+      }
     }
   }
 );
@@ -67,7 +73,10 @@ export const refreshTokensThunk = createAsyncThunk(
         setToken(refreshToken);
         const { data } = await taskProApi.post('api/auth/refresh', {
           sid,
+          refreshToken,
         });
+        console.log(data);
+
         return data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -87,6 +96,7 @@ export const refreshUserThunk = createAsyncThunk(
     }
 
     const accessToken = thunkAPI.getState().user.accessToken;
+    console.log(accessToken);
     setToken(accessToken);
     if (!accessToken) {
       return thunkAPI.rejectWithValue('Unable to fetch user');
@@ -99,10 +109,6 @@ export const refreshUserThunk = createAsyncThunk(
     }
   }
 );
-
-// email: 'heidie@modulesdsh.com';
-// name: 'ann';
-// password: 'aaAA1111';
 
 export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
@@ -127,6 +133,7 @@ export const resendVerificationEmailThunk = createAsyncThunk(
       const { data } = await taskProApi.post('api/auth/verify', {
         email: body,
       });
+
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -4,10 +4,22 @@ import { LoginSchame, RegistrationSchame } from '../../schames/AuthSchames';
 import { loginThunk, registerThunk } from '../../redux/user/userOperations';
 import css from './AuthPage.module.css';
 import DocumentTitle from '../../components/Title/Title';
+import { useState } from 'react';
 
 export const AuthPage = () => {
   const { type } = useParams();
+  const defaultValues = { email: '', password: '' };
+  const testValues = { email: 'danipem600@biscoine.com', password: 'aaAA1111' };
 
+  const [choosenValues, setChoosenValues] = useState(defaultValues);
+
+  const handleCheckboxChange = checked => {
+    if (checked) {
+      setChoosenValues(testValues);
+    } else {
+      setChoosenValues(defaultValues);
+    }
+  };
   return (
     <>
       <DocumentTitle>
@@ -51,6 +63,8 @@ export const AuthPage = () => {
               key="login"
               scheme={LoginSchame}
               onSubmitThunk={loginThunk}
+              handleCheckboxChange={handleCheckboxChange}
+              choosenValues={choosenValues}
             />
           ) : (
             <AuthForm
@@ -58,6 +72,8 @@ export const AuthPage = () => {
               key="register"
               scheme={RegistrationSchame}
               onSubmitThunk={registerThunk}
+              choosenValues={{ email: '', password: '', username: '' }}
+              handleCheckboxChange={handleCheckboxChange}
             />
           )}
         </div>
@@ -66,5 +82,3 @@ export const AuthPage = () => {
   );
 };
 export default AuthPage;
-
-
