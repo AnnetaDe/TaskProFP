@@ -7,4 +7,8 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  server: {
+    host: '0.0.0.0',      // 👈 allows LAN access
+    port: 5173,
+  },
 });

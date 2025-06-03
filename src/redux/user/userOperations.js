@@ -1,22 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { taskProApi } from '../../config/api';
-import { taskProApiUnAutorized } from '../../config/api';
-
-export const setToken = accessToken => {
-  taskProApi.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+// import { taskProApiUnAutorized } from '../../config/api';
+import Cookies from 'js-cookie';
+export const setToken = (token) => {
+  taskProApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 export const clearToken = () => {
-  taskProApi.defaults.headers.common.Authorization = ``;
+  taskProApi.defaults.headers.common['Authorization'] = ``;
+  localStorage.removeItem('user');
+  
 };
 
 export const registerThunk = createAsyncThunk(
   'auth/register',
   async (credentials, thunkApi) => {
     try {
-      const { data } = await taskProApiUnAutorized.post(
+      const { data } = await taskProApi.post(
         'api/auth/register',
         credentials
       );
+      console.log('Register response:', data);
 
       return data;
     } catch (error) {
@@ -29,19 +32,26 @@ export const loginThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkApi) => {
     try {
-      const { data } = await taskProApi.post('api/auth/login', credentials);
-      setToken(data.data.accessToken);
-      return data;
+      const  res  = await taskProApi.post('api/auth/login', credentials);
+      console.log('Login cookies:', document.cookie)
+      if (res.data.status === 'error') {
+        return thunkApi.rejectWithValue({
+          message: res.data.message,
+          status: res.data.statusCode,
+        });
+      }
+
+      console.log('Login response:', res.data, 'token:', res.data.data.token);
+      // setToken(res.data.data.token);
+      return res.data;
     } catch (error) {
       if (error.response) {
-        const errorResponse = error.response;
         return thunkApi.rejectWithValue({
-          message: errorResponse.data.message,
-          status: errorResponse.status,
+          message: error.response.data.message,
+          status: error.response.status,
         });
-      } else {
-        return thunkApi.rejectWithValue('Network Error');
       }
+      return thunkApi.rejectWithValue('Network Error');
     }
   }
 );
@@ -69,8 +79,7 @@ export const refreshTokensThunk = createAsyncThunk(
         const { data } = await taskProApi.post('api/auth/refresh', {
           sid: sid,
         });
-        const { accessToken} = data.data;
-        setToken(accessToken);
+        console.log('Refresh response:', data);
 
         return data;
       } catch (error) {
@@ -84,18 +93,17 @@ export const refreshTokensThunk = createAsyncThunk(
 export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
   async (_, thunkAPI) => {
-    await thunkAPI.dispatch(refreshTokensThunk());
-
-    const accessToken = thunkAPI.getState().user.accessToken;
-
-    if (!accessToken) {
-      return thunkAPI.rejectWithValue(
-        'Unable to fetch user, missing access token'
-      );
-    }
+  const accessToken = Cookies.get('refreshToken')
+  if (accessToken) {
     setToken(accessToken);
+  }
+  console.log('Fetching current user with access token:', accessToken);
     try {
-      const { data } = await taskProApi.get('api/auth/current');
+      const { data } = await taskProApi.get('api/auth/current',{
+      withCredentials: true,
+
+      });
+      console.log('Current user response:', data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

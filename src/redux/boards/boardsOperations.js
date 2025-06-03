@@ -5,7 +5,7 @@ export const fetchBoardsThunk = createAsyncThunk(
   'boards/fetchBoards',
   async (_, thunkAPI) => {
     try {
-      const { data } = await taskProApi.get('api/boards');
+      const { data } = await taskProApi.get('api/boards', {withCredentials: true});
 
       return data;
     } catch (error) {
@@ -50,31 +50,7 @@ export const deleteBoardThunk = createAsyncThunk(
   }
 );
 
-// export const backgroundUrl = createAsyncThunk(
-//   'backgrounds',
-//   async (_, thunkAPI) => {
-//     try {
-//       const { data } = await taskProApi.get('/api/backgrounds');
-//       return data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
 
-// export const changeBackground = createAsyncThunk(
-//   'boards/changeBackground',
-//   async ({ id, currentBg }, thunkAPI) => {
-//     try {
-//       const { data } = await taskProApi.patch(`/api/boards/${id}/currentBg`, {
-//         currentBg,
-//       });
-//       return data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
 
 export const fetchBoardByIdThunk = createAsyncThunk(
   'board/fetchBoardById',

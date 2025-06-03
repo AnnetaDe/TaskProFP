@@ -6,7 +6,7 @@ import PrivateRoute from './routes/PrivateRoute';
 
 import { useSelector } from 'react-redux';
 import {
-  selectIsLoading,
+ 
   selectIsRefreshing,
   selectNotification,
 } from './redux/user/userSelectors';
@@ -35,9 +35,9 @@ function App() {
     }
   }, [notification, dispatch]);
 
-  useEffect(() => {
-    dispatch(refreshUserThunk());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(refreshUserThunk());
+  // }, []);
 
   return isRefreshing ? (
     <Loader />

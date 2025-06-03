@@ -7,18 +7,17 @@ import icon from '../../../images/icons.svg';
 import { Button } from '../../Button/Button';
 import IconsList from './IconsList/IconsList';
 import BgcList from './BgcList/BgcList';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { BoardFormScheme } from '../../../schames/BoardFormSchemes';
 import {
   createBoardThunk,
   updateBoardThunk,
 } from '../../../redux/boards/boardsOperations';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 
-import { useSelector } from 'react-redux';
 
 const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
-  const { id } = useParams();
+  const { id } = useParams() || { id: '' };
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -80,7 +79,7 @@ const BoardModal = ({ type, title, chosenIcon, chosenBackGround, onClose }) => {
     const board = await dispatch(options[type].onSubmitThunk(formData));
 
     if (type === 'create') {
-      navigate(`/board/${board.payload.data._id}`);
+      navigate(`/board/${board.payload.data.id}`);
     }
     onClose();
     reset();
