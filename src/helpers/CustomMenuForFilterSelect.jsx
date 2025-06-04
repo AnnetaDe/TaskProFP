@@ -1,48 +1,41 @@
 import { components } from 'react-select';
-import { useDispatch } from 'react-redux';
 import svg from '../images/icons.svg';
 import css from '../components/FilterSelect/FilterSelect.module.css';
-import { setNewFilter } from '../redux/columns/filterSlice';
+import { Button } from '../components/Button/Button';
 
 const CustomMenu = props => {
-  const { selectProps } = props;
-  const dispatch = useDispatch();
+  const { selectProps, closeMenu } = props;
 
   const handleCloseMenu = () => {
     if (selectProps && selectProps.onMenuClose) {
       selectProps.onMenuClose();
     }
   };
-
-  const handleChange = ({ value }, selectProps) => {
-    dispatch(setNewFilter(value));
-
-    if (selectProps && selectProps.onMenuClose) {
-      selectProps.onMenuClose();
-    }
+  const handleClick = () => {
+    closeMenu();
   };
+
+
 
   return (
     <components.Menu {...props}>
-      <div className={css.icon_close_wrapper} onClick={handleCloseMenu}>
+      <div onClick={handleCloseMenu}>
+        <Button
+          iconSize='20'
+          icon={`${svg}#icon-x-close-1`}
+          typeStyle="transparent"
+          type="button"
+          small
+          onClick={handleClick}
+          className={css.closeBtn}
+        >
         <svg className={css.icon_close}>
           <use href={`${svg}#icon-x-close-1`}></use>
         </svg>
-      </div>
-      <div className={css.menuHeader}>
-        <div className={css.filtersTitle}>Filters</div>
-        <div className={css.separator}></div>
-        <div className={css.labelTitle}>Label color</div>
-      </div>
+      </Button>
+
       {props.children}
-      <div className={css.selectAllContainer}>
-        <button
-          className={css.selectAllButton}
-          onClick={() => handleChange({ value: 'all' }, selectProps)}
-        >
-          Show all
-        </button>
-      </div>
+  </div>
     </components.Menu>
   );
 };

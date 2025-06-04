@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+    align-items: center;
+}
+
+
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  background-color: black;
+}
+.icon_close {
+  width: 20px;
+  height: 20px;
+  fill: white;
+  stroke: white;
+}
+.filterBtn {
+
+  padding: 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+ 
+}
+
+.closeBtn {
+  margin-left: auto;
+  border-radius: 50%;
+
+}

@@ -7,6 +7,7 @@ const options = [
   { value: 'low', label: 'Low', color: '#8fa1d0' },
   { value: 'medium', label: 'Medium', color: '#e09cb5' },
   { value: 'high', label: 'High', color: '#bedbb0' },
+  { value: 'all', label: 'All', color: '#ff4d4f' },
 ];
 
 export default options;

@@ -19,7 +19,6 @@ export const customStyles = {
   menu: provided => ({
     ...provided,
     backgroundColor: 'var(--background-header)',
-    border: 'none',
     boxShadow: 'none',
     border: '1px solid var(--button-background-color)',
     borderRadius: '8px',

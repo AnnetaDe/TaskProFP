@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { taskProApi } from '../../config/api';
-// import { taskProApiUnAutorized } from '../../config/api';
-import Cookies from 'js-cookie';
+import { taskProApi, taskProApiFormData } from '../../config/api';
 export const setToken = (token) => {
   taskProApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
@@ -33,7 +31,6 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkApi) => {
     try {
       const  res  = await taskProApi.post('api/auth/login', credentials);
-      console.log('Login cookies:', document.cookie)
       if (res.data.status === 'error') {
         return thunkApi.rejectWithValue({
           message: res.data.message,
@@ -42,7 +39,6 @@ export const loginThunk = createAsyncThunk(
       }
 
       console.log('Login response:', res.data, 'token:', res.data.data.token);
-      // setToken(res.data.data.token);
       return res.data;
     } catch (error) {
       if (error.response) {
@@ -108,11 +104,12 @@ export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
     try {
-      const { data } = await taskProApi.patch('api/auth/update', preferences, {
+      const { data } = await taskProApiFormData.patch('api/auth/update', preferences, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log('Update user preferences response:', data);
       return data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

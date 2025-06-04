@@ -22,7 +22,7 @@ const customStyles = {
     borderRadius: '8px',
     width: '300px',
     height: '234px',
-    padding: '24px',
+    padding: '30px',
     position: 'absolute',
     top: '38px',
     right: '20px',
@@ -31,7 +31,7 @@ const customStyles = {
   menuList: () => ({
     position: 'absolute',
     zIndex: '120',
-    bottom: '30px',
+    // bottom: '30px',
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',

@@ -33,7 +33,11 @@ export const selectFilteredTasks = createSelector(
           const tasks = column.tasks.filter(task => task.priority === 'low');
           return { ...column, tasks };
         });
-
+case 'none':
+        return columns.map(column => {
+          const tasks = column.tasks.filter(task => task.priority === 'none');
+          return { ...column, tasks };
+        });
       default:
         return columns;
     }

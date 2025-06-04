@@ -1,40 +1,74 @@
+import { useState } from 'react';
 import Select from 'react-select';
 import { useDispatch } from 'react-redux';
-
 import { setNewFilter } from '../../redux/columns/filterSlice';
-import options from '../../helpers/optionsForFilterSelect';
 import CustomOption from '../../helpers/CustomOptionsForFilterSelect';
 import CustomMenu from '../../helpers/CustomMenuForFilterSelect';
 import customStyles from '../../helpers/customStylesForFilterSelect';
-
 import svg from '../../images/icons.svg';
 import css from './FilterSelect.module.css';
+import { Button } from '../Button/Button';
+
+// Define your select options here
+const selectOptions = [
+  {
+    value: 'none',
+    label: 'Without priority',
+    color: '#bdbdbd',
+  },
+  { value: 'low', label: 'Low', color: '#8fa1d0' },
+  { value: 'medium', label: 'Medium', color: '#e09cb5' },
+  { value: 'high', label: 'High', color: '#bedbb0' },
+  { value: 'all', label: 'All', color: '#ff4d4f' },
+];
+
 
 const FilterSelect = () => {
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(selectOptions[0]);
 
-  const handleChange = ({ value }, selectProps) => {
-    dispatch(setNewFilter(value));
+  const handleChange = (selectedOption) => {
+    setSelected(selectedOption);
+    dispatch(setNewFilter(selectedOption.value));
+    setIsOpen(false);
   };
 
   return (
     <>
-      <div className={css.container}>
+    <div className={css.wrapper}>
+      <Button
+      iconSize='20'
+        icon={`${svg}#icon-filter-1`}
+        typeStyle="transparent"
+        type="button"
+      small
+        onClick={() => setIsOpen(!isOpen)}
+        className={`${css.filterBtn} ${isOpen ? css.active : ''}`}
+      >
         <svg className={css.icon_filter}>
           <use href={`${svg}#icon-filter-1`}></use>
         </svg>
-        <span className={css.text}>Filters</span>
-      </div>
-      <Select
-        options={options}
-        styles={customStyles}
-        placeholder=""
-        components={{ Option: CustomOption, Menu: CustomMenu }}
-        onChange={value => handleChange(value)}
-        selectProps={{
-          handleChange,
-        }}
-      />
+        <span>Filters</span>
+      </Button>
+  </div>
+      {isOpen && (
+        <div className="absolute top-[110%] left-0 z-50 min-w-[150px]">
+          <Select
+            value={selected}
+            options={selectOptions}
+            styles={customStyles}
+            components={{ Option: CustomOption, Menu: CustomMenu }}
+            onChange={handleChange}
+            menuIsOpen
+            autoFocus
+            closeMenuOnSelect={true}
+            
+            onMenuClose={() => setIsOpen(false)}
+          />
+        </div>
+      )}
+  
     </>
   );
 };
