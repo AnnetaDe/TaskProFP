@@ -35,9 +35,9 @@ function App() {
     }
   }, [notification, dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(refreshUserThunk());
-  // }, []);
+  useEffect(() => {
+    dispatch(refreshUserThunk());
+  }, []);
 
   return isRefreshing ? (
     <Loader />
