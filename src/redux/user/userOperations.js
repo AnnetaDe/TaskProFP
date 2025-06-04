@@ -93,14 +93,9 @@ export const refreshTokensThunk = createAsyncThunk(
 export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
   async (_, thunkAPI) => {
-  // const accessToken = Cookies.get('refreshToken')
-  // if (accessToken) {
-  //   setToken(accessToken);
-  // }
-  // console.log('Fetching current user with access token:', accessToken);
     try {
-      const { data } = await taskProApi.get('api/auth/current',{
-      withCredentials: true,
+      const { data } = await taskProApi.get('api/auth/current', {
+        withCredentials: true,
       });
       console.log('Current user response:', data);
       return data;
