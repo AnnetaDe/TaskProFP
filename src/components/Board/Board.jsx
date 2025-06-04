@@ -95,16 +95,16 @@ export const Board = () => {
       }}
     >
       <FilterSelect className={s.filter_select} />
-
+   <div className={s.boardTitle}>
+            <h2>{boardTitle}</h2>
+          </div>
       <div className={s.nested_wrap}>
         <DragDropContext
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
           className={s.board_wrap}
         >
-          <div className={s.boardTitle}>
-            <h2>{boardTitle}</h2>
-          </div>
+       
           <div className={s.board}>
             <ul>
               {columns.map(column => (

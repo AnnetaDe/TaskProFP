@@ -27,6 +27,10 @@ const FilterSelect = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(selectOptions[0]);
+  const toggleFilter = () => {
+    setIsOpen(prev => !prev);
+  }
+  const isActive = selected.value !== 'none' || isOpen;
 
   const handleChange = (selectedOption) => {
     setSelected(selectedOption);
@@ -43,8 +47,9 @@ const FilterSelect = () => {
         typeStyle="transparent"
         type="button"
       small
-        onClick={() => setIsOpen(!isOpen)}
-        className={`${css.filterBtn} ${isOpen ? css.active : ''}`}
+      onClick={toggleFilter}
+      aria-label="Toggle filter"
+      className={`${css.filterBtn} ${isActive ? css.active : ''}`}
       >
         <svg className={css.icon_filter}>
           <use href={`${svg}#icon-filter-1`}></use>
@@ -60,8 +65,8 @@ const FilterSelect = () => {
             styles={customStyles}
             components={{ Option: CustomOption, Menu: CustomMenu }}
             onChange={handleChange}
-            menuIsOpen
-            autoFocus
+            menuIsOpen={isOpen}
+            
             closeMenuOnSelect={true}
             
             onMenuClose={() => setIsOpen(false)}
