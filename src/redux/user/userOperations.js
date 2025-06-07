@@ -97,7 +97,7 @@ export const refreshUserThunk = createAsyncThunk(
       if (!accessToken) {
         return thunkAPI.rejectWithValue('No access token found');
       }
-
+      setToken(accessToken);
       const { data } = await taskProApi.get('api/auth/current');
       console.log('Current user response:', data);
       return data;
