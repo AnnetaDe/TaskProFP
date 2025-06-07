@@ -92,9 +92,7 @@ export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
   async (_, thunkAPI) => {
     try {
-      const { data } = await taskProApi.get('api/auth/current', {
-        withCredentials: true,
-      });
+      const { data } = await taskProApi.get('api/auth/current');
       console.log('Current user response:', data);
       return data;
     } catch (error) {
