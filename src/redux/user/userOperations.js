@@ -39,7 +39,9 @@ export const loginThunk = createAsyncThunk(
       }
 
       console.log('Login response:', res.data, 'token:', res.data.data.token);
+      setToken(res.data.data.token);
       return res.data;
+
     } catch (error) {
       if (error.response) {
         return thunkApi.rejectWithValue({
