@@ -110,10 +110,17 @@ export const updateUserPreferencesThunk = createAsyncThunk(
   'auth/updateUserPreferences',
   async (preferences, thunkAPI) => {
     try {
+      const accessToken = thunkAPI.getState().user.accessToken;
+      if (!accessToken) {
+        return thunkAPI.rejectWithValue('No access token found');
+      }
+      setToken(accessToken);
       const { data } = await taskProApiFormData.patch('api/auth/update', preferences, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        
+
       });
       console.log('Update user preferences response:', data);
       return data.data;
