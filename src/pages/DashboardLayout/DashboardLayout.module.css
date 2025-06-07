@@ -2,12 +2,13 @@
   display: flex;
 
   width: 100%;
-  height: calc(100vh);
+  height:100dvh;
   
   overflow: hidden;
 
 
   .rightSide {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -18,9 +19,8 @@
   }
 }
 .outlet {
-  overflow: hidden;
-  height: 99%;
-  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 .gridHeader {
   display: flex;
