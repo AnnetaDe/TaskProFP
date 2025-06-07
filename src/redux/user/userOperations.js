@@ -69,7 +69,8 @@ export const logoutThunk = createAsyncThunk(
 export const refreshTokensThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkApi) => {
-    const sid = thunkApi.getState().user.sid;
+    const sid = thunkApi.getState().user.sessionId;
+    console.log('Refresh tokens thunk called with sid:', sid);
     const refreshToken = thunkApi.getState().user.refreshToken;
     if (refreshToken && sid) {
       try {
@@ -92,6 +93,11 @@ export const refreshUserThunk = createAsyncThunk(
   'auth/currentUser',
   async (_, thunkAPI) => {
     try {
+      const accessToken = thunkAPI.getState().user.accessToken;
+      if (!accessToken) {
+        return thunkAPI.rejectWithValue('No access token found');
+      }
+
       const { data } = await taskProApi.get('api/auth/current');
       console.log('Current user response:', data);
       return data;

@@ -11,6 +11,7 @@ const initialState = {
   login: { avatarUrl: '', email: '', username: '', theme: '' },
   accessToken: null,
   refreshToken: null,
+  sessionId: null,
   isNotVerified: null,
   userTheme: 'dark',
   userAvatar: '',
@@ -37,9 +38,10 @@ const userSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.login = payload.data.user;
         state.email = payload.data.email;
+
         state.accessToken = payload.data.token;
         state.refreshToken = payload.data.refreshToken;
-        state.sid = payload.data.sid;
+        state.sessionId = payload.data.sessionId
         state.userTheme = payload.data.user.theme;
         state.userAvatar = payload.data.user.avatarUrl;
         state.isLoggined = true;
@@ -53,7 +55,6 @@ const userSlice = createSlice({
       })
       .addCase(loginThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
-
         state.error = payload.message;
         if (payload.status === 403) {
           state.isNotVerified = true;
@@ -68,7 +69,7 @@ const userSlice = createSlice({
         state.login = { email: '', password: '', theme: 'dark', avatar: '' };
         state.accessToken = null;
         state.refreshToken = null;
-        state.sid = null;
+        state.sessionId = null;
         state.isLoggined = false;
         state.error = false;
         state.notification = 'You are logged out';
@@ -76,7 +77,7 @@ const userSlice = createSlice({
       .addCase(refreshTokensThunk.fulfilled, (state, { payload }) => {
         state.accessToken = payload.data.accessToken;
         state.refreshToken = payload.data.refreshToken;
-        state.sid = payload.data.sid;
+        state.sessionId = payload.data.sessionId;
         state.error = false;
         state.isLoading = false;
         state.notification = '';
