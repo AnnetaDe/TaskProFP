@@ -14,15 +14,7 @@ function App() {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   if (notification) {
-  //     showToast(notification);
-  //     const timer = setTimeout(() => {
-  //       dispatch(clearNotification());
-  //     }, 3000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [notification, dispatch]);
+
   const routing = useRoutes(routeConfig);
 
   return (
