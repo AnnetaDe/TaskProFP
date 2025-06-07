@@ -1,12 +1,11 @@
 .gridContainer {
   display: flex;
-
-  width: 100%;
-  height: calc(100vh);
-  
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
-
-
+  .gridSidebar {
+    height: 100vh;
+  }
   .rightSide {
     display: flex;
     flex-direction: column;
@@ -22,12 +21,20 @@
   height: 99%;
   width: 100%;
 }
-.gridHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  height: 70px;
-  background-color: var(--header-background-color);
-  box-shadow: var(--header-box-shadow);
+/* .gridContainer {
+  height: 100vh;
+
+  outline: 1px solid rgb(53, 210, 84);
+  max-width: 1440px;
+  display: grid;
+  grid-template-areas: 'header header' 'sidebar main';
 }
+.gridHeader {
+  grid-area: header;
+}
+.gridSidebar {
+  grid-area: sidebar;
+}
+.gridContent {
+  grid-area: main;
+} */
