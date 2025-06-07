@@ -61,7 +61,7 @@ taskProApiFormData.interceptors.response.use(
       try {
         await store.dispatch(refreshTokensThunk());
         originalRequest.withCredentials = true;
-        return taskProApi(originalRequest);
+        return taskProApiFormData(originalRequest);
       } catch (refreshError) {
         store.dispatch(logoutThunk());
         window.location.href = '/auth/login';
