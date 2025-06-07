@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { selectUserTheme } from '../../redux/user/userSelectors';
@@ -8,7 +8,6 @@ import s from './DashboardLayout.module.css';
 
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { selectBoards } from '../../redux/boards/boardsSelectors';
-import Loader from '../../components/Loader/Loader';
 
 const DashboardLayout = () => {
   const colorScheme = useSelector(selectUserTheme);
@@ -19,20 +18,16 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', colorScheme);
-
-    if (path === '/' && boards.length) {
-      const id = boards[0]._id;
-
-      const navigationToBoard = async () => {
-        try {
-          navigate(`/board/${id}`);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      navigationToBoard();
+  }, [colorScheme]);
+  
+  useEffect(() => {
+    if (path === '/' && boards.length > 0) {
+      const id = boards[0]?._id;
+      if (id) {
+        navigate(`/board/${id}`, { replace: true });
+      }
     }
-  }, [colorScheme, navigate, path, boards]);
+  }, [navigate, path, boards]);
 
   return (
     <div className={s.gridContainer}>
@@ -48,9 +43,8 @@ const DashboardLayout = () => {
           setIsSidebarOpen={setIsSidebarOpen}
         />
         <div className={s.outlet}>
-          <Suspense fallback={<Loader />}>
+     
             <Outlet />
-          </Suspense>
         </div>
       </div>
     </div>

@@ -17,7 +17,6 @@ const initialState = {
   userName: '',
   isLoggined: false,
   isLoading: false,
-  isRefreshing: false,
   error: false,
   notification: '',
 };
@@ -85,21 +84,22 @@ const userSlice = createSlice({
 
       .addCase(refreshUserThunk.fulfilled, (state, { payload }) => {
         state.login = payload.data;
-        state.userTheme = payload.data.theme;
-        state.userAvatar = payload.data.avatarUrl;
+        // state.userName = payload.data.username;
+        // state.email = payload.data.email;
+        // state.userAvatar = payload.data.avatarUrl;
         state.isLoggined = true;
-        state.isRefreshing = false;
         state.error = false;
         state.isLoading = false;
+        state.notification = null;
+
       })
       .addCase(refreshUserThunk.pending, state => {
-        state.isRefreshing = true;
         state.error = false;
         state.isLoading = true;
       })
       .addCase(refreshUserThunk.rejected, (state, { payload }) => {
+        state.login = { email: '', password: '', theme: 'dark', avatar: '' };
         state.error = payload;
-        state.isRefreshing = false;
         state.isLoggined = false;
         state.error = payload.message;
         state.isLoading = false;
