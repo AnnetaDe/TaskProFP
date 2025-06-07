@@ -6,7 +6,7 @@ export const taskProApi = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    'Cache-Control': 'no-store',
+    // 'Cache-Control': 'no-store',
   },
 });
 
@@ -15,7 +15,7 @@ export const taskProApiFormData = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'multipart/form-data',
-    'Cache-Control': 'no-store',
+    // 'Cache-Control': 'no-store',
   },
 });
 
