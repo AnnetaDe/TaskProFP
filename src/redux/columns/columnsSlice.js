@@ -96,7 +96,7 @@ const columnSlice = createSlice({
           }, []);
         }
       )
-      .addCase(logoutThunk.fulfilled, (state, action) => {
+      .addCase(logoutThunk.fulfilled, (state) => {
         state.currentBoardId = {};
       })
       .addCase(createBoardThunk.fulfilled, (state, action) => {

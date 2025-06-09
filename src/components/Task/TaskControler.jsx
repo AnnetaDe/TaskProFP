@@ -10,6 +10,8 @@ import ModalWithoutRedux from '../ModalWithoutRedux/ModalWithoutRedux';
 import CardForm from '../CardForm/CardForm';
 import { clsx } from 'clsx';
 import WarningDedline from '../WarningDedline/WarningDedline';
+
+
 export const TaskControler = ({
   taskid,
   columnid,
@@ -29,6 +31,9 @@ export const TaskControler = ({
   const handleDelete = taskid => {
     dispatch(deleteTaskThunk({ boardid: id, columnid, taskid }));
   };
+  console.log('TaskControler taskid', id);
+  console.log('TaskControler columnid', columnid);
+  console.log('TaskControler task', task);
 
   return (
     <>
@@ -48,7 +53,7 @@ export const TaskControler = ({
           </button>
         </li>
         <li>
-          <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
+          <button className={s.btn_icon} onClick={() => handleDelete(id)}>
             <svg
               className={s.taskIcon}
             >
