@@ -189,6 +189,5 @@ export const {
   stopDrag,
   undoDrag,
   updateTaskOrder,
-  deleteTask,
 } = columnSlice.actions;
 export const columnsReducer = columnSlice.reducer;

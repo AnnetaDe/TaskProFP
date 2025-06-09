@@ -13,15 +13,15 @@ import WarningDedline from '../WarningDedline/WarningDedline';
 
 
 export const TaskControler = ({
-  taskid,
-  columnid,
   task,
+  columnid,
   className,
 }) => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState();
+  const taskid = task._id;
   const openEditModal = () => {
     setIsEditOpen(true);
   };
@@ -31,9 +31,8 @@ export const TaskControler = ({
   const handleDelete = taskid => {
     dispatch(deleteTaskThunk({ boardid: id, columnid, taskid }));
   };
-  console.log('TaskControler taskid', id);
+  console.log('TaskControler taskid', taskid);
   console.log('TaskControler columnid', columnid);
-  console.log('TaskControler task', task);
 
   return (
     <>
@@ -53,7 +52,7 @@ export const TaskControler = ({
           </button>
         </li>
         <li>
-          <button className={s.btn_icon} onClick={() => handleDelete(id)}>
+          <button className={s.btn_icon} onClick={() => handleDelete(taskid)}>
             <svg
               className={s.taskIcon}
             >

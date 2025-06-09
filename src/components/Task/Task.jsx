@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 
 export const Task = ({ task, columnid, boardid }) => {
   const { title, description, priority, deadline } = task;
+  const taskid = task._id;
   const priorityColor = priorities.find(
     item => item.priorityLevel === priority
   );
